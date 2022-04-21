@@ -1,21 +1,24 @@
+using StateMachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateMachine : MonoBehaviour
+public class PlayerStateMachine : MonoBehaviour, StateMachine.IStateMachineContext
 {
     private PlayerBaseState currentState;
     private PlayerStateFactory stateFactory;
 
-    public PlayerBaseState CurrentState
+    public IState CurrentState
     {
         get => currentState;
-        set => currentState = value;    
+        set => currentState = (PlayerBaseState)value;    
     }
 
     private void Awake()
     {
         stateFactory = new PlayerStateFactory(this);
+        currentState = stateFactory.Grounded();
+        currentState.EnterState();
     }
 
     private void Update()
