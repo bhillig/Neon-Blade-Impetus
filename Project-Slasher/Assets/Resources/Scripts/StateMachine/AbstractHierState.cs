@@ -6,15 +6,15 @@ namespace StateMachine
     {
         private AbstractHierState currentSuperState;
         private AbstractHierState currentSubState;
-        private IStateMachineContext context;
-        protected IStateMachineContext Context
+        private IStateMachineContext abstractContext;
+        protected IStateMachineContext AbstractContext
         {
-            get => context;
+            get => abstractContext;
         }
 
         public AbstractHierState(IStateMachineContext context)
         {
-            this.context = context;
+            this.abstractContext = context;
         }
 
         public abstract void EnterState();
@@ -43,20 +43,35 @@ namespace StateMachine
             //Only assign new current root state if current state is root
             if (currentSuperState == null)
             {
-                context.CurrentState = newState;
+                abstractContext.CurrentState = newState;
             }
             else
             {
                 currentSuperState.SetSubState(newState);
             }
         }
+        /// <summary>
+        /// Switches or initializes this substate to new state
+        /// </summary>
+        protected void SwitchSubState(AbstractHierState newState)
+        {
+            if(currentSubState != null)
+            {
+                currentSubState.SwitchState(newState);
+            }
+            else
+            {
+                SetSubState(newState);
+                newState.EnterState();
+            }
+        }
 
-        protected void SetSuperState(AbstractHierState newSuperState)
+        private void SetSuperState(AbstractHierState newSuperState)
         {
             currentSuperState = newSuperState;
         }
 
-        protected void SetSubState(AbstractHierState newSubState)
+        private void SetSubState(AbstractHierState newSubState)
         {
             currentSubState = newSubState;
             newSubState.SetSuperState(this);

@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour, StateMachine.IStateMachineContext
 {
+    // StateMachine Context
+    public ControlPhysicsbodyContext physicsbodyContext;
+    public InputInfo inputContext;
+    public ThirdPersonCameraTargetController cameraControlContext;
+
     private PlayerBaseState currentState;
     private PlayerStateFactory stateFactory;
 
@@ -17,7 +22,7 @@ public class PlayerStateMachine : MonoBehaviour, StateMachine.IStateMachineConte
     private void Awake()
     {
         stateFactory = new PlayerStateFactory(this);
-        currentState = stateFactory.Movement();
+        currentState = stateFactory.Grounded();
         currentState.EnterState();
     }
 

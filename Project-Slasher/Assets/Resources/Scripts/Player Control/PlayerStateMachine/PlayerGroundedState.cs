@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerBaseState
 {
-    public PlayerGroundedState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
-    {
-        
-    }
+    public PlayerGroundedState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) {}
 
     public override void EnterState()
     {
-
+        InitializeSubState();
     }
 
     public override void ExitState()
@@ -26,11 +23,11 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void InitializeSubState()
     {
-
+        SwitchSubState(this.Factory.Movement());
     }
 
     public override void CheckSwitchStates()
     {
-
+        
     }
 }

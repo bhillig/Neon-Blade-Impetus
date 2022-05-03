@@ -5,43 +5,46 @@ using UnityEngine;
 public class PlayerStateFactory 
 {
     private PlayerStateMachine context;
+    Dictionary<System.Type,PlayerBaseState> statePool = new Dictionary<System.Type, PlayerBaseState>();
 
     public PlayerStateFactory(PlayerStateMachine currentContext)
     {
         context = currentContext;
+        //Initialize pool
+        statePool.Add(typeof(PlayerIdleState), new PlayerIdleState(context, this));
+        statePool.Add(typeof(PlayerRunState), new PlayerRunState(context, this));
+        statePool.Add(typeof(PlayerGroundedState), new PlayerGroundedState(context, this));
+        statePool.Add(typeof(PlayerAirborneState), new PlayerAirborneState(context, this));
+        statePool.Add(typeof(PlayerMovementState), new PlayerMovementState(context, this));
+        statePool.Add(typeof(PlayerJumpState), new PlayerJumpState(context, this));
     }
 
     public PlayerBaseState Idle()
     {
-        return new PlayerIdleState(context,this);
-    }
-
-    public PlayerBaseState Walk()
-    {
-        return new PlayerWalkState(context, this);
+        return statePool[typeof(PlayerIdleState)];
     }
 
     public PlayerBaseState Run()
     {
-        return new PlayerRunState(context, this);
+        return statePool[typeof(PlayerRunState)];
     }
 
     public PlayerBaseState Grounded()
     {
-        return new PlayerGroundedState(context, this);
+        return statePool[typeof(PlayerGroundedState)];
     }
     public PlayerBaseState Airborne()
     {
-        return new PlayerAirborneState(context, this);
+        return statePool[typeof(PlayerAirborneState)];
     }
 
-    public PlayerMovementState Movement()
+    public PlayerBaseState Movement()
     {
-        return new PlayerMovementState(context, this);
+        return statePool[typeof(PlayerMovementState)];
     }
 
     public PlayerBaseState Jump()
     {
-        return new PlayerJumpState(context, this);
+        return statePool[typeof(PlayerJumpState)];
     }
 }
