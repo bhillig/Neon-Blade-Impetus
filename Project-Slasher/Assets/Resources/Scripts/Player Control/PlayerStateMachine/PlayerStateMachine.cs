@@ -17,7 +17,7 @@ public class PlayerStateMachine : MonoBehaviour, StateMachine.IStateMachineConte
     private void Awake()
     {
         stateFactory = new PlayerStateFactory(this);
-        currentState = stateFactory.Grounded();
+        currentState = stateFactory.Movement();
         currentState.EnterState();
     }
 

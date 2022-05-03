@@ -30,6 +30,15 @@ public class PlayerStateFactory
     {
         return new PlayerGroundedState(context, this);
     }
+    public PlayerBaseState Airborne()
+    {
+        return new PlayerAirborneState(context, this);
+    }
+
+    public PlayerMovementState Movement()
+    {
+        return new PlayerMovementState(context, this);
+    }
 
     public PlayerBaseState Jump()
     {
