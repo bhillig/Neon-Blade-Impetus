@@ -10,6 +10,7 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
 {
     // Serialized fields
     public Transform TPTarget;
+    public Transform toFollow;
 
     // Public fields
     public InputInfo inputInfo;
@@ -30,14 +31,19 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
+        TPTarget.position = toFollow.position;
         CameraRotation();
+    }
+
+    private void FixedUpdate()
+    {
+        TPTarget.position = toFollow.position;
     }
 
     private void CameraRotation()
     {
-
         yRotation += Time.deltaTime * Sensitivity * mouseDelta.x;
         xRotation -= Time.deltaTime * Sensitivity * mouseDelta.y;
         // Clamping vertical looking       
@@ -53,7 +59,6 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
             originalRotation.x.AngleLerp(xRotation, lerpFactor),
             originalRotation.y.AngleLerp(yRotation, lerpFactor),
             0);
-
     }
 
     private void LockMouse(bool val)

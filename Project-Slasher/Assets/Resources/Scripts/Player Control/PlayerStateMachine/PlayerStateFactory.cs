@@ -2,49 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateFactory 
+public class PlayerStateFactory
 {
     private PlayerStateMachine context;
-    Dictionary<System.Type,PlayerBaseState> statePool = new Dictionary<System.Type, PlayerBaseState>();
 
     public PlayerStateFactory(PlayerStateMachine currentContext)
     {
         context = currentContext;
-        //Initialize pool
-        statePool.Add(typeof(PlayerIdleState), new PlayerIdleState(context, this));
-        statePool.Add(typeof(PlayerRunState), new PlayerRunState(context, this));
-        statePool.Add(typeof(PlayerGroundedState), new PlayerGroundedState(context, this));
-        statePool.Add(typeof(PlayerAirborneState), new PlayerAirborneState(context, this));
-        statePool.Add(typeof(PlayerMovementState), new PlayerMovementState(context, this));
-        statePool.Add(typeof(PlayerJumpState), new PlayerJumpState(context, this));
+        //Initialize states
+        Movement = new PlayerMovementState(context, this);
+        Grounded = new PlayerGroundedState(context, this);
+        Airborne = new PlayerAirborneState(context, this);
+
+        Idle = new PlayerIdleState(context, this);
+        Jump = new PlayerJumpState(context, this);
+        Stopping = new PlayerStoppingState(context, this);
+        Landing = new PlayerLandingState(context, this);
+        Run = new PlayerRunState(context, this);
+
     }
 
-    public PlayerBaseState Idle()
-    {
-        return statePool[typeof(PlayerIdleState)];
-    }
+    public PlayerBaseState Movement { get; }
 
-    public PlayerBaseState Run()
-    {
-        return statePool[typeof(PlayerRunState)];
-    }
+    public PlayerBaseState Grounded { get; }
+    public PlayerBaseState Airborne { get; }
 
-    public PlayerBaseState Grounded()
-    {
-        return statePool[typeof(PlayerGroundedState)];
-    }
-    public PlayerBaseState Airborne()
-    {
-        return statePool[typeof(PlayerAirborneState)];
-    }
 
-    public PlayerBaseState Movement()
-    {
-        return statePool[typeof(PlayerMovementState)];
-    }
-
-    public PlayerBaseState Jump()
-    {
-        return statePool[typeof(PlayerJumpState)];
-    }
+    public PlayerBaseState Idle { get; }
+    public PlayerBaseState Stopping { get; }
+    public PlayerBaseState Landing { get; }
+    public PlayerBaseState Run { get; }
+    public PlayerBaseState Jump { get; }
 }
+

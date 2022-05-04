@@ -1,4 +1,5 @@
 
+using UnityEngine;
 
 namespace StateMachine
 {
@@ -6,20 +7,24 @@ namespace StateMachine
     {
         private AbstractHierState currentSuperState;
         private AbstractHierState currentSubState;
-        private IStateMachineContext abstractContext;
-        protected IStateMachineContext AbstractContext
+
+        public AbstractHierState CurrentSubState => currentSubState;
+
+        private IStateMachineContext stateMachine;
+        protected IStateMachineContext StateMachine
         {
-            get => abstractContext;
+            get => stateMachine;
         }
 
-        public AbstractHierState(IStateMachineContext context)
+        public AbstractHierState(IStateMachineContext stateMachine)
         {
-            this.abstractContext = context;
+            this.stateMachine = stateMachine;
         }
 
         public abstract void EnterState();
 
-        public abstract void UpdateState();
+        public virtual void UpdateState() { }
+        public virtual void FixedUpdateState() { }
 
         public abstract void ExitState();
 
@@ -36,19 +41,28 @@ namespace StateMachine
             }
         }
 
+        public void FixedUpdateStates()
+        {
+            FixedUpdateState();
+            if (currentSubState != null)
+            {
+                currentSubState.FixedUpdateStates();
+            }
+        }
+
         protected void SwitchState(AbstractHierState newState)
         {
             ExitState();
-            newState.EnterState();
             //Only assign new current root state if current state is root
             if (currentSuperState == null)
             {
-                abstractContext.CurrentState = newState;
+                stateMachine.CurrentState = newState;
             }
             else
             {
                 currentSuperState.SetSubState(newState);
             }
+            newState.EnterState();
         }
         /// <summary>
         /// Switches or initializes this substate to new state
@@ -66,12 +80,12 @@ namespace StateMachine
             }
         }
 
-        private void SetSuperState(AbstractHierState newSuperState)
+        protected void SetSuperState(AbstractHierState newSuperState)
         {
             currentSuperState = newSuperState;
         }
 
-        private void SetSubState(AbstractHierState newSubState)
+        protected void SetSubState(AbstractHierState newSubState)
         {
             currentSubState = newSubState;
             newSubState.SetSuperState(this);

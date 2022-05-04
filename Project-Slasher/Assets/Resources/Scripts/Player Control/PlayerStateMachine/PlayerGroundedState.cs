@@ -18,16 +18,16 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void UpdateState()
     {
-
+        CheckSwitchStates();
     }
 
     public override void InitializeSubState()
     {
-        SwitchSubState(this.Factory.Movement());
+        SwitchSubState(this.Factory.Idle);
     }
 
     public override void CheckSwitchStates()
     {
-        
+        //Grounded check
     }
 }

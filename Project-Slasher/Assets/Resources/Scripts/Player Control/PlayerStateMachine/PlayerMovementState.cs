@@ -23,7 +23,7 @@ public class PlayerMovementState : PlayerBaseState
 
     public override void InitializeSubState()
     {
-        SwitchSubState(this.Factory.Run());
+        SwitchSubState(this.Factory.Grounded);
     }
 
     public override void CheckSwitchStates()

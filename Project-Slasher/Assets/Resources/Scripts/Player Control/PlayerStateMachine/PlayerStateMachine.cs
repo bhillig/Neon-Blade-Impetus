@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateMachine : MonoBehaviour, StateMachine.IStateMachineContext
+public class PlayerStateMachine : StateMachine.IStateMachineContext
 {
-    // StateMachine Context
-    public ControlPhysicsbodyContext physicsbodyContext;
-    public InputInfo inputContext;
-    public ThirdPersonCameraTargetController cameraControlContext;
+    // Context
+    private PlayerController context;
+    public PlayerController Context => context;
 
     private PlayerBaseState currentState;
     private PlayerStateFactory stateFactory;
@@ -19,15 +18,22 @@ public class PlayerStateMachine : MonoBehaviour, StateMachine.IStateMachineConte
         set => currentState = (PlayerBaseState)value;    
     }
 
-    private void Awake()
+    public PlayerStateMachine(PlayerController context)
     {
+        this.context = context;
         stateFactory = new PlayerStateFactory(this);
-        currentState = stateFactory.Grounded();
+        //Entry state
+        currentState = stateFactory.Movement;
         currentState.EnterState();
     }
 
-    private void Update()
+    public void UpdateStateMachine()
     {
         currentState.UpdateStates();
+    }
+
+    public void FixedUpdateStateMachine()
+    {
+        currentState.FixedUpdateStates();
     }
 }

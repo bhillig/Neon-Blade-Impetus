@@ -2,12 +2,11 @@
 public abstract class PlayerBaseState : StateMachine.AbstractHierState
 {
     private PlayerStateFactory factory;
-    private PlayerBaseState currentSuperState;
-    private PlayerBaseState currentSubState;
 
-    protected PlayerStateMachine Context
+    private PlayerController context;
+    protected PlayerController Context
     {
-        get => (PlayerStateMachine)AbstractContext;
+        get => context;
     }
 
     protected PlayerStateFactory Factory
@@ -15,8 +14,9 @@ public abstract class PlayerBaseState : StateMachine.AbstractHierState
         get => factory;
     }
 
-    public PlayerBaseState(PlayerStateMachine context, PlayerStateFactory factory) : base(context)
+    public PlayerBaseState(PlayerStateMachine stateMachine, PlayerStateFactory factory) : base(stateMachine)
     {
         this.factory = factory;
+        this.context = stateMachine.Context;
     }
 }

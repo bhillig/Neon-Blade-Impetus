@@ -21,7 +21,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void UpdateState()
     {
-
+        CheckSwitchStates();
     }
 
     public override void InitializeSubState()
@@ -31,6 +31,9 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void CheckSwitchStates()
     {
-
+        if(Context.inputContext.movementInput != Vector2.zero)
+        {
+            SwitchState(Factory.Run);
+        }
     }
 }
