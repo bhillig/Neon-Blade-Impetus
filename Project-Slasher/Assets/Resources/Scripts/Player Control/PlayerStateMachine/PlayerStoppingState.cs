@@ -37,8 +37,10 @@ public class PlayerStoppingState : PlayerBaseState
         float sqrMag = cVel.XZSqrMag();
         if (sqrMag == 0)
             return;
-        cVel.x = Mathf.MoveTowards(cVel.x, 0f, cVel.x * cVel.x / sqrMag * frictionStep);
-        cVel.z = Mathf.MoveTowards(cVel.z, 0f, cVel.z * cVel.z / sqrMag * frictionStep);
+        float xAxisRatio = cVel.x * cVel.x / sqrMag;
+        float zAxisRatio = cVel.z * cVel.z / sqrMag;
+        cVel.x = Mathf.MoveTowards(cVel.x, 0f, xAxisRatio * frictionStep);
+        cVel.z = Mathf.MoveTowards(cVel.z, 0f, zAxisRatio * frictionStep);
         rb.velocity = cVel;
     }
 

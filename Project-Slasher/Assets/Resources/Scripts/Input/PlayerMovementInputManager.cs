@@ -29,4 +29,12 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
     {
         movementInputInfo.mouseDelta = context.ReadValue<Vector2>();
     }
+
+    public void OnSpacebar(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+            movementInputInfo.SpacebarUpEvent.Invoke();
+        else if(context.performed)
+            movementInputInfo.SpacebarDownEvent.Invoke();
+    }
 }

@@ -9,11 +9,17 @@ public class PlayerGroundedState : PlayerBaseState
     public override void EnterState()
     {
         InitializeSubState();
+        Context.inputContext.SpacebarDownEvent.AddListener(Jump);
     }
 
     public override void ExitState()
     {
+        Context.inputContext.SpacebarDownEvent.RemoveListener(Jump);
+    }
 
+    private void Jump()
+    {
+        Context.playerRb.velocity += Vector3.up * Context.movementProfile.JumpVelocity;
     }
 
     public override void UpdateState()
