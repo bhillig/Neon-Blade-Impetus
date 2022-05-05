@@ -28,9 +28,17 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         stateMachine.FixedUpdateStateMachine();
+        if (shouldConstPrintState)
+            PrintState();
     }
 
-    [ContextMenu("Print state tree")]
+    private bool shouldConstPrintState = false;
+
+    [ContextMenu("Toggle Print state tree")]
+    public void toggle()
+    {
+        shouldConstPrintState = !shouldConstPrintState;
+    }
     public void PrintState()
     {
         PlayerBaseState state = (PlayerBaseState)stateMachine.CurrentState;

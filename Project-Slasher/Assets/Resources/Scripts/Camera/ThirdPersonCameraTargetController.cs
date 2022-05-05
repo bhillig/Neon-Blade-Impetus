@@ -11,6 +11,7 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
     // Serialized fields
     public Transform TPTarget;
     public Transform toFollow;
+    public Vector3 offset;
 
     // Public fields
     public InputInfo inputInfo;
@@ -33,13 +34,13 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        TPTarget.position = toFollow.position;
+        TPTarget.position = toFollow.position + offset;
         CameraRotation();
     }
 
     private void FixedUpdate()
     {
-        TPTarget.position = toFollow.position;
+        TPTarget.position = toFollow.position + offset;
     }
 
     private void CameraRotation()

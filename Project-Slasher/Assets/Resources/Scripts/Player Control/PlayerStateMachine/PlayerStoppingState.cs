@@ -20,6 +20,7 @@ public class PlayerStoppingState : PlayerBaseState
 
     public override void ExitState()
     {
+        base.ExitState();
         Context.animationController.SetBool("Running", false);
     }
 
@@ -39,8 +40,10 @@ public class PlayerStoppingState : PlayerBaseState
             return;
         float xAxisRatio = cVel.x * cVel.x / sqrMag;
         float zAxisRatio = cVel.z * cVel.z / sqrMag;
+        float yAxisRatio = cVel.z * cVel.z / sqrMag;
         cVel.x = Mathf.MoveTowards(cVel.x, 0f, xAxisRatio * frictionStep);
         cVel.z = Mathf.MoveTowards(cVel.z, 0f, zAxisRatio * frictionStep);
+        cVel.y = Mathf.MoveTowards(cVel.y, 0f, yAxisRatio * frictionStep);
         rb.velocity = cVel;
     }
 
@@ -53,7 +56,7 @@ public class PlayerStoppingState : PlayerBaseState
     {
         if(Context.inputContext.movementInput != Vector2.zero)
             SwitchState(Factory.Run);
-        else if(Context.playerRb.velocity == Vector3.zero)
+        else if(Context.playerRb.velocity.magnitude < 0.15f)
             SwitchState(Factory.Idle);
     }
 }

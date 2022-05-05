@@ -55,4 +55,9 @@ public static class ExtensionMethods
         float newRot = Mathf.Lerp(current, current + diff, lerpVal);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, newRot, transform.eulerAngles.z);
     }
+
+    public static bool IsInLayerMask(this GameObject gameObject, LayerMask mask)
+    {
+        return ((mask.value) & (1 << gameObject.layer)) == (1 << gameObject.layer);
+    }
 }

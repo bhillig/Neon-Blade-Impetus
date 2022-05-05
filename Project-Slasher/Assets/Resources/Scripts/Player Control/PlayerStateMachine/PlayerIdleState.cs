@@ -11,16 +11,19 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void EnterState()
     {
-
+        Context.playerRb.velocity = Vector3.zero;
+        Context.playerRb.constraints |= (RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
     }
 
     public override void ExitState()
     {
-
+        base.ExitState();
+        Context.playerRb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     public override void UpdateState()
     {
+        
         CheckSwitchStates();
     }
 

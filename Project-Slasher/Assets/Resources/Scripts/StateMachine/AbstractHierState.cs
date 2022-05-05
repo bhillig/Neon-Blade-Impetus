@@ -26,7 +26,11 @@ namespace StateMachine
         public virtual void UpdateState() { }
         public virtual void FixedUpdateState() { }
 
-        public abstract void ExitState();
+        public virtual void ExitState() 
+        { 
+            if(currentSubState != null)
+                currentSubState.ExitState();
+        }
 
         public abstract void CheckSwitchStates();
 

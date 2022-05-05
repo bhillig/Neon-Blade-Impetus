@@ -14,12 +14,14 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void ExitState()
     {
+        base.ExitState();
         Context.inputContext.SpacebarDownEvent.RemoveListener(Jump);
     }
 
     private void Jump()
     {
         Context.playerRb.velocity += Vector3.up * Context.movementProfile.JumpVelocity;
+        Context.physicsbodyContext.SnapToGroundBlock = 0.5f;
     }
 
     public override void UpdateState()
@@ -29,11 +31,18 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void InitializeSubState()
     {
-        SwitchSubState(this.Factory.Idle);
+        if(Context.playerRb.velocity.magnitude == 0f)
+            SwitchSubState(this.Factory.Idle);
+        else
+            SwitchSubState(this.Factory.Stopping);
     }
 
     public override void CheckSwitchStates()
     {
         //Grounded check
+        if (!Context.physicsbodyContext.IsGrounded())
+        {
+            SwitchState(Factory.Airborne);
+        }
     }
 }
