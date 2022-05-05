@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: DefaultMovementProfile
   m_EditorClassIdentifier: 
   turnSpeed: 0.2
-  baseMoveSpeed: 10
+  baseMoveSpeed: 8
   baseAcceleration: 50
   baseAirAcceleration: 10
   baseFriction: 25
   jumpVelocity: 6
   jumpHeight: 1.5
   maxGroundedAngle: 60
-  maxSnapAngle: 80
+  maxSnapAngle: 35
   snapProbeDistance: 2
   minGroundedDotProd: 0.49999997
-  maxSnapDotProd: 0.9848077
+  maxSnapDotProd: 0.57357645

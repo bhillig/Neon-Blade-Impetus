@@ -35,12 +35,12 @@ public class ControlPhysicsbodyContext : MonoBehaviour
     private void FixedUpdate()
     {
         //Raycast for data
-        var hits = Physics.SphereCastAll(groundedCast.bounds.center, groundedCast.radius, Vector3.down, 0.01f, groundedMask);
+        List<RaycastHit> hits = new List<RaycastHit>(Physics.SphereCastAll(groundedCast.bounds.center, groundedCast.radius, Vector3.down, 0.02f, groundedMask));
         foreach (var hit in hits)
         {
             EvaluateCollision(hit);
         }
-        groundContacts = hits.Length;
+        groundContacts = hits.Count;
 
         RecalculateNormalsFromContacts();
         // Update state
@@ -130,7 +130,7 @@ public class ControlPhysicsbodyContext : MonoBehaviour
     private void EvaluateCollision(RaycastHit contact)
     {
         Vector3 normal = contact.normal;
-        if(Vector3.Dot(Vector3.up,normal) >= profile.MinGroundedDotProd)
+        if (Vector3.Dot(Vector3.up,normal) >= profile.MinGroundedDotProd)
         {
             groundedContacts.Add(contact);
         }

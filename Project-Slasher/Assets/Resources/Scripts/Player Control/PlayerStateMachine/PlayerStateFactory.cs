@@ -13,6 +13,7 @@ public class PlayerStateFactory
         Movement = new PlayerMovementState(context, this);
         Grounded = new PlayerGroundedState(context, this);
         Airborne = new PlayerAirborneState(context, this);
+        Wallglide = new PlayerWallglideState(context, this);
 
         Idle = new PlayerIdleState(context, this);
         Jump = new PlayerJumpState(context, this);
@@ -26,6 +27,7 @@ public class PlayerStateFactory
 
     public PlayerBaseState Grounded { get; }
     public PlayerBaseState Airborne { get; }
+    public PlayerBaseState Wallglide { get; }
 
 
     public PlayerBaseState Idle { get; }

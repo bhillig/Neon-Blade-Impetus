@@ -20,6 +20,11 @@ public static class ExtensionMethods
         return vec;
     }
 
+    public static void DrawNormal(this RaycastHit hit)
+    {
+        Debug.DrawRay(hit.point, hit.normal * 100, Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f), 10f);
+    }
+
     public static Quaternion ZeroXAxis(this Quaternion rot)
     {
         rot.eulerAngles = new Vector3(0, rot.eulerAngles.y, rot.eulerAngles.z);

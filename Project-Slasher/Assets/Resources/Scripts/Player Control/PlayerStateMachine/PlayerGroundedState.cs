@@ -29,6 +29,11 @@ public class PlayerGroundedState : PlayerBaseState
         CheckSwitchStates();
     }
 
+    public override void FixedUpdateState()
+    {
+
+    }
+
     public override void InitializeSubState()
     {
         if(Context.playerRb.velocity.magnitude == 0f)

@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public ControlPhysicsbodyContext physicsbodyContext;
     public Transform playerPhysicsTransform;
     public Rigidbody playerRb;
+    public WallFinder wallFinder;
     // State machine
     private PlayerStateMachine stateMachine;
 

@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAirborneState : PlayerBaseState
+public class PlayerWallglideState : AbstractMovingState
 {
-    public PlayerAirborneState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
+    public PlayerWallglideState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
     {
         
     }
 
+    private WallSearchResult results;
+
     public override void EnterState()
     {
+        results = Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd);
+        Context.playerRb.useGravity = false;
         Context.animationController.SetBool("Airborne", true);
         InitializeSubState();
         Context.inputContext.SpacebarDownEvent.AddListener(OnSpacebarDown);
@@ -19,16 +23,14 @@ public class PlayerAirborneState : PlayerBaseState
     public override void ExitState()
     {
         base.ExitState();
+        Context.playerRb.useGravity = true;
         Context.animationController.SetBool("Airborne", false);
         Context.inputContext.SpacebarDownEvent.RemoveListener(OnSpacebarDown);
     }
 
     public void OnSpacebarDown()
     {
-        if(Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd) != null)
-        {
-            SwitchState(Factory.Wallglide);
-        }
+        SwitchState(Factory.Airborne);
     }
 
     public override void UpdateState()
@@ -36,9 +38,22 @@ public class PlayerAirborneState : PlayerBaseState
         CheckSwitchStates();
     }
 
+    public override void FixedUpdateState()
+    {
+        results = Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd);
+        if (results == null)
+        {
+            SwitchState(Factory.Airborne);
+            return;
+        }
+        Vector3 dir = Vector3.ProjectOnPlane(Camera.main.transform.forward, results.norm).normalized;
+        Context.playerRb.velocity = dir * 25f;
+        LerpRotation(1f);
+    }
+
     public override void InitializeSubState()
     {
-        SwitchSubState(Factory.Jump);
+        
     }
 
     public override void CheckSwitchStates()
