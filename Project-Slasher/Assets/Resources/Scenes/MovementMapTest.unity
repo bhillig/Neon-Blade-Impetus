@@ -12333,7 +12333,7 @@ Transform:
   m_GameObject: {fileID: 1247120341}
   m_LocalRotation: {x: 0.09806463, y: -0.030816203, z: 0.2982022, w: 0.94895166}
   m_LocalPosition: {x: 28.1, y: 1, z: 5.9}
-  m_LocalScale: {x: 25, y: 5, z: 5}
+  m_LocalScale: {x: 100, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 179126220}
   m_RootOrder: 17
@@ -14862,7 +14862,7 @@ MonoBehaviour:
   movementProfile: {fileID: 11400000, guid: 9d0f869c154dc7f49be7e185d525e807, type: 2}
   cameraControlContext: {fileID: 1856482431}
   animationController: {fileID: 2491728509801970510}
-  physicsbodyContext: {fileID: 1466472557}
+  groundPhysicsContext: {fileID: 1466472557}
   playerPhysicsTransform: {fileID: 1839794995}
   playerRb: {fileID: 1839794996}
   wallFinder: {fileID: 530547563}

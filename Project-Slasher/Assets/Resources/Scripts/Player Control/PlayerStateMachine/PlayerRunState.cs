@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRunState : AbstractMovingState
+public class PlayerRunState : AbstractFlatMovingState
 {
     public PlayerRunState(PlayerStateMachine context, PlayerStateFactory factory) : base(context, factory) {}
 
@@ -31,15 +31,16 @@ public class PlayerRunState : AbstractMovingState
         desiredVelocity = GetDesiredVelocity(maxSpeed);
         CheckSwitchStates();
     }
-
     public override void FixedUpdateState()
     {
-        SimpleMovement(desiredVelocity,maxSpeedChange);
+        if (desiredVelocity != Vector3.zero)
+            SimpleMovement(desiredVelocity,maxSpeedChange);
         // Rotation
         if (movementInput != Vector2.zero)
         {
             LerpRotation(Context.movementProfile.TurnSpeed);
         }
+        Context.groundPhysicsContext.DisplayGroundVectors();
     }
 
     public override void InitializeSubState()

@@ -29,7 +29,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void FixedUpdateState()
     {
-        
+        Context.groundPhysicsContext.DisplayGroundVectors();
     }
 
     public override void InitializeSubState()

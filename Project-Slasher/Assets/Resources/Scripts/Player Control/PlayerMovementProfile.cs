@@ -17,12 +17,13 @@ public class PlayerMovementProfile : ScriptableObject
     // State calculation fields
     [Space(15f)]
     [SerializeField] private float maxGroundedAngle;
+    [SerializeField] private float maxSnapVelocity;
+    [SerializeField] private AnimationCurve snapVelocityToAngleRatioCurve;
     // The player will snap over small ledges if the difference is less than this
     [SerializeField] private float maxSnapAngle;
     [SerializeField] private float snapProbeDistance;
 
     [SerializeField, HideInInspector] private float minGroundedDotProd;
-    [SerializeField, HideInInspector] private float maxSnapDotProd;
 
     public float TurnSpeed => turnSpeed;
     public float BaseMoveSpeed => baseMoveSpeed;
@@ -33,7 +34,11 @@ public class PlayerMovementProfile : ScriptableObject
     public float JumpHeight => jumpHeight;
 
     public float MinGroundedDotProd => minGroundedDotProd;
-    public float MaxSnapDotProd => maxSnapDotProd;
+    public float GetMaxSnapDotProd(float vel)
+    {
+        float ratio = snapVelocityToAngleRatioCurve.Evaluate(vel / maxSnapVelocity);
+        return ratio * Mathf.Sin(maxSnapAngle * Mathf.Deg2Rad);
+    }
     public float SnapProbeDistance => snapProbeDistance;
 
 
@@ -42,6 +47,5 @@ public class PlayerMovementProfile : ScriptableObject
         // Calculate jump velocity based on jump height
         jumpVelocity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
         minGroundedDotProd = Mathf.Cos(maxGroundedAngle * Mathf.Deg2Rad);
-        maxSnapDotProd = Mathf.Sin(maxSnapAngle * Mathf.Deg2Rad);
     }
 }

@@ -24,6 +24,14 @@ public static class ExtensionMethods
     {
         Debug.DrawRay(hit.point, hit.normal * 100, Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f), 10f);
     }
+    public static void DrawVector(this Vector3 vec, Vector3 point, float duration = 10f)
+    {
+        vec.DrawVector(point, Color.red, duration);
+    }
+    public static void DrawVector(this Vector3 vec, Vector3 point, Color c,float duration = 10f)
+    {
+        Debug.DrawRay(point, vec * 100, c, duration);
+    }
 
     public static Quaternion ZeroXAxis(this Quaternion rot)
     {

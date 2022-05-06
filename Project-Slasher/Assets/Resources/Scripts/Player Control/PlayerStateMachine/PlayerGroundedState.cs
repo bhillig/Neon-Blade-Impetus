@@ -21,7 +21,7 @@ public class PlayerGroundedState : PlayerBaseState
     private void Jump()
     {
         Context.playerRb.velocity += Vector3.up * Context.movementProfile.JumpVelocity;
-        Context.physicsbodyContext.SnapToGroundBlock = 0.5f;
+        Context.groundPhysicsContext.SnapToGroundBlock = 0.5f;
     }
 
     public override void UpdateState()
@@ -45,7 +45,7 @@ public class PlayerGroundedState : PlayerBaseState
     public override void CheckSwitchStates()
     {
         //Grounded check
-        if (!Context.physicsbodyContext.IsGrounded())
+        if (!Context.groundPhysicsContext.IsGrounded())
         {
             SwitchState(Factory.Airborne);
         }

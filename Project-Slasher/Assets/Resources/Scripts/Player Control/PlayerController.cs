@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public PlayerMovementProfile movementProfile;
     public ThirdPersonCameraTargetController cameraControlContext;
     public Animator animationController;
-    public ControlPhysicsbodyContext physicsbodyContext;
+    public GroundedPhysicsContext groundPhysicsContext;
     public Transform playerPhysicsTransform;
     public Rigidbody playerRb;
     public WallFinder wallFinder;

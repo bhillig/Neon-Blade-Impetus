@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : AbstractMovingState
+public class PlayerJumpState : AbstractFlatMovingState
 {
     public PlayerJumpState(PlayerStateMachine context, PlayerStateFactory factory) : base(context, factory)
     {
@@ -37,7 +37,7 @@ public class PlayerJumpState : AbstractMovingState
     public override void FixedUpdateState()
     {
         if (desiredVelocity.magnitude > 0f)
-            SimpleMovement(desiredVelocity, maxSpeedChange);
+            SimpleMovement(desiredVelocity,maxSpeedChange);
         // Rotation
         if (movementInput != Vector2.zero)
         {

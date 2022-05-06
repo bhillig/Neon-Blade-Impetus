@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWallglideState : AbstractMovingState
+public class PlayerWallglideState : AbstractFlatMovingState
 {
     public PlayerWallglideState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
     {
@@ -59,7 +59,7 @@ public class PlayerWallglideState : AbstractMovingState
     public override void CheckSwitchStates()
     {
         //Grounded check
-        if (Context.physicsbodyContext.IsGrounded())
+        if (Context.groundPhysicsContext.IsGrounded())
         {
             SwitchState(Factory.Grounded);
         }

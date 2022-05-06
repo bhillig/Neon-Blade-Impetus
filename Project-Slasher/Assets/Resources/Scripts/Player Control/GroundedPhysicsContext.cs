@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ControlPhysicsbodyContext : MonoBehaviour
+/// <summary>
+/// <para>Handles physics data when on the ground</para>
+/// <para>Mostly taken from Catlike coding's tutorial on movement</para>
+/// <para>With moderate changes to be less sus</para>
+/// <para>Like who the hell uses OnCollisionStay to do grounded contact checks</para>
+/// </summary>
+public class GroundedPhysicsContext : MonoBehaviour
 {
     // Serialized fields
     [SerializeField] private LayerMask groundedMask;
@@ -16,7 +21,7 @@ public class ControlPhysicsbodyContext : MonoBehaviour
     public float GroundNormalDot => groundNormalDot;
 
     private Vector3 contactNormal;
-    private Vector3 ContactNormal => contactNormal;
+    public Vector3 ContactNormal => contactNormal;
 
     private List<RaycastHit> groundedContacts = new List<RaycastHit>();
 
@@ -30,12 +35,34 @@ public class ControlPhysicsbodyContext : MonoBehaviour
     }
 
     private Vector3 hitSurfacePos; 
-    private Vector3 prevHitSurfacePos; 
+    private Vector3 prevHitSurfacePos;
+
+    private Vector3 rawNormal;
+    public Vector3 RawNormal => rawNormal;
 
     private void FixedUpdate()
     {
-        //Raycast for data
-        List<RaycastHit> hits = new List<RaycastHit>(Physics.SphereCastAll(groundedCast.bounds.center, groundedCast.radius, Vector3.down, 0.02f, groundedMask));
+        // Raycast for ground contacts
+        List<RaycastHit> hits = new List<RaycastHit>(Physics.SphereCastAll(
+            groundedCast.bounds.center, 
+            groundedCast.radius, 
+            -transform.up, 
+            0.03f, 
+            groundedMask));
+
+        if (Physics.Raycast(
+            groundedCast.bounds.center,
+            -transform.up,
+            out RaycastHit raw,
+            groundedCast.radius + 1f,
+            groundedMask))
+        {
+            rawNormal = raw.normal;
+        }
+        else
+            raw.normal = Vector3.up;
+
+
         foreach (var hit in hits)
         {
             EvaluateCollision(hit);
@@ -49,12 +76,13 @@ public class ControlPhysicsbodyContext : MonoBehaviour
 
     private void RecalculateNormalsFromContacts()
     {
-        //Calculate normals based off previous frames contacts
+        // Calculate normals based off previous frame's contacts (this might be an issue cuz its now one fixedupdate behind but whatever)
         prevHitSurfacePos = hitSurfacePos;
         hitSurfacePos = Vector3.zero;
         contactNormal = Vector3.zero;
         foreach (var contact in groundedContacts)
         {
+            print(contact.normal);
             contactNormal += contact.normal;
             hitSurfacePos += contact.point;
         }
@@ -107,16 +135,16 @@ public class ControlPhysicsbodyContext : MonoBehaviour
         Vector3 snapNormal = hit.normal;
         Vector3 vel = rb.velocity;
         // Compare to minSnapDotProd
-        if (Vector3.Dot(snapNormal.normalized,vel.normalized) <= profile.MaxSnapDotProd)
+        if (Vector3.Dot(snapNormal.normalized,vel.normalized) <= 
+            profile.GetMaxSnapDotProd(rb.velocity.magnitude))
         {
             snappedToGround = true;
             contactNormal = hit.normal;
             groundNormalDot = Vector3.Dot(contactNormal, Vector3.up);
-            //rb.velocity += Vector3.up * (hit.point.y - prevHitSurfacePos.y);
-            // Readjust velocity
+            // Readjust velocity if doing so will redirect towards snap target
             if(Vector3.Dot(contactNormal,vel) > 0f)
             {
-                vel = ProjectOnContactPlane(vel).normalized * vel.magnitude;
+                vel = Vector3.ProjectOnPlane(vel,contactNormal).normalized * vel.magnitude;
                 rb.velocity = vel;
             }
         }
@@ -145,8 +173,19 @@ public class ControlPhysicsbodyContext : MonoBehaviour
         return IsGrounded() && (!snappedToGround);
     }
 
-    public Vector3 ProjectOnContactPlane(Vector3 vec)
+    public void DisplayGroundVectors()
     {
-        return vec - contactNormal * Vector3.Dot(vec, contactNormal);
+        Vector3 normal = contactNormal;
+        // Why work in quaternions when you can do everything with vectors
+        // This probably has terrible performance
+        Vector3 y = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * Vector3.forward;
+        Vector3 cross = Vector3.Cross(rawNormal, y);
+        Vector3 forward = Vector3.Cross(rawNormal, cross);
+        y.DrawVector(transform.position, 0.5f);
+        cross.DrawVector(transform.position, 0.5f);
+        normal.DrawVector(transform.position, Color.yellow, 0.5f);
+        rawNormal.DrawVector(transform.position, Color.magenta, 0.5f);
+        forward.DrawVector(transform.position,Color.cyan, 0.5f);
     }
+
 }
