@@ -21,6 +21,11 @@ public class PlayerMovementState : PlayerBaseState
 
     }
 
+    public override void FixedUpdateState()
+    {
+        Context.slideLock -= Time.deltaTime;
+    }
+
     public override void InitializeSubState()
     {
         SwitchSubState(this.Factory.Grounded);

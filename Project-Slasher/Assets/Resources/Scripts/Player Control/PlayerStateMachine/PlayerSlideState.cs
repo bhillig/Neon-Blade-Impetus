@@ -6,10 +6,13 @@ public class PlayerSlideState : AbstractFlatMovingState
 {
     public PlayerSlideState(PlayerStateMachine context, PlayerStateFactory factory) : base(context, factory) {}
 
+    private float enterSpeedOffset;
+
     public override void EnterState()
     {
         Context.animationController.SetBool("Sliding", true);
         Context.inputContext.ShiftUpEvent.AddListener(Shift);
+        enterSpeedOffset = (Context.movementProfile.SlideSpeedBoostRatio - 1) * Context.playerRb.velocity.magnitude;
         Vector3 cVel = Context.playerRb.velocity;
         cVel.x *= Context.movementProfile.SlideSpeedBoostRatio;
         cVel.z *= Context.movementProfile.SlideSpeedBoostRatio;
@@ -21,6 +24,8 @@ public class PlayerSlideState : AbstractFlatMovingState
         base.ExitState();
         Context.animationController.SetBool("Sliding", false);
         Context.inputContext.ShiftUpEvent.RemoveListener(Shift);
+        Context.slideLock = Context.movementProfile.SlideLockDuration;
+        Context.playerRb.velocity -= Context.playerRb.velocity.normalized * enterSpeedOffset;
     }
 
     private void Shift()

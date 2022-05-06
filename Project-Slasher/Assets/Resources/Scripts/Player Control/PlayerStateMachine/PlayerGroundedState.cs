@@ -22,18 +22,18 @@ public class PlayerGroundedState : PlayerBaseState
 
     private void Jump()
     {
+        SwitchState(Factory.Airborne);
         Vector3 vel = Context.playerRb.velocity;
         vel.y = Mathf.Max(0f, vel.y);
         Vector3 jumpVec = Context.groundPhysicsContext.ContactNormal * Context.movementProfile.JumpVelocity;
         vel += jumpVec;
         Context.playerRb.velocity = vel;
-        SwitchState(Factory.Airborne);
-        Context.groundPhysicsContext.SnapToGroundBlock = 0.5f;
+        Context.groundPhysicsContext.SnapToGroundBlock = 0.25f;
     }
 
     private void Shift()
     {
-        if (Context.playerRb.velocity.magnitude >= Context.movementProfile.SlideVelThreshhold)
+        if (Context.playerRb.velocity.magnitude >= Context.movementProfile.SlideVelThreshhold && Context.slideLock <= 0f)
             SwitchSubState(Factory.Slide);
     }
 

@@ -33,6 +33,7 @@ public class GroundedPhysicsContext : MonoBehaviour
     private float snapToGroundBlock = 0f;
     public float SnapToGroundBlock
     {
+        get => snapToGroundBlock;
         set => snapToGroundBlock = value;
     }
 

@@ -44,7 +44,7 @@ public class PlayerAirborneState : PlayerBaseState
     public override void CheckSwitchStates()
     {
         //Grounded check
-        if (Context.groundPhysicsContext.IsGrounded())
+        if (Context.groundPhysicsContext.IsGrounded() && Context.groundPhysicsContext.SnapToGroundBlock <= 0)
         {
             SwitchState(Factory.Grounded);
         }

@@ -9514,7 +9514,7 @@ MonoBehaviour:
   Damping: {x: 0.3, y: 0.5, z: 0.75}
   ShoulderOffset: {x: 1, y: 0, z: 0}
   VerticalArmLength: 0
-  CameraSide: 0.5
+  CameraSide: 1
   CameraDistance: 3
   CameraCollisionFilter:
     serializedVersion: 2
@@ -16263,8 +16263,8 @@ MonoBehaviour:
   body: {fileID: 1839794996}
   minVel: 0
   maxVel: 20
-  maxFOV: 100
-  minFOV: 60
+  maxFOV: 95
+  minFOV: 70
   fovCurve:
     serializedVersion: 2
     m_Curve:
@@ -16299,7 +16299,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   cam: {fileID: 1466254715}
-  lerpSpeed: 3
+  lerpSpeed: 2
 --- !u!43 &1185728139
 Mesh:
   m_ObjectHideFlags: 0
@@ -17852,7 +17852,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466254713}
   m_LocalRotation: {x: 0.108679175, y: 0.74058884, z: -0.12356347, w: 0.65149766}
-  m_LocalPosition: {x: 1.7999992, y: 0, z: 8.101666}
+  m_LocalPosition: {x: 1.7939998, y: 0, z: 8.101499}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 825018864}
@@ -19703,7 +19703,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817712750}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7999992, y: 0, z: 8.101666}
+  m_LocalPosition: {x: 1.7939998, y: 0, z: 8.101499}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1167069153}
@@ -19878,6 +19878,7 @@ MonoBehaviour:
   groundPhysicsContext: {fileID: 1466472557}
   airbornePhysicsContext: {fileID: 1839794998}
   playerPhysicsTransform: {fileID: 1839794995}
+  playerModelTransform: {fileID: 1931340620}
   playerRb: {fileID: 1839794996}
   wallFinder: {fileID: 530547563}
   forwardVector: {x: 0, y: 0, z: 0}

@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public GroundedPhysicsContext groundPhysicsContext;
     public AirbornePhysicsContext airbornePhysicsContext;
     public Transform playerPhysicsTransform;
+    public Transform playerModelTransform;
     public Rigidbody playerRb;
     public WallFinder wallFinder;
     // State machine
