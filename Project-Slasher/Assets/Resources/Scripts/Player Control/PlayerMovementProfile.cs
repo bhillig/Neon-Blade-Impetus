@@ -7,6 +7,7 @@ public class PlayerMovementProfile : ScriptableObject
 {
     // Basic movement fields
     [SerializeField] private float turnSpeed;
+    [SerializeField] private float airTurnSpeed;
     [SerializeField] private float baseMoveSpeed;
     [SerializeField] private float baseAcceleration;
     [SerializeField] private float baseAirAcceleration;
@@ -22,10 +23,12 @@ public class PlayerMovementProfile : ScriptableObject
     // The player will snap over small ledges if the difference is less than this
     [SerializeField] private float maxSnapAngle;
     [SerializeField] private float snapProbeDistance;
+    [SerializeField] private float maxAirRotationDot;
 
-    [SerializeField, HideInInspector] private float minGroundedDotProd;
+    [SerializeField] private float minGroundedDotProd;
 
     public float TurnSpeed => turnSpeed;
+    public float AirTurnSpeed => airTurnSpeed;
     public float BaseMoveSpeed => baseMoveSpeed;
     public float BaseAcceleration => baseAcceleration;
     public float BaseAirAcceleration => baseAirAcceleration;
@@ -34,6 +37,7 @@ public class PlayerMovementProfile : ScriptableObject
     public float JumpHeight => jumpHeight;
 
     public float MinGroundedDotProd => minGroundedDotProd;
+    public float MinAirRotationDot => maxAirRotationDot;
     public float GetMaxSnapDotProd(float vel)
     {
         float ratio = snapVelocityToAngleRatioCurve.Evaluate(vel / maxSnapVelocity);

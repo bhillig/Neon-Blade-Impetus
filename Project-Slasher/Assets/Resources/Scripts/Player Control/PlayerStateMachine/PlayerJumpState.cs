@@ -41,7 +41,10 @@ public class PlayerJumpState : AbstractFlatMovingState
         // Rotation
         if (movementInput != Vector2.zero)
             UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);
-        LerpRotation(Context.movementProfile.TurnSpeed);
+        if(Vector3.Dot(Context.playerPhysicsTransform.up,Vector3.up) <= Context.movementProfile.MinAirRotationDot)
+            LerpRotation(Context.movementProfile.AirTurnSpeed);
+        else
+            LerpRotationY(Context.movementProfile.AirTurnSpeed);
     }
 
     public override void InitializeSubState()

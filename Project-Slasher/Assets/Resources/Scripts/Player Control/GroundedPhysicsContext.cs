@@ -24,6 +24,7 @@ public class GroundedPhysicsContext : MonoBehaviour
     public Vector3 ContactNormal => contactNormal;
 
     private List<RaycastHit> groundedContacts = new List<RaycastHit>();
+    private List<RaycastHit> steepContacts = new List<RaycastHit>();
 
     private int stepsSinceLastGrounded;
     private bool snappedToGround = false;
@@ -60,14 +61,14 @@ public class GroundedPhysicsContext : MonoBehaviour
             rawNormal = raw.normal;
         }
         else
-            raw.normal = Vector3.up;
+            rawNormal = Vector3.up;
 
 
         foreach (var hit in hits)
         {
             EvaluateCollision(hit);
         }
-        groundContacts = hits.Count;
+        groundContacts = groundedContacts.Count;
 
         RecalculateNormalsFromContacts();
         // Update state
@@ -82,7 +83,6 @@ public class GroundedPhysicsContext : MonoBehaviour
         contactNormal = Vector3.zero;
         foreach (var contact in groundedContacts)
         {
-            print(contact.normal);
             contactNormal += contact.normal;
             hitSurfacePos += contact.point;
         }
@@ -92,6 +92,7 @@ public class GroundedPhysicsContext : MonoBehaviour
             hitSurfacePos /= groundedContacts.Count;
         groundNormalDot = Vector3.Dot(contactNormal, Vector3.up);
         groundedContacts.Clear();
+        steepContacts.Clear();
     }
 
     private void UpdateState()
@@ -161,6 +162,10 @@ public class GroundedPhysicsContext : MonoBehaviour
         if (Vector3.Dot(Vector3.up,normal) >= profile.MinGroundedDotProd)
         {
             groundedContacts.Add(contact);
+        }
+        else
+        {
+            steepContacts.Add(contact);
         }
     }
     public bool IsGrounded()

@@ -41,13 +41,25 @@ public abstract class AbstractFlatMovingState : PlayerBaseState
     protected void UpdateFlatForwardVector(Vector2 input)
     {
         Context.forwardVector =
-            Quaternion.AngleAxis(-movementInput.Angle() + Context.cameraControlContext.rotation.eulerAngles.y + 90, Vector3.up)
+            Quaternion.AngleAxis(-input.Angle() + Context.cameraControlContext.rotation.eulerAngles.y + 90, Vector3.up)
             * Vector3.forward;
     }
     
     protected void LerpRotation(float factor)
     {
         Vector3 normal = Context.groundPhysicsContext.RawNormal;
+        // Why work in quaternions when you can do everything with vectors
+        // This probably has terrible performance
+
+        Vector3 rightTangent = Vector3.Cross(normal, -Context.forwardVector);
+        Vector3 biNormal = Vector3.Cross(normal, rightTangent);
+        Quaternion targetRotation = Quaternion.LookRotation(biNormal, normal);
+        Context.playerPhysicsTransform.rotation = Quaternion.Lerp(Context.playerPhysicsTransform.rotation, targetRotation, factor);
+    }
+
+    protected void LerpRotationY(float factor)
+    {
+        Vector3 normal = Context.playerPhysicsTransform.up;
         // Why work in quaternions when you can do everything with vectors
         // This probably has terrible performance
 

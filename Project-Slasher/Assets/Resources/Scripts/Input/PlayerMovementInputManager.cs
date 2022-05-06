@@ -12,6 +12,7 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
         playerControls = new PlayerControls();
         playerControls.Enable();
         playerControls.PlayerMovement.SetCallbacks(this);
+        movementInputInfo.lastNZeroMovementInput = Vector2.right;
     }
 
     public void OnDestroy()

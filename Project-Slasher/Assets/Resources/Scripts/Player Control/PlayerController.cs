@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         stateMachine = new PlayerStateMachine(this);
+        forwardVector = Vector3.forward;
     }
 
     private void Update()

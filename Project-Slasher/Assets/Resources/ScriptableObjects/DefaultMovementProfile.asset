@@ -12,26 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aacbec332df735438d620106428ca76, type: 3}
   m_Name: DefaultMovementProfile
   m_EditorClassIdentifier: 
-  turnSpeed: 0.25
+  turnSpeed: 0.2
+  airTurnSpeed: 0.1
   baseMoveSpeed: 8
   baseAcceleration: 50
   baseAirAcceleration: 10
   baseFriction: 35
   jumpVelocity: 6
   jumpHeight: 1.5
-  maxGroundedAngle: 75
+  maxGroundedAngle: 45
   maxSnapVelocity: 8
   snapVelocityToAngleRatioCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0041648876
-      value: 1.0023499
-      inSlope: -0.15180536
-      outSlope: -0.15180536
+      time: -0.0019693496
+      value: 0.002681816
+      inSlope: 6.3373566
+      outSlope: 6.3373566
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.15497386
+      value: 0.9972869
+      inSlope: 0.029436167
+      outSlope: 0.029436167
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.85100037
@@ -54,6 +64,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maxSnapAngle: 90
-  snapProbeDistance: 2
-  minGroundedDotProd: 0.25881907
+  maxSnapAngle: 85
+  snapProbeDistance: 0.5
+  maxAirRotationDot: 0
+  minGroundedDotProd: 0.70710677
