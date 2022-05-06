@@ -9,6 +9,12 @@ public static class ExtensionMethods
         return Mathf.Lerp(source, source + Mathf.DeltaAngle(source, target), t);
     }
 
+    public static Vector2 AngleToVector2(this float angle)
+    {
+        angle *= Mathf.Deg2Rad;
+        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+    }
+
     public static Vector3 ToXZPlane(this Vector2 vec)
     {
         return new Vector3(vec.x, 0, vec.y);

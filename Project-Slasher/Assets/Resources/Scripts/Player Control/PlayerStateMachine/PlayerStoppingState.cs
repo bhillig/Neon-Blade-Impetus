@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Player is slowing down
 /// </summary>
-public class PlayerStoppingState : PlayerBaseState
+public class PlayerStoppingState : AbstractFlatMovingState
 {
     public PlayerStoppingState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) {}
 
@@ -45,6 +45,8 @@ public class PlayerStoppingState : PlayerBaseState
         cVel.z = Mathf.MoveTowards(cVel.z, 0f, zAxisRatio * frictionStep);
         cVel.y = Mathf.MoveTowards(cVel.y, 0f, yAxisRatio * frictionStep);
         rb.velocity = cVel;
+        // Rotation
+        LerpRotation(Context.movementProfile.TurnSpeed);
     }
 
     public override void InitializeSubState()

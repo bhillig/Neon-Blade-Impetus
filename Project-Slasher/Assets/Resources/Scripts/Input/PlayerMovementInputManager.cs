@@ -23,6 +23,8 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
     public void OnMovement(InputAction.CallbackContext context)
     {
         movementInputInfo.movementInput = context.ReadValue<Vector2>();
+        if (movementInputInfo.movementInput != Vector2.zero)
+            movementInputInfo.lastNZeroMovementInput = movementInputInfo.movementInput;
     }
 
     public void OnMouseMovement(InputAction.CallbackContext context)

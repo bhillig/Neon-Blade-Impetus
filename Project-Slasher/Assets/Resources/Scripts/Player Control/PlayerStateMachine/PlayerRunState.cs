@@ -23,6 +23,7 @@ public class PlayerRunState : AbstractFlatMovingState
 
     public override void ExitState()
     {
+        base.ExitState();
         Context.animationController.SetBool("Running", false);
     }
 
@@ -31,15 +32,15 @@ public class PlayerRunState : AbstractFlatMovingState
         desiredVelocity = GetDesiredVelocity(maxSpeed);
         CheckSwitchStates();
     }
+
     public override void FixedUpdateState()
     {
         if (desiredVelocity != Vector3.zero)
             SimpleMovement(desiredVelocity,maxSpeedChange);
         // Rotation
         if (movementInput != Vector2.zero)
-        {
-            LerpRotation(Context.movementProfile.TurnSpeed);
-        }
+            UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);
+        LerpRotation(Context.movementProfile.TurnSpeed);
         Context.groundPhysicsContext.DisplayGroundVectors();
     }
 

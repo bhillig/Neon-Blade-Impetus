@@ -40,9 +40,8 @@ public class PlayerJumpState : AbstractFlatMovingState
             SimpleMovement(desiredVelocity,maxSpeedChange);
         // Rotation
         if (movementInput != Vector2.zero)
-        {
-            LerpRotation(Context.movementProfile.TurnSpeed);
-        }
+            UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);
+        LerpRotation(Context.movementProfile.TurnSpeed);
     }
 
     public override void InitializeSubState()

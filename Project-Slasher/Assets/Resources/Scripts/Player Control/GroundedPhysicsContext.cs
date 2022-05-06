@@ -54,7 +54,7 @@ public class GroundedPhysicsContext : MonoBehaviour
             groundedCast.bounds.center,
             -transform.up,
             out RaycastHit raw,
-            groundedCast.radius + 1f,
+            groundedCast.radius + 0.3f,
             groundedMask))
         {
             rawNormal = raw.normal;

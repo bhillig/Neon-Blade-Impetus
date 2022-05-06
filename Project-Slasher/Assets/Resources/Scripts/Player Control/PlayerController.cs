@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     // State machine
     private PlayerStateMachine stateMachine;
 
+    // Some context scope values
+    [HideInInspector] public Vector3 forwardVector;
+
     private void Awake()
     {
         stateMachine = new PlayerStateMachine(this);

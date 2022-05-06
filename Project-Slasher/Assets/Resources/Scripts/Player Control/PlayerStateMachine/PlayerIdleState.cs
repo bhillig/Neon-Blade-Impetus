@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerBaseState
+public class PlayerIdleState : AbstractFlatMovingState
 {
     public PlayerIdleState(PlayerStateMachine context, PlayerStateFactory factory) : base(context, factory)
     {
@@ -30,6 +30,7 @@ public class PlayerIdleState : PlayerBaseState
     public override void FixedUpdateState()
     {
         Context.groundPhysicsContext.DisplayGroundVectors();
+        LerpRotation(Context.movementProfile.TurnSpeed);
     }
 
     public override void InitializeSubState()

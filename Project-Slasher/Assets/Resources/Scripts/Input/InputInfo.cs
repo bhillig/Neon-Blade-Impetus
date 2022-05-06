@@ -7,6 +7,7 @@ public class InputInfo : ScriptableObject
 {
     public Vector2 mouseDelta;
     public Vector2 movementInput;
+    public Vector2 lastNZeroMovementInput;
     public UnityEvent SpacebarDownEvent;
     public UnityEvent SpacebarUpEvent;
 }
