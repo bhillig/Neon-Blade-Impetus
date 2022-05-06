@@ -17,6 +17,7 @@ public class PlayerStateFactory
 
         Idle = new PlayerIdleState(context, this);
         Jump = new PlayerJumpState(context, this);
+        Slide = new PlayerSlideState(context, this);
         Stopping = new PlayerStoppingState(context, this);
         Landing = new PlayerLandingState(context, this);
         Run = new PlayerRunState(context, this);
@@ -35,5 +36,6 @@ public class PlayerStateFactory
     public PlayerBaseState Landing { get; }
     public PlayerBaseState Run { get; }
     public PlayerBaseState Jump { get; }
+    public PlayerBaseState Slide { get; }
 }
 

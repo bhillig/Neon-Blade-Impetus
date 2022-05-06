@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public ThirdPersonCameraTargetController cameraControlContext;
     public Animator animationController;
     public GroundedPhysicsContext groundPhysicsContext;
+    public AirbornePhysicsContext airbornePhysicsContext;
     public Transform playerPhysicsTransform;
     public Rigidbody playerRb;
     public WallFinder wallFinder;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     // Some context scope values
     [HideInInspector] public Vector3 forwardVector;
+    [HideInInspector] public float slideLock;
 
     private void Awake()
     {

@@ -10,4 +10,8 @@ public class InputInfo : ScriptableObject
     public Vector2 lastNZeroMovementInput;
     public UnityEvent SpacebarDownEvent;
     public UnityEvent SpacebarUpEvent;
+    public UnityEvent ShiftDownEvent;
+    public UnityEvent ShiftHeldEvent;
+    public UnityEvent ShiftUpEvent;
+    public bool shiftDown;
 }

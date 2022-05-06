@@ -7,13 +7,16 @@ public class PlayerMovementProfile : ScriptableObject
 {
     // Basic movement fields
     [SerializeField] private float turnSpeed;
-    [SerializeField] private float airTurnSpeed;
     [SerializeField] private float baseMoveSpeed;
     [SerializeField] private float baseAcceleration;
-    [SerializeField] private float baseAirAcceleration;
     [SerializeField] private float baseFriction;
-    [SerializeField,HideInInspector] private float jumpVelocity;
+
+    [Space(15f)]
+    // Air
+    [SerializeField, HideInInspector] private float jumpVelocity;
     [SerializeField] private float jumpHeight;
+    [SerializeField] private float baseAirAcceleration;
+    [SerializeField] private float airTurnSpeed;
 
     // State calculation fields
     [Space(15f)]
@@ -25,7 +28,15 @@ public class PlayerMovementProfile : ScriptableObject
     [SerializeField] private float snapProbeDistance;
     [SerializeField] private float maxAirRotationDot;
 
-    [SerializeField] private float minGroundedDotProd;
+    // Slide
+    [Space(15f)]
+    [SerializeField] private float slideVelThreshhold;
+    [SerializeField] private float slideGravityBoost;
+    [SerializeField] private float slideSpeedBoostRatio;
+    [SerializeField] private float slideBaseFriction;
+    [SerializeField] private float slideLockDuration;
+
+    [SerializeField,HideInInspector] private float minGroundedDotProd;
 
     public float TurnSpeed => turnSpeed;
     public float AirTurnSpeed => airTurnSpeed;
@@ -38,6 +49,11 @@ public class PlayerMovementProfile : ScriptableObject
 
     public float MinGroundedDotProd => minGroundedDotProd;
     public float MinAirRotationDot => maxAirRotationDot;
+    public float SlideVelThreshhold => slideVelThreshhold;
+    public float SlideGravityBoost => slideGravityBoost;
+    public float SlideBaseFriction => slideBaseFriction;
+    public float SlideSpeedBoostRatio => slideSpeedBoostRatio;
+    public float SlideLockDuration => slideLockDuration;
     public float GetMaxSnapDotProd(float vel)
     {
         float ratio = snapVelocityToAngleRatioCurve.Evaluate(vel / maxSnapVelocity);

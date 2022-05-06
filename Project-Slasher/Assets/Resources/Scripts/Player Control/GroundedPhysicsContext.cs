@@ -15,7 +15,8 @@ public class GroundedPhysicsContext : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private SphereCollider groundedCast;
 
-    private int groundContacts = 0;
+    private int groundContactCount = 0;
+    private int steepContactCount = 0;
 
     private float groundNormalDot = 0f;
     public float GroundNormalDot => groundNormalDot;
@@ -39,7 +40,9 @@ public class GroundedPhysicsContext : MonoBehaviour
     private Vector3 prevHitSurfacePos;
 
     private Vector3 rawNormal;
-    public Vector3 RawNormal => rawNormal;
+    private float rawNormalDot;
+    public Vector3 RawGroundNormal => rawNormal;
+    public float RawGroundNormalDot => rawNormalDot;
 
     private void FixedUpdate()
     {
@@ -58,17 +61,18 @@ public class GroundedPhysicsContext : MonoBehaviour
             groundedCast.radius + 0.3f,
             groundedMask))
         {
-            rawNormal = raw.normal;
+            rawNormal = raw.normal;            
         }
         else
             rawNormal = Vector3.up;
 
-
+        rawNormalDot = Vector3.Dot(rawNormal, Vector3.up);
         foreach (var hit in hits)
         {
             EvaluateCollision(hit);
         }
-        groundContacts = groundedContacts.Count;
+        groundContactCount = groundedContacts.Count;
+        steepContactCount = steepContacts.Count;
 
         RecalculateNormalsFromContacts();
         // Update state
@@ -170,12 +174,17 @@ public class GroundedPhysicsContext : MonoBehaviour
     }
     public bool IsGrounded()
     {
-        return (groundContacts > 0 || snappedToGround) && (groundNormalDot >= profile.MinGroundedDotProd);
+        return (groundContactCount > 0 || snappedToGround) && (groundNormalDot >= profile.MinGroundedDotProd);
     }
 
     public bool IsGroundedRaw()
     {
         return IsGrounded() && (!snappedToGround);
+    }
+
+    public bool IsSteepContacting()
+    {
+        return steepContactCount > 0;
     }
 
     public void DisplayGroundVectors()

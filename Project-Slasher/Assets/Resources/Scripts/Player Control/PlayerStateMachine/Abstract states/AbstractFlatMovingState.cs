@@ -47,7 +47,7 @@ public abstract class AbstractFlatMovingState : PlayerBaseState
     
     protected void LerpRotation(float factor)
     {
-        Vector3 normal = Context.groundPhysicsContext.RawNormal;
+        Vector3 normal = Context.groundPhysicsContext.RawGroundNormal;
         // Why work in quaternions when you can do everything with vectors
         // This probably has terrible performance
 

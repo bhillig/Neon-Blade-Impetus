@@ -53,6 +53,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shift"",
+                    ""type"": ""Value"",
+                    ""id"": ""ccbf1112-3bc1-4a17-9108-0d1f8d84329f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Spacebar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e98ef83-1a8c-4468-8e5f-d9133f12206f"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +218,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMovement_MouseMovement = m_PlayerMovement.FindAction("MouseMovement", throwIfNotFound: true);
         m_PlayerMovement_Spacebar = m_PlayerMovement.FindAction("Spacebar", throwIfNotFound: true);
+        m_PlayerMovement_Shift = m_PlayerMovement.FindAction("Shift", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -260,6 +281,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Movement;
     private readonly InputAction m_PlayerMovement_MouseMovement;
     private readonly InputAction m_PlayerMovement_Spacebar;
+    private readonly InputAction m_PlayerMovement_Shift;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -267,6 +289,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_PlayerMovement_Movement;
         public InputAction @MouseMovement => m_Wrapper.m_PlayerMovement_MouseMovement;
         public InputAction @Spacebar => m_Wrapper.m_PlayerMovement_Spacebar;
+        public InputAction @Shift => m_Wrapper.m_PlayerMovement_Shift;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -285,6 +308,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Spacebar.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnSpacebar;
                 @Spacebar.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnSpacebar;
                 @Spacebar.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnSpacebar;
+                @Shift.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShift;
+                @Shift.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShift;
+                @Shift.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShift;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -298,6 +324,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Spacebar.started += instance.OnSpacebar;
                 @Spacebar.performed += instance.OnSpacebar;
                 @Spacebar.canceled += instance.OnSpacebar;
+                @Shift.started += instance.OnShift;
+                @Shift.performed += instance.OnShift;
+                @Shift.canceled += instance.OnShift;
             }
         }
     }
@@ -307,5 +336,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnMouseMovement(InputAction.CallbackContext context);
         void OnSpacebar(InputAction.CallbackContext context);
+        void OnShift(InputAction.CallbackContext context);
     }
 }

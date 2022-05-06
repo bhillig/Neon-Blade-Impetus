@@ -21,6 +21,12 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
         playerControls.Dispose();
     }
 
+    void Update()
+    {
+        if (movementInputInfo.shiftDown)
+            movementInputInfo.ShiftHeldEvent.Invoke();
+    }
+
     public void OnMovement(InputAction.CallbackContext context)
     {
         movementInputInfo.movementInput = context.ReadValue<Vector2>();
@@ -37,7 +43,22 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
     {
         if (context.canceled)
             movementInputInfo.SpacebarUpEvent.Invoke();
-        else if(context.performed)
+        else if(context.started)
             movementInputInfo.SpacebarDownEvent.Invoke();
+    }
+
+    public void OnShift(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            movementInputInfo.ShiftUpEvent.Invoke();
+            movementInputInfo.shiftDown = false;
+        }
+        else if (context.started)
+        {
+            movementInputInfo.ShiftDownEvent.Invoke();
+            movementInputInfo.ShiftHeldEvent.Invoke();
+            movementInputInfo.shiftDown = true;
+        }
     }
 }

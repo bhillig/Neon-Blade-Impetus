@@ -21,6 +21,7 @@ public class PlayerStoppingState : AbstractFlatMovingState
     public override void ExitState()
     {
         base.ExitState();
+        Context.playerRb.useGravity = true;
         Context.animationController.SetBool("Running", false);
     }
 
@@ -32,18 +33,11 @@ public class PlayerStoppingState : AbstractFlatMovingState
 
     public override void FixedUpdateState()
     {
+        Context.playerRb.useGravity = !Context.groundPhysicsContext.IsGroundedRaw();
         //Friction simulation
         var rb = Context.playerRb;
         Vector3 cVel = rb.velocity;
-        float sqrMag = cVel.XZSqrMag();
-        if (sqrMag == 0)
-            return;
-        float xAxisRatio = cVel.x * cVel.x / sqrMag;
-        float zAxisRatio = cVel.z * cVel.z / sqrMag;
-        float yAxisRatio = cVel.z * cVel.z / sqrMag;
-        cVel.x = Mathf.MoveTowards(cVel.x, 0f, xAxisRatio * frictionStep);
-        cVel.z = Mathf.MoveTowards(cVel.z, 0f, zAxisRatio * frictionStep);
-        cVel.y = Mathf.MoveTowards(cVel.y, 0f, yAxisRatio * frictionStep);
+        cVel = Vector3.MoveTowards(cVel, Vector3.zero, Context.movementProfile.BaseFriction * Time.fixedDeltaTime);
         rb.velocity = cVel;
         // Rotation
         LerpRotation(Context.movementProfile.TurnSpeed);

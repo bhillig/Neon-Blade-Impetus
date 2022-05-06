@@ -14,6 +14,7 @@ public class PlayerJumpState : AbstractFlatMovingState
     protected float maxSpeedChange;
 
     protected Vector3 desiredVelocity;
+    private float maxVel;
 
     public override void EnterState()
     {
@@ -21,6 +22,13 @@ public class PlayerJumpState : AbstractFlatMovingState
         acceleration = Context.movementProfile.BaseAirAcceleration;
         maxSpeed = Context.movementProfile.BaseMoveSpeed;
         maxSpeedChange = acceleration * Time.fixedDeltaTime;
+
+        // If going faster than top speed when entering, then that becomes the new max speed
+        float mag = Context.playerRb.velocity.XZMag();
+        float desiredMag = desiredVelocity.magnitude;
+        maxVel = maxSpeed;
+        if (desiredMag < mag)
+            maxVel = mag;
     }
 
     public override void ExitState()
@@ -30,14 +38,16 @@ public class PlayerJumpState : AbstractFlatMovingState
 
     public override void UpdateState()
     {
-        desiredVelocity = GetDesiredVelocity(maxSpeed);
+        desiredVelocity = GetDesiredVelocity(maxVel);
         CheckSwitchStates();
     }
 
     public override void FixedUpdateState()
     {
         if (desiredVelocity.magnitude > 0f)
+        {           
             SimpleMovement(desiredVelocity,maxSpeedChange);
+        }
         // Rotation
         if (movementInput != Vector2.zero)
             UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);
