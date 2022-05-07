@@ -15,12 +15,13 @@ public class PlayerController : MonoBehaviour
     public Transform playerModelTransform;
     public Rigidbody playerRb;
     public WallFinder wallFinder;
+    public ColliderSwitcher colliderSwitcher;
     // State machine
     private PlayerStateMachine stateMachine;
 
     // Some context scope values
     [HideInInspector] public Vector3 forwardVector;
-    [HideInInspector] public float slideLock;
+    [HideInInspector] public float slideCooldownTimer;
 
     private void Awake()
     {
@@ -51,12 +52,5 @@ public class PlayerController : MonoBehaviour
     {
         PlayerBaseState state = (PlayerBaseState)stateMachine.CurrentState;
         print(state);
-        while(true)
-        {
-            state = (PlayerBaseState)state.CurrentSubState;
-            if (state == null)
-                return;
-            print(state);
-        }
     }
 }

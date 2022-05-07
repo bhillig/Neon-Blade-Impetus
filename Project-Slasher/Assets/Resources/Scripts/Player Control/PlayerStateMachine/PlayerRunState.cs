@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRunState : AbstractFlatMovingState
+public class PlayerRunState : PlayerGroundedState
 {
-    public PlayerRunState(PlayerStateMachine context, PlayerStateFactory factory) : base(context, factory) {}
+    public PlayerRunState(PlayerStateMachine context, PlayerStateFactory factory) : base(context, factory) { }
 
     protected float acceleration;
     protected float maxSpeed;
@@ -14,6 +14,7 @@ public class PlayerRunState : AbstractFlatMovingState
 
     public override void EnterState()
     {
+        base.EnterState();
         Context.animationController.SetBool("Running", true);
         // Grab some values from movementProfile
         acceleration = Context.movementProfile.BaseAcceleration;
@@ -29,31 +30,30 @@ public class PlayerRunState : AbstractFlatMovingState
 
     public override void UpdateState()
     {
-        desiredVelocity = GetDesiredVelocity(maxSpeed);
-        CheckSwitchStates();
+        base.UpdateState();
+        desiredVelocity = flatMove.GetDesiredVelocity(maxSpeed);
+        CheckSwitchState();
     }
 
     public override void FixedUpdateState()
     {
+        base.FixedUpdateState();
+        // Basic run movement
         if (desiredVelocity != Vector3.zero)
-            SimpleMovement(desiredVelocity,maxSpeedChange);
+            flatMove.SimpleMovement(desiredVelocity,maxSpeedChange);
+
         // Rotation
-        if (movementInput != Vector2.zero)
-            UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);
-        LerpRotation(Context.movementProfile.TurnSpeed);
-        Context.groundPhysicsContext.DisplayGroundVectors();
+        if (Context.inputContext.movementInput != Vector2.zero)
+            flatMove.UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);
+        flatMove.LerpRotation(Context.movementProfile.TurnSpeed);
     }
 
-    public override void InitializeSubState()
+    public override void CheckSwitchState()
     {
-
-    }
-
-    public override void CheckSwitchStates()
-    {
-        if(movementInput == Vector2.zero)
+        base.CheckSwitchState();
+        if(Context.inputContext.movementInput == Vector2.zero)
         {
-            SwitchState(Factory.Stopping);
+            TrySwitchState(Factory.Stopping);
         }
     }
 }

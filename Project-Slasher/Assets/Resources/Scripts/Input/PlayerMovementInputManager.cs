@@ -51,14 +51,14 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
     {
         if (context.canceled)
         {
-            movementInputInfo.ShiftUpEvent.Invoke();
             movementInputInfo.shiftDown = false;
+            movementInputInfo.ShiftUpEvent.Invoke();
         }
         else if (context.started)
         {
+            movementInputInfo.shiftDown = true;
             movementInputInfo.ShiftDownEvent.Invoke();
             movementInputInfo.ShiftHeldEvent.Invoke();
-            movementInputInfo.shiftDown = true;
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWallglideState : AbstractFlatMovingState
+public class PlayerWallglideState : PlayerMovementState
 {
     public PlayerWallglideState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
     {
@@ -16,13 +16,11 @@ public class PlayerWallglideState : AbstractFlatMovingState
         results = Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd);
         Context.playerRb.useGravity = false;
         Context.animationController.SetBool("Airborne", true);
-        InitializeSubState();
         Context.inputContext.SpacebarDownEvent.AddListener(OnSpacebarDown);
     }
 
     public override void ExitState()
     {
-        base.ExitState();
         Context.playerRb.useGravity = true;
         Context.animationController.SetBool("Airborne", false);
         Context.inputContext.SpacebarDownEvent.RemoveListener(OnSpacebarDown);
@@ -30,12 +28,12 @@ public class PlayerWallglideState : AbstractFlatMovingState
 
     public void OnSpacebarDown()
     {
-        SwitchState(Factory.Airborne);
+        TrySwitchState(Factory.Jump);
     }
 
     public override void UpdateState()
     {
-        CheckSwitchStates();
+        CheckSwitchState();
     }
 
     public override void FixedUpdateState()
@@ -43,25 +41,20 @@ public class PlayerWallglideState : AbstractFlatMovingState
         results = Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd);
         if (results == null)
         {
-            SwitchState(Factory.Airborne);
+            TrySwitchState(Factory.Jump);
             return;
         }
         Vector3 dir = Vector3.ProjectOnPlane(Camera.main.transform.forward, results.norm).normalized;
         Context.playerRb.velocity = dir * 25f;
-        LerpRotation(1f);
+        flatMove.LerpRotation(1f);
     }
 
-    public override void InitializeSubState()
-    {
-        
-    }
-
-    public override void CheckSwitchStates()
+    public override void CheckSwitchState()
     {
         //Grounded check
         if (Context.groundPhysicsContext.IsGrounded())
         {
-            SwitchState(Factory.Grounded);
+            TrySwitchState(Factory.Idle);
         }
     }
 }

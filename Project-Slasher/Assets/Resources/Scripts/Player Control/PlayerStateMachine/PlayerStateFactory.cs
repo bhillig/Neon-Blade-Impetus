@@ -9,10 +9,7 @@ public class PlayerStateFactory
     public PlayerStateFactory(PlayerStateMachine currentContext)
     {
         context = currentContext;
-        //Initialize states
-        Movement = new PlayerMovementState(context, this);
-        Grounded = new PlayerGroundedState(context, this);
-        Airborne = new PlayerAirborneState(context, this);
+        // Initialize states
         Wallglide = new PlayerWallglideState(context, this);
 
         Idle = new PlayerIdleState(context, this);
@@ -22,14 +19,12 @@ public class PlayerStateFactory
         Landing = new PlayerLandingState(context, this);
         Run = new PlayerRunState(context, this);
 
+        // Switch states
+        GroundedSwitch = new PlayerGroundedSwitchState(context, this);
+
     }
 
-    public PlayerBaseState Movement { get; }
-
-    public PlayerBaseState Grounded { get; }
-    public PlayerBaseState Airborne { get; }
     public PlayerBaseState Wallglide { get; }
-
 
     public PlayerBaseState Idle { get; }
     public PlayerBaseState Stopping { get; }
@@ -37,5 +32,9 @@ public class PlayerStateFactory
     public PlayerBaseState Run { get; }
     public PlayerBaseState Jump { get; }
     public PlayerBaseState Slide { get; }
+
+    // Switch states
+    
+    public PlayerBaseState GroundedSwitch { get; }
 }
 
