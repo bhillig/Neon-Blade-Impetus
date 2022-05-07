@@ -2,27 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGroundedState : PlayerBaseState
+public abstract class PlayerGroundedState : PlayerMovementState
 {
     public PlayerGroundedState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) {}
 
     public override void EnterState()
     {
-        InitializeSubState();
         Context.inputContext.SpacebarDownEvent.AddListener(Jump);
         Context.inputContext.ShiftDownEvent.AddListener(Shift);
     }
 
     public override void ExitState()
     {
-        base.ExitState();
         Context.inputContext.SpacebarDownEvent.RemoveListener(Jump);
         Context.inputContext.ShiftDownEvent.RemoveListener(Shift);
     }
 
-    private void Jump()
+    protected virtual void Jump()
     {
-        SwitchState(Factory.Airborne);
+        TrySwitchState(Factory.Jump);
+        // Jump physics
         Vector3 vel = Context.playerRb.velocity;
         vel.y = Mathf.Max(0f, vel.y);
         Vector3 jumpVec = Context.groundPhysicsContext.ContactNormal * Context.movementProfile.JumpVelocity;
@@ -31,37 +30,25 @@ public class PlayerGroundedState : PlayerBaseState
         Context.groundPhysicsContext.SnapToGroundBlock = 0.25f;
     }
 
-    private void Shift()
+    protected virtual void Shift()
     {
-        if (Context.playerRb.velocity.magnitude >= Context.movementProfile.SlideVelThreshhold && Context.slideLock <= 0f)
-            SwitchSubState(Factory.Slide);
+        TrySwitchState(Factory.Slide);
     }
 
     public override void UpdateState()
     {
-        CheckSwitchStates();
+        base.UpdateState();
     }
     public override void FixedUpdateState()
     {
 
     }
 
-    public override void InitializeSubState()
+    public override void CheckSwitchState()
     {
-        if(Context.playerRb.velocity.magnitude == 0f)
-            SwitchSubState(this.Factory.Idle);
-        else if(Context.inputContext.shiftDown)
-            SwitchSubState(this.Factory.Slide);
-        else
-            SwitchSubState(this.Factory.Stopping);
-    }
-
-    public override void CheckSwitchStates()
-    {
-        //Grounded check
         if (!Context.groundPhysicsContext.IsGrounded())
         {
-            SwitchState(Factory.Airborne);
+            TrySwitchState(Factory.Jump);
         }
     }
 }

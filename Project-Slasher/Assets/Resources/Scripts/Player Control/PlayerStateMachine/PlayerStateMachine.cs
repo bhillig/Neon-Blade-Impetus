@@ -12,6 +12,8 @@ public class PlayerStateMachine : StateMachine.IStateMachineContext
     private PlayerBaseState currentState;
     private PlayerStateFactory stateFactory;
 
+    public FlatMovingStateComponent flatMove;
+
     public IState CurrentState
     {
         get => currentState;
@@ -20,20 +22,24 @@ public class PlayerStateMachine : StateMachine.IStateMachineContext
 
     public PlayerStateMachine(PlayerController context)
     {
+        // Create state dependencies
         this.context = context;
+        flatMove = new FlatMovingStateComponent(context);
+        // Set up factory and default state
         stateFactory = new PlayerStateFactory(this);
-        //Entry state
-        currentState = stateFactory.Movement;
+        // Entry state
+        currentState = stateFactory.Idle;
         currentState.EnterState();
+
     }
 
     public void UpdateStateMachine()
     {
-        currentState.UpdateStates();
+        currentState.UpdateState();
     }
 
     public void FixedUpdateStateMachine()
     {
-        currentState.FixedUpdateStates();
+        currentState.FixedUpdateState();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Player is slowing down
 /// </summary>
-public class PlayerStoppingState : AbstractFlatMovingState
+public class PlayerStoppingState : PlayerGroundedState
 {
     public PlayerStoppingState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) {}
 
@@ -13,9 +13,10 @@ public class PlayerStoppingState : AbstractFlatMovingState
 
     public override void EnterState()
     {
+        base.EnterState();
         Context.animationController.SetBool("Running", true);
         frictionStep = Context.movementProfile.BaseFriction * Time.fixedDeltaTime;
-        CheckSwitchStates();       
+        CheckSwitchState();       
     }
 
     public override void ExitState()
@@ -27,32 +28,30 @@ public class PlayerStoppingState : AbstractFlatMovingState
 
     public override void UpdateState()
     {
+        base.UpdateState();
         Context.animationController.SetBool("Running", Context.playerRb.velocity.magnitude > frictionStep * 10);
-        CheckSwitchStates();
+        CheckSwitchState();
     }
 
     public override void FixedUpdateState()
     {
+        base.FixedUpdateState();
         Context.playerRb.useGravity = !Context.groundPhysicsContext.IsGroundedRaw();
-        //Friction simulation
+        // Apply friction
         var rb = Context.playerRb;
         Vector3 cVel = rb.velocity;
         cVel = Vector3.MoveTowards(cVel, Vector3.zero, Context.movementProfile.BaseFriction * Time.fixedDeltaTime);
         rb.velocity = cVel;
         // Rotation
-        LerpRotation(Context.movementProfile.TurnSpeed);
+        flatMove.LerpRotation(Context.movementProfile.TurnSpeed);
     }
 
-    public override void InitializeSubState()
+    public override void CheckSwitchState()
     {
-        
-    }
-
-    public override void CheckSwitchStates()
-    {
+        base.CheckSwitchState();
         if(Context.inputContext.movementInput != Vector2.zero)
-            SwitchState(Factory.Run);
+            TrySwitchState(Factory.Run);
         else if(Context.playerRb.velocity.magnitude < 0.2f)
-            SwitchState(Factory.Idle);
+            TrySwitchState(Factory.Idle);
     }
 }

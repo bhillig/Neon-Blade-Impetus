@@ -5,11 +5,6 @@ namespace StateMachine
 {
     public abstract class AbstractHierState : StateMachine.IState
     {
-        private AbstractHierState currentSuperState;
-        private AbstractHierState currentSubState;
-
-        public AbstractHierState CurrentSubState => currentSubState;
-
         private IStateMachineContext stateMachine;
         protected IStateMachineContext StateMachine
         {
@@ -21,79 +16,35 @@ namespace StateMachine
             this.stateMachine = stateMachine;
         }
 
-        public abstract void EnterState();
-
-        public virtual void UpdateState() { }
-        public virtual void FixedUpdateState() { }
-
-        public virtual void ExitState() 
-        { 
-            if(currentSubState != null)
-                currentSubState.ExitState();
-        }
-
-        public abstract void CheckSwitchStates();
-
-        public abstract void InitializeSubState();
-
-        public void UpdateStates()
-        {
-            UpdateState();
-            if (currentSubState != null)
-            {
-                currentSubState.UpdateStates();
-            }
-        }
-
-        public void FixedUpdateStates()
-        {
-            FixedUpdateState();
-            if (currentSubState != null)
-            {
-                currentSubState.FixedUpdateStates();
-            }
-        }
-
-        protected void SwitchState(AbstractHierState newState)
-        {
-            ExitState();
-            //Only assign new current root state if current state is root
-            if (currentSuperState == null)
-            {
-                stateMachine.CurrentState = newState;
-            }
-            else
-            {
-                currentSuperState.SetSubState(newState);
-            }
-            newState.EnterState();
-        }
         /// <summary>
-        /// Switches or initializes this substate to new state
+        /// Logic for determining if the state can be switched to or not
         /// </summary>
-        protected void SwitchSubState(AbstractHierState newState)
+        /// <returns></returns>
+        public virtual bool IsStateSwitchable()
         {
-            if(currentSubState != null)
-            {
-                currentSubState.SwitchState(newState);
-            }
-            else
-            {
-                SetSubState(newState);
-                newState.EnterState();
-            }
+            return true;
         }
 
-        protected void SetSuperState(AbstractHierState newSuperState)
+        /// <summary>
+        /// <para>Attempt to switch to a new state</para>
+        /// <para>Will fail if the new state fails IsStateSwitchable()</para>
+        /// </summary>
+        /// <param name="newState"></param>
+        public bool TrySwitchState(IState newState)
         {
-            currentSuperState = newSuperState;
+            if (!newState.IsStateSwitchable())
+                return false;
+            ExitState();
+            stateMachine.CurrentState = newState;
+            newState.EnterState();
+            return true;
         }
 
-        protected void SetSubState(AbstractHierState newSubState)
-        {
-            currentSubState = newSubState;
-            newSubState.SetSuperState(this);
-        }
+        public abstract void EnterState();
+        public abstract void ExitState();
+        public abstract void UpdateState();
+        public abstract void FixedUpdateState();
+        public abstract void CheckSwitchState();
     }
 
 }

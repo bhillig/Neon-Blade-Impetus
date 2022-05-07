@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : AbstractFlatMovingState
+public class PlayerIdleState : PlayerGroundedState
 {
-    public PlayerIdleState(PlayerStateMachine context, PlayerStateFactory factory) : base(context, factory)
-    {
-
-    }
+    public PlayerIdleState(PlayerStateMachine context, PlayerStateFactory factory) : base(context, factory) { }
 
     public override void EnterState()
     {
+        base.EnterState();
         Context.playerRb.velocity = Vector3.zero;
         Context.playerRb.constraints |= (RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ);
+        CheckSwitchState();
     }
 
     public override void ExitState()
@@ -23,26 +22,24 @@ public class PlayerIdleState : AbstractFlatMovingState
 
     public override void UpdateState()
     {
-        
-        CheckSwitchStates();
+        base.UpdateState();
+        CheckSwitchState();
     }
 
     public override void FixedUpdateState()
     {
+        base.FixedUpdateState();
         Context.groundPhysicsContext.DisplayGroundVectors();
-        LerpRotation(Context.movementProfile.TurnSpeed);
+        flatMove.LerpRotation(Context.movementProfile.TurnSpeed);
     }
 
-    public override void InitializeSubState()
-    {
 
-    }
-
-    public override void CheckSwitchStates()
+    public override void CheckSwitchState()
     {
+        base.CheckSwitchState();
         if(Context.inputContext.movementInput != Vector2.zero)
         {
-            SwitchState(Factory.Run);
+            TrySwitchState(Factory.Run);
         }
     }
 }

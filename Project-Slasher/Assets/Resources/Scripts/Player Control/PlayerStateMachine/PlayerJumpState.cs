@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : AbstractFlatMovingState
+public class PlayerJumpState : PlayerAirborneState
 {
-    public PlayerJumpState(PlayerStateMachine context, PlayerStateFactory factory) : base(context, factory)
-    {
-
-    }
+    public PlayerJumpState(PlayerStateMachine context, PlayerStateFactory factory) : base(context, factory) { }
 
     protected float acceleration;
     protected float maxSpeed;
@@ -18,12 +15,18 @@ public class PlayerJumpState : AbstractFlatMovingState
 
     public override void EnterState()
     {
+        base.EnterState();
         // Grab some values from movementProfile
         acceleration = Context.movementProfile.BaseAirAcceleration;
         maxSpeed = Context.movementProfile.BaseMoveSpeed;
         maxSpeedChange = acceleration * Time.fixedDeltaTime;
 
-        // If going faster than top speed when entering, then that becomes the new max speed
+        // If going faster than movement profile's speed when entering state, then that becomes the new max speed
+        CompareEnterSpeed();
+    }
+
+    private void CompareEnterSpeed()
+    {
         float mag = Context.playerRb.velocity.XZMag();
         float desiredMag = desiredVelocity.magnitude;
         maxVel = maxSpeed;
@@ -38,32 +41,29 @@ public class PlayerJumpState : AbstractFlatMovingState
 
     public override void UpdateState()
     {
-        desiredVelocity = GetDesiredVelocity(maxVel);
-        CheckSwitchStates();
+        base.UpdateState();
+        desiredVelocity = flatMove.GetDesiredVelocity(maxVel);
+        CheckSwitchState();
     }
 
     public override void FixedUpdateState()
     {
         if (desiredVelocity.magnitude > 0f)
         {           
-            SimpleMovement(desiredVelocity,maxSpeedChange);
+            flatMove.SimpleMovement(desiredVelocity,maxSpeedChange);
         }
         // Rotation
-        if (movementInput != Vector2.zero)
-            UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);
+        // Only rotates to a threshhold for aesthetic reasons
+        if (Context.inputContext.movementInput != Vector2.zero)
+            flatMove.UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);      
         if(Vector3.Dot(Context.playerPhysicsTransform.up,Vector3.up) <= Context.movementProfile.MinAirRotationDot)
-            LerpRotation(Context.movementProfile.AirTurnSpeed);
+            flatMove.LerpRotation(Context.movementProfile.AirTurnSpeed);
         else
-            LerpRotationY(Context.movementProfile.AirTurnSpeed);
+            flatMove.LerpRotationY(Context.movementProfile.AirTurnSpeed);
     }
 
-    public override void InitializeSubState()
+    public override void CheckSwitchState()
     {
-
-    }
-
-    public override void CheckSwitchStates()
-    {
-
+        base.CheckSwitchState();
     }
 }
