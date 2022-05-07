@@ -10,13 +10,14 @@ public class PlayerWallglideState : PlayerMovementState
     }
 
     private WallSearchResult results;
-
+    private Wallrunning wallrunning;
     public override void EnterState()
     {
-        results = Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd);
         Context.playerRb.useGravity = false;
         Context.animationController.SetBool("Airborne", true);
         Context.inputContext.SpacebarDownEvent.AddListener(OnSpacebarDown);
+        wallrunning = new Wallrunning(Context);
+        wallrunning.StartWallRun();
     }
 
     public override void ExitState()
@@ -28,29 +29,34 @@ public class PlayerWallglideState : PlayerMovementState
 
     public void OnSpacebarDown()
     {
+        wallrunning.JumpFromWall();
         TrySwitchState(Factory.Jump);
     }
 
     public override void UpdateState()
     {
         CheckSwitchState();
+        wallrunning.CheckForWall();
+        wallrunning.CheckDuration();
     }
 
     public override void FixedUpdateState()
     {
-        results = Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd);
-        if (results == null)
+        if (wallrunning.IsWallRunning())
         {
-            TrySwitchState(Factory.Jump);
-            return;
+            wallrunning.WallRunningMovement();
         }
-        Vector3 dir = Vector3.ProjectOnPlane(Camera.main.transform.forward, results.norm).normalized;
-        Context.playerRb.velocity = dir * 25f;
-        flatMove.LerpRotation(1f);
+        
     }
 
     public override void CheckSwitchState()
     {
+        if (!wallrunning.IsWallRunning())
+        {
+            TrySwitchState(Factory.Jump);
+            return;
+        }
+
         //Grounded check
         if (Context.groundPhysicsContext.IsGrounded())
         {
