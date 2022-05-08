@@ -67,10 +67,10 @@ MonoBehaviour:
   maxSnapAngle: 85
   snapProbeDistance: 0.5
   maxAirRotationDot: 0.9
-  slideVelThreshhold: 8
-  slideGravityBoost: 24
+  slideVelThreshhold: 7
+  slideGravityBoost: 20
   slideSpeedBoostRatio: 1.45
   slideBaseFriction: 9
-  slideLockDuration: 0.35
+  slideLockDuration: 0.3
   slideCooldown: 0.65
   minGroundedDotProd: 0.25881907

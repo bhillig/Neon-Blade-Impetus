@@ -77,6 +77,7 @@ public class PlayerSlideState : PlayerGroundedState
         rb.velocity = cVel;
     }
 
+    // Override GroundedState's jump logic to include a slideLockTimer check
     protected override void Jump()
     {
         if(slideLockTimer <= 0f)
