@@ -10,18 +10,22 @@ public class Wallrunning
     private LayerMask whatisWall;
     private LayerMask whatisGround;
     private float wallRunForce = 1.5f;
-    private float maxWallRunTime = 2.0f;
+    private float wallJumpUpForce = 7f;
+    private float wallJumpSideForce = 7f;
+    private float maxWallRunTime = 2.00f;
     private float wallRunTimer = 0.0f;
 
     // Detection variables
-    private float wallCheckDistance = 1.0f;
-    private float minJumpHeight = 1.5f;
+    private float wallCheckDistance = 0.7f;
+    private float minJumpHeight = 2.0f;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
     private bool leftWall;
     private bool rightWall;
     private Vector3 wallForward;
     private Vector3 wallNormal;
+    private bool useGravity = true;
+    private float counterGravityForce = 11.0f;
 
     //References
     private Transform orientation;
@@ -59,12 +63,13 @@ public class Wallrunning
     public void StartWallRun()
     {
         isWallRunning = true;
+        rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
     }
 
     public void WallRunningMovement()
     {
-        rb.useGravity = false;
-        rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
+        rb.useGravity = useGravity;
+        
 
         wallNormal = rightWall ? rightWallHit.normal : leftWallHit.normal;
         wallForward = Vector3.Cross(wallNormal, orientation.up);
@@ -76,7 +81,10 @@ public class Wallrunning
         }
 
         rb.velocity += wallForward * wallRunForce * Time.deltaTime;
-        //rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
+        if(useGravity)
+        {
+            rb.AddForce(orientation.up * counterGravityForce, ForceMode.Force);
+        }
     }
 
     public void StopWallRun()
@@ -97,8 +105,9 @@ public class Wallrunning
 
     public void JumpFromWall()
     {
-        Vector3 direction = -wallNormal + Vector3.up;
-        rb.AddForce(direction * 100.0f);
+        Vector3 forceToApply = orientation.up * wallJumpUpForce + wallNormal * wallJumpSideForce;
+        rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
+        rb.AddForce(forceToApply, ForceMode.Impulse);
     }
 
     public bool IsWallRunning()
