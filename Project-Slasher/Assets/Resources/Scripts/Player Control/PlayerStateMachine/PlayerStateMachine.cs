@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateMachine : StateMachine.IStateMachineContext
+public abstract class PlayerStateMachine : StateMachine.IStateMachineContext
 {
     // Context
-    private PlayerController context;
+    protected PlayerController context;
     public PlayerController Context => context;
 
-    private PlayerBaseState currentState;
-    private PlayerStateFactory stateFactory;
+    protected PlayerBaseState currentState;
+    protected PlayerStateFactory stateFactory;
 
     public FlatMovingStateComponent flatMove;
 
@@ -27,18 +27,14 @@ public class PlayerStateMachine : StateMachine.IStateMachineContext
         flatMove = new FlatMovingStateComponent(context);
         // Set up factory and default state
         stateFactory = new PlayerStateFactory(this);
-        // Entry state
-        currentState = stateFactory.Idle;
-        currentState.EnterState();
-
     }
 
-    public void UpdateStateMachine()
+    public virtual void UpdateStateMachine()
     {
         currentState.UpdateState();
     }
 
-    public void FixedUpdateStateMachine()
+    public virtual void FixedUpdateStateMachine()
     {
         currentState.FixedUpdateState();
     }

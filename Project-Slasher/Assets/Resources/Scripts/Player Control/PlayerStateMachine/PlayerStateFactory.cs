@@ -22,6 +22,10 @@ public class PlayerStateFactory
         // Switch states
         GroundedSwitch = new PlayerGroundedSwitchState(context, this);
 
+        // Combat states
+        CombatIdle = new PlayerCombatIdleState(context, this);
+        CombatCharge = new PlayerCombatChargeState(context, this);
+        CombatStrike = new PlayerCombatStrikeState(context, this);
     }
 
     public PlayerBaseState Wallglide { get; }
@@ -34,7 +38,11 @@ public class PlayerStateFactory
     public PlayerBaseState Slide { get; }
 
     // Switch states
-    
     public PlayerBaseState GroundedSwitch { get; }
+
+    // Combat states
+    public PlayerBaseState CombatIdle { get; }
+    public PlayerBaseState CombatCharge { get; }
+    public PlayerBaseState CombatStrike { get; }
 }
 

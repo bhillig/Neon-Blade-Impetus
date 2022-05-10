@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerController : MonoBehaviour
 {
     // Dependencies
     public InputInfo inputContext;
     public PlayerMovementProfile movementProfile;
+    public PlayerCombatProfile combatProfile;
     public ThirdPersonCameraTargetController cameraControlContext;
     public Animator animationController;
     public GroundedPhysicsContext groundPhysicsContext;
@@ -17,26 +18,34 @@ public class PlayerController : MonoBehaviour
     public WallFinder wallFinder;
     public ColliderSwitcher colliderSwitcher;
     // State machine
-    private PlayerStateMachine stateMachine;
+    private PlayerStateMachine movementStateMachine;
+    private PlayerStateMachine combatStateMachine;
+
+    // Ok so the event communications go here i guess
+    public Action OnStrikeStart;
 
     // Some context scope values
     [HideInInspector] public Vector3 forwardVector;
     [HideInInspector] public float slideCooldownTimer;
+    [HideInInspector] public float primaryAttackCooldownTimer;
 
     private void Awake()
     {
-        stateMachine = new PlayerStateMachine(this);
+        movementStateMachine = new PlayerMovementStateMachine(this);
+        combatStateMachine = new PlayerCombatStateMachine(this);
         forwardVector = Vector3.forward;
     }
 
     private void Update()
     {
-        stateMachine.UpdateStateMachine();
+        combatStateMachine.UpdateStateMachine();
+        movementStateMachine.UpdateStateMachine();
     }
 
     private void FixedUpdate()
     {
-        stateMachine.FixedUpdateStateMachine();
+        combatStateMachine.FixedUpdateStateMachine();
+        movementStateMachine.FixedUpdateStateMachine();
         if (shouldConstPrintState)
             PrintState();
     }
@@ -50,7 +59,7 @@ public class PlayerController : MonoBehaviour
     }
     public void PrintState()
     {
-        PlayerBaseState state = (PlayerBaseState)stateMachine.CurrentState;
+        PlayerBaseState state = (PlayerBaseState)movementStateMachine.CurrentState;
         print(state);
     }
 }

@@ -46,7 +46,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Spacebar"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""0cce39c0-c7d0-49a1-9a44-4fe83bd88227"",
                     ""expectedControlType"": ""Button"",
@@ -55,13 +55,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Shift"",
+                    ""name"": ""Slide"",
                     ""type"": ""Value"",
                     ""id"": ""ccbf1112-3bc1-4a17-9108-0d1f8d84329f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PrimaryAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ee99ef9-7567-4f13-a9a3-d0e5faef22f2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -193,7 +202,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Spacebar"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -204,7 +213,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Shift"",
+                    ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff6546e1-7807-416f-bb97-4d3481d0b8d4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrimaryAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -217,8 +237,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement = asset.FindActionMap("Player Movement", throwIfNotFound: true);
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMovement_MouseMovement = m_PlayerMovement.FindAction("MouseMovement", throwIfNotFound: true);
-        m_PlayerMovement_Spacebar = m_PlayerMovement.FindAction("Spacebar", throwIfNotFound: true);
-        m_PlayerMovement_Shift = m_PlayerMovement.FindAction("Shift", throwIfNotFound: true);
+        m_PlayerMovement_Jump = m_PlayerMovement.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerMovement_Slide = m_PlayerMovement.FindAction("Slide", throwIfNotFound: true);
+        m_PlayerMovement_PrimaryAttack = m_PlayerMovement.FindAction("PrimaryAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -280,16 +301,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IPlayerMovementActions m_PlayerMovementActionsCallbackInterface;
     private readonly InputAction m_PlayerMovement_Movement;
     private readonly InputAction m_PlayerMovement_MouseMovement;
-    private readonly InputAction m_PlayerMovement_Spacebar;
-    private readonly InputAction m_PlayerMovement_Shift;
+    private readonly InputAction m_PlayerMovement_Jump;
+    private readonly InputAction m_PlayerMovement_Slide;
+    private readonly InputAction m_PlayerMovement_PrimaryAttack;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerMovement_Movement;
         public InputAction @MouseMovement => m_Wrapper.m_PlayerMovement_MouseMovement;
-        public InputAction @Spacebar => m_Wrapper.m_PlayerMovement_Spacebar;
-        public InputAction @Shift => m_Wrapper.m_PlayerMovement_Shift;
+        public InputAction @Jump => m_Wrapper.m_PlayerMovement_Jump;
+        public InputAction @Slide => m_Wrapper.m_PlayerMovement_Slide;
+        public InputAction @PrimaryAttack => m_Wrapper.m_PlayerMovement_PrimaryAttack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -305,12 +328,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MouseMovement.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMouseMovement;
                 @MouseMovement.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMouseMovement;
                 @MouseMovement.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMouseMovement;
-                @Spacebar.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnSpacebar;
-                @Spacebar.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnSpacebar;
-                @Spacebar.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnSpacebar;
-                @Shift.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShift;
-                @Shift.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShift;
-                @Shift.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShift;
+                @Jump.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnJump;
+                @Slide.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnSlide;
+                @Slide.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnSlide;
+                @Slide.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnSlide;
+                @PrimaryAttack.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPrimaryAttack;
+                @PrimaryAttack.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPrimaryAttack;
+                @PrimaryAttack.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPrimaryAttack;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -321,12 +347,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MouseMovement.started += instance.OnMouseMovement;
                 @MouseMovement.performed += instance.OnMouseMovement;
                 @MouseMovement.canceled += instance.OnMouseMovement;
-                @Spacebar.started += instance.OnSpacebar;
-                @Spacebar.performed += instance.OnSpacebar;
-                @Spacebar.canceled += instance.OnSpacebar;
-                @Shift.started += instance.OnShift;
-                @Shift.performed += instance.OnShift;
-                @Shift.canceled += instance.OnShift;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Slide.started += instance.OnSlide;
+                @Slide.performed += instance.OnSlide;
+                @Slide.canceled += instance.OnSlide;
+                @PrimaryAttack.started += instance.OnPrimaryAttack;
+                @PrimaryAttack.performed += instance.OnPrimaryAttack;
+                @PrimaryAttack.canceled += instance.OnPrimaryAttack;
             }
         }
     }
@@ -335,7 +364,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnMouseMovement(InputAction.CallbackContext context);
-        void OnSpacebar(InputAction.CallbackContext context);
-        void OnShift(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnSlide(InputAction.CallbackContext context);
+        void OnPrimaryAttack(InputAction.CallbackContext context);
     }
 }

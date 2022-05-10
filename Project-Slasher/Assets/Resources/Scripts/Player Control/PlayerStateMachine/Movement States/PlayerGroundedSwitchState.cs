@@ -26,7 +26,7 @@ public class PlayerGroundedSwitchState : PlayerGroundedState
 
     public override void CheckSwitchState()
     {
-        if(Context.inputContext.shiftDown)
+        if(Context.inputContext.slideDown)
         {
             if (TrySwitchState(Factory.Slide))
                 return;

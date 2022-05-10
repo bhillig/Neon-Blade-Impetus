@@ -87,7 +87,7 @@ public class PlayerSlideState : PlayerGroundedState
     public override void CheckSwitchState()
     {
         base.CheckSwitchState();
-        bool userCancel = !Context.inputContext.shiftDown;
+        bool userCancel = !Context.inputContext.slideDown;
         bool tooSlow = Context.playerRb.velocity.magnitude < Context.movementProfile.SlideVelThreshhold;
         if ((userCancel || tooSlow) && slideLockTimer <= 0f)
             TrySwitchState(Factory.GroundedSwitch);

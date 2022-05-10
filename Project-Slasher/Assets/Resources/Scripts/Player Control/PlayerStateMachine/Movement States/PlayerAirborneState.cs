@@ -12,13 +12,13 @@ public abstract class PlayerAirborneState : PlayerMovementState
     public override void EnterState()
     {
         Context.animationController.SetBool("Airborne", true);
-        Context.inputContext.SpacebarDownEvent.AddListener(OnSpacebarDown);
+        Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
     }
 
     public override void ExitState()
     {
         Context.animationController.SetBool("Airborne", false);
-        Context.inputContext.SpacebarDownEvent.RemoveListener(OnSpacebarDown);
+        Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
     }
 
     public void OnSpacebarDown()

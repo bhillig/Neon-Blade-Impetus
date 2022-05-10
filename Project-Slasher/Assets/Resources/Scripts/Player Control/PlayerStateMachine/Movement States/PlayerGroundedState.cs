@@ -8,14 +8,14 @@ public abstract class PlayerGroundedState : PlayerMovementState
 
     public override void EnterState()
     {
-        Context.inputContext.SpacebarDownEvent.AddListener(Jump);
-        Context.inputContext.ShiftDownEvent.AddListener(Shift);
+        Context.inputContext.JumpDownEvent.AddListener(Jump);
+        Context.inputContext.SlideDownEvent.AddListener(Shift);
     }
 
     public override void ExitState()
     {
-        Context.inputContext.SpacebarDownEvent.RemoveListener(Jump);
-        Context.inputContext.ShiftDownEvent.RemoveListener(Shift);
+        Context.inputContext.JumpDownEvent.RemoveListener(Jump);
+        Context.inputContext.SlideDownEvent.RemoveListener(Shift);
     }
 
     protected virtual void Jump()
