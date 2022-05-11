@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     // Ok so the event communications go here i guess
     public Action OnStrikeStart;
+    public Action OnStrikeEnd;
 
     // Some context scope values
     [HideInInspector] public Vector3 forwardVector;

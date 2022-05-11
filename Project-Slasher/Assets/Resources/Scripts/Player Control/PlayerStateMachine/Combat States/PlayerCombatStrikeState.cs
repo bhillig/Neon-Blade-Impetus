@@ -9,30 +9,34 @@ public class PlayerCombatStrikeState : PlayerCombatState
         
     }
 
+    private float timer = 0f;
+
     public override void CheckSwitchState()
     {
-        TrySwitchState(Factory.CombatIdle);
+        if (timer <= 0f)
+            TrySwitchState(Factory.CombatIdle);
     }
 
     public override void EnterState()
     {
         Context.OnStrikeStart?.Invoke();
+        timer = Context.combatProfile.Duration;
         Debug.Log("Strike");
     }
 
     public override void ExitState()
     {
-        
+        Context.OnStrikeEnd?.Invoke();
     }
 
     public override void FixedUpdateState()
     {
-       
+        timer -= Time.fixedDeltaTime;
+        CheckSwitchState();
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        CheckSwitchState();
     }
 }

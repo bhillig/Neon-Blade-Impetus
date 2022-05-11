@@ -11,6 +11,21 @@ public abstract class PlayerMovementState : PlayerBaseState
 
     protected FlatMovingStateComponent flatMove;
 
+    public override void EnterState()
+    {
+        Context.OnStrikeStart += PerformStrikeDash;
+    }
+
+    public override void ExitState()
+    {
+        Context.OnStrikeStart -= PerformStrikeDash;
+    }
+
+    private void PerformStrikeDash()
+    {
+        TrySwitchState(Factory.StrikeDash);
+    }
+
     public override void UpdateState()
     {
         Context.slideCooldownTimer -= Time.deltaTime;

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: DefaultCombatProfile
   m_EditorClassIdentifier: 
   chargeTime: 0.5
-  holdTime: 1
+  holdTime: 25
   cooldown: 1
+  velocity: 25
+  duration: 0.3

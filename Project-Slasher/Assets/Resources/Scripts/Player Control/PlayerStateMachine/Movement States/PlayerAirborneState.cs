@@ -11,12 +11,14 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
     public override void EnterState()
     {
+        base.EnterState();
         Context.animationController.SetBool("Airborne", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
     }
 
     public override void ExitState()
     {
+        base.ExitState();
         Context.animationController.SetBool("Airborne", false);
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
     }
@@ -37,7 +39,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
     public override void CheckSwitchState()
     {
         //Grounded check
-        if (Context.groundPhysicsContext.IsGrounded() && Context.groundPhysicsContext.SnapToGroundBlock <= 0)
+        if (Context.groundPhysicsContext.IsGrounded())
         {
             TrySwitchState(Factory.GroundedSwitch);
         }

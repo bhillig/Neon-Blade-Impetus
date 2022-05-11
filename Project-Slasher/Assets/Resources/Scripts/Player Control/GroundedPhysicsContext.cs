@@ -175,7 +175,7 @@ public class GroundedPhysicsContext : MonoBehaviour
     }
     public bool IsGrounded()
     {
-        return (groundContactCount > 0 || snappedToGround) && (groundNormalDot >= profile.MinGroundedDotProd);
+        return (groundContactCount > 0 || snappedToGround) && snapToGroundBlock <= 0f;
     }
 
     public bool IsGroundedRaw()

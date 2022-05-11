@@ -18,6 +18,7 @@ public class PlayerStateFactory
         Stopping = new PlayerStoppingState(context, this);
         Landing = new PlayerLandingState(context, this);
         Run = new PlayerRunState(context, this);
+        StrikeDash = new PlayerStrikeDashState(context, this);
 
         // Switch states
         GroundedSwitch = new PlayerGroundedSwitchState(context, this);
@@ -36,6 +37,7 @@ public class PlayerStateFactory
     public PlayerBaseState Run { get; }
     public PlayerBaseState Jump { get; }
     public PlayerBaseState Slide { get; }
+    public PlayerBaseState StrikeDash { get; }
 
     // Switch states
     public PlayerBaseState GroundedSwitch { get; }
