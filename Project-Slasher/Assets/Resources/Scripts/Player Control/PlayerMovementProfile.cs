@@ -14,6 +14,7 @@ public class PlayerMovementProfile : ScriptableObject
     [Space(15f)]
     // Air
     [SerializeField, HideInInspector] private float jumpVelocity;
+    [SerializeField] private float groundedToJumpDelay;
     [SerializeField] private float jumpHeight;
     [SerializeField] private float baseAirAcceleration;
     [SerializeField] private float airTurnSpeed;
@@ -45,6 +46,7 @@ public class PlayerMovementProfile : ScriptableObject
     public float BaseAcceleration => baseAcceleration;
     public float BaseAirAcceleration => baseAirAcceleration;
     public float BaseFriction => baseFriction;
+    public float GroundedToJumpDelay => groundedToJumpDelay;
     public float JumpVelocity => jumpVelocity;
     public float JumpHeight => jumpHeight;
 

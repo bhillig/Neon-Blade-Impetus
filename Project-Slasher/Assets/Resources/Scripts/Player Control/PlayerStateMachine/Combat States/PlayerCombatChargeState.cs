@@ -54,8 +54,7 @@ public class PlayerCombatChargeState : PlayerCombatState
 
     public override void UpdateState()
     {
-        base.UpdateState();
-        Debug.Log("Charge");
+        base.UpdateState();   
         timer += Time.deltaTime;
         fullyCharged = timer >= Context.combatProfile.ChargeTime;
         overCharged = timer >= Context.combatProfile.ChargeTime + Context.combatProfile.HoldTime;

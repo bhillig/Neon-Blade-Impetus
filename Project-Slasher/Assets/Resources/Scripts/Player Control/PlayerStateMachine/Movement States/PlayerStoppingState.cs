@@ -40,7 +40,7 @@ public class PlayerStoppingState : PlayerGroundedState
         // Apply friction
         var rb = Context.playerRb;
         Vector3 cVel = rb.velocity;
-        cVel = Vector3.MoveTowards(cVel, Vector3.zero, Context.movementProfile.BaseFriction * Time.fixedDeltaTime);
+        cVel = Vector3.MoveTowards(cVel, new Vector3(0,cVel.y,0), Context.movementProfile.BaseFriction * Time.fixedDeltaTime);
         rb.velocity = cVel;
         // Rotation
         flatMove.LerpRotation(Context.movementProfile.TurnSpeed);

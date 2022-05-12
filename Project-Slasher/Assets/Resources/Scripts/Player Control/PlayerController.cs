@@ -14,21 +14,24 @@ public class PlayerController : MonoBehaviour
     public AirbornePhysicsContext airbornePhysicsContext;
     public Transform playerPhysicsTransform;
     public Transform playerModelTransform;
+    public Transform playerCenter;
     public Rigidbody playerRb;
     public WallFinder wallFinder;
     public ColliderSwitcher colliderSwitcher;
+    public ColliderEvents colliderEvents;
     // State machine
     private PlayerStateMachine movementStateMachine;
     private PlayerStateMachine combatStateMachine;
 
     // Ok so the event communications go here i guess
-    public Action OnStrikeStart;
+    public Action<Collider> OnStrikeStart;
     public Action OnStrikeEnd;
 
     // Some context scope values
     [HideInInspector] public Vector3 forwardVector;
     [HideInInspector] public float slideCooldownTimer;
     [HideInInspector] public float primaryAttackCooldownTimer;
+    [HideInInspector] public Collider combatTarget;
 
     private void Awake()
     {

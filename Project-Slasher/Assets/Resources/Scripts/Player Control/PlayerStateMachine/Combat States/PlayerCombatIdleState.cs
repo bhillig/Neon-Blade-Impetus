@@ -37,7 +37,6 @@ public class PlayerCombatIdleState : PlayerCombatState
     public override void UpdateState()
     {
         base.UpdateState();
-        Debug.Log("Idle");
         if (Context.inputContext.primaryDown)
             ChargeStarted();
     }

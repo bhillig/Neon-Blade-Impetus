@@ -9,12 +9,32 @@ public class PlayerCombatProfile : ScriptableObject
     [SerializeField] private float chargeTime;
     [SerializeField] private float holdTime;
     [SerializeField] private float cooldown;
-    [SerializeField] private float velocity;
-    [SerializeField] private float duration;
+    [SerializeField] private float castRadius;
+    [SerializeField] private float castDistance;
+    [SerializeField] private LayerMask hitMask;
+    [SerializeField] private LayerMask targetMask;
+    [Space(15f)]
+    [SerializeField] private float hitVelocity;
+    [SerializeField] private float hitBoostVelocity;
+    [SerializeField] private float hitDashPierceDistance;
+    [Space(15f)]
+    [SerializeField] private float dryVelocity;
+    [SerializeField] private float dryMinVelocity;
+    [SerializeField] private float dryDashDistance;
 
     public float ChargeTime => chargeTime;
     public float HoldTime => holdTime;
     public float Cooldown => cooldown;
-    public float Velocity => velocity;
-    public float Duration => duration;
+    public float CastRadius => castRadius;
+    public float CastDistance => castDistance;
+    public LayerMask HitMask => hitMask;
+    public LayerMask TargetMask => targetMask;
+
+    public float HitVelocity => hitVelocity;
+    public float HitBoostVelocity => hitBoostVelocity;
+    public float HitDashPierceDistance => hitDashPierceDistance;
+
+    public float DryVelocity => dryVelocity;
+    public float DryMinVelocity => dryMinVelocity;
+    public float DryDashDistance => dryDashDistance;
 }

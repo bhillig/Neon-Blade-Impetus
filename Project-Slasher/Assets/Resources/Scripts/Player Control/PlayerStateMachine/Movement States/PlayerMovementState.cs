@@ -21,9 +21,16 @@ public abstract class PlayerMovementState : PlayerBaseState
         Context.OnStrikeStart -= PerformStrikeDash;
     }
 
-    private void PerformStrikeDash()
+    protected virtual void PerformStrikeDash(Collider strikeHasTarget)
     {
-        TrySwitchState(Factory.StrikeDash);
+        if(strikeHasTarget != null)
+        {
+            TrySwitchState(Factory.HitStrikeDash);
+        }
+        else
+        {
+            TrySwitchState(Factory.DryStrikeDash);
+        }
     }
 
     public override void UpdateState()

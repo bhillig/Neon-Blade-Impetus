@@ -21,4 +21,9 @@ public class ColliderSwitcher : MonoBehaviour
             states[index].enabled = true;
         }
     }
+
+    public Collider GetCollider(int index)
+    {
+        return states[index];
+    }
 }

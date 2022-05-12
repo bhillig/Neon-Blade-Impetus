@@ -1,5 +1,79 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &927070100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 927070101}
+  - component: {fileID: 7514598196361490}
+  m_Layer: 7
+  m_Name: DashPhysicsCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &927070101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927070100}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3000002, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2023879516243316267}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7514598196361490
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927070100}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!1 &2072106071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2072106072}
+  m_Layer: 7
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2072106072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072106071}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.9000006, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2023879515020833344}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &111781507666654352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,6 +1660,7 @@ GameObject:
   - component: {fileID: 2023879515020833351}
   - component: {fileID: 2023879515020833348}
   - component: {fileID: 2023879515020833349}
+  - component: {fileID: 903932689}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1609,6 +1684,7 @@ Transform:
   - {fileID: 2023879514664214815}
   - {fileID: 2023879515863202329}
   - {fileID: 2023879516243316267}
+  - {fileID: 2072106072}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1649,11 +1725,15 @@ MonoBehaviour:
   airbornePhysicsContext: {fileID: 2023879515020833349}
   playerPhysicsTransform: {fileID: 2023879515020833344}
   playerModelTransform: {fileID: 2023879515267486271}
+  playerCenter: {fileID: 2072106072}
   playerRb: {fileID: 2023879515020833351}
   wallFinder: {fileID: 2023879515863202328}
   colliderSwitcher: {fileID: 2023879516243316266}
+  colliderEvents: {fileID: 903932689}
   forwardVector: {x: 0, y: 0, z: 0}
   slideCooldownTimer: 0
+  primaryAttackCooldownTimer: 0
+  combatTarget: {fileID: 0}
 --- !u!114 &2023879515020833349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,6 +1749,18 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &903932689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023879515020833345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29aaefec273b34f4795b481a04da55dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2023879515267486264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,6 +2088,7 @@ Transform:
   m_Children:
   - {fileID: 2023879515692641237}
   - {fileID: 2023879515830157308}
+  - {fileID: 927070101}
   m_Father: {fileID: 2023879515020833344}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2014,6 +2107,7 @@ MonoBehaviour:
   states:
   - {fileID: 2023879515692641236}
   - {fileID: 2023879515830157283}
+  - {fileID: 7514598196361490}
   startCollider: 0
 --- !u!1 &2128815095892655763
 GameObject:
