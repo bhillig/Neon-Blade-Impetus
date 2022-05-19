@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.3, y: 0.5, z: 0.75}
-  ShoulderOffset: {x: 1, y: 0, z: 0}
+  ShoulderOffset: {x: 2, y: 0, z: 0}
   VerticalArmLength: 0
   CameraSide: 1
   CameraDistance: 3
@@ -133,8 +133,8 @@ MonoBehaviour:
   body: {fileID: 0}
   minVel: 0
   maxVel: 20
-  maxFOV: 95
-  minFOV: 70
+  maxFOV: 100
+  minFOV: 65
   fovCurve:
     serializedVersion: 2
     m_Curve:
@@ -195,7 +195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462526633342}
   m_LocalRotation: {x: 0.108679175, y: 0.74058884, z: -0.12356347, w: 0.65149766}
-  m_LocalPosition: {x: 1.7939998, y: 0, z: 8.101499}
+  m_LocalPosition: {x: 1.7964754, y: 0, z: 8.101152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3537850461884283383}
@@ -265,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462879656041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7939998, y: 0, z: 8.101499}
+  m_LocalPosition: {x: 1.7964754, y: 0, z: 8.101152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3537850462230069222}
