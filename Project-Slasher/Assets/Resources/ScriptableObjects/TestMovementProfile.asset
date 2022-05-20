@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aacbec332df735438d620106428ca76, type: 3}
+  m_Name: TestMovementProfile
+  m_EditorClassIdentifier: 
+  turnSpeed: 0.2
+  baseMoveSpeed: 12
+  baseAcceleration: 20
+  baseFriction: 20
+  jumpVelocity: 7.2111025
+  groundedToJumpDelay: 0.1
+  jumpHeight: 2
+  baseAirAcceleration: 12
+  airTurnSpeed: 0.1
+  maxGroundedAngle: 75
+  maxSnapVelocity: 12
+  snapVelocityToAngleRatioCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0022268174
+      value: 0.49914178
+      inSlope: 9.569721
+      outSlope: 9.569721
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.054281116
+      value: 0.9972869
+      inSlope: 0.029436167
+      outSlope: 0.029436167
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9094955
+      value: 0.958833
+      inSlope: -0.21508162
+      outSlope: -0.21508162
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17802493
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0049798
+      value: 0.44948864
+      inSlope: -5.3343215
+      outSlope: -5.3343215
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSnapAngle: 85
+  snapProbeDistance: 1
+  maxAirRotationDot: 0.9
+  slideVelThreshhold: 7
+  slideGravityBoost: 20
+  slideSpeedBoostRatio: 1.45
+  slideBaseFriction: 9
+  slideLockDuration: 0.3
+  slideCooldown: 0.65
+  minGroundedDotProd: 0.25881907

@@ -9,10 +9,15 @@ public class PlayerMovementProfile : ScriptableObject
     [SerializeField] private float turnSpeed;
     [SerializeField] private float baseMoveSpeed;
     [SerializeField] private float baseAcceleration;
-    [SerializeField] private float baseAirAcceleration;
     [SerializeField] private float baseFriction;
-    [SerializeField,HideInInspector] private float jumpVelocity;
+
+    [Space(15f)]
+    // Air
+    [SerializeField, HideInInspector] private float jumpVelocity;
+    [SerializeField] private float groundedToJumpDelay;
     [SerializeField] private float jumpHeight;
+    [SerializeField] private float baseAirAcceleration;
+    [SerializeField] private float airTurnSpeed;
 
     // State calculation fields
     [Space(15f)]
@@ -22,18 +27,37 @@ public class PlayerMovementProfile : ScriptableObject
     // The player will snap over small ledges if the difference is less than this
     [SerializeField] private float maxSnapAngle;
     [SerializeField] private float snapProbeDistance;
+    [SerializeField] private float maxAirRotationDot;
 
-    [SerializeField, HideInInspector] private float minGroundedDotProd;
+    // Slide
+    [Space(15f)]
+    [SerializeField] private float slideVelThreshhold;
+    [SerializeField] private float slideGravityBoost;
+    [SerializeField] private float slideSpeedBoostRatio;
+    [SerializeField] private float slideBaseFriction;
+    [SerializeField] private float slideLockDuration;
+    [SerializeField] private float slideCooldown;
+
+    [SerializeField,HideInInspector] private float minGroundedDotProd;
 
     public float TurnSpeed => turnSpeed;
+    public float AirTurnSpeed => airTurnSpeed;
     public float BaseMoveSpeed => baseMoveSpeed;
     public float BaseAcceleration => baseAcceleration;
     public float BaseAirAcceleration => baseAirAcceleration;
     public float BaseFriction => baseFriction;
+    public float GroundedToJumpDelay => groundedToJumpDelay;
     public float JumpVelocity => jumpVelocity;
     public float JumpHeight => jumpHeight;
 
     public float MinGroundedDotProd => minGroundedDotProd;
+    public float MinAirRotationDot => maxAirRotationDot;
+    public float SlideVelThreshhold => slideVelThreshhold;
+    public float SlideGravityBoost => slideGravityBoost;
+    public float SlideBaseFriction => slideBaseFriction;
+    public float SlideSpeedBoostRatio => slideSpeedBoostRatio;
+    public float SlideLockDuration => slideLockDuration;
+    public float SlideCooldown => slideCooldown;
     public float GetMaxSnapDotProd(float vel)
     {
         float ratio = snapVelocityToAngleRatioCurve.Evaluate(vel / maxSnapVelocity);

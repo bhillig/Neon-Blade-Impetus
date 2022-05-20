@@ -15,7 +15,8 @@ public class GroundedPhysicsContext : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private SphereCollider groundedCast;
 
-    private int groundContacts = 0;
+    private int groundContactCount = 0;
+    private int steepContactCount = 0;
 
     private float groundNormalDot = 0f;
     public float GroundNormalDot => groundNormalDot;
@@ -24,6 +25,7 @@ public class GroundedPhysicsContext : MonoBehaviour
     public Vector3 ContactNormal => contactNormal;
 
     private List<RaycastHit> groundedContacts = new List<RaycastHit>();
+    private List<RaycastHit> steepContacts = new List<RaycastHit>();
 
     private int stepsSinceLastGrounded;
     private bool snappedToGround = false;
@@ -31,6 +33,7 @@ public class GroundedPhysicsContext : MonoBehaviour
     private float snapToGroundBlock = 0f;
     public float SnapToGroundBlock
     {
+        get => snapToGroundBlock;
         set => snapToGroundBlock = value;
     }
 
@@ -38,7 +41,9 @@ public class GroundedPhysicsContext : MonoBehaviour
     private Vector3 prevHitSurfacePos;
 
     private Vector3 rawNormal;
-    public Vector3 RawNormal => rawNormal;
+    private float rawNormalDot;
+    public Vector3 RawGroundNormal => rawNormal;
+    public float RawGroundNormalDot => rawNormalDot;
 
     private void FixedUpdate()
     {
@@ -57,17 +62,18 @@ public class GroundedPhysicsContext : MonoBehaviour
             groundedCast.radius + 0.3f,
             groundedMask))
         {
-            rawNormal = raw.normal;
+            rawNormal = raw.normal;            
         }
         else
-            raw.normal = Vector3.up;
+            rawNormal = Vector3.up;
 
-
+        rawNormalDot = Vector3.Dot(rawNormal, Vector3.up);
         foreach (var hit in hits)
         {
             EvaluateCollision(hit);
         }
-        groundContacts = hits.Count;
+        groundContactCount = groundedContacts.Count;
+        steepContactCount = steepContacts.Count;
 
         RecalculateNormalsFromContacts();
         // Update state
@@ -82,7 +88,6 @@ public class GroundedPhysicsContext : MonoBehaviour
         contactNormal = Vector3.zero;
         foreach (var contact in groundedContacts)
         {
-            print(contact.normal);
             contactNormal += contact.normal;
             hitSurfacePos += contact.point;
         }
@@ -92,6 +97,7 @@ public class GroundedPhysicsContext : MonoBehaviour
             hitSurfacePos /= groundedContacts.Count;
         groundNormalDot = Vector3.Dot(contactNormal, Vector3.up);
         groundedContacts.Clear();
+        steepContacts.Clear();
     }
 
     private void UpdateState()
@@ -162,15 +168,24 @@ public class GroundedPhysicsContext : MonoBehaviour
         {
             groundedContacts.Add(contact);
         }
+        else
+        {
+            steepContacts.Add(contact);
+        }
     }
     public bool IsGrounded()
     {
-        return (groundContacts > 0 || snappedToGround) && (groundNormalDot >= profile.MinGroundedDotProd);
+        return (groundContactCount > 0 || snappedToGround) && snapToGroundBlock <= 0f;
     }
 
     public bool IsGroundedRaw()
     {
         return IsGrounded() && (!snappedToGround);
+    }
+
+    public bool IsSteepContacting()
+    {
+        return steepContactCount > 0;
     }
 
     public void DisplayGroundVectors()

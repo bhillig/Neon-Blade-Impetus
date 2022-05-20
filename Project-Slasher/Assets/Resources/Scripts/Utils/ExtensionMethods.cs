@@ -50,9 +50,9 @@ public static class ExtensionMethods
         return Mathf.Rad2Deg * Mathf.Atan2(vec.y, vec.x);
     }
 
-    public static float XZSqrMag(this Vector3 vec)
+    public static float XZMag(this Vector3 vec)
     {
-        return new Vector2(vec.x, vec.z).SqrMagnitude();
+        return new Vector2(vec.x, vec.z).magnitude;
     }
 
     /// <summary>

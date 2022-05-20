@@ -12,6 +12,7 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
         playerControls = new PlayerControls();
         playerControls.Enable();
         playerControls.PlayerMovement.SetCallbacks(this);
+        movementInputInfo.lastNZeroMovementInput = Vector2.right;
     }
 
     public void OnDestroy()
@@ -32,11 +33,39 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
         movementInputInfo.mouseDelta = context.ReadValue<Vector2>();
     }
 
-    public void OnSpacebar(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (context.canceled)
-            movementInputInfo.SpacebarUpEvent.Invoke();
-        else if(context.performed)
-            movementInputInfo.SpacebarDownEvent.Invoke();
+            movementInputInfo.JumpUpEvent.Invoke();
+        else if(context.started)
+            movementInputInfo.JumpDownEvent.Invoke();
+    }
+
+    public void OnSlide(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            movementInputInfo.slideDown = false;
+            movementInputInfo.SlideUpEvent.Invoke();
+        }
+        else if (context.started)
+        {
+            movementInputInfo.slideDown = true;
+            movementInputInfo.SlideDownEvent.Invoke();
+        }
+    }
+
+    public void OnPrimaryAttack(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            movementInputInfo.primaryDown = false;
+            movementInputInfo.PrimaryUpEvent.Invoke();
+        }
+        else if (context.started)
+        {
+            movementInputInfo.primaryDown = true;
+            movementInputInfo.PrimaryDownEvent.Invoke();
+        }
     }
 }

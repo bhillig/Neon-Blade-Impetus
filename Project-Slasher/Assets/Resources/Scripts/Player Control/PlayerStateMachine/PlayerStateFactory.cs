@@ -9,31 +9,44 @@ public class PlayerStateFactory
     public PlayerStateFactory(PlayerStateMachine currentContext)
     {
         context = currentContext;
-        //Initialize states
-        Movement = new PlayerMovementState(context, this);
-        Grounded = new PlayerGroundedState(context, this);
-        Airborne = new PlayerAirborneState(context, this);
+        // Initialize states
         Wallglide = new PlayerWallglideState(context, this);
 
         Idle = new PlayerIdleState(context, this);
         Jump = new PlayerJumpState(context, this);
+        Slide = new PlayerSlideState(context, this);
         Stopping = new PlayerStoppingState(context, this);
         Landing = new PlayerLandingState(context, this);
         Run = new PlayerRunState(context, this);
+        DryStrikeDash = new PlayerDryStrikeDashState(context, this);
+        HitStrikeDash = new PlayerHitStrikeDashState(context, this);
 
+        // Switch states
+        GroundedSwitch = new PlayerGroundedSwitchState(context, this);
+
+        // Combat states
+        CombatIdle = new PlayerCombatIdleState(context, this);
+        CombatCharge = new PlayerCombatChargeState(context, this);
+        CombatStrike = new PlayerCombatStrikeState(context, this);
     }
 
-    public PlayerBaseState Movement { get; }
-
-    public PlayerBaseState Grounded { get; }
-    public PlayerBaseState Airborne { get; }
     public PlayerBaseState Wallglide { get; }
-
 
     public PlayerBaseState Idle { get; }
     public PlayerBaseState Stopping { get; }
     public PlayerBaseState Landing { get; }
     public PlayerBaseState Run { get; }
     public PlayerBaseState Jump { get; }
+    public PlayerBaseState Slide { get; }
+    public PlayerBaseState DryStrikeDash { get; }
+    public PlayerBaseState HitStrikeDash { get; }
+
+    // Switch states
+    public PlayerBaseState GroundedSwitch { get; }
+
+    // Combat states
+    public PlayerBaseState CombatIdle { get; }
+    public PlayerBaseState CombatCharge { get; }
+    public PlayerBaseState CombatStrike { get; }
 }
 
