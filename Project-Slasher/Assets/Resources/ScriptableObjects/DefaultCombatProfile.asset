@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chargeTime: 0.5
   holdTime: 25
-  cooldown: 1
+  cooldown: 2
   castRadius: 0.75
   castDistance: 12
   hitMask:
@@ -26,6 +26,6 @@ MonoBehaviour:
   hitVelocity: 50
   hitBoostVelocity: 2
   hitDashPierceDistance: 2
-  dryVelocity: 30
+  dryVelocity: 35
   dryMinVelocity: 3.5
-  dryDashDistance: 3.25
+  dryDashDistance: 4.5
