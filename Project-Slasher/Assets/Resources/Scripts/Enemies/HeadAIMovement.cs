@@ -25,7 +25,9 @@ public class HeadAIMovement : MonoBehaviour
 
     [SerializeField] GameObject bullet;
 
+    private float alertTimer;
 
+    private float reloadTimer;
     
     void Awake()
     {
@@ -45,11 +47,14 @@ public class HeadAIMovement : MonoBehaviour
             {
                 Shoot();
                 playerSpotted = true;
+                alertTimer = alertTime;
             }
 
             if (Vector3.Distance(this.transform.position, player.position) <= sightRange)
             {
                 playerSpotted = true;
+                alertTimer = alertTime;
+                reloadTimer = reloadDelay;
             }
 
             else 
@@ -61,8 +66,24 @@ public class HeadAIMovement : MonoBehaviour
         else
         {
             TurnLockOn();
-            Invoke("Shoot", reloadDelay);
-            Invoke("Reset", alertTime);
+            if (reloadTimer <= 0) 
+            {
+                reloadTimer = reloadDelay;
+                Shoot();
+            }
+            else
+            {
+                reloadTimer -= Time.deltaTime;
+            }
+            if (alertTimer <= 0)
+            {
+                Reset();
+            }
+            else
+            {
+                alertTimer -= Time.deltaTime;
+            }
+
         }
     }
 
@@ -108,7 +129,5 @@ public class HeadAIMovement : MonoBehaviour
     {
         playerSpotted = false;
     }
-
-
 
 }

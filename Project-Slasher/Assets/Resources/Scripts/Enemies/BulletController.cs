@@ -19,7 +19,7 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         this.gameObject.transform.Rotate(new Vector3 (0, 30, 0), rotationSpeed*Time.deltaTime, Space.World);
-        this.transform.position = Vector3.Lerp(this.gameObject.transform.position, player.position, moveSpeed*Time.smoothDeltaTime);
+        this.transform.position = Vector3.Lerp(this.gameObject.transform.position, new Vector3(player.position.x, player.position.y+1, player.position.z), moveSpeed*Time.smoothDeltaTime);
         Invoke("DestroyBullet", destructTime);
     }
 
@@ -28,9 +28,9 @@ public class BulletController : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             Destroy(other.gameObject);
         }
