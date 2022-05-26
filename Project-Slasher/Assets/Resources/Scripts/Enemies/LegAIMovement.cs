@@ -17,7 +17,10 @@ public class LegAIMovement : MonoBehaviour
 
     private void Update()
     {
-        Patrol();
+        if(!GetComponent<HeadAIMovement>().GetPlayerSpotted() && GetComponent<HeadAIMovement>().Activate())
+        {
+            Patrol();
+        }
     }
 
     private void Patrol()

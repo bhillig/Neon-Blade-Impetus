@@ -15,6 +15,8 @@ public class HeadAIMovement : MonoBehaviour
 
     [SerializeField] private float sightRange;
 
+    [SerializeField] private float activationRange;
+
     [SerializeField] private float scopeRange;
 
     [SerializeField] private float reloadDelay;
@@ -41,50 +43,54 @@ public class HeadAIMovement : MonoBehaviour
 
     void Update()
     {
-        if (!playerSpotted)
+        if (Vector3.Distance(this.transform.position, player.position) <= activationRange)
         {
-            if (Physics.Raycast(barrel.transform.position, barrel.transform.position, scopeRange, whatIsPlayer))
+            if (!playerSpotted)
             {
-                Shoot();
-                playerSpotted = true;
-                alertTimer = alertTime;
+                if (Physics.Raycast(barrel.transform.position, barrel.transform.position, scopeRange, whatIsPlayer))
+                {
+                    Shoot();
+                    playerSpotted = true;
+                    alertTimer = alertTime;
+                }
+
+                if (Vector3.Distance(this.transform.position, player.position) <= sightRange)
+                {
+                    playerSpotted = true;
+                    alertTimer = alertTime;
+                    reloadTimer = reloadDelay;
+                }
+
+                else 
+                {
+                    TurnRandom();
+                }
             }
 
-            if (Vector3.Distance(this.transform.position, player.position) <= sightRange)
-            {
-                playerSpotted = true;
-                alertTimer = alertTime;
-                reloadTimer = reloadDelay;
-            }
-
-            else 
-            {
-                TurnRandom();
-            }
-        }
-
-        else
-        {
-            TurnLockOn();
-            if (reloadTimer <= 0) 
-            {
-                reloadTimer = reloadDelay;
-                Shoot();
-            }
             else
             {
-                reloadTimer -= Time.deltaTime;
-            }
-            if (alertTimer <= 0)
-            {
-                Reset();
-            }
-            else
-            {
-                alertTimer -= Time.deltaTime;
-            }
+                TurnLockOn();
+                if (reloadTimer <= 0) 
+                {
+                    reloadTimer = reloadDelay;
+                    Shoot();
+                }
+                else
+                {
+                    reloadTimer -= Time.deltaTime;
+                }
+                if (alertTimer <= 0)
+                {
+                    Reset();
+                }
+                else
+                {
+                    alertTimer -= Time.deltaTime;
+                }
 
+            }
         }
+        
     }
 
     void Shoot()
@@ -128,6 +134,11 @@ public class HeadAIMovement : MonoBehaviour
     void Reset()
     {
         playerSpotted = false;
+    }
+
+    public bool Activate()
+    {
+        return Vector3.Distance(this.transform.position, player.position) <= activationRange;
     }
 
 }

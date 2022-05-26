@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BotKiller : MonoBehaviour
 {
-   void OnTriggerEnter(Collider other) 
+   void OnCollisionEnter(Collision other) 
    {
-       if (other.tag == "Player") 
+       if (other.gameObject.tag == "Player") 
        {
            Destroy(this.gameObject);
        }
