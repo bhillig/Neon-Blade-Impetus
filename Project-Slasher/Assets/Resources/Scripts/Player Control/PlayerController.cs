@@ -19,10 +19,16 @@ public class PlayerController : MonoBehaviour
     public WallFinder wallFinder;
     public ColliderSwitcher colliderSwitcher;
     public ColliderEvents colliderEvents;
+
     // State machine
     private PlayerStateMachine movementStateMachine;
     private PlayerStateMachine combatStateMachine;
 
+    // Getter for movementState
+    public PlayerStateMachine MovementStateMachine
+    {
+        get => movementStateMachine;
+    }
     // Ok so the event communications go here i guess
     public Action<Collider> OnStrikeStart;
     public Action OnStrikeEnd;
@@ -32,6 +38,19 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public float slideCooldownTimer;
     [HideInInspector] public float primaryAttackCooldownTimer;
     [HideInInspector] public Collider combatTarget;
+
+    // Particle Prefabs.
+    [SerializeField]
+    private GameObject runParticle;
+    [SerializeField]
+    private GameObject landParticle;
+    [SerializeField]
+    private GameObject slideParticle;
+
+    // Getters for particles
+    public GameObject RunParticle { get => runParticle; }
+    public GameObject LandParticle { get => landParticle; }
+    public GameObject SlideParticle { get => slideParticle; }
 
     private void Awake()
     {

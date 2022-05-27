@@ -700,6 +700,9 @@ MonoBehaviour:
   slideCooldownTimer: 0
   primaryAttackCooldownTimer: 0
   combatTarget: {fileID: 0}
+  runParticle: {fileID: 3777589564684063362, guid: 46a1f1d4ece0d504ababa223f86013c9, type: 3}
+  landParticle: {fileID: 3674786695083146027, guid: 97d44353e071ee0448be619e53ef5a7f, type: 3}
+  slideParticle: {fileID: 2399767533243803249, guid: e1b384cdda4654d43bce51327dd05a23, type: 3}
 --- !u!114 &2023879515020833349
 MonoBehaviour:
   m_ObjectHideFlags: 0
