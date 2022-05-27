@@ -24,11 +24,6 @@ public class PlayerController : MonoBehaviour
     private PlayerStateMachine movementStateMachine;
     private PlayerStateMachine combatStateMachine;
 
-    // Getter for movementState
-    public PlayerStateMachine MovementStateMachine
-    {
-        get => movementStateMachine;
-    }
     // Ok so the event communications go here i guess
     public Action<Collider> OnStrikeStart;
     public Action OnStrikeEnd;
