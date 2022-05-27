@@ -28,12 +28,15 @@ public class PlayerCombatStrikeState : PlayerCombatState
             float dist = (targetFound.bounds.center - dashCollider.bounds.center).magnitude + Context.combatProfile.HitDashPierceDistance;
             timer = dist / Context.combatProfile.HitVelocity;
         }
-        Context.groundPhysicsContext.SnapToGroundBlock = timer;
+        Context.groundPhysicsContext.GroundedBlockTimer = timer;
+        // Animation
+        Context.animationController.SetBool("Striking", true);
     }
 
     public override void ExitState()
     {
         Context.OnStrikeEnd?.Invoke();
+        Context.animationController.SetBool("Striking", false);
     }
 
     public override void FixedUpdateState()

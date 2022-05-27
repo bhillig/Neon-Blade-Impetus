@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef578cc589496b84e9ec2af5c8188dc7, type: 3}
   m_Name: DefaultCombatProfile
   m_EditorClassIdentifier: 
-  chargeTime: 0.5
-  holdTime: 25
+  chargeTime: 0.75
+  holdTime: 0.4
   cooldown: 2
-  castRadius: 0.75
-  castDistance: 12
+  castRadius: 1
+  castDistance: 10
   hitMask:
     serializedVersion: 2
     m_Bits: 2147483712
   targetMask:
     serializedVersion: 2
     m_Bits: 2147483648
-  hitVelocity: 50
+  hitVelocity: 35
   hitBoostVelocity: 2
   hitDashPierceDistance: 2
-  dryVelocity: 35
+  dryVelocity: 32
   dryMinVelocity: 3.5
   dryDashDistance: 4.5

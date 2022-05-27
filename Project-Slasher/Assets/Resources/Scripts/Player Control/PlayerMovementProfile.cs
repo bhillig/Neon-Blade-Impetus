@@ -37,6 +37,7 @@ public class PlayerMovementProfile : ScriptableObject
     [SerializeField] private float slideBaseFriction;
     [SerializeField] private float slideLockDuration;
     [SerializeField] private float slideCooldown;
+    [SerializeField] private float slideSpeedCap;
 
     [SerializeField,HideInInspector] private float minGroundedDotProd;
 
@@ -58,6 +59,7 @@ public class PlayerMovementProfile : ScriptableObject
     public float SlideSpeedBoostRatio => slideSpeedBoostRatio;
     public float SlideLockDuration => slideLockDuration;
     public float SlideCooldown => slideCooldown;
+    public float SlideSpeedCap => slideSpeedCap;
     public float GetMaxSnapDotProd(float vel)
     {
         float ratio = snapVelocityToAngleRatioCurve.Evaluate(vel / maxSnapVelocity);
