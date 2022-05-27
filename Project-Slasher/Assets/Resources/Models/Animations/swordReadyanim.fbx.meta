@@ -1,20 +1,23 @@
 fileFormatVersion: 2
-guid: 31978622eaa93b64892a48e3d873dccb
+guid: 933316900193b6e47a19aae2f8982155
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: -203655887218126122
-    second: mixamo.com
+      74: 4781951162920444690
+    second: Armature|ArmatureAction
   - first:
-      74: 4720984316349914143
-    second: Armature|FallIdle
+      74: -2791508656229221981
+    second: Armature|Run2
   - first:
-      74: -8945691123924629249
-    second: Armature|Idle
+      74: 2059750750254226541
+    second: Armature|Run3
   - first:
-      74: -236022367644965580
-    second: Armature|Idle (1)
+      74: 2369928771097038509
+    second: Armature|SwordDraw
+  - first:
+      74: -8317000130012250315
+    second: Armature|SwordDraw (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -44,11 +47,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|Idle (1)
-      takeName: Armature|Idle
+      name: Armature|SwordDraw (1)
+      takeName: Armature|SwordDraw
       internalID: 0
       firstFrame: 0
-      lastFrame: 60
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -73,11 +76,69 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Idle
-      takeName: Armature|Idle
+      name: Armature|Run2
+      takeName: Armature|Run2
       internalID: 0
       firstFrame: 0
-      lastFrame: 60
+      lastFrame: 17
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Run3
+      takeName: Armature|Run3
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|SwordDraw
+      takeName: Armature|SwordDraw
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
