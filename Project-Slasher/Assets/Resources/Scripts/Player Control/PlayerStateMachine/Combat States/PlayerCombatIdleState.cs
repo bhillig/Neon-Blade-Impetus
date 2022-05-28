@@ -19,6 +19,7 @@ public class PlayerCombatIdleState : PlayerCombatState
         //Context.inputContext.PrimaryDownEvent.AddListener(ChargeStarted);
         if (Context.primaryAttackCooldownTimer > 0f)
             Context.playerEvents.OnStrikeCooldownStarted?.Invoke();
+        Context.inputContext.PrimaryDownEvent.AddListener(ChargeStarted);
     }
 
     protected void ChargeStarted()
@@ -28,7 +29,7 @@ public class PlayerCombatIdleState : PlayerCombatState
 
     public override void ExitState()
     {
-        //Context.inputContext.PrimaryDownEvent.RemoveListener(ChargeStarted);
+        Context.inputContext.PrimaryDownEvent.RemoveListener(ChargeStarted);
     }
 
     public override void FixedUpdateState()
@@ -39,7 +40,5 @@ public class PlayerCombatIdleState : PlayerCombatState
     public override void UpdateState()
     {
         base.UpdateState();
-        if (Context.inputContext.primaryDown)
-            ChargeStarted();
     }
 }

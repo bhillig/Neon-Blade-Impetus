@@ -55,6 +55,7 @@ public class PlayerWallglideState : PlayerMovementState
     {
         if (!Context.wallRunning.IsWallRunning())
         {
+            Context.wallRunning.SetWallrunCooldown();
             TrySwitchState(Factory.Jump);
             return;
         }

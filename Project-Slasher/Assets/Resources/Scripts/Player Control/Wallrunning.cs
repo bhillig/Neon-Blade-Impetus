@@ -14,6 +14,10 @@ public class Wallrunning
     private float maxWallRunTime = 25.00f;
     private float wallRunTimer = 2.0f;
 
+    // Cooldown
+    private float wallRunCooldown = 0.3f;
+    private float wallRunCooldownTime;
+
     // Detection variables
     private float wallCheckDistance = 1.2f;
     private float minJumpHeight = 1.5f;
@@ -23,7 +27,7 @@ public class Wallrunning
     // temp variables for testing
     private Vector3[] directions;
     private RaycastHit[] hits;
-    private float normalizedAngleThreshold = 0.1f;
+    private float normalizedAngleThreshold = 0.25f;
     private Vector3 lastWallPosition;
     private Vector3 lastWallNormal;
     private bool jumping;
@@ -103,6 +107,11 @@ public class Wallrunning
         return isWallRunning;
     }
 
+    public void SetWallrunCooldown()
+    {
+        wallRunCooldownTime = Time.time;
+    }
+
     public void DetectWalls(bool performRun = true)
     {
         isWallRunning = false;
@@ -166,7 +175,10 @@ public class Wallrunning
     public bool CanWallRun()
     {
         float verticalAxis = context.inputContext.movementInput.y;
-        return verticalAxis > 0.0f && AboveGround(minWallrunHeightFromGround);
+        return Time.time - wallRunCooldownTime > wallRunCooldown &&
+                rb.velocity.magnitude > 1f && 
+                verticalAxis > 0.0f && 
+                AboveGround(minWallrunHeightFromGround);
     }
 
     void OnWall(RaycastHit hit)
