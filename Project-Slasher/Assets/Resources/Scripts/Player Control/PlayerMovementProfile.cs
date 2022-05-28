@@ -5,22 +5,23 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PlayerMovementProfile")]
 public class PlayerMovementProfile : ScriptableObject
 {
-    // Basic movement fields
+    [Space(10)]
+    [Header("Basic Movement")]
     [SerializeField] private float turnSpeed;
     [SerializeField] private float baseMoveSpeed;
     [SerializeField] private float baseAcceleration;
     [SerializeField] private float baseFriction;
 
-    [Space(15f)]
-    // Air
+    [Space(10)]
+    [Header("Jump and Airborne")]
     [SerializeField, HideInInspector] private float jumpVelocity;
     [SerializeField] private float groundedToJumpDelay;
     [SerializeField] private float jumpHeight;
     [SerializeField] private float baseAirAcceleration;
     [SerializeField] private float airTurnSpeed;
 
-    // State calculation fields
-    [Space(15f)]
+    [Space(10)]
+    [Header("Grounded and Ground Snap")]
     [SerializeField] private float maxGroundedAngle;
     [SerializeField] private float maxSnapVelocity;
     [SerializeField] private AnimationCurve snapVelocityToAngleRatioCurve;
@@ -29,14 +30,15 @@ public class PlayerMovementProfile : ScriptableObject
     [SerializeField] private float snapProbeDistance;
     [SerializeField] private float maxAirRotationDot;
 
-    // Slide
-    [Space(15f)]
+    [Space(10)]
+    [Header("Slide")]
     [SerializeField] private float slideVelThreshhold;
     [SerializeField] private float slideGravityBoost;
     [SerializeField] private float slideSpeedBoostRatio;
     [SerializeField] private float slideBaseFriction;
     [SerializeField] private float slideLockDuration;
     [SerializeField] private float slideCooldown;
+    [SerializeField] private float slideSpeedCap;
 
     [SerializeField,HideInInspector] private float minGroundedDotProd;
 
@@ -58,6 +60,7 @@ public class PlayerMovementProfile : ScriptableObject
     public float SlideSpeedBoostRatio => slideSpeedBoostRatio;
     public float SlideLockDuration => slideLockDuration;
     public float SlideCooldown => slideCooldown;
+    public float SlideSpeedCap => slideSpeedCap;
     public float GetMaxSnapDotProd(float vel)
     {
         float ratio = snapVelocityToAngleRatioCurve.Evaluate(vel / maxSnapVelocity);

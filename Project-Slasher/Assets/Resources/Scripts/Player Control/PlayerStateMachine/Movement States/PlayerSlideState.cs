@@ -56,6 +56,12 @@ public class PlayerSlideState : PlayerGroundedState
         // Gravity is amplified when sliding
         Context.playerRb.AddForce(Vector3.down * Context.movementProfile.SlideGravityBoost);
         ApplySlideFriction();
+        // Cap speed
+        Vector2 vel = Context.playerRb.velocity;
+        if (vel.sqrMagnitude > Mathf.Pow(Context.movementProfile.SlideSpeedCap, 2))
+        {
+            Context.playerRb.velocity = vel.normalized * Context.movementProfile.SlideSpeedCap;
+        }
     }
 
     private void RotateTowardsSlide()

@@ -16,7 +16,7 @@ MonoBehaviour:
   baseMoveSpeed: 12
   baseAcceleration: 20
   baseFriction: 20
-  jumpVelocity: 7.2111025
+  jumpVelocity: 7.745967
   groundedToJumpDelay: 0.1
   jumpHeight: 2
   baseAirAcceleration: 12
@@ -69,9 +69,10 @@ MonoBehaviour:
   snapProbeDistance: 1
   maxAirRotationDot: 0.9
   slideVelThreshhold: 7
-  slideGravityBoost: 20
+  slideGravityBoost: 17
   slideSpeedBoostRatio: 1.45
   slideBaseFriction: 9
   slideLockDuration: 0.3
   slideCooldown: 0.65
+  slideSpeedCap: 17.25
   minGroundedDotProd: 0.25881907

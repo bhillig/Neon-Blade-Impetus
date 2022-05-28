@@ -133,7 +133,7 @@ MonoBehaviour:
   body: {fileID: 0}
   minVel: 0
   maxVel: 20
-  maxFOV: 100
+  maxFOV: 90
   minFOV: 65
   fovCurve:
     serializedVersion: 2
@@ -157,10 +157,52 @@ MonoBehaviour:
       inWeight: 0.1455294
       outWeight: 0.31558457
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2.2452953
-      outSlope: 2.2452953
+      time: 1.0114594
+      value: 1.0031166
+      inSlope: 2.1896703
+      outSlope: 2.1896703
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  lensDistortCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.00065856177
+      outSlope: -0.00065856177
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.3217057
+      value: -0.00021186308
+      inSlope: 0.010245976
+      outSlope: 0.010245976
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.80058765
+      value: 0.1689165
+      inSlope: 0.50727963
+      outSlope: 0.50727963
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9981998
+      value: 0.2996144
+      inSlope: 0.66138595
+      outSlope: 0.66138595
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -195,7 +237,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462526633342}
   m_LocalRotation: {x: 0.108679175, y: 0.74058884, z: -0.12356347, w: 0.65149766}
-  m_LocalPosition: {x: 1.7964754, y: 0, z: 8.101152}
+  m_LocalPosition: {x: 3.382191, y: 1.79, z: 11.916918}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3537850461884283383}
@@ -264,8 +306,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462879656041}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7964754, y: 0, z: 8.101152}
+  m_LocalRotation: {x: 0, y: -0.90766764, z: -0, w: 0.4196898}
+  m_LocalPosition: {x: 3.382191, y: 1.79, z: 11.916918}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3537850462230069222}
@@ -281,7 +323,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.5712887, g: 0.85911363, b: 0.9245283, a: 0}
+  m_BackGroundColor: {r: 0.2707369, g: 0.33638483, b: 0.33962262, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -413,13 +455,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462916779130}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7999992, y: 0, z: 8.1}
+  m_LocalRotation: {x: 0, y: -0.90766764, z: 0, w: 0.4196898}
+  m_LocalPosition: {x: 2.392, y: 1.79, z: 8.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3537850462230069222}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -130.37, z: 0}
 --- !u!114 &3537850462916779128
 MonoBehaviour:
   m_ObjectHideFlags: 0

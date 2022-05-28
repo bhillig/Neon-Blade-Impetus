@@ -16,7 +16,7 @@ public class PlayerCombatStrikeState : PlayerCombatState
         Collider targetFound = SearchForTarget();
         Context.combatTarget = targetFound;
         // Invoke event to tell the movement state machine to switch to dash state
-        Context.OnStrikeStart?.Invoke(targetFound);
+        Context.playerEvents.OnStrikeStart?.Invoke(targetFound);
         // Calculate dash duration from distance and velocity
         if(targetFound == null)
         {
@@ -24,16 +24,20 @@ public class PlayerCombatStrikeState : PlayerCombatState
         }
         else
         {
+            Context.primaryAttackCooldownTimer = 0f;
             // Calculate distance to target + pierce distance
             float dist = (targetFound.bounds.center - dashCollider.bounds.center).magnitude + Context.combatProfile.HitDashPierceDistance;
             timer = dist / Context.combatProfile.HitVelocity;
         }
-        Context.groundPhysicsContext.SnapToGroundBlock = timer;
+        Context.groundPhysicsContext.GroundedBlockTimer = timer;
+        // Animation
+        Context.animationController.SetBool("Striking", true);
     }
 
     public override void ExitState()
     {
-        Context.OnStrikeEnd?.Invoke();
+        Context.playerEvents.OnStrikeEnd?.Invoke();
+        Context.animationController.SetBool("Striking", false);
     }
 
     public override void FixedUpdateState()

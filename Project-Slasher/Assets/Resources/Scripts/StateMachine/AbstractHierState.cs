@@ -32,7 +32,7 @@ namespace StateMachine
         /// <param name="newState"></param>
         public bool TrySwitchState(IState newState)
         {
-            if (!newState.IsStateSwitchable())
+            if (!newState.IsStateSwitchable() || stateMachine.CurrentState != this)
                 return false;
             ExitState();
             stateMachine.CurrentState = newState;

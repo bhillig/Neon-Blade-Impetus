@@ -130,6 +130,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2799581902026424467, guid: fcfba7cb38dffce49a87b3e4282ee1eb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: db3135b954fe04d4ea439beb76de2a5e, type: 2}
+    - target: {fileID: 3003995295797491877, guid: fcfba7cb38dffce49a87b3e4282ee1eb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e3af1f382ba2f2a448c685fe299af39d, type: 2}
     - target: {fileID: 3439004526829816031, guid: fcfba7cb38dffce49a87b3e4282ee1eb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -440,6 +448,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4658439610029144978, guid: 4f5eaacf3ae5b45479e658b151c53dba, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4227ed18f3a040544b251189e4b463a6, type: 2}
     - target: {fileID: 9055669157984692388, guid: 4f5eaacf3ae5b45479e658b151c53dba, type: 3}
       propertyPath: m_Name
       value: BuildingBase5 (1)
@@ -544,6 +556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingTriangle3
       objectReference: {fileID: 0}
+    - target: {fileID: 5331443017060074922, guid: 4bfc1137029328446ba4e009eb15cc05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e3af1f382ba2f2a448c685fe299af39d, type: 2}
     - target: {fileID: 7408508787507946786, guid: 4bfc1137029328446ba4e009eb15cc05, type: 3}
       propertyPath: m_Mesh
       value: 

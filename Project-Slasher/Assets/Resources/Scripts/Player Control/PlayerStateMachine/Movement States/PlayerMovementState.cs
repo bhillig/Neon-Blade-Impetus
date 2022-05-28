@@ -13,12 +13,12 @@ public abstract class PlayerMovementState : PlayerBaseState
 
     public override void EnterState()
     {
-        Context.OnStrikeStart += PerformStrikeDash;
+        Context.playerEvents.OnStrikeStart += PerformStrikeDash;
     }
 
     public override void ExitState()
     {
-        Context.OnStrikeStart -= PerformStrikeDash;
+        Context.playerEvents.OnStrikeStart -= PerformStrikeDash;
     }
 
     protected virtual void PerformStrikeDash(Collider strikeHasTarget)
