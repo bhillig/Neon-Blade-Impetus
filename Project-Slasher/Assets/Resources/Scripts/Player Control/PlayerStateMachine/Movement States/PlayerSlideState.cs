@@ -11,6 +11,12 @@ public class PlayerSlideState : PlayerGroundedState
     public override void EnterState()
     {
         base.EnterState();
+
+        // Start particles.
+        Context.Particle = GameObject.Instantiate(Context.SlideParticle, Context.transform, false);
+        Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
+
+
         Context.animationController.SetBool("Sliding", true);
         Context.colliderSwitcher.SwitchToCollider(1);
         SlideEnterPhysics();
@@ -32,6 +38,11 @@ public class PlayerSlideState : PlayerGroundedState
         base.ExitState();
         Context.animationController.SetBool("Sliding", false);
         Context.colliderSwitcher.SwitchToCollider(0);
+
+        // Stop Particles
+        // They will be deleted from their own scrips after 1 second of stopped.
+        Context.Particle.transform.SetParent(null, true);
+        Context.Ps.Stop();
     }
 
     public override void UpdateState()

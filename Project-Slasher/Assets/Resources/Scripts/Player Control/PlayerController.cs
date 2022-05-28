@@ -34,7 +34,44 @@ public class PlayerController : MonoBehaviour
     private PlayerStateMachine movementStateMachine;
     private PlayerStateMachine combatStateMachine;
 
+    // Player initialPosition for particle usage
+    private float initialHeight;
 
+    public float InitialHeight
+    {
+        get => initialHeight;
+        set => initialHeight = value;
+    }
+
+    // Particle prefabs.
+    [SerializeField]
+    private GameObject runParticle;
+    [SerializeField]
+    private GameObject landParticle;
+    [SerializeField]
+    private GameObject slideParticle;
+
+    // Particle getters.
+    public GameObject RunParticle { get => runParticle; }
+    public GameObject LandParticle { get => landParticle; }
+    public GameObject SlideParticle { get => slideParticle; }
+
+    // For particles usage in each state.
+    private GameObject particle;
+    private ParticleSystem ps;
+
+    // Particle usage getters.
+
+    public GameObject Particle
+    {
+        get => particle;
+        set => particle = value;
+    }
+    public ParticleSystem Ps
+    {
+        get => ps;
+        set => ps = value;
+    }
     // Some context scope values
     [HideInInspector] public Vector3 forwardVector;
     [HideInInspector] public float slideCooldownTimer;

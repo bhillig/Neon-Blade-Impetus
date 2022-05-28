@@ -12,13 +12,30 @@ public abstract class PlayerAirborneState : PlayerMovementState
     public override void EnterState()
     {
         base.EnterState();
+
+        // Store initial height of the player.
+        Context.InitialHeight = Context.transform.position.y;
+
         Context.animationController.SetBool("Airborne", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
     }
 
     public override void ExitState()
-    {
+    {   
         base.ExitState();
+
+        // If the fall is geater than a certain initial, create large land particle.
+        if(Context.transform.position.y < Context.InitialHeight - 7.0f)
+        {
+            // Start particles.
+            Context.Particle = GameObject.Instantiate(Context.LandParticle, Context.transform, false);
+            Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
+        }
+        else if(Context.transform.position.y < Context.InitialHeight - 3.0f)
+        {
+            // Small Land particle
+        }
+        
         Context.animationController.SetBool("Airborne", false);
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
     }

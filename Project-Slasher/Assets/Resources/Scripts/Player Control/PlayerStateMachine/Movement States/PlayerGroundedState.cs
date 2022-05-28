@@ -11,6 +11,7 @@ public abstract class PlayerGroundedState : PlayerMovementState
     public override void EnterState()
     {
         base.EnterState();
+
         Context.inputContext.JumpDownEvent.AddListener(Jump);
         Context.inputContext.SlideDownEvent.AddListener(Shift);
     }
