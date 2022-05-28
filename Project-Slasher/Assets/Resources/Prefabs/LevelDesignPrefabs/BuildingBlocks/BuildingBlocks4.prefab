@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MultiBuildingPrototype3
       objectReference: {fileID: 0}
+    - target: {fileID: 1382158458626405901, guid: b4be4de6c491f4e4ca255b6a3c9132f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f59630a9d53493a4bb37ee1d93efd6eb, type: 2}
     - target: {fileID: 1516154937301179215, guid: b4be4de6c491f4e4ca255b6a3c9132f2, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -120,6 +124,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8501665850294698861, guid: b4be4de6c491f4e4ca255b6a3c9132f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c27d6211cddabd24a90c9b8c6dcfe8e9, type: 2}
     - target: {fileID: 8719802423557723928, guid: b4be4de6c491f4e4ca255b6a3c9132f2, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -252,6 +260,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3712962080906362544, guid: e57b46398aaeb394fa6819a41b254621, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4227ed18f3a040544b251189e4b463a6, type: 2}
     - target: {fileID: 5489990898678759696, guid: e57b46398aaeb394fa6819a41b254621, type: 3}
       propertyPath: m_Mesh
       value: 
