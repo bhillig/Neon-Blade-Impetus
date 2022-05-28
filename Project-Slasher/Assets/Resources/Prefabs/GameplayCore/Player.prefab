@@ -15631,6 +15631,7 @@ Cloth:
   - {fileID: 7492347807446673177}
   - {fileID: 614366299}
   - {fileID: 676916206}
+  - {fileID: 1174025377}
   m_SphereColliders: []
   m_SelfCollisionDistance: 0
   m_SelfCollisionStiffness: 0.2
@@ -17172,6 +17173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 132066819791042103}
+  - component: {fileID: 1174025377}
   m_Layer: 30
   m_Name: mixamorig:Head
   m_TagString: Untagged
@@ -17194,6 +17196,20 @@ Transform:
   m_Father: {fileID: 1947074328043902709}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1174025377
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6037990706203304839}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 0.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &6691980041362095024
 GameObject:
   m_ObjectHideFlags: 0
