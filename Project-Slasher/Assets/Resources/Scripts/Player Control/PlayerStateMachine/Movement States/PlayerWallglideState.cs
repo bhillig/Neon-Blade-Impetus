@@ -26,7 +26,7 @@ public class PlayerWallglideState : PlayerMovementState
         Context.animationController.SetBool("Wallrunning", false);
         Context.wallRunning.isWallRunning = false;
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
-        Context.TPComponentController.SetShoulderOffset(1f);
+        Context.TPComponentController.RemoveKey(2);
     }
 
     public void OnSpacebarDown()
@@ -41,7 +41,7 @@ public class PlayerWallglideState : PlayerMovementState
         Context.wallRunning.DetectWalls();
         Context.wallRunning.CheckDuration();
         float tilt = Context.wallRunning.PlayerRightDotWallNormal > 0 ? 1 : 0;
-        Context.TPComponentController.SetShoulderOffset(tilt);
+        Context.TPComponentController.SetShoulderOffset(tilt,2);
         Context.animationController.SetFloat("RunTilt",tilt);
         CheckSwitchState();
     }

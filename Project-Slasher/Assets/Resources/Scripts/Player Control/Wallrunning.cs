@@ -15,7 +15,7 @@ public class Wallrunning
     private float wallRunTimer = 2.0f;
 
     // Cooldown
-    private float wallRunCooldown = 0.3f;
+    private float wallRunCooldown = 0.1f;
     private float wallRunCooldownTime;
 
     // Detection variables
@@ -219,7 +219,7 @@ public class Wallrunning
 
     public bool CanAttach()
     {
-        if(jumping)
+/*        if(jumping)
         {
             timeSinceLastJumped += Time.deltaTime;
             if(timeSinceLastJumped >= 0.5f)
@@ -228,7 +228,7 @@ public class Wallrunning
                 timeSinceLastJumped = 0.0f;
             }
             return false;
-        }
+        }*/
         return true;
     }
     public Vector3 GetWallJumpVelocity(float sideVel, float upVel)
