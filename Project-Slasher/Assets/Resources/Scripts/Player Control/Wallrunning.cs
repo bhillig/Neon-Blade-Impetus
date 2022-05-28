@@ -36,6 +36,10 @@ public class Wallrunning
     private bool useGravity = true;
     private float counterGravityForce = 11.0f;
 
+    private float playerRightDotWallNormal;
+
+    public float PlayerRightDotWallNormal => playerRightDotWallNormal;
+
     //References
     private Transform orientation;
     private Rigidbody rb;
@@ -147,6 +151,7 @@ public class Wallrunning
             {
                 rb.velocity += Vector3.down * counterGravityForce * Time.deltaTime;
             }
+            playerRightDotWallNormal = Vector3.Dot(lastWallNormal, orientation.right);
         }
         else
         {

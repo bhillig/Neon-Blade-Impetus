@@ -13,6 +13,7 @@ public class PlayerWallglideState : PlayerMovementState
     {
         Context.playerRb.useGravity = false;
         Context.animationController.SetBool("Airborne", true);
+        Context.animationController.SetBool("Wallrunning", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
     }
 
@@ -20,8 +21,10 @@ public class PlayerWallglideState : PlayerMovementState
     {
         Context.playerRb.useGravity = true;
         Context.animationController.SetBool("Airborne", false);
+        Context.animationController.SetBool("Wallrunning", false);
         Context.wallRunning.isWallRunning = false;
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
+        Context.animationController.SetFloat("RunTilt", 0.5f);
     }
 
     public void OnSpacebarDown()
@@ -32,9 +35,10 @@ public class PlayerWallglideState : PlayerMovementState
 
     public override void UpdateState()
     {
-        CheckSwitchState();
         Context.wallRunning.DetectWalls();
         Context.wallRunning.CheckDuration();
+        Context.animationController.SetFloat("RunTilt", Mathf.Ceil(Context.wallRunning.PlayerRightDotWallNormal));
+        CheckSwitchState();
     }
 
     public override void FixedUpdateState()
