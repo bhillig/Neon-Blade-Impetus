@@ -11,15 +11,14 @@ public class Wallrunning
     private LayerMask whatisWall;
     private LayerMask whatisGround;
     private float wallRunForce = 10.0f;
-    private float wallJumpUpForce = 5.0f;
-    private float wallJumpSideForce = 10.0f;
     private float maxWallRunTime = 25.00f;
     private float wallRunTimer = 2.0f;
 
     // Detection variables
-    private float wallCheckDistance = 0.75f;
+    private float wallCheckDistance = 1.2f;
     private float minJumpHeight = 1.5f;
     private float minWallrunHeightFromGround = 1f;
+    private float raycastWaistHeightOffset = 0.75f;
 
     // temp variables for testing
     private Vector3[] directions;
@@ -57,9 +56,6 @@ public class Wallrunning
         whatisWall = LayerMask.GetMask("Terrain");
         directions = new Vector3[]{
             Vector3.right,
-            Vector3.right + Vector3.forward,
-            Vector3.forward,
-            Vector3.left + Vector3.forward,
             Vector3.left
         };
     }
@@ -93,15 +89,13 @@ public class Wallrunning
         }
     }
 
-    public void JumpFromWall()
+    public void JumpFromWall(float sideVel, float upVel)
     {
-        Debug.Log("Jump!");
-
         jumping = true;
         timeSinceLastJumped = 0.0f;
 
         rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
-        rb.velocity += GetWallJumpVelocity();
+        rb.velocity += GetWallJumpVelocity(sideVel, upVel);
     }
 
     public bool IsWallRunning()
@@ -112,14 +106,19 @@ public class Wallrunning
     public void DetectWalls(bool performRun = true)
     {
         isWallRunning = false;
-        if(CanAttach())
+        bool wallDetected = false;
+        if (CanAttach())
         {
             hits = new RaycastHit[directions.Length];
+            var waistHits = new RaycastHit[directions.Length];
 
             for (int i = 0; i < directions.Length; i++)
             {
                 Vector3 dir = orientation.TransformDirection(directions[i]);
-                Physics.Raycast(orientation.position, dir, out hits[i], wallCheckDistance);
+                dir = Vector3.ProjectOnPlane(dir, Vector3.up).normalized;
+                Physics.Raycast(orientation.position, dir, out hits[i], wallCheckDistance,whatisGround);
+                Physics.Raycast(orientation.position + Vector3.up * raycastWaistHeightOffset, 
+                    dir, out waistHits[i], wallCheckDistance, whatisGround);
                 if (hits[i].collider != null)
                 {
                     Debug.DrawRay(orientation.position, dir * hits[i].distance, Color.green);
@@ -132,24 +131,20 @@ public class Wallrunning
             if (CanWallRun())
             {
                 hits = hits.ToList().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
-                if (hits.Length > 0)
+                waistHits = waistHits.ToList().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
+                if (hits.Length > 0 && waistHits.Length > 0)
                 {
-                    if(performRun)
+                    wallDetected = true;
+                    if (performRun)
                         OnWall(hits[0]);
                     lastWallPosition = hits[0].point;
                     lastWallNormal = hits[0].normal;
                 }
             }
-            else
-            {
-                hits = new RaycastHit[0];
-            }
-        }
-        else
-        {
-            hits = new RaycastHit[0];
         }
 
+        if(!wallDetected)
+            hits = new RaycastHit[0];
 
         if (isWallRunning)
         {
@@ -202,9 +197,12 @@ public class Wallrunning
         }
     }
 
-    public bool ShouldWallRun()
+    public bool ShouldWallRun(Vector3 cameraForward)
     {
-        return CanWallRun() && hits.Length > 0 && AboveGround(minJumpHeight);
+        // Only enter wall run if camera is pointing towards the wall 
+        Vector3 proj = Vector3.ProjectOnPlane(cameraForward, Vector3.up);
+        float dot = Vector3.Dot(proj.normalized, lastWallNormal);
+        return CanWallRun() && hits.Length > 0 && AboveGround(minJumpHeight) && dot <= 0.2f;
     }
 
     public bool CanAttach()
@@ -221,11 +219,11 @@ public class Wallrunning
         }
         return true;
     }
-    public Vector3 GetWallJumpVelocity()
+    public Vector3 GetWallJumpVelocity(float sideVel, float upVel)
     {
         if (isWallRunning)
         {
-            return lastWallNormal * wallJumpSideForce + Vector3.up * wallJumpUpForce;
+            return lastWallNormal * sideVel + Vector3.up * upVel;
         }
         return Vector3.zero;
     }

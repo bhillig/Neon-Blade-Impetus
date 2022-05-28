@@ -40,7 +40,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
     {
         // wallrun check
         Context.wallRunning.DetectWalls(false);
-        if (Context.wallRunning.ShouldWallRun() && Context.groundPhysicsContext.GroundedBlockTimer <= 0f)
+        if (Context.wallRunning.ShouldWallRun(Context.mainCam.transform.forward) && Context.groundPhysicsContext.GroundedBlockTimer <= 0f)
         {
             TrySwitchState(Factory.Wallglide);
         }

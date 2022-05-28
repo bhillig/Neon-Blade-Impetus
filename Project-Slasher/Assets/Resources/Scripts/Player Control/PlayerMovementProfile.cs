@@ -22,6 +22,12 @@ public class PlayerMovementProfile : ScriptableObject
     [SerializeField] private float jumpGroundBlockDuration;
 
     [Space(10)]
+    [Header("Wallrun and Walljump")]
+    [SerializeField] private float wallJumpUpHeight;
+    [SerializeField] private float wallJumpUpVel;
+    [SerializeField] private float wallJumpSideVel;
+
+    [Space(10)]
     [Header("Grounded and Ground Snap")]
     [SerializeField] private float maxGroundedAngle;
     [SerializeField] private float maxSnapVelocity;
@@ -53,6 +59,8 @@ public class PlayerMovementProfile : ScriptableObject
     public float JumpVelocity => jumpVelocity;
     public float JumpHeight => jumpHeight;
     public float JumpGroundBlockDuration => jumpGroundBlockDuration;
+    public float WallJumpSideVel => wallJumpSideVel;
+    public float WallJumpUpVel => wallJumpUpVel;
 
     public float MinGroundedDotProd => minGroundedDotProd;
     public float MinAirRotationDot => maxAirRotationDot;
@@ -75,6 +83,7 @@ public class PlayerMovementProfile : ScriptableObject
     {
         // Calculate jump velocity based on jump height
         jumpVelocity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+        wallJumpUpVel = Mathf.Sqrt(-2f * Physics.gravity.y * wallJumpUpHeight);
         minGroundedDotProd = Mathf.Cos(maxGroundedAngle * Mathf.Deg2Rad);
     }
 }

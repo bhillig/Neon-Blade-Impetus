@@ -28,6 +28,7 @@ public class GroundedPhysicsContext : MonoBehaviour
     private List<RaycastHit> steepContacts = new List<RaycastHit>();
 
     private int stepsSinceLastGrounded;
+    private int stepsGrounded;
     private bool snappedToGround = false;
 
     private float groundedBlockTimer = 0f;
@@ -108,11 +109,13 @@ public class GroundedPhysicsContext : MonoBehaviour
         if (groundedBlockTimer <= 0f && (IsGrounded() || SnapToGround()))
         {
             stepsSinceLastGrounded = 0;
+            stepsGrounded++;
         }
         else
         {
             contactNormal = Vector3.up;
             groundNormalDot = 1f;
+            stepsGrounded = 0;
         }
     }
     /// <summary>
@@ -182,6 +185,11 @@ public class GroundedPhysicsContext : MonoBehaviour
     public bool IsGrounded()
     {
         return (groundContactCount > 0 || snappedToGround) && groundedBlockTimer <= 0f;
+    }
+
+    public bool IsGroundedForSteps(int steps)
+    {
+        return stepsGrounded > steps;
     }
 
     public bool IsGroundedRaw()

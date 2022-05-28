@@ -57,15 +57,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.3, y: 0.5, z: 0.45}
-  ShoulderOffset: {x: 2, y: 0, z: 0}
+  ShoulderOffset: {x: 1.25, y: 0.6, z: 0}
   VerticalArmLength: 0
   CameraSide: 1
-  CameraDistance: 3
+  CameraDistance: 2.5
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 64
   IgnoreTag: 
-  CameraRadius: 0.1
+  CameraRadius: 0.15
 --- !u!1 &3537850462230069223
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 3537850462230069222}
   - component: {fileID: 3537850462230069221}
   - component: {fileID: 3537850462230069220}
+  - component: {fileID: 1389386789}
   m_Layer: 0
   m_Name: CameraSystem
   m_TagString: Untagged
@@ -133,7 +134,7 @@ MonoBehaviour:
   body: {fileID: 0}
   minVel: 0
   maxVel: 20
-  maxFOV: 90
+  maxFOV: 95
   minFOV: 65
   fovCurve:
     serializedVersion: 2
@@ -141,15 +142,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.18672949
-      outSlope: 0.18672949
+      inSlope: 0.24831906
+      outSlope: 0.24831906
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.60493344
-      value: 0.112958916
+      time: 0.5501391
+      value: 0.13661003
       inSlope: 0.37548655
       outSlope: 0.37548655
       tangentMode: 0
@@ -159,8 +160,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1.0114594
       value: 1.0031166
-      inSlope: 2.1896703
-      outSlope: 2.1896703
+      inSlope: 1.8783191
+      outSlope: 1.8783191
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -174,26 +175,26 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.00065856177
-      outSlope: -0.00065856177
+      inSlope: 0.024100149
+      outSlope: 0.024100149
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.3217057
-      value: -0.00021186308
-      inSlope: 0.010245976
-      outSlope: 0.010245976
+      time: 0.25515908
+      value: 0.006149372
+      inSlope: 0.030909719
+      outSlope: 0.030909719
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 1
+      outWeight: 0.30081177
     - serializedVersion: 3
       time: 0.80058765
       value: 0.1689165
-      inSlope: 0.50727963
-      outSlope: 0.50727963
+      inSlope: 0.47990328
+      outSlope: 0.47990328
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -212,6 +213,20 @@ MonoBehaviour:
     m_RotationOrder: 4
   cam: {fileID: 3537850462526633340}
   lerpSpeed: 1
+--- !u!114 &1389386789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537850462230069223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf9b63ab445e2604594b2052876fd8af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 3537850462526633340}
+  cameraSideLerpFactor: 6.25
 --- !u!1 &3537850462526633342
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462526633342}
   m_LocalRotation: {x: 0.108679175, y: 0.74058884, z: -0.12356347, w: 0.65149766}
-  m_LocalPosition: {x: 3.382191, y: 1.79, z: 11.916918}
+  m_LocalPosition: {x: 3.487043, y: 2.3899999, z: 11.021649}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3537850461884283383}
@@ -265,7 +280,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 3537850462916779129}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 65
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -307,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462879656041}
   m_LocalRotation: {x: 0, y: -0.90766764, z: -0, w: 0.4196898}
-  m_LocalPosition: {x: 3.382191, y: 1.79, z: 11.916918}
+  m_LocalPosition: {x: 3.487043, y: 2.3899999, z: 11.021649}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3537850462230069222}
@@ -338,7 +353,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

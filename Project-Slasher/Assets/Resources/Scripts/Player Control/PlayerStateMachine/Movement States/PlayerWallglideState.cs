@@ -26,11 +26,12 @@ public class PlayerWallglideState : PlayerMovementState
         Context.animationController.SetBool("Wallrunning", false);
         Context.wallRunning.isWallRunning = false;
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
+        Context.TPComponentController.SetShoulderOffset(1f);
     }
 
     public void OnSpacebarDown()
     {
-        Context.wallRunning.JumpFromWall();
+        Context.wallRunning.JumpFromWall(Context.movementProfile.WallJumpSideVel, Context.movementProfile.WallJumpUpVel);
         Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
         TrySwitchState(Factory.Jump);
     }
@@ -40,6 +41,7 @@ public class PlayerWallglideState : PlayerMovementState
         Context.wallRunning.DetectWalls();
         Context.wallRunning.CheckDuration();
         float tilt = Context.wallRunning.PlayerRightDotWallNormal > 0 ? 1 : 0;
+        Context.TPComponentController.SetShoulderOffset(tilt);
         Context.animationController.SetFloat("RunTilt",tilt);
         CheckSwitchState();
     }
@@ -58,7 +60,7 @@ public class PlayerWallglideState : PlayerMovementState
         }
 
         //Grounded check
-        if (Context.groundPhysicsContext.IsGrounded())
+        if (Context.groundPhysicsContext.IsGroundedForSteps(2))
         {
             TrySwitchState(Factory.Idle);
         }
