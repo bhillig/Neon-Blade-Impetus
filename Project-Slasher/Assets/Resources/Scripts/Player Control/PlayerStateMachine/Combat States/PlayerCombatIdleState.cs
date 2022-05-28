@@ -17,6 +17,8 @@ public class PlayerCombatIdleState : PlayerCombatState
     public override void EnterState()
     {
         //Context.inputContext.PrimaryDownEvent.AddListener(ChargeStarted);
+        if (Context.primaryAttackCooldownTimer > 0f)
+            Context.playerEvents.OnStrikeCooldownStarted?.Invoke();
     }
 
     protected void ChargeStarted()
