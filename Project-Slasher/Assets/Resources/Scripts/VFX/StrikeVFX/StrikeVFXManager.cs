@@ -14,6 +14,7 @@ public class StrikeVFXManager : MonoBehaviour
     public ParticleSystem chargeParticles;
     public ParticleSystem chargeReadyParticles;
     public ParticleSystem cooldownFinishedParticles;
+    public ParticleSystem overchargedParticles;
     public SkinnedMeshRenderer coat;
 
     [Header("Values")]
@@ -31,6 +32,7 @@ public class StrikeVFXManager : MonoBehaviour
         playerEvents.OnStrikeChargeReady += ChargeReady;
         playerEvents.OnStrikeChargeEnd += ChargeEnd;
         playerEvents.OnStrikeChargeStart += ChargeStart;
+        playerEvents.OnStrikeOvercharged += Overcharged;
         playerEvents.OnStrikeCooldownFinished += CooldownFinished;
         playerEvents.OnStrikeCooldownStarted += CooldownStarted;
         sword.GetComponent<MeshRenderer>().enabled = false;
@@ -43,6 +45,7 @@ public class StrikeVFXManager : MonoBehaviour
         playerEvents.OnStrikeChargeReady -= ChargeReady;
         playerEvents.OnStrikeChargeEnd -= ChargeEnd;
         playerEvents.OnStrikeChargeStart -= ChargeStart;
+        playerEvents.OnStrikeOvercharged -= Overcharged;
         playerEvents.OnStrikeCooldownFinished -= CooldownFinished;
         playerEvents.OnStrikeCooldownStarted -= CooldownStarted;
     }
@@ -86,6 +89,11 @@ public class StrikeVFXManager : MonoBehaviour
     {
         chargeParticles.Play();
     }
+
+    private void Overcharged()
+    {
+        overchargedParticles.Play();
+    }    
 
     private void ChargeEnd(bool dash)
     {

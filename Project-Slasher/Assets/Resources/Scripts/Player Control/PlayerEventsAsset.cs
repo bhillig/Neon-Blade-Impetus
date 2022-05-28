@@ -25,6 +25,7 @@ public class PlayerEventsAsset : ScriptableObject
     /// True if strike, false if overcharged or cancelled
     /// </summary>
     public Action<bool> OnStrikeChargeEnd;
+    public Action OnStrikeOvercharged;
     public Action OnStrikeChargeStart;
     public Action OnStrikeCooldownFinished;
     public Action OnStrikeCooldownStarted;

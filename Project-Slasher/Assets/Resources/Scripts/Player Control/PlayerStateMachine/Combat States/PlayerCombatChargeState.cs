@@ -19,6 +19,7 @@ public class PlayerCombatChargeState : PlayerCombatState
         {
             Context.primaryAttackCooldownTimer = Context.combatProfile.Cooldown;
             Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
+            Context.playerEvents.OnStrikeOvercharged?.Invoke();
             TrySwitchState(Factory.CombatIdle);
         }
     }
