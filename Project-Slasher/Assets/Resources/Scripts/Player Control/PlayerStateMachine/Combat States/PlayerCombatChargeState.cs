@@ -17,6 +17,7 @@ public class PlayerCombatChargeState : PlayerCombatState
     {
         if(overCharged)
         {
+            Context.primaryAttackCooldownTimer = Context.combatProfile.Cooldown;
             Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
             TrySwitchState(Factory.CombatIdle);
         }
@@ -30,6 +31,7 @@ public class PlayerCombatChargeState : PlayerCombatState
         Context.primaryAttackCooldownTimer = Context.combatProfile.Cooldown;
         Context.inputContext.PrimaryUpEvent.AddListener(ChargeReleased);
         Context.animationController.SetBool("Charging", true);
+        Context.playerEvents.OnStrikeChargeStart?.Invoke();
     }
 
     public override bool IsStateSwitchable()
@@ -39,7 +41,6 @@ public class PlayerCombatChargeState : PlayerCombatState
 
     public override void ExitState()
     {
-        Context.primaryAttackCooldownTimer = Context.combatProfile.Cooldown;
         Context.inputContext.PrimaryUpEvent.RemoveListener(ChargeReleased);
         Context.animationController.SetBool("Charging", false);
     }
@@ -48,14 +49,15 @@ public class PlayerCombatChargeState : PlayerCombatState
     {
         if (fullyCharged)
         {
+            Context.primaryAttackCooldownTimer = Context.combatProfile.Cooldown;
             Context.playerEvents.OnStrikeChargeEnd?.Invoke(true);
             TrySwitchState(Factory.CombatStrike);
         }
         else
         {
+            Context.primaryAttackCooldownTimer = 0f;
             Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
             TrySwitchState(Factory.CombatIdle);
-            Context.primaryAttackCooldownTimer = 0f;
         }
     }
 
