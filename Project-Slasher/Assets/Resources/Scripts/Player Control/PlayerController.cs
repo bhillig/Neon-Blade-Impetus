@@ -24,6 +24,14 @@ public class PlayerController : MonoBehaviour
     private PlayerStateMachine movementStateMachine;
     private PlayerStateMachine combatStateMachine;
 
+    // Player initialPosition for particle usage
+    private float initialHeight;
+
+    public float InitialHeight
+    {
+        get => initialHeight;
+        set => initialHeight = value;
+    }
 
     // Particle prefabs.
     [SerializeField]
