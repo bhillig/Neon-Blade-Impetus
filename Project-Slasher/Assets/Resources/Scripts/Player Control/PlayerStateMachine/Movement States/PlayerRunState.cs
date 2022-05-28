@@ -19,6 +19,7 @@ public class PlayerRunState : PlayerGroundedState
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.RunParticle, Context.transform, false);
         Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
+        
         // Grab some values from movementProfile
         acceleration = Context.movementProfile.BaseAcceleration;
         maxSpeed = Context.movementProfile.BaseMoveSpeed;
