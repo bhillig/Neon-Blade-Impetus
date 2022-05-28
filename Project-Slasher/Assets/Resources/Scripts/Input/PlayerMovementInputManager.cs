@@ -21,12 +21,6 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
         playerControls.Dispose();
     }
 
-    void Update()
-    {
-        if (movementInputInfo.shiftDown)
-            movementInputInfo.ShiftHeldEvent.Invoke();
-    }
-
     public void OnMovement(InputAction.CallbackContext context)
     {
         movementInputInfo.movementInput = context.ReadValue<Vector2>();
@@ -39,26 +33,39 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
         movementInputInfo.mouseDelta = context.ReadValue<Vector2>();
     }
 
-    public void OnSpacebar(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (context.canceled)
-            movementInputInfo.SpacebarUpEvent.Invoke();
+            movementInputInfo.JumpUpEvent.Invoke();
         else if(context.started)
-            movementInputInfo.SpacebarDownEvent.Invoke();
+            movementInputInfo.JumpDownEvent.Invoke();
     }
 
-    public void OnShift(InputAction.CallbackContext context)
+    public void OnSlide(InputAction.CallbackContext context)
     {
         if (context.canceled)
         {
-            movementInputInfo.shiftDown = false;
-            movementInputInfo.ShiftUpEvent.Invoke();
+            movementInputInfo.slideDown = false;
+            movementInputInfo.SlideUpEvent.Invoke();
         }
         else if (context.started)
         {
-            movementInputInfo.shiftDown = true;
-            movementInputInfo.ShiftDownEvent.Invoke();
-            movementInputInfo.ShiftHeldEvent.Invoke();
+            movementInputInfo.slideDown = true;
+            movementInputInfo.SlideDownEvent.Invoke();
+        }
+    }
+
+    public void OnPrimaryAttack(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            movementInputInfo.primaryDown = false;
+            movementInputInfo.PrimaryUpEvent.Invoke();
+        }
+        else if (context.started)
+        {
+            movementInputInfo.primaryDown = true;
+            movementInputInfo.PrimaryDownEvent.Invoke();
         }
     }
 }

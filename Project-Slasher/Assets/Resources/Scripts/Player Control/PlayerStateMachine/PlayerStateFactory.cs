@@ -18,10 +18,16 @@ public class PlayerStateFactory
         Stopping = new PlayerStoppingState(context, this);
         Landing = new PlayerLandingState(context, this);
         Run = new PlayerRunState(context, this);
+        DryStrikeDash = new PlayerDryStrikeDashState(context, this);
+        HitStrikeDash = new PlayerHitStrikeDashState(context, this);
 
         // Switch states
         GroundedSwitch = new PlayerGroundedSwitchState(context, this);
 
+        // Combat states
+        CombatIdle = new PlayerCombatIdleState(context, this);
+        CombatCharge = new PlayerCombatChargeState(context, this);
+        CombatStrike = new PlayerCombatStrikeState(context, this);
     }
 
     public PlayerBaseState Wallglide { get; }
@@ -32,9 +38,15 @@ public class PlayerStateFactory
     public PlayerBaseState Run { get; }
     public PlayerBaseState Jump { get; }
     public PlayerBaseState Slide { get; }
+    public PlayerBaseState DryStrikeDash { get; }
+    public PlayerBaseState HitStrikeDash { get; }
 
     // Switch states
-    
     public PlayerBaseState GroundedSwitch { get; }
+
+    // Combat states
+    public PlayerBaseState CombatIdle { get; }
+    public PlayerBaseState CombatCharge { get; }
+    public PlayerBaseState CombatStrike { get; }
 }
 
