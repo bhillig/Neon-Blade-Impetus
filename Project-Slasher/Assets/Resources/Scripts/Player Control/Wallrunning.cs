@@ -11,14 +11,14 @@ public class Wallrunning
     private LayerMask whatisWall;
     private LayerMask whatisGround;
     private float wallRunForce = 10.0f;
-    private float wallJumpUpForce = 15f;
-    private float wallJumpSideForce = 150f;
+    private float wallJumpUpForce = 5.0f;
+    private float wallJumpSideForce = 10.0f;
     private float maxWallRunTime = 2.00f;
-    private float wallRunTimer = 0.0f;
+    private float wallRunTimer = 2.0f;
 
     // Detection variables
     private float wallCheckDistance = 0.7f;
-    private float minJumpHeight = 1.0f;
+    private float minJumpHeight = 1.5f;
 
     // temp variables for testing
     private Vector3[] directions;
@@ -91,12 +91,12 @@ public class Wallrunning
     public void JumpFromWall()
     {
         Debug.Log("Jump!");
+
         jumping = true;
         timeSinceLastJumped = 0.0f;
 
-        orientation = context.playerPhysicsTransform;
         rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
-        rb.velocity += GetWallJumpDirection() * context.movementProfile.JumpVelocity;
+        rb.velocity += GetWallJumpVelocity();
     }
 
     public bool IsWallRunning()
@@ -125,18 +125,19 @@ public class Wallrunning
                     Debug.DrawRay(orientation.position, dir * wallCheckDistance, Color.red);
                 }
             }
-        }
-
-        if (CanWallRun())
-        {
-            hits = hits.ToList().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
-            if (hits.Length > 0)
+            if (CanWallRun())
             {
-                OnWall(hits[0]);
-                lastWallPosition = hits[0].point;
-                lastWallNormal = hits[0].normal;
+                hits = hits.ToList().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
+                if (hits.Length > 0)
+                {
+                    OnWall(hits[0]);
+                    lastWallPosition = hits[0].point;
+                    lastWallNormal = hits[0].normal;
+                }
             }
         }
+
+        
 
         if (isWallRunning)
         {
@@ -190,7 +191,7 @@ public class Wallrunning
 
     public bool ShouldWallRun()
     {
-        return CanWallRun() & hits.Length > 0;
+        return CanWallRun() && hits.Length > 0;
     }
 
     public bool CanAttach()
@@ -207,11 +208,11 @@ public class Wallrunning
         }
         return true;
     }
-    public Vector3 GetWallJumpDirection()
+    public Vector3 GetWallJumpVelocity()
     {
         if (isWallRunning)
         {
-            return lastWallNormal * wallJumpSideForce + Vector3.up;
+            return lastWallNormal * wallJumpSideForce + Vector3.up * wallJumpUpForce;
         }
         return Vector3.zero;
     }

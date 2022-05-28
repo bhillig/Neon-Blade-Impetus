@@ -9,35 +9,32 @@ public class PlayerWallglideState : PlayerMovementState
         
     }
 
-    private WallSearchResult results;
-    private Wallrunning wallrunning;
     public override void EnterState()
     {
         Context.playerRb.useGravity = false;
         Context.animationController.SetBool("Airborne", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
-        wallrunning = new Wallrunning(Context);
     }
 
     public override void ExitState()
     {
         Context.playerRb.useGravity = true;
         Context.animationController.SetBool("Airborne", false);
-        wallrunning.isWallRunning = false;
+        Context.wallRunning.isWallRunning = false;
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
     }
 
     public void OnSpacebarDown()
     {
-        wallrunning.JumpFromWall();
+        Context.wallRunning.JumpFromWall();
         TrySwitchState(Factory.Jump);
     }
 
     public override void UpdateState()
     {
         CheckSwitchState();
-        wallrunning.DetectWalls();
-        wallrunning.CheckDuration();
+        Context.wallRunning.DetectWalls();
+        Context.wallRunning.CheckDuration();
     }
 
     public override void FixedUpdateState()
@@ -47,7 +44,7 @@ public class PlayerWallglideState : PlayerMovementState
 
     public override void CheckSwitchState()
     {
-        if (!wallrunning.IsWallRunning())
+        if (!Context.wallRunning.IsWallRunning())
         {
             TrySwitchState(Factory.Jump);
             return;

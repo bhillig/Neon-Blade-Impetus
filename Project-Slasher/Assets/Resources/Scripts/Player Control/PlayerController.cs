@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public Transform playerCenter;
     public Rigidbody playerRb;
     public WallFinder wallFinder;
+    public Wallrunning wallRunning;
     public ColliderSwitcher colliderSwitcher;
     public ColliderEvents colliderEvents;
     public PlayerEventsAsset playerEvents;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         movementStateMachine = new PlayerMovementStateMachine(this);
         combatStateMachine = new PlayerCombatStateMachine(this);
+        wallRunning = new Wallrunning(this);
         forwardVector = Vector3.forward;
     }
 
