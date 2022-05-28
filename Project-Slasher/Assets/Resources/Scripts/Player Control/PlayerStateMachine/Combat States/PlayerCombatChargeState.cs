@@ -55,6 +55,7 @@ public class PlayerCombatChargeState : PlayerCombatState
         {
             Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
             TrySwitchState(Factory.CombatIdle);
+            Context.primaryAttackCooldownTimer = 0f;
         }
     }
 

@@ -4887,7 +4887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &587235546
 Transform:
   m_ObjectHideFlags: 0
@@ -16009,7 +16009,7 @@ MonoBehaviour:
   targettedDashParticles: {fileID: 963560411}
   dashTrailParticles: {fileID: 300292242}
   coat: {fileID: 7144831110458703608}
-  endDelay: 0.15
+  endDelay: 0.1
   defaultMat: {fileID: 2100000, guid: 62027d625eefcc4479049a8cf7ff5f42, type: 2}
   chargeStrikeMat: {fileID: 2100000, guid: c0a6467b6f160b94eb061bef0e0e76ee, type: 2}
   defaultCoatMat: {fileID: 2100000, guid: 5ca44debf5cde25439266e4a7b472f4f, type: 2}

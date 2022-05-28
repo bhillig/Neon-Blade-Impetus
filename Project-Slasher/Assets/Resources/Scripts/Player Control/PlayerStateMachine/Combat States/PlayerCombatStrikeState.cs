@@ -24,6 +24,7 @@ public class PlayerCombatStrikeState : PlayerCombatState
         }
         else
         {
+            Context.primaryAttackCooldownTimer = 0f;
             // Calculate distance to target + pierce distance
             float dist = (targetFound.bounds.center - dashCollider.bounds.center).magnitude + Context.combatProfile.HitDashPierceDistance;
             timer = dist / Context.combatProfile.HitVelocity;
