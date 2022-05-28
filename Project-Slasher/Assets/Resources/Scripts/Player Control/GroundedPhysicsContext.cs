@@ -141,7 +141,8 @@ public class GroundedPhysicsContext : MonoBehaviour
         Vector3 vel = rb.velocity;
         // Compare to minSnapDotProd
         if (Vector3.Dot(snapNormal.normalized,vel.normalized) <= 
-            profile.GetMaxSnapDotProd(rb.velocity.magnitude))
+            profile.GetMaxSnapDotProd(rb.velocity.magnitude) &&
+            CheckIfGroundNormal(hit))
         {
             snappedToGround = true;
             contactNormal = hit.normal;
@@ -162,8 +163,7 @@ public class GroundedPhysicsContext : MonoBehaviour
 
     private void EvaluateCollision(RaycastHit contact)
     {
-        Vector3 normal = contact.normal;
-        if (Vector3.Dot(Vector3.up,normal) >= profile.MinGroundedDotProd)
+        if(CheckIfGroundNormal(contact))
         {
             groundedContacts.Add(contact);
         }
@@ -172,6 +172,13 @@ public class GroundedPhysicsContext : MonoBehaviour
             steepContacts.Add(contact);
         }
     }
+
+    private bool CheckIfGroundNormal(RaycastHit contact)
+    {
+        Vector3 normal = contact.normal;
+        return Vector3.Dot(Vector3.up, normal) >= profile.MinGroundedDotProd;
+    }
+
     public bool IsGrounded()
     {
         return (groundContactCount > 0 || snappedToGround) && groundedBlockTimer <= 0f;

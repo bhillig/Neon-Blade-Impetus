@@ -11,6 +11,7 @@ public class PlayerWallglideState : PlayerMovementState
 
     public override void EnterState()
     {
+        base.EnterState();
         Context.playerRb.useGravity = false;
         Context.animationController.SetBool("Airborne", true);
         Context.animationController.SetBool("Wallrunning", true);
@@ -19,12 +20,12 @@ public class PlayerWallglideState : PlayerMovementState
 
     public override void ExitState()
     {
+        base.ExitState();
         Context.playerRb.useGravity = true;
         Context.animationController.SetBool("Airborne", false);
         Context.animationController.SetBool("Wallrunning", false);
         Context.wallRunning.isWallRunning = false;
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
-        Context.animationController.SetFloat("RunTilt", 0.5f);
     }
 
     public void OnSpacebarDown()

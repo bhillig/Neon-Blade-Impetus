@@ -13,12 +13,13 @@ public class Wallrunning
     private float wallRunForce = 10.0f;
     private float wallJumpUpForce = 5.0f;
     private float wallJumpSideForce = 10.0f;
-    private float maxWallRunTime = 2.00f;
+    private float maxWallRunTime = 25.00f;
     private float wallRunTimer = 2.0f;
 
     // Detection variables
-    private float wallCheckDistance = 0.7f;
+    private float wallCheckDistance = 0.75f;
     private float minJumpHeight = 1.5f;
+    private float minWallrunHeightFromGround = 1f;
 
     // temp variables for testing
     private Vector3[] directions;
@@ -63,10 +64,10 @@ public class Wallrunning
         };
     }
 
-    public bool AboveGround()
+    public bool AboveGround(float dist)
     {
         orientation = context.playerPhysicsTransform;
-        return !Physics.Raycast(orientation.position, Vector3.down, minJumpHeight, whatisGround);
+        return !Physics.Raycast(orientation.position, Vector3.down, dist, whatisGround);
     }
 
     public void StartWallRun()
@@ -108,10 +109,9 @@ public class Wallrunning
         return isWallRunning;
     }
 
-    public void DetectWalls()
+    public void DetectWalls(bool performRun = true)
     {
         isWallRunning = false;
-
         if(CanAttach())
         {
             hits = new RaycastHit[directions.Length];
@@ -134,14 +134,22 @@ public class Wallrunning
                 hits = hits.ToList().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
                 if (hits.Length > 0)
                 {
-                    OnWall(hits[0]);
+                    if(performRun)
+                        OnWall(hits[0]);
                     lastWallPosition = hits[0].point;
                     lastWallNormal = hits[0].normal;
                 }
             }
+            else
+            {
+                hits = new RaycastHit[0];
+            }
+        }
+        else
+        {
+            hits = new RaycastHit[0];
         }
 
-        
 
         if (isWallRunning)
         {
@@ -163,8 +171,7 @@ public class Wallrunning
     public bool CanWallRun()
     {
         float verticalAxis = context.inputContext.movementInput.y;
-
-        return !context.groundPhysicsContext.IsGrounded() && verticalAxis > 0.0f && AboveGround();
+        return verticalAxis > 0.0f && AboveGround(minWallrunHeightFromGround);
     }
 
     void OnWall(RaycastHit hit)
@@ -183,8 +190,8 @@ public class Wallrunning
             if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
             {
                 wallForward = -wallForward;
-                orientation.forward = wallForward;
             }
+            orientation.forward = wallForward;
 
             Debug.DrawRay(orientation.position, alongWall.normalized * 10, Color.green);
             Debug.DrawRay(orientation.position, lastWallNormal * 10, Color.magenta);
@@ -197,7 +204,7 @@ public class Wallrunning
 
     public bool ShouldWallRun()
     {
-        return CanWallRun() && hits.Length > 0;
+        return CanWallRun() && hits.Length > 0 && AboveGround(minJumpHeight);
     }
 
     public bool CanAttach()

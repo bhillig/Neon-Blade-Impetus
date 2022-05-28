@@ -39,7 +39,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
     public override void CheckSwitchState()
     {
         // wallrun check
-        Context.wallRunning.DetectWalls();
+        Context.wallRunning.DetectWalls(false);
         if (Context.wallRunning.ShouldWallRun() && Context.groundPhysicsContext.GroundedBlockTimer <= 0f)
         {
             TrySwitchState(Factory.Wallglide);
