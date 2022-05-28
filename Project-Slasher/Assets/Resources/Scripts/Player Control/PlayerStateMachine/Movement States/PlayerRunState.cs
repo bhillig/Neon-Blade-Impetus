@@ -12,14 +12,9 @@ public class PlayerRunState : PlayerGroundedState
 
     protected Vector3 desiredVelocity;
 
-    protected GameObject particle;
-    protected ParticleSystem ps;
     public override void EnterState()
     {
         base.EnterState();
-        Context.animationController.SetBool("Running", true);
-        particle = GameObject.Instantiate(Context.RunParticle, Context.transform, false);
-        ps = particle.GetComponent<ParticleSystem>();
         // Grab some values from movementProfile
         acceleration = Context.movementProfile.BaseAcceleration;
         maxSpeed = Context.movementProfile.BaseMoveSpeed;
@@ -29,14 +24,13 @@ public class PlayerRunState : PlayerGroundedState
     public override void ExitState()
     {
         base.ExitState();
-        ps.Stop();
-        //GameObject.Destroy(particle);
         Context.animationController.SetBool("Running", false);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
+        Context.animationController.SetBool("Running", Context.playerRb.velocity.magnitude > 0.35f);
         desiredVelocity = flatMove.GetDesiredVelocity(maxSpeed);
         CheckSwitchState();
     }
