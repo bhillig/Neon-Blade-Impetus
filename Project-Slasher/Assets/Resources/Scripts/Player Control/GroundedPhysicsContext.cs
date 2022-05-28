@@ -30,11 +30,11 @@ public class GroundedPhysicsContext : MonoBehaviour
     private int stepsSinceLastGrounded;
     private bool snappedToGround = false;
 
-    private float snapToGroundBlock = 0f;
-    public float SnapToGroundBlock
+    private float groundedBlockTimer = 0f;
+    public float GroundedBlockTimer
     {
-        get => snapToGroundBlock;
-        set => snapToGroundBlock = value;
+        get => groundedBlockTimer;
+        set => groundedBlockTimer = value;
     }
 
     private Vector3 hitSurfacePos; 
@@ -102,9 +102,10 @@ public class GroundedPhysicsContext : MonoBehaviour
 
     private void UpdateState()
     {
+        groundedBlockTimer -= Time.deltaTime;
         snappedToGround = false;
         stepsSinceLastGrounded++;
-        if (IsGrounded() || SnapToGround())
+        if (groundedBlockTimer <= 0f && (IsGrounded() || SnapToGround()))
         {
             stepsSinceLastGrounded = 0;
         }
@@ -120,9 +121,7 @@ public class GroundedPhysicsContext : MonoBehaviour
     /// <returns></returns>
     private bool SnapToGround()
     {
-        if (snapToGroundBlock > 0f)
-            snapToGroundBlock -= Time.fixedDeltaTime;
-        if (stepsSinceLastGrounded > 1 || snapToGroundBlock > 0f)
+        if (stepsSinceLastGrounded > 1 || groundedBlockTimer > 0f)
         {
             return false;
         }
@@ -175,7 +174,7 @@ public class GroundedPhysicsContext : MonoBehaviour
     }
     public bool IsGrounded()
     {
-        return (groundContactCount > 0 || snappedToGround) && snapToGroundBlock <= 0f;
+        return (groundContactCount > 0 || snappedToGround) && groundedBlockTimer <= 0f;
     }
 
     public bool IsGroundedRaw()

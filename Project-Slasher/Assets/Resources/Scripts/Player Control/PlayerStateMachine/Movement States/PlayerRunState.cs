@@ -15,7 +15,6 @@ public class PlayerRunState : PlayerGroundedState
     public override void EnterState()
     {
         base.EnterState();
-        Context.animationController.SetBool("Running", true);
         // Grab some values from movementProfile
         acceleration = Context.movementProfile.BaseAcceleration;
         maxSpeed = Context.movementProfile.BaseMoveSpeed;
@@ -31,6 +30,7 @@ public class PlayerRunState : PlayerGroundedState
     public override void UpdateState()
     {
         base.UpdateState();
+        Context.animationController.SetBool("Running", Context.playerRb.velocity.magnitude > 0.35f);
         desiredVelocity = flatMove.GetDesiredVelocity(maxSpeed);
         CheckSwitchState();
     }

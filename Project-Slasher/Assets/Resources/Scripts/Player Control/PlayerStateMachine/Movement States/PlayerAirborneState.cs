@@ -4,9 +4,11 @@ using UnityEngine;
 
 public abstract class PlayerAirborneState : PlayerMovementState
 {
+    Wallrunning wallrunning;
+
     public PlayerAirborneState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
     {
-        
+         
     }
 
     public override void EnterState()
@@ -14,6 +16,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
         base.EnterState();
         Context.animationController.SetBool("Airborne", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
+        wallrunning = new Wallrunning(Context);
     }
 
     public override void ExitState()
@@ -38,6 +41,13 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
     public override void CheckSwitchState()
     {
+        // wallrun check
+        wallrunning.DetectWalls();
+        if (wallrunning.ShouldWallRun())
+        {
+            TrySwitchState(Factory.Wallglide);
+        }
+
         //Grounded check
         if (Context.groundPhysicsContext.IsGrounded())
         {
