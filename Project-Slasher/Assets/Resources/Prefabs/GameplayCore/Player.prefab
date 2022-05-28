@@ -15926,13 +15926,14 @@ MonoBehaviour:
   colliderSwitcher: {fileID: 2023879516243316266}
   colliderEvents: {fileID: 903932689}
   playerEvents: {fileID: 11400000, guid: a91b005c0b76a724eb48b3f4a8d02fcd, type: 2}
+  runParticle: {fileID: 3777589564684063362, guid: 46a1f1d4ece0d504ababa223f86013c9, type: 3}
+  largeLandParticle: {fileID: 3674786695083146027, guid: 97d44353e071ee0448be619e53ef5a7f, type: 3}
+  slideParticle: {fileID: 2399767533243803249, guid: e1b384cdda4654d43bce51327dd05a23, type: 3}
+  smallLandParticle: {fileID: 7007818099370543262, guid: f016971c2480a21468923af8d810ba22, type: 3}
   forwardVector: {x: 0, y: 0, z: 0}
   slideCooldownTimer: 0
   primaryAttackCooldownTimer: 0
   combatTarget: {fileID: 0}
-  runParticle: {fileID: 3777589564684063362, guid: 46a1f1d4ece0d504ababa223f86013c9, type: 3}
-  landParticle: {fileID: 3674786695083146027, guid: 97d44353e071ee0448be619e53ef5a7f, type: 3}
-  slideParticle: {fileID: 2399767533243803249, guid: e1b384cdda4654d43bce51327dd05a23, type: 3}
 --- !u!114 &2023879515020833349
 MonoBehaviour:
   m_ObjectHideFlags: 0
