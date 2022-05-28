@@ -16,7 +16,7 @@ public class PlayerCombatStrikeState : PlayerCombatState
         Collider targetFound = SearchForTarget();
         Context.combatTarget = targetFound;
         // Invoke event to tell the movement state machine to switch to dash state
-        Context.OnStrikeStart?.Invoke(targetFound);
+        Context.playerEvents.OnStrikeStart?.Invoke(targetFound);
         // Calculate dash duration from distance and velocity
         if(targetFound == null)
         {
@@ -35,7 +35,7 @@ public class PlayerCombatStrikeState : PlayerCombatState
 
     public override void ExitState()
     {
-        Context.OnStrikeEnd?.Invoke();
+        Context.playerEvents.OnStrikeEnd?.Invoke();
         Context.animationController.SetBool("Striking", false);
     }
 

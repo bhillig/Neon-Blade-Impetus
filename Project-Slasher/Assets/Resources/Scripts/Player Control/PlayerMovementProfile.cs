@@ -5,22 +5,23 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PlayerMovementProfile")]
 public class PlayerMovementProfile : ScriptableObject
 {
-    // Basic movement fields
+    [Space(10)]
+    [Header("Basic Movement")]
     [SerializeField] private float turnSpeed;
     [SerializeField] private float baseMoveSpeed;
     [SerializeField] private float baseAcceleration;
     [SerializeField] private float baseFriction;
 
-    [Space(15f)]
-    // Air
+    [Space(10)]
+    [Header("Jump and Airborne")]
     [SerializeField, HideInInspector] private float jumpVelocity;
     [SerializeField] private float groundedToJumpDelay;
     [SerializeField] private float jumpHeight;
     [SerializeField] private float baseAirAcceleration;
     [SerializeField] private float airTurnSpeed;
 
-    // State calculation fields
-    [Space(15f)]
+    [Space(10)]
+    [Header("Grounded and Ground Snap")]
     [SerializeField] private float maxGroundedAngle;
     [SerializeField] private float maxSnapVelocity;
     [SerializeField] private AnimationCurve snapVelocityToAngleRatioCurve;
@@ -29,8 +30,8 @@ public class PlayerMovementProfile : ScriptableObject
     [SerializeField] private float snapProbeDistance;
     [SerializeField] private float maxAirRotationDot;
 
-    // Slide
-    [Space(15f)]
+    [Space(10)]
+    [Header("Slide")]
     [SerializeField] private float slideVelThreshhold;
     [SerializeField] private float slideGravityBoost;
     [SerializeField] private float slideSpeedBoostRatio;

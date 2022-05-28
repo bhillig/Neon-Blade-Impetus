@@ -17,13 +17,13 @@ public abstract class PlayerDashState : PlayerMovementState
     public override void EnterState()
     {
         base.EnterState();
-        Debug.Log(Context.playerRb.velocity.magnitude);
         cachedSpeed = Context.playerRb.velocity.magnitude;
         Context.colliderSwitcher.SwitchToCollider(2);
-        Context.OnStrikeEnd += StrikeDashEnd;
         subscribedToCollision = false;
         buffer = 0;
         Context.playerRb.useGravity = false;
+        // Subscribe 
+        Context.playerEvents.OnStrikeEnd += StrikeDashEnd;
     }
 
     protected override void PerformStrikeDash(Collider strikeHasTarget)
@@ -35,10 +35,11 @@ public abstract class PlayerDashState : PlayerMovementState
     {
         base.ExitState();
         Context.colliderSwitcher.SwitchToCollider(0);
-        Context.OnStrikeEnd -= StrikeDashEnd;
         if(subscribedToCollision)
             Context.colliderEvents.OnCollisionEnterEvent -= OnDashCollision;
         Context.playerRb.useGravity = true;
+        // unsubscribe
+        Context.playerEvents.OnStrikeEnd -= StrikeDashEnd;
     }
 
     public override void UpdateState()
