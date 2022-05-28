@@ -47,15 +47,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject runParticle;
     [SerializeField]
-    private GameObject landParticle;
+    private GameObject largeLandParticle;
     [SerializeField]
     private GameObject slideParticle;
+    [SerializeField]
+    private GameObject smallLandParticle;
 
     // Particle getters.
     public GameObject RunParticle { get => runParticle; }
-    public GameObject LandParticle { get => landParticle; }
+    public GameObject LargeLandParticle { get => largeLandParticle; }
     public GameObject SlideParticle { get => slideParticle; }
-
+    public GameObject SmallLandParticle { get => smallLandParticle; }
     // For particles usage in each state.
     private GameObject particle;
     private ParticleSystem ps;
