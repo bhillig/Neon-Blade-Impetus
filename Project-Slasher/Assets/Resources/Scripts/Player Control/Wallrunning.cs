@@ -183,6 +183,7 @@ public class Wallrunning
             if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
             {
                 wallForward = -wallForward;
+                orientation.forward = wallForward;
             }
 
             Debug.DrawRay(orientation.position, alongWall.normalized * 10, Color.green);

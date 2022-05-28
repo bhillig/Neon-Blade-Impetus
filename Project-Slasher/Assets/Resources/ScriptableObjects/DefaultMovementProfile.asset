@@ -21,6 +21,7 @@ MonoBehaviour:
   jumpHeight: 2
   baseAirAcceleration: 10
   airTurnSpeed: 0.1
+  jumpGroundBlockDuration: 0.15
   maxGroundedAngle: 50
   maxSnapVelocity: 11
   snapVelocityToAngleRatioCurve:

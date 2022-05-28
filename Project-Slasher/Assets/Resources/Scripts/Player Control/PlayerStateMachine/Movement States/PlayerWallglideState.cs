@@ -30,6 +30,7 @@ public class PlayerWallglideState : PlayerMovementState
     public void OnSpacebarDown()
     {
         Context.wallRunning.JumpFromWall();
+        Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
         TrySwitchState(Factory.Jump);
     }
 
@@ -37,7 +38,8 @@ public class PlayerWallglideState : PlayerMovementState
     {
         Context.wallRunning.DetectWalls();
         Context.wallRunning.CheckDuration();
-        Context.animationController.SetFloat("RunTilt", Mathf.Ceil(Context.wallRunning.PlayerRightDotWallNormal));
+        float tilt = Context.wallRunning.PlayerRightDotWallNormal > 0 ? 1 : 0;
+        Context.animationController.SetFloat("RunTilt",tilt);
         CheckSwitchState();
     }
 

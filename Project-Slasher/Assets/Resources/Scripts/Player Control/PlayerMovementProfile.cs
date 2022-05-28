@@ -19,6 +19,7 @@ public class PlayerMovementProfile : ScriptableObject
     [SerializeField] private float jumpHeight;
     [SerializeField] private float baseAirAcceleration;
     [SerializeField] private float airTurnSpeed;
+    [SerializeField] private float jumpGroundBlockDuration;
 
     [Space(10)]
     [Header("Grounded and Ground Snap")]
@@ -51,6 +52,7 @@ public class PlayerMovementProfile : ScriptableObject
     public float GroundedToJumpDelay => groundedToJumpDelay;
     public float JumpVelocity => jumpVelocity;
     public float JumpHeight => jumpHeight;
+    public float JumpGroundBlockDuration => jumpGroundBlockDuration;
 
     public float MinGroundedDotProd => minGroundedDotProd;
     public float MinAirRotationDot => maxAirRotationDot;

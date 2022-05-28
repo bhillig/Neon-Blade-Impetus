@@ -26133,6 +26133,14 @@ PrefabInstance:
       propertyPath: cameraControlContext
       value: 
       objectReference: {fileID: 1856482431}
+    - target: {fileID: 2023879515863202328, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
+      propertyPath: searchDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583622000524376622, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
+      propertyPath: m_Layer
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
 --- !u!4 &5631728251675153082 stripped
