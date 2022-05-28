@@ -32,13 +32,13 @@ public abstract class PlayerAirborneState : PlayerMovementState
         {
             // Start particles.
             Context.Particle = GameObject.Instantiate(Context.LargeLandParticle, Context.transform, false);
-            Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
+            //Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
         }
-        else if(Context.transform.position.y < Context.InitialHeight - 3.0f)
+        else if(Context.transform.position.y < Context.InitialHeight - 2.0f)
         {
             // Small Land particle
             Context.Particle = GameObject.Instantiate(Context.SmallLandParticle, Context.transform, false);
-            Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
+            //Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
         }
 
         Context.animationController.SetBool("Airborne", false);
