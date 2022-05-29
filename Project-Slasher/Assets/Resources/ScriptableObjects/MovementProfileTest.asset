@@ -10,31 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aacbec332df735438d620106428ca76, type: 3}
-  m_Name: TestMovementProfile
+  m_Name: MovementProfileTest
   m_EditorClassIdentifier: 
   turnSpeed: 0.2
-  baseMoveSpeed: 12
-  baseAcceleration: 20
-  baseFriction: 20
+  baseMoveSpeed: 11
+  baseAcceleration: 40
+  baseFriction: 25
   jumpVelocity: 7.745967
   groundedToJumpDelay: 0.1
   jumpHeight: 2
   baseAirAcceleration: 10
-  airTurnSpeed: 0.3
-  jumpGroundBlockDuration: 0
-  wallJumpUpHeight: 0
-  wallJumpUpVel: 0
-  wallJumpSideVel: 0
-  maxGroundedAngle: 75
-  maxSnapVelocity: 12
+  airTurnSpeed: 0.1
+  jumpGroundBlockDuration: 0.15
+  wallJumpUpHeight: 1.5
+  wallJumpUpVel: 6.708204
+  wallJumpSideVel: 10
+  maxGroundedAngle: 50
+  maxSnapVelocity: 11
   snapVelocityToAngleRatioCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0022268174
-      value: 0.49914178
-      inSlope: 9.569721
-      outSlope: 9.569721
+      time: -0.0019693496
+      value: 0.002681816
+      inSlope: 17.681723
+      outSlope: 17.681723
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -72,11 +72,11 @@ MonoBehaviour:
   maxSnapAngle: 85
   snapProbeDistance: 1
   maxAirRotationDot: 0.9
-  slideVelThreshhold: 7
-  slideGravityBoost: 17
+  slideVelThreshhold: 5
+  slideGravityBoost: 15
   slideSpeedBoostRatio: 1.45
   slideBaseFriction: 9
   slideLockDuration: 0.3
   slideCooldown: 0.65
-  slideSpeedCap: 17.25
-  minGroundedDotProd: 0.25881907
+  slideSpeedCap: 25
+  minGroundedDotProd: 0.64278764
