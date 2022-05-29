@@ -19,11 +19,29 @@ public class PlayerRunState : PlayerGroundedState
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.RunParticle, Context.transform, false);
         Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
-        
+
         // Grab some values from movementProfile
         acceleration = Context.movementProfile.BaseAcceleration;
-        maxSpeed = Context.movementProfile.BaseMoveSpeed;
         maxSpeedChange = acceleration * Time.fixedDeltaTime;
+        CalculateTopSpeed();
+    }
+
+    /// <summary>
+    /// Always use the fastest top speed possible to preserve entry velocity 
+    /// </summary>
+    private void CalculateTopSpeed()
+    {
+        float flatVel = Vector3.ProjectOnPlane(Context.playerRb.velocity, Context.groundPhysicsContext.ContactNormal).magnitude;
+        if(flatVel < maxSpeed)
+        {
+            maxSpeed = Mathf.Lerp(flatVel, maxSpeed, Context.movementProfile.RunningPreservationRatio);
+        }
+        else
+        {
+            maxSpeed = flatVel;
+        }
+        // Clamp to minimum speed
+        maxSpeed = Mathf.Max(maxSpeed,Context.movementProfile.BaseMoveSpeed);
     }
 
     public override void ExitState()
@@ -55,6 +73,7 @@ public class PlayerRunState : PlayerGroundedState
         if (Context.inputContext.movementInput != Vector2.zero)
             flatMove.UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);
         flatMove.LerpRotation(Context.movementProfile.TurnSpeed);
+        CalculateTopSpeed();
     }
 
     public override void CheckSwitchState()

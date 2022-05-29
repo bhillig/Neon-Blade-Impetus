@@ -11,27 +11,31 @@ public class PlayerJumpState : PlayerAirborneState
     protected float maxSpeedChange;
 
     protected Vector3 desiredVelocity;
-    private float maxVel;
 
     public override void EnterState()
     {
         base.EnterState();
         // Grab some values from movementProfile
         acceleration = Context.movementProfile.BaseAirAcceleration;
-        maxSpeed = Context.movementProfile.BaseMoveSpeed;
         maxSpeedChange = acceleration * Time.fixedDeltaTime;
 
         // If going faster than movement profile's speed when entering state, then that becomes the new max speed
-        CompareEnterSpeed();
+        UpdateTopSpeed();
     }
 
-    private void CompareEnterSpeed()
+    private void UpdateTopSpeed()
     {
-        float mag = Context.playerRb.velocity.XZMag();
-        float desiredMag = desiredVelocity.magnitude;
-        maxVel = maxSpeed;
-        if (desiredMag < mag)
-            maxVel = mag;
+        float flatVel = Context.playerRb.velocity.XZMag();
+        if (flatVel < maxSpeed)
+        {
+            maxSpeed = Mathf.Lerp(flatVel,maxSpeed, Context.movementProfile.AirbornePreservationRatio);
+        }
+        else
+        {
+            maxSpeed = flatVel;
+        }
+        // Clamp to minimum speed
+        maxSpeed = Mathf.Max(maxSpeed, Context.movementProfile.BaseMoveSpeed);
     }
 
     public override void ExitState()
@@ -42,7 +46,7 @@ public class PlayerJumpState : PlayerAirborneState
     public override void UpdateState()
     {
         base.UpdateState();
-        desiredVelocity = flatMove.GetDesiredVelocity(maxVel);
+        desiredVelocity = flatMove.GetDesiredVelocity(maxSpeed);
         CheckSwitchState();
     }
 
@@ -60,6 +64,7 @@ public class PlayerJumpState : PlayerAirborneState
             flatMove.LerpRotation(Context.movementProfile.AirTurnSpeed);
         else
             flatMove.LerpRotationY(Context.movementProfile.AirTurnSpeed);
+        UpdateTopSpeed();
     }
 
     public override void CheckSwitchState()

@@ -16,12 +16,14 @@ MonoBehaviour:
   baseMoveSpeed: 11
   baseAcceleration: 40
   baseFriction: 25
-  jumpVelocity: 7.745967
   groundedToJumpDelay: 0.1
   jumpHeight: 2
+  jumpVelocity: 7.745967
   baseAirAcceleration: 10
   airTurnSpeed: 0.1
   jumpGroundBlockDuration: 0.15
+  runningPreservationRatio: 0.35
+  airbornePreservationRatio: 0.35
   rollSpeed: 12
   rollFallSpeedThreshhold: 15
   wallJumpUpHeight: 1.5
@@ -75,9 +77,9 @@ MonoBehaviour:
   snapProbeDistance: 1
   maxAirRotationDot: 0.95
   slideVelThreshhold: 5
-  slideGravityBoost: 15
-  slideSpeedBoostRatio: 1.45
-  slideBaseFriction: 9
+  slideGravityBoost: 13
+  slideSpeedBoostRatio: 1.4
+  slideBaseFriction: 8
   slideLockDuration: 0.3
   slideCooldown: 0.65
   slideSpeedCap: 25
