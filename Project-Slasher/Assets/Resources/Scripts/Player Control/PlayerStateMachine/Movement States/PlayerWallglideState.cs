@@ -16,6 +16,8 @@ public class PlayerWallglideState : PlayerMovementState
         Context.animationController.SetBool("Airborne", true);
         Context.animationController.SetBool("Wallrunning", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
+
+        Context.wallRunning.IncomingMagnitude = Context.playerRb.velocity.XZMag();
     }
 
     public override void ExitState()

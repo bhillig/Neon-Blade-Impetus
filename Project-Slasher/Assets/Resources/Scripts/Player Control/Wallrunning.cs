@@ -35,6 +35,13 @@ public class Wallrunning
     float elapsedTimeSinceWallAttach = 0;
     float elapsedTimeSinceWallDetatch = 0;
 
+    private float incomingMagnitude;
+    public float IncomingMagnitude
+    {
+        get { return incomingMagnitude; }
+        set { incomingMagnitude = value; }
+    }
+
     private Vector3 wallForward;
     private Vector3 wallNormal;
     private bool useGravity = true;
@@ -164,7 +171,6 @@ public class Wallrunning
         float d = Vector3.Dot(hit.normal, Vector3.up);
         if (d >= -normalizedAngleThreshold && d <= normalizedAngleThreshold)
         {
-            // Vector3 alongWall = Vector3.Cross(hit.normal, Vector3.up);
             float vertical = context.inputContext.movementInput.y;
             Vector3 alongWall = orientation.TransformDirection(Vector3.forward);
 
@@ -180,7 +186,14 @@ public class Wallrunning
             Debug.DrawRay(orientation.position, alongWall.normalized * 10, Color.green);
             Debug.DrawRay(orientation.position, lastWallNormal * 10, Color.magenta);
 
-            rb.velocity = wallForward * wallRunForce * vertical;
+            Debug.Log(incomingMagnitude);
+            float wallRunForceToAdd = wallRunForce;
+            if(incomingMagnitude > wallRunForce)
+            {
+                wallRunForceToAdd = incomingMagnitude;
+            }
+
+            rb.velocity = wallForward * wallRunForceToAdd * vertical;
             rb.AddForce(-wallNormal * 100.0f, ForceMode.Force);
             isWallRunning = true;
         }
