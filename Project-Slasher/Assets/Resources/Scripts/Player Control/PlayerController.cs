@@ -64,8 +64,9 @@ public class PlayerController : MonoBehaviour
 
     // For particles usage in each state.
     private GameObject particle;
+    
+    private GameObject speedParticle;
     private ParticleSystem ps;
-
     // Particle usage getters.
     public GameObject Particle
     {
