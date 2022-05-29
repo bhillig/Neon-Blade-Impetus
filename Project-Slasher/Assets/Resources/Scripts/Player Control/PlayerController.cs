@@ -35,12 +35,12 @@ public class PlayerController : MonoBehaviour
     private PlayerStateMachine combatStateMachine;
 
     // Player initialPosition for particle usage
-    private float initialHeight;
+    private float apexHeight;
 
-    public float InitialHeight
+    public float ApexHeight
     {
-        get => initialHeight;
-        set => initialHeight = value;
+        get => apexHeight;
+        set => apexHeight = value;
     }
 
     // Particle prefabs.
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     private GameObject smallLandParticle;
     [SerializeField]
     private GameObject jumpParticle;
-    
+
     // Particle getters.
     public GameObject RunParticle { get => runParticle; }
     public GameObject LargeLandParticle { get => largeLandParticle; }
