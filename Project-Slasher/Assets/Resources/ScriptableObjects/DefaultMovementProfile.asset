@@ -22,6 +22,8 @@ MonoBehaviour:
   baseAirAcceleration: 10
   airTurnSpeed: 0.1
   jumpGroundBlockDuration: 0.15
+  rollSpeed: 10
+  rollFallSpeedThreshhold: 15
   wallJumpUpHeight: 1.5
   wallJumpUpVel: 6.708204
   wallJumpSideVel: 10
@@ -71,7 +73,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   maxSnapAngle: 85
   snapProbeDistance: 1
-  maxAirRotationDot: 0.9
+  maxAirRotationDot: 0.95
   slideVelThreshhold: 5
   slideGravityBoost: 15
   slideSpeedBoostRatio: 1.45

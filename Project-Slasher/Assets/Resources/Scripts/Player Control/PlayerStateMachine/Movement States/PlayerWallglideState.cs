@@ -39,7 +39,6 @@ public class PlayerWallglideState : PlayerMovementState
     public override void UpdateState()
     {
         Context.wallRunning.DetectWalls();
-        Context.wallRunning.CheckDuration();
         float tilt = Context.wallRunning.PlayerRightDotWallNormal > 0 ? 1 : 0;
         Context.TPComponentController.SetShoulderOffset(tilt,2);
         Context.animationController.SetFloat("RunTilt",tilt);
