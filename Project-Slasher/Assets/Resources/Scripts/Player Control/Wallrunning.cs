@@ -30,6 +30,8 @@ public class Wallrunning
     private float normalizedAngleThreshold = 0.25f;
     private Vector3 lastWallPosition;
     private Vector3 lastWallNormal;
+    private float side;
+    public float Side => side;
 
     public Vector3 LastWallNormal => lastWallNormal;
 
@@ -46,6 +48,8 @@ public class Wallrunning
     }
 
     private Vector3 wallForward;
+    public Vector3 WallForward => wallForward;
+
     private Vector3 wallNormal;
     private bool useGravity = true;
     private float counterGravityForce = 11.0f;
@@ -69,8 +73,8 @@ public class Wallrunning
         whatisGround = LayerMask.GetMask("Terrain");
         whatisWall = LayerMask.GetMask("Terrain");
         directions = new Vector3[]{
-            Vector3.right,
-            Vector3.left
+            Vector3.right + Vector3.forward * 0.1f,
+            Vector3.left + Vector3.forward * 0.1f
         };
     }
 
@@ -181,13 +185,15 @@ public class Wallrunning
 
             wallNormal = hit.normal;
             wallForward = Vector3.Cross(hit.normal, Vector3.up);
+            side = 1;
             // Ensures the player wallruns in the direction according to their orientation
             if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
             {
+                side = -1;
                 wallForward = -wallForward;
             }
-            orientation.rotation = Quaternion.identity;
-            orientation.forward = wallForward;
+            /*orientation.rotation = Quaternion.identity;
+            orientation.forward = wallForward;*/
 
 
             Debug.DrawRay(orientation.position, alongWall.normalized * 10, Color.green);
@@ -199,7 +205,7 @@ public class Wallrunning
             }
 
             rb.velocity = wallForward * wallRunForceToAdd * vertical;
-            rb.AddForce(-wallNormal * 100.0f, ForceMode.Force);
+            rb.AddForce(-wallNormal * 50.0f, ForceMode.Force);
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             isWallRunning = true;
         }
@@ -231,7 +237,6 @@ public class Wallrunning
     {
         if (isWallRunning)
         {
-            Debug.Log(lastWallNormal);
             return lastWallNormal * sideVel + Vector3.up * upVel;
         }
         return Vector3.zero;

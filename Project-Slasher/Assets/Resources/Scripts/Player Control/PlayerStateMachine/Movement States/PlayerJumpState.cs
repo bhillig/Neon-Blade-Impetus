@@ -28,7 +28,7 @@ public class PlayerJumpState : PlayerAirborneState
         float flatVel = Context.playerRb.velocity.XZMag();
         if (flatVel < maxSpeed)
         {
-            maxSpeed = Mathf.Lerp(flatVel,maxSpeed, Context.movementProfile.AirbornePreservationRatio);
+            maxSpeed = Mathf.LerpUnclamped(flatVel,maxSpeed, Context.movementProfile.AirbornePreservationRatio);
         }
         else
         {

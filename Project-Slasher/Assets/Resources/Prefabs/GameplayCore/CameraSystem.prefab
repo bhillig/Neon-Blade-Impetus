@@ -87,7 +87,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601195886}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.05
   m_Height: 2
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.3, y: 0.5, z: 0.45}
-  ShoulderOffset: {x: 1.25, y: 0.6, z: 0}
+  ShoulderOffset: {x: 1.35, y: 0.6, z: 0}
   VerticalArmLength: 0
   CameraSide: 1
   CameraDistance: 2.5
@@ -346,7 +346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462526633342}
   m_LocalRotation: {x: 0.108679175, y: 0.74058884, z: -0.12356347, w: 0.65149766}
-  m_LocalPosition: {x: 3.642, y: 2.3899999, z: 5.95}
+  m_LocalPosition: {x: 3.742, y: 2.3899999, z: 5.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3537850461884283383}
@@ -436,7 +436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462879656041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.642, y: 2.3899999, z: 5.95}
+  m_LocalPosition: {x: 3.742, y: 2.3899999, z: 5.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1601195887}

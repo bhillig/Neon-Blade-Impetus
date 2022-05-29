@@ -34,7 +34,7 @@ public class PlayerRunState : PlayerGroundedState
         float flatVel = Vector3.ProjectOnPlane(Context.playerRb.velocity, Context.groundPhysicsContext.ContactNormal).magnitude;
         if(flatVel < maxSpeed)
         {
-            maxSpeed = Mathf.Lerp(flatVel, maxSpeed, Context.movementProfile.RunningPreservationRatio);
+            maxSpeed = Mathf.LerpUnclamped(flatVel, maxSpeed, Context.movementProfile.RunningPreservationRatio);
         }
         else
         {

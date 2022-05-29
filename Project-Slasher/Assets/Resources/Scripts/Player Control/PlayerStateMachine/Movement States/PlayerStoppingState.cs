@@ -51,7 +51,7 @@ public class PlayerStoppingState : PlayerGroundedState
         base.CheckSwitchState();
         if(Context.inputContext.movementInput != Vector2.zero)
             TrySwitchState(Factory.Run);
-        else if(Context.playerRb.velocity.magnitude < 0.2f)
+        else if(Context.playerRb.velocity.magnitude < 1f)
             TrySwitchState(Factory.Idle);
     }
 }

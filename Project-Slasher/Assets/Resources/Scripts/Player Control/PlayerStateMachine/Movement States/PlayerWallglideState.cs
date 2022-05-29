@@ -17,8 +17,10 @@ public class PlayerWallglideState : PlayerMovementState
         Context.animationController.SetBool("Wallrunning", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
 
-        Context.wallRunning.IncomingMagnitude = 
-            Vector3.ProjectOnPlane(Context.playerRb.velocity, Context.wallRunning.LastWallNormal).magnitude;
+        // particles
+        // Start particles.
+        Context.Particle = GameObject.Instantiate(Context.RunParticle, Context.transform, false);
+        Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
     }
 
     public override void ExitState()
@@ -28,8 +30,16 @@ public class PlayerWallglideState : PlayerMovementState
         Context.animationController.SetBool("Airborne", false);
         Context.animationController.SetBool("Wallrunning", false);
         Context.wallRunning.isWallRunning = false;
+        Context.StartCoroutine(CoroutExit());
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
-        Context.TPComponentController.RemoveKey(2);
+        Context.Ps.Stop();
+    }
+
+    private IEnumerator CoroutExit()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Context.TPComponentController.SetShoulderOffset(1);
+        Context.TPComponentController.SetLerpTimeMultiplier(3f);
     }
 
     public void OnSpacebarDown()
@@ -43,14 +53,21 @@ public class PlayerWallglideState : PlayerMovementState
     {
         Context.wallRunning.DetectWalls();
         float tilt = Context.wallRunning.PlayerRightDotWallNormal > 0 ? 1 : 0;
-        Context.TPComponentController.SetShoulderOffset(tilt,2);
+        if(tilt == 0)
+        {
+            Context.TPComponentController.SetLerpTimeMultiplier(1f);
+            Context.TPComponentController.SetShoulderOffset(tilt);
+        }
         Context.animationController.SetFloat("RunTilt",tilt);
         CheckSwitchState();
     }
 
     public override void FixedUpdateState()
     {
-
+        flatMove.LerpRotation(
+            Context.movementProfile.TurnSpeed*1.25f,
+            Context.wallRunning.WallForward,
+            Context.wallRunning.LastWallNormal * Context.wallRunning.Side);
     }
 
     public override void CheckSwitchState()
@@ -59,7 +76,7 @@ public class PlayerWallglideState : PlayerMovementState
         {
             // Running into an osbtacle while running will block you from wall running again for a longer duration
             if(Context.playerRb.velocity.magnitude < 5f)
-                Context.wallRunning.SetWallrunCooldown(0.4f);
+                Context.wallRunning.SetWallrunCooldown(0.45f);
             else
                 Context.wallRunning.SetWallrunCooldown(0.25f);
             TrySwitchState(Factory.Jump);

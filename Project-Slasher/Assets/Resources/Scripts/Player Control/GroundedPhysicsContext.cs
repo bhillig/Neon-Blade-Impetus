@@ -53,7 +53,7 @@ public class GroundedPhysicsContext : MonoBehaviour
             groundedCast.bounds.center, 
             groundedCast.radius, 
             -transform.up, 
-            0.03f, 
+            0.1f, 
             groundedMask));
 
         if (Physics.Raycast(
@@ -151,7 +151,7 @@ public class GroundedPhysicsContext : MonoBehaviour
             contactNormal = hit.normal;
             groundNormalDot = Vector3.Dot(contactNormal, Vector3.up);
             // Readjust velocity if doing so will redirect towards snap target
-            if(Vector3.Dot(contactNormal,vel) > 0f)
+            if (Vector3.Dot(contactNormal, vel) > 0f)
             {
                 vel = Vector3.ProjectOnPlane(vel,contactNormal).normalized * vel.magnitude;
                 rb.velocity = vel;
@@ -191,6 +191,12 @@ public class GroundedPhysicsContext : MonoBehaviour
     {
         return stepsGrounded > steps;
     }
+
+    public bool IsAirborneForSteps(int steps)
+    {
+        return stepsSinceLastGrounded > steps;
+    }
+
 
     public bool IsGroundedRaw()
     {
