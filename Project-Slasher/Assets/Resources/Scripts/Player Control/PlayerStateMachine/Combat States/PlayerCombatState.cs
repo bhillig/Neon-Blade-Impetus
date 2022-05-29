@@ -13,8 +13,13 @@ public abstract class PlayerCombatState : PlayerBaseState
     protected SphereCollider dashCollider;
 
     public override void UpdateState()
-    {
-        Context.primaryAttackCooldownTimer -= Time.deltaTime;
+    {       
+        if(Context.primaryAttackCooldownTimer > 0f)
+        {
+            Context.primaryAttackCooldownTimer -= Time.deltaTime;
+            if(Context.primaryAttackCooldownTimer < 0f)
+                Context.playerEvents.OnStrikeCooldownFinished?.Invoke();
+        }
         Context.combatTarget = SearchForTarget();
         CursorScript.instance.SetCursorState(Context.combatTarget == null ? CursorStates.Default : CursorStates.Enemy);
     }

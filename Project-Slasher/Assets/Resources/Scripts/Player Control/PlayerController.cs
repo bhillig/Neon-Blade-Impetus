@@ -5,20 +5,30 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     // Dependencies
-    public InputInfo inputContext;
-    public PlayerMovementProfile movementProfile;
-    public PlayerCombatProfile combatProfile;
-    public ThirdPersonCameraTargetController cameraControlContext;
-    public Animator animationController;
-    public GroundedPhysicsContext groundPhysicsContext;
-    public AirbornePhysicsContext airbornePhysicsContext;
+    [Header("Transforms")]
     public Transform playerPhysicsTransform;
     public Transform playerModelTransform;
     public Transform playerCenter;
-    public Rigidbody playerRb;
+    [Header("Camera")]
+    public Camera mainCam;
+    public ThirdPersonCameraTargetController TPTargetController;
+    public CinemachineTPFollowController TPComponentController;
+    [Header("Movement Scripts")]
+    public GroundedPhysicsContext groundPhysicsContext;
+    public AirbornePhysicsContext airbornePhysicsContext;
     public WallFinder wallFinder;
+    public Wallrunning wallRunning;
+    [Header("Physics Dependencies")]
     public ColliderSwitcher colliderSwitcher;
     public ColliderEvents colliderEvents;
+    public Rigidbody playerRb;
+    [Header("Scriptable Objects")]
+    public PlayerMovementProfile movementProfile;
+    public PlayerCombatProfile combatProfile;
+    [Header("Misc")]
+    public InputInfo inputContext;
+    public Animator animationController;
+
     public PlayerEventsAsset playerEvents;
     // State machine
     private PlayerStateMachine movementStateMachine;
@@ -74,6 +84,8 @@ public class PlayerController : MonoBehaviour
     {
         movementStateMachine = new PlayerMovementStateMachine(this);
         combatStateMachine = new PlayerCombatStateMachine(this);
+        wallRunning = new Wallrunning(this);
+        mainCam = Camera.main;
         forwardVector = Vector3.forward;
     }
 
