@@ -15,7 +15,7 @@ public class Wallrunning
     private float wallRunTimer = 2.0f;
 
     // Cooldown
-    private float wallRunCooldown = 0.1f;
+    private float wallRunCooldown;
     private float wallRunCooldownTime;
 
     // Detection variables
@@ -84,9 +84,10 @@ public class Wallrunning
         return isWallRunning;
     }
 
-    public void SetWallrunCooldown()
+    public void SetWallrunCooldown(float cooldown)
     {
         wallRunCooldownTime = Time.time;
+        wallRunCooldown = cooldown;
     }
 
     public void DetectWalls(bool performRun = true)
@@ -152,8 +153,9 @@ public class Wallrunning
     public bool CanWallRun()
     {
         float verticalAxis = context.inputContext.movementInput.y;
+        bool enoughSpeed = rb.velocity.magnitude > 1f;
         return Time.time - wallRunCooldownTime > wallRunCooldown &&
-                rb.velocity.magnitude > 1f && 
+                enoughSpeed && 
                 verticalAxis > 0.0f && 
                 AboveGround(minWallrunHeightFromGround);
     }
@@ -165,7 +167,7 @@ public class Wallrunning
         if (d >= -normalizedAngleThreshold && d <= normalizedAngleThreshold)
         {
             // Vector3 alongWall = Vector3.Cross(hit.normal, Vector3.up);
-            float vertical = context.inputContext.movementInput.y;
+            float vertical = 1;
             Vector3 alongWall = orientation.TransformDirection(Vector3.forward);
 
             wallNormal = hit.normal;
@@ -175,13 +177,16 @@ public class Wallrunning
             {
                 wallForward = -wallForward;
             }
+            orientation.rotation = Quaternion.identity;
             orientation.forward = wallForward;
+
 
             Debug.DrawRay(orientation.position, alongWall.normalized * 10, Color.green);
             Debug.DrawRay(orientation.position, lastWallNormal * 10, Color.magenta);
 
             rb.velocity = wallForward * wallRunForce * vertical;
             rb.AddForce(-wallNormal * 100.0f, ForceMode.Force);
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             isWallRunning = true;
         }
     }
@@ -212,6 +217,7 @@ public class Wallrunning
     {
         if (isWallRunning)
         {
+            Debug.Log(lastWallNormal);
             return lastWallNormal * sideVel + Vector3.up * upVel;
         }
         return Vector3.zero;

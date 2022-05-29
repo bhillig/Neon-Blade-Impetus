@@ -8198,6 +8198,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2023879515020833344}
     m_Modifications:
+    - target: {fileID: 8824805476735016512, guid: 2316cd7d09447824f978ac5f6e104cbc, type: 3}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824805476735016512, guid: 2316cd7d09447824f978ac5f6e104cbc, type: 3}
+      propertyPath: m_Center.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8824805477399916423, guid: 2316cd7d09447824f978ac5f6e104cbc, type: 3}
       propertyPath: m_Name
       value: Colliders

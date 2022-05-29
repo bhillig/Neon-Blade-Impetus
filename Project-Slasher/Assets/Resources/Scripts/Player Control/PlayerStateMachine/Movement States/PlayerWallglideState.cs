@@ -54,7 +54,11 @@ public class PlayerWallglideState : PlayerMovementState
     {
         if (!Context.wallRunning.IsWallRunning())
         {
-            Context.wallRunning.SetWallrunCooldown();
+            // Running into an osbtacle while running will block you from wall running again for a longer duration
+            if(Context.playerRb.velocity.magnitude < 3f)
+                Context.wallRunning.SetWallrunCooldown(0.4f);
+            else
+                Context.wallRunning.SetWallrunCooldown(0.25f);
             TrySwitchState(Factory.Jump);
             return;
         }
