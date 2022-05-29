@@ -7,10 +7,11 @@ public class PlayerLandingState : PlayerGroundedState
     public PlayerLandingState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) {}
 
     private float timer = 0.0f;
-    private float stateDuration = 0.70f;
+    private float stateDuration = 0.6f;
 
     public override void EnterState()
     {
+        base.EnterState();
         Context.animationController.SetBool("Landing", true);
         // Adjust roll velocity
         Vector3 roll = Context.playerRb.velocity;
@@ -22,12 +23,14 @@ public class PlayerLandingState : PlayerGroundedState
 
     public override void ExitState()
     {
+        base.ExitState();
         timer = 0.0f;
         Context.animationController.SetBool("Landing", false);
     }
 
     public override void UpdateState()
     {
+        base.UpdateState();
         CheckSwitchState();
     }
 

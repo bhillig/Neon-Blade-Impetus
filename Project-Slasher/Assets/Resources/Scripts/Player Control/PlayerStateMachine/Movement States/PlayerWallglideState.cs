@@ -17,7 +17,8 @@ public class PlayerWallglideState : PlayerMovementState
         Context.animationController.SetBool("Wallrunning", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
 
-        Context.wallRunning.IncomingMagnitude = Context.playerRb.velocity.XZMag();
+        Context.wallRunning.IncomingMagnitude = 
+            Vector3.ProjectOnPlane(Context.playerRb.velocity, Context.wallRunning.LastWallNormal).magnitude;
     }
 
     public override void ExitState()
@@ -57,7 +58,7 @@ public class PlayerWallglideState : PlayerMovementState
         if (!Context.wallRunning.IsWallRunning())
         {
             // Running into an osbtacle while running will block you from wall running again for a longer duration
-            if(Context.playerRb.velocity.magnitude < 3f)
+            if(Context.playerRb.velocity.magnitude < 5f)
                 Context.wallRunning.SetWallrunCooldown(0.4f);
             else
                 Context.wallRunning.SetWallrunCooldown(0.25f);

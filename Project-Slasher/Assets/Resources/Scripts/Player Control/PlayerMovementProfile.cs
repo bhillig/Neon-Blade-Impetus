@@ -9,6 +9,7 @@ public class PlayerMovementProfile : ScriptableObject
     [Header("Basic Movement")]
     [SerializeField] private float turnSpeed;
     [SerializeField] private float baseMoveSpeed;
+    [SerializeField] private float topMoveSpeed;
     [SerializeField] private float baseAcceleration;
     [SerializeField] private float baseFriction;
 
@@ -62,6 +63,7 @@ public class PlayerMovementProfile : ScriptableObject
     public float TurnSpeed => turnSpeed;
     public float AirTurnSpeed => airTurnSpeed;
     public float BaseMoveSpeed => baseMoveSpeed;
+    public float TopMoveSpeed => topMoveSpeed;
     public float BaseAcceleration => baseAcceleration;
     public float BaseAirAcceleration => baseAirAcceleration;
     public float BaseFriction => baseFriction;

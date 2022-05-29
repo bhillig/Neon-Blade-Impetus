@@ -30,6 +30,9 @@ public class Wallrunning
     private float normalizedAngleThreshold = 0.25f;
     private Vector3 lastWallPosition;
     private Vector3 lastWallNormal;
+
+    public Vector3 LastWallNormal => lastWallNormal;
+
     private bool jumping;
     private float timeSinceLastJumped;
     float elapsedTimeSinceWallAttach = 0;
@@ -189,8 +192,6 @@ public class Wallrunning
 
             Debug.DrawRay(orientation.position, alongWall.normalized * 10, Color.green);
             Debug.DrawRay(orientation.position, lastWallNormal * 10, Color.magenta);
-
-            Debug.Log(incomingMagnitude);
             float wallRunForceToAdd = wallRunForce;
             if(incomingMagnitude > wallRunForce)
             {

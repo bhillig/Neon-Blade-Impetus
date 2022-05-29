@@ -53,6 +53,9 @@
         },
         {
             "m_Id": "8b6a1477eef940958696e5a6fae45797"
+        },
+        {
+            "m_Id": "a9cb8a3306e544a48d556b8221d54caa"
         }
     ],
     "m_GroupDatas": [],
@@ -202,6 +205,9 @@
             },
             {
                 "m_Id": "b92b6fd293d943a5ae1c167899d7f3c6"
+            },
+            {
+                "m_Id": "a9cb8a3306e544a48d556b8221d54caa"
             }
         ]
     },
@@ -251,7 +257,7 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalUnlitSubTarget",
-    "m_ObjectId": "15eaf1a927a2476592a90f6b112d81ee"
+    "m_ObjectId": "16bc8133fdf449cab943354d8632d860"
 }
 
 {
@@ -372,6 +378,21 @@
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "4644c05101564dc59161ca354971caf3",
+    "m_Id": 0,
+    "m_DisplayName": "Smoothness",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Smoothness",
+    "m_StageCapability": 2,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.5,
     "m_Labels": []
 }
 
@@ -779,6 +800,39 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "a9cb8a3306e544a48d556b8221d54caa",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.Smoothness",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "4644c05101564dc59161ca354971caf3"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.Smoothness"
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "ab9edb2deee747319c02542118a28410",
     "m_Group": {
@@ -946,7 +1000,7 @@
     "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalTarget",
     "m_ObjectId": "c8e1a4dc1efc4e81b532e4e770950875",
     "m_ActiveSubTarget": {
-        "m_Id": "15eaf1a927a2476592a90f6b112d81ee"
+        "m_Id": "16bc8133fdf449cab943354d8632d860"
     },
     "m_SurfaceType": 0,
     "m_AlphaMode": 0,

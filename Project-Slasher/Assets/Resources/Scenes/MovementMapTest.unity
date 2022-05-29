@@ -28023,42 +28023,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1601195891, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: body
       value: 
       objectReference: {fileID: 5631728251675153085}
-    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
-      propertyPath: lensDistortCurve.m_Curve.Array.data[2].time
-      value: 0.7922639
-      objectReference: {fileID: 0}
-    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
-      propertyPath: lensDistortCurve.m_Curve.Array.data[3].time
-      value: 0.98989904
-      objectReference: {fileID: 0}
-    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
-      propertyPath: lensDistortCurve.m_Curve.Array.data[2].value
-      value: 0.13429798
-      objectReference: {fileID: 0}
-    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
-      propertyPath: lensDistortCurve.m_Curve.Array.data[3].value
-      value: 0.19643828
-      objectReference: {fileID: 0}
-    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
-      propertyPath: lensDistortCurve.m_Curve.Array.data[2].inSlope
-      value: 0.27650538
-      objectReference: {fileID: 0}
-    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
-      propertyPath: lensDistortCurve.m_Curve.Array.data[3].inSlope
-      value: 0.31441933
-      objectReference: {fileID: 0}
-    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
-      propertyPath: lensDistortCurve.m_Curve.Array.data[2].outSlope
-      value: 0.27650538
-      objectReference: {fileID: 0}
-    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
-      propertyPath: lensDistortCurve.m_Curve.Array.data[3].outSlope
-      value: 0.31441933
-      objectReference: {fileID: 0}
     - target: {fileID: 3537850462230069222, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: m_RootOrder
       value: 4

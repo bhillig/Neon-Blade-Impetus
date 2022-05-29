@@ -41,7 +41,7 @@ public class PlayerRunState : PlayerGroundedState
             maxSpeed = flatVel;
         }
         // Clamp to minimum speed
-        maxSpeed = Mathf.Max(maxSpeed,Context.movementProfile.BaseMoveSpeed);
+        maxSpeed = Mathf.Clamp(maxSpeed,Context.movementProfile.BaseMoveSpeed,Context.movementProfile.TopMoveSpeed);
     }
 
     public override void ExitState()

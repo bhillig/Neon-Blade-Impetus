@@ -55,6 +55,11 @@ public static class ExtensionMethods
         return new Vector2(vec.x, vec.z).magnitude;
     }
 
+    public static Vector3 XZVec(this Vector3 vec)
+    {
+        return new Vector3(vec.x, 0, vec.z);
+    }
+
     /// <summary>
     /// Rotate a transform towards the velocity of a rb
     /// </summary>
