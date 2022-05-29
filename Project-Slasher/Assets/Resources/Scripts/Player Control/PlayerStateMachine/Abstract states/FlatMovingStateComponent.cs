@@ -24,7 +24,7 @@ public class FlatMovingStateComponent
     {
         // Calculate desired velocity
         movementInput = context.inputContext.movementInput.normalized;
-        Vector3 rotatedInput = context.cameraControlContext.RotateAroundCameraY(movementInput.ToXZPlane());
+        Vector3 rotatedInput = context.TPTargetController.RotateAroundCameraY(movementInput.ToXZPlane());
         return maxSpeed * rotatedInput;
     }
 
@@ -44,7 +44,7 @@ public class FlatMovingStateComponent
     public void UpdateFlatForwardVector(Vector2 input)
     {
         context.forwardVector =
-            Quaternion.AngleAxis(-input.Angle() + context.cameraControlContext.rotation.eulerAngles.y + 90, Vector3.up)
+            Quaternion.AngleAxis(-input.Angle() + context.TPTargetController.rotation.eulerAngles.y + 90, Vector3.up)
             * Vector3.forward;
     }
     

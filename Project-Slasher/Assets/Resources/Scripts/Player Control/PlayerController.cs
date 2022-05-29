@@ -5,26 +5,75 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     // Dependencies
-    public InputInfo inputContext;
-    public PlayerMovementProfile movementProfile;
-    public PlayerCombatProfile combatProfile;
-    public ThirdPersonCameraTargetController cameraControlContext;
-    public Animator animationController;
-    public GroundedPhysicsContext groundPhysicsContext;
-    public AirbornePhysicsContext airbornePhysicsContext;
+    [Header("Transforms")]
     public Transform playerPhysicsTransform;
     public Transform playerModelTransform;
     public Transform playerCenter;
-    public Rigidbody playerRb;
+    [Header("Camera")]
+    public Camera mainCam;
+    public ThirdPersonCameraTargetController TPTargetController;
+    public CinemachineTPFollowController TPComponentController;
+    [Header("Movement Scripts")]
+    public GroundedPhysicsContext groundPhysicsContext;
+    public AirbornePhysicsContext airbornePhysicsContext;
     public WallFinder wallFinder;
+    public Wallrunning wallRunning;
+    [Header("Physics Dependencies")]
     public ColliderSwitcher colliderSwitcher;
     public ColliderEvents colliderEvents;
+    public Rigidbody playerRb;
+    [Header("Scriptable Objects")]
+    public PlayerMovementProfile movementProfile;
+    public PlayerCombatProfile combatProfile;
+    [Header("Misc")]
+    public InputInfo inputContext;
+    public Animator animationController;
+
     public PlayerEventsAsset playerEvents;
     // State machine
     private PlayerStateMachine movementStateMachine;
     private PlayerStateMachine combatStateMachine;
 
+    // Player initialPosition for particle usage
+    private float initialHeight;
 
+    public float InitialHeight
+    {
+        get => initialHeight;
+        set => initialHeight = value;
+    }
+
+    // Particle prefabs.
+    [SerializeField]
+    private GameObject runParticle;
+    [SerializeField]
+    private GameObject largeLandParticle;
+    [SerializeField]
+    private GameObject slideParticle;
+    [SerializeField]
+    private GameObject smallLandParticle;
+
+    // Particle getters.
+    public GameObject RunParticle { get => runParticle; }
+    public GameObject LargeLandParticle { get => largeLandParticle; }
+    public GameObject SlideParticle { get => slideParticle; }
+    public GameObject SmallLandParticle { get => smallLandParticle; }
+    // For particles usage in each state.
+    private GameObject particle;
+    private ParticleSystem ps;
+
+    // Particle usage getters.
+
+    public GameObject Particle
+    {
+        get => particle;
+        set => particle = value;
+    }
+    public ParticleSystem Ps
+    {
+        get => ps;
+        set => ps = value;
+    }
     // Some context scope values
     [HideInInspector] public Vector3 forwardVector;
     [HideInInspector] public float slideCooldownTimer;
@@ -35,6 +84,8 @@ public class PlayerController : MonoBehaviour
     {
         movementStateMachine = new PlayerMovementStateMachine(this);
         combatStateMachine = new PlayerCombatStateMachine(this);
+        wallRunning = new Wallrunning(this);
+        mainCam = Camera.main;
         forwardVector = Vector3.forward;
     }
 

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class PlayerAirborneState : PlayerMovementState
 {
-    Wallrunning wallrunning;
-
     public PlayerAirborneState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
     {
          
@@ -14,24 +12,42 @@ public abstract class PlayerAirborneState : PlayerMovementState
     public override void EnterState()
     {
         base.EnterState();
+
+        // Store initial height of the player.
+        Context.InitialHeight = Context.transform.position.y;
+
         Context.animationController.SetBool("Airborne", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
-        wallrunning = new Wallrunning(Context);
     }
 
     public override void ExitState()
-    {
+    {   
         base.ExitState();
+
+        // If the fall is geater than a certain initial, create large land particle.
+        if(Context.transform.position.y < Context.InitialHeight - 7.0f)
+        {
+            // Start particles.
+            Context.Particle = GameObject.Instantiate(Context.LargeLandParticle, Context.transform, false);
+            //Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
+        }
+        else if(Context.transform.position.y < Context.InitialHeight - 2.0f)
+        {
+            // Small Land particle
+            Context.Particle = GameObject.Instantiate(Context.SmallLandParticle, Context.transform, false);
+            //Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
+        }
+
         Context.animationController.SetBool("Airborne", false);
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
     }
 
     public void OnSpacebarDown()
     {
-        if(Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd) != null)
+/*        if(Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd) != null)
         {
             TrySwitchState(Factory.Wallglide);
-        }
+        }*/
     }
 
     public override void UpdateState()
@@ -42,8 +58,8 @@ public abstract class PlayerAirborneState : PlayerMovementState
     public override void CheckSwitchState()
     {
         // wallrun check
-        wallrunning.DetectWalls();
-        if (wallrunning.ShouldWallRun())
+        Context.wallRunning.DetectWalls(false);
+        if (Context.wallRunning.ShouldWallRun(Context.mainCam.transform.forward) && Context.groundPhysicsContext.GroundedBlockTimer <= 0f)
         {
             TrySwitchState(Factory.Wallglide);
         }

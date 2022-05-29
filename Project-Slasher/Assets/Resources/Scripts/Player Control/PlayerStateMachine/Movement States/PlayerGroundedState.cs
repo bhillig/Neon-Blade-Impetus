@@ -11,6 +11,7 @@ public abstract class PlayerGroundedState : PlayerMovementState
     public override void EnterState()
     {
         base.EnterState();
+
         Context.inputContext.JumpDownEvent.AddListener(Jump);
         Context.inputContext.SlideDownEvent.AddListener(Shift);
     }
@@ -34,7 +35,7 @@ public abstract class PlayerGroundedState : PlayerMovementState
             Vector3 jumpVec = Context.groundPhysicsContext.ContactNormal * Context.movementProfile.JumpVelocity;
             vel += jumpVec;
             Context.playerRb.velocity = vel;
-            Context.groundPhysicsContext.GroundedBlockTimer = 0.25f;
+            Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
         }
     }
 

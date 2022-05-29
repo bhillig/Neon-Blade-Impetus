@@ -6,18 +6,24 @@ public class StrikeVFXManager : MonoBehaviour
 {
     public PlayerEventsAsset playerEvents;
     public GameObject sword;
-    public GameObject scabbard;
+    public MeshRenderer scabbard;
     public GameObject scabbardSword;
     public ParticleSystem dryDashParticles;
     public ParticleSystem targettedDashParticles;
     public ParticleSystem dashTrailParticles;
+    public ParticleSystem chargeParticles;
+    public ParticleSystem chargeReadyParticles;
+    public ParticleSystem cooldownFinishedParticles;
+    public ParticleSystem overchargedParticles;
     public SkinnedMeshRenderer coat;
 
     [Header("Values")]
     public float endDelay;
-    public Material defaultMat;
+    public Material scabbardDefaultGlow;
     public Material chargeStrikeMat;
     public Material defaultCoatMat;
+
+    public Material scabbardCooldownMat;
 
     private void Awake()
     {
@@ -25,7 +31,34 @@ public class StrikeVFXManager : MonoBehaviour
         playerEvents.OnStrikeEnd += StrikeEnd;
         playerEvents.OnStrikeChargeReady += ChargeReady;
         playerEvents.OnStrikeChargeEnd += ChargeEnd;
+        playerEvents.OnStrikeChargeStart += ChargeStart;
+        playerEvents.OnStrikeOvercharged += Overcharged;
+        playerEvents.OnStrikeCooldownFinished += CooldownFinished;
+        playerEvents.OnStrikeCooldownStarted += CooldownStarted;
         sword.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    private void OnDestroy()
+    {
+        playerEvents.OnStrikeStart -= StrikePerformed;
+        playerEvents.OnStrikeEnd -= StrikeEnd;
+        playerEvents.OnStrikeChargeReady -= ChargeReady;
+        playerEvents.OnStrikeChargeEnd -= ChargeEnd;
+        playerEvents.OnStrikeChargeStart -= ChargeStart;
+        playerEvents.OnStrikeOvercharged -= Overcharged;
+        playerEvents.OnStrikeCooldownFinished -= CooldownFinished;
+        playerEvents.OnStrikeCooldownStarted -= CooldownStarted;
+    }
+
+    private void CooldownFinished()
+    {
+        cooldownFinishedParticles.Play();
+        scabbard.material = scabbardDefaultGlow;
+    }
+
+    private void CooldownStarted()
+    {
+        scabbard.material = scabbardCooldownMat;
     }
 
     private void StrikePerformed(Collider target)
@@ -52,23 +85,35 @@ public class StrikeVFXManager : MonoBehaviour
         DashReadyVisuals();
     }
 
+    private void ChargeStart()
+    {
+        chargeParticles.Play();
+    }
+
+    private void Overcharged()
+    {
+        overchargedParticles.Play();
+    }    
+
     private void ChargeEnd(bool dash)
     {
-        if(!dash)
+        chargeParticles.Stop();
+        if (!dash)
             DefaultVisuals();
     }
 
     private void DashReadyVisuals()
     {
-        scabbard.GetComponent<MeshRenderer>().material = chargeStrikeMat;
+        scabbard.material = chargeStrikeMat;
         var mats = coat.materials;
         mats[0] = chargeStrikeMat;
         coat.materials = mats;
+        chargeReadyParticles.Play();
     }
 
     private void DefaultVisuals()
     {
-        scabbard.GetComponent<MeshRenderer>().material = defaultMat;
+        scabbard.material = scabbardDefaultGlow;
         var mats = coat.materials;
         mats[0] = defaultCoatMat;
         coat.materials = mats;
@@ -76,6 +121,7 @@ public class StrikeVFXManager : MonoBehaviour
 
     private void StrikeEnd()
     {
+        DefaultVisuals();
         StartCoroutine(CoroutStrikeEnd());
     }
 
@@ -83,7 +129,6 @@ public class StrikeVFXManager : MonoBehaviour
     {
         dashTrailParticles.Stop();
         yield return new WaitForSeconds(endDelay);
-        DefaultVisuals();
         scabbardSword.SetActive(true);
         sword.GetComponent<MeshRenderer>().enabled = false;
     }
@@ -91,11 +136,5 @@ public class StrikeVFXManager : MonoBehaviour
     private void DryDash()
     {
         dryDashParticles.Play();
-    }
-
-    private void OnDestroy()
-    {
-        playerEvents.OnStrikeStart -= StrikePerformed;
-        playerEvents.OnStrikeEnd -= StrikeEnd;
     }
 }
