@@ -57,7 +57,7 @@ public class PlayerJumpState : PlayerAirborneState
             flatMove.SimpleMovement(desiredVelocity,maxSpeedChange);
         }
         // Rotation
-        // Only rotates to a threshhold for aesthetic reasons
+        // Only rotates X/Z to a threshhold
         if (Context.inputContext.movementInput != Vector2.zero)
             flatMove.UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);      
         if(Vector3.Dot(Context.playerPhysicsTransform.up,Vector3.up) <= Context.movementProfile.MinAirRotationDot)
