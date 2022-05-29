@@ -20,6 +20,7 @@ public class PlayerWallglideState : PlayerMovementState
         // particles
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.RunParticle, Context.transform, false);
+        Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
     }
 
     public override void ExitState()
@@ -31,6 +32,7 @@ public class PlayerWallglideState : PlayerMovementState
         Context.wallRunning.isWallRunning = false;
         Context.StartCoroutine(CoroutExit());
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
+        Context.Ps.Stop();
     }
 
     private IEnumerator CoroutExit()

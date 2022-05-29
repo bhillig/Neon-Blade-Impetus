@@ -64,12 +64,21 @@ public class PlayerController : MonoBehaviour
 
     // For particles usage in each state.
     private GameObject particle;
+    private ParticleSystem ps;
     
+    // Particle for speed of player.
+    private GameObject speedParticle;
+
     // Particle usage getters.
     public GameObject Particle
     {
         get => particle;
         set => particle = value;
+    }
+    public ParticleSystem Ps
+    {
+        get => ps;
+        set => ps = value;
     }
     // Some context scope values
     [HideInInspector] public Vector3 forwardVector;

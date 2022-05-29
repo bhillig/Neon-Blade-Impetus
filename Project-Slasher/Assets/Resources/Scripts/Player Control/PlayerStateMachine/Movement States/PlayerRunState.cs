@@ -18,6 +18,7 @@ public class PlayerRunState : PlayerGroundedState
 
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.RunParticle, Context.transform, false);
+        Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
 
         // Grab some values from movementProfile
         acceleration = Context.movementProfile.BaseAcceleration;
@@ -47,6 +48,10 @@ public class PlayerRunState : PlayerGroundedState
     {
         base.ExitState();
         Context.animationController.SetBool("Running", false);
+
+        // Stop Particles
+        // They will be deleted from their own scrips after 1 second of stopped.
+        Context.Ps.Stop();
     }
 
     public override void UpdateState()
