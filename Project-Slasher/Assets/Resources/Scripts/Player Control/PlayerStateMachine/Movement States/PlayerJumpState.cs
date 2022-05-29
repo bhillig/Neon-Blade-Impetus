@@ -19,6 +19,12 @@ public class PlayerJumpState : PlayerAirborneState
         acceleration = Context.movementProfile.BaseAirAcceleration;
         maxSpeedChange = acceleration * Time.fixedDeltaTime;
 
+        
+        // Start particles.
+        Context.Particle = GameObject.Instantiate(Context.JumpParticle, Context.transform, false);
+        Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
+
+
         // If going faster than movement profile's speed when entering state, then that becomes the new max speed
         UpdateTopSpeed();
     }

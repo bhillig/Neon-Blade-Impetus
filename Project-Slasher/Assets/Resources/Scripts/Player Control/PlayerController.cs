@@ -52,18 +52,21 @@ public class PlayerController : MonoBehaviour
     private GameObject slideParticle;
     [SerializeField]
     private GameObject smallLandParticle;
-
+    [SerializeField]
+    private GameObject jumpParticle;
+    
     // Particle getters.
     public GameObject RunParticle { get => runParticle; }
     public GameObject LargeLandParticle { get => largeLandParticle; }
     public GameObject SlideParticle { get => slideParticle; }
     public GameObject SmallLandParticle { get => smallLandParticle; }
+    public GameObject JumpParticle { get => jumpParticle; }
+
     // For particles usage in each state.
     private GameObject particle;
     private ParticleSystem ps;
 
     // Particle usage getters.
-
     public GameObject Particle
     {
         get => particle;
