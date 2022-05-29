@@ -70,29 +70,6 @@ public class Wallrunning
         return !Physics.Raycast(orientation.position, Vector3.down, dist, whatisGround);
     }
 
-    public void StartWallRun()
-    {
-        isWallRunning = true;
-        rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
-    }
-
-
-    public void StopWallRun()
-    {
-        isWallRunning = false;
-        rb.velocity -= wallForward * wallRunForce * Time.deltaTime;
-    }
-
-    public void CheckDuration()
-    {
-        wallRunTimer += Time.deltaTime;
-        if(wallRunTimer >= maxWallRunTime)
-        {
-            wallRunTimer = 0.0f;
-            StopWallRun();
-        }
-    }
-
     public void JumpFromWall(float sideVel, float upVel)
     {
         jumping = true;

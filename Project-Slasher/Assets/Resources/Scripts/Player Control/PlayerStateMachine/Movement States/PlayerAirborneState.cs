@@ -64,6 +64,12 @@ public abstract class PlayerAirborneState : PlayerMovementState
             TrySwitchState(Factory.Wallglide);
         }
 
+        if(!Context.wallRunning.AboveGround(1.0f))
+        {
+            if (Context.playerRb.velocity.y <= -20.0f)
+                TrySwitchState(Factory.Landing);
+        }
+
         //Grounded check
         if (Context.groundPhysicsContext.IsGrounded())
         {
