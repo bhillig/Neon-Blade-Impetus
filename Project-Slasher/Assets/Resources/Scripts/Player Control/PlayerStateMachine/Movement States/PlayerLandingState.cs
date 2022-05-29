@@ -11,14 +11,18 @@ public class PlayerLandingState : PlayerGroundedState
 
     public override void EnterState()
     {
-        Debug.Log("landed");
         Context.animationController.SetBool("Landing", true);
+        // Adjust roll velocity
+        Vector3 roll = Context.playerRb.velocity;
+        Vector3 planeVel = Vector3.ProjectOnPlane(roll, Context.groundPhysicsContext.RawGroundNormal);
+        float speed = planeVel.magnitude;
+        Context.playerRb.velocity = Context.forwardVector.normalized *
+            Mathf.Max(speed, Context.movementProfile.RollSpeed);
     }
 
     public override void ExitState()
     {
         timer = 0.0f;
-        Debug.Log("no longer landed");
         Context.animationController.SetBool("Landing", false);
     }
 
