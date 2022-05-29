@@ -22,6 +22,11 @@ public class PlayerMovementProfile : ScriptableObject
     [SerializeField] private float jumpGroundBlockDuration;
 
     [Space(10)]
+    [Header("Landing Roll")]
+    [SerializeField] private float rollSpeed;
+    [SerializeField] private float rollFallSpeedThreshhold;
+
+    [Space(10)]
     [Header("Wallrun and Walljump")]
     [SerializeField] private float wallJumpUpHeight;
     [SerializeField] private float wallJumpUpVel;
@@ -59,6 +64,8 @@ public class PlayerMovementProfile : ScriptableObject
     public float JumpVelocity => jumpVelocity;
     public float JumpHeight => jumpHeight;
     public float JumpGroundBlockDuration => jumpGroundBlockDuration;
+    public float RollSpeed => rollSpeed;
+    public float RollFallSpeedThreshhold => rollFallSpeedThreshhold;
     public float WallJumpSideVel => wallJumpSideVel;
     public float WallJumpUpVel => wallJumpUpVel;
 
