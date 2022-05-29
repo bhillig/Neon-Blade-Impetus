@@ -34,7 +34,7 @@ public class CinemachineTPFollowController : MonoBehaviour
             cameraSideTarget = targets.Values.Last();
         else
             cameraSideTarget = 1;
-        Debug.Log(cameraSideTarget);
+        //Debug.Log(cameraSideTarget);
         var tpFollow = cam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
         float current = tpFollow.CameraSide;
         tpFollow.CameraSide = Mathf.Lerp(current, cameraSideTarget, cameraSideLerpFactor * Time.fixedDeltaTime);   

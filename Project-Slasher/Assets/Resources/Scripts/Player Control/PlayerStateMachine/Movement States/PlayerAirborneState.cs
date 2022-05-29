@@ -44,10 +44,10 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
     public void OnSpacebarDown()
     {
-        if(Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd) != null)
+/*        if(Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd) != null)
         {
             TrySwitchState(Factory.Wallglide);
-        }
+        }*/
     }
 
     public override void UpdateState()

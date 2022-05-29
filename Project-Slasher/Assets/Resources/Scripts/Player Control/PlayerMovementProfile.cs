@@ -81,6 +81,16 @@ public class PlayerMovementProfile : ScriptableObject
 
     private void OnValidate()
     {
+        UpdateCalculatedValues();
+    }
+
+    private void OnEnable()
+    {
+        UpdateCalculatedValues();
+    }
+
+    private void UpdateCalculatedValues()
+    {
         // Calculate jump velocity based on jump height
         jumpVelocity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
         wallJumpUpVel = Mathf.Sqrt(-2f * Physics.gravity.y * wallJumpUpHeight);
