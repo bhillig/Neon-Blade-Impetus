@@ -25,6 +25,8 @@ public class HeadAIMovement : MonoBehaviour
 
     [SerializeField] private float lookSpeed;
 
+    [SerializeField] private float targetHeightOffset;
+
     [SerializeField] GameObject bullet;
 
     private float alertTimer;
@@ -95,7 +97,10 @@ public class HeadAIMovement : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bullet, barrel.transform.position, Quaternion.identity);
+        var newBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
+        var controller = newBullet.GetComponent<BulletController>();
+        controller.SetTarget(player);
+        controller.SetTargetHeightOffset(targetHeightOffset);
     }
 
     void TurnLockOn()

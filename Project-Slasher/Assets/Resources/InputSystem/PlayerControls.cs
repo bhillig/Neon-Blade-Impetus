@@ -71,6 +71,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""fed63b16-a7f0-42b8-a946-5f0eb39196ca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -227,6 +236,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""PrimaryAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bab10ab8-f3d1-4d9a-b252-4e01f8b939a1"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -240,6 +260,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_Jump = m_PlayerMovement.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMovement_Slide = m_PlayerMovement.FindAction("Slide", throwIfNotFound: true);
         m_PlayerMovement_PrimaryAttack = m_PlayerMovement.FindAction("PrimaryAttack", throwIfNotFound: true);
+        m_PlayerMovement_Restart = m_PlayerMovement.FindAction("Restart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -304,6 +325,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Jump;
     private readonly InputAction m_PlayerMovement_Slide;
     private readonly InputAction m_PlayerMovement_PrimaryAttack;
+    private readonly InputAction m_PlayerMovement_Restart;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -313,6 +335,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerMovement_Jump;
         public InputAction @Slide => m_Wrapper.m_PlayerMovement_Slide;
         public InputAction @PrimaryAttack => m_Wrapper.m_PlayerMovement_PrimaryAttack;
+        public InputAction @Restart => m_Wrapper.m_PlayerMovement_Restart;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -337,6 +360,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @PrimaryAttack.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPrimaryAttack;
                 @PrimaryAttack.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPrimaryAttack;
                 @PrimaryAttack.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPrimaryAttack;
+                @Restart.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnRestart;
+                @Restart.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnRestart;
+                @Restart.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnRestart;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -356,6 +382,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @PrimaryAttack.started += instance.OnPrimaryAttack;
                 @PrimaryAttack.performed += instance.OnPrimaryAttack;
                 @PrimaryAttack.canceled += instance.OnPrimaryAttack;
+                @Restart.started += instance.OnRestart;
+                @Restart.performed += instance.OnRestart;
+                @Restart.canceled += instance.OnRestart;
             }
         }
     }
@@ -367,5 +396,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
         void OnPrimaryAttack(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
 }

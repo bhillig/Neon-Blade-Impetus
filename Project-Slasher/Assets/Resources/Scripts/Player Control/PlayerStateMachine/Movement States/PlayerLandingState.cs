@@ -17,7 +17,9 @@ public class PlayerLandingState : PlayerGroundedState
         Vector3 roll = Context.playerRb.velocity;
         Vector3 planeVel = Vector3.ProjectOnPlane(roll, Context.groundPhysicsContext.RawGroundNormal);
         float speed = planeVel.magnitude;
-        Context.playerRb.velocity = Context.forwardVector.normalized *
+        Context.playerRb.velocity = 
+            Vector3.up * roll.y + 
+            Context.forwardVector.normalized *
             Mathf.Max(speed, Context.movementProfile.RollSpeed);
     }
 
@@ -34,11 +36,6 @@ public class PlayerLandingState : PlayerGroundedState
         CheckSwitchState();
     }
 
-    protected override void Jump()
-    {
-        // NO JUMPIN WHILE ROLLIN
-    }
-
     public override void CheckSwitchState()
     {
         timer += Time.deltaTime;
@@ -48,5 +45,9 @@ public class PlayerLandingState : PlayerGroundedState
             TrySwitchState(Factory.GroundedSwitch);
         }
 
+    }
+    protected override void Jump()
+    {
+        // NO JUMPIN WHILE ROLLIN
     }
 }

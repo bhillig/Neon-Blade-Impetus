@@ -17,4 +17,6 @@ public class InputInfo : ScriptableObject
     public UnityEvent PrimaryDownEvent;
     public UnityEvent PrimaryUpEvent;
     public bool primaryDown;
+
+    public UnityEvent RestartDownEvent;
 }

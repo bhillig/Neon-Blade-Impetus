@@ -33,7 +33,6 @@ public class PlayerIdleState : PlayerGroundedState
         flatMove.LerpRotation(Context.movementProfile.TurnSpeed);
     }
 
-
     public override void CheckSwitchState()
     {
         base.CheckSwitchState();

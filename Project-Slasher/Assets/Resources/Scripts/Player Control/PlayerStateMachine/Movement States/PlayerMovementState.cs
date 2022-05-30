@@ -14,28 +14,33 @@ public abstract class PlayerMovementState : PlayerBaseState
     public override void EnterState()
     {
         Context.playerEvents.OnStrikeStart += PerformStrikeDash;
+        Context.playerEvents.OnCollideWithProjectile += PlayerKilled;
     }
 
     public override void ExitState()
     {
         Context.playerEvents.OnStrikeStart -= PerformStrikeDash;
-    }
-
-    protected virtual void PerformStrikeDash(Collider strikeHasTarget)
-    {
-        if(strikeHasTarget != null)
-        {
-            TrySwitchState(Factory.HitStrikeDash);
-        }
-        else
-        {
-            Debug.Log("E");
-            TrySwitchState(Factory.DryStrikeDash);
-        }
+        Context.playerEvents.OnCollideWithProjectile -= PlayerKilled;
     }
 
     public override void UpdateState()
     {
         Context.slideCooldownTimer -= Time.deltaTime;
+    }
+    protected virtual void PerformStrikeDash(Collider strikeHasTarget)
+    {
+        if (strikeHasTarget != null)
+        {
+            TrySwitchState(Factory.HitStrikeDash);
+        }
+        else
+        {
+            TrySwitchState(Factory.DryStrikeDash);
+        }
+    }
+
+    protected virtual void PlayerKilled()
+    {
+        TrySwitchState(Factory.Dead);
     }
 }

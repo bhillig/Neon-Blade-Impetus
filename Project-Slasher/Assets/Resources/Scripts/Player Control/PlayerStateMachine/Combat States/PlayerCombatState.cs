@@ -9,8 +9,17 @@ public abstract class PlayerCombatState : PlayerBaseState
         dashCollider = (SphereCollider)Context.colliderSwitcher.GetCollider(2);
     }
 
-
     protected SphereCollider dashCollider;
+
+    public override void EnterState()
+    {
+        Context.playerEvents.OnCollideWithProjectile += PlayerCombatKilled;
+    }
+
+    public override void ExitState()
+    {
+        Context.playerEvents.OnCollideWithProjectile -= PlayerCombatKilled;
+    }
 
     public override void UpdateState()
     {       
@@ -55,5 +64,9 @@ public abstract class PlayerCombatState : PlayerBaseState
             }
         }
         return null;
+    }
+    protected virtual void PlayerCombatKilled()
+    {
+        TrySwitchState(Factory.CombatDead);
     }
 }

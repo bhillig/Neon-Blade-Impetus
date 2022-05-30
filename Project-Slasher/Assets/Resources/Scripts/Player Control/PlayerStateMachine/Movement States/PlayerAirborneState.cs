@@ -4,10 +4,7 @@ using UnityEngine;
 
 public abstract class PlayerAirborneState : PlayerMovementState
 {
-    public PlayerAirborneState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
-    {
-         
-    }
+    public PlayerAirborneState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) { }
 
     public override void EnterState()
     {
@@ -17,48 +14,21 @@ public abstract class PlayerAirborneState : PlayerMovementState
         Context.ApexHeight = Context.transform.position.y;
         Context.colliderSwitcher.SwitchToCollider(3);
         Context.animationController.SetBool("Airborne", true);
-        Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
     }
 
     public override void ExitState()
     {   
         base.ExitState();
         Context.colliderSwitcher.SwitchToCollider(0);
-
         Context.animationController.SetBool("Airborne", false);
-        Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
-    }
-
-    public void OnSpacebarDown()
-    {
-/*        if(Context.wallFinder.SearchForWall(Context.movementProfile.MinGroundedDotProd) != null)
-        {
-            TrySwitchState(Factory.Wallglide);
-        }*/
     }
 
     public override void UpdateState()
     {
-        // Check to highest point of player when in the air.
-        if(Context.transform.position.y > Context.ApexHeight)
-            Context.ApexHeight = Context.transform.position.y;
-
         base.UpdateState();
-    }
-
-    private void LandingParticles()
-    {
-        // If the fall is geater than a certain initial, create large land particle.
-        if (Context.transform.position.y < Context.ApexHeight - 7.0f)
-        {
-            // Start particles.
-            Context.Particle = GameObject.Instantiate(Context.LargeLandParticle, Context.transform, false);
-        }
-        else if (Context.transform.position.y < Context.ApexHeight - 2.0f)
-        {
-            // Small Land particle
-            Context.Particle = GameObject.Instantiate(Context.SmallLandParticle, Context.transform, false);
-        }
+        // Check to highest point of player when in the air.
+        if (Context.transform.position.y > Context.ApexHeight)
+            Context.ApexHeight = Context.transform.position.y;
     }
 
     public override void CheckSwitchState()
@@ -93,6 +63,20 @@ public abstract class PlayerAirborneState : PlayerMovementState
             }
             LandingParticles();
             TrySwitchState(Factory.GroundedSwitch);
+        }
+    }
+    private void LandingParticles()
+    {
+        // If the fall is geater than a certain initial, create large land particle.
+        if (Context.transform.position.y < Context.ApexHeight - 7.0f)
+        {
+            // Start particles.
+            Context.Particle = GameObject.Instantiate(Context.LargeLandParticle, Context.transform, false);
+        }
+        else if (Context.transform.position.y < Context.ApexHeight - 2.0f)
+        {
+            // Small Land particle
+            Context.Particle = GameObject.Instantiate(Context.SmallLandParticle, Context.transform, false);
         }
     }
 }

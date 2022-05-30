@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class PlayerWallglideState : PlayerMovementState
 {
-    public PlayerWallglideState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
-    {
-        
-    }
+    public PlayerWallglideState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) { }
 
     public override void EnterState()
     {
@@ -33,20 +30,6 @@ public class PlayerWallglideState : PlayerMovementState
         Context.StartCoroutine(CoroutExit());
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
         Context.Ps.Stop();
-    }
-
-    private IEnumerator CoroutExit()
-    {
-        yield return new WaitForSeconds(0.2f);
-        Context.TPComponentController.SetShoulderOffset(1);
-        Context.TPComponentController.SetLerpTimeMultiplier(3f);
-    }
-
-    public void OnSpacebarDown()
-    {
-        Context.wallRunning.JumpFromWall(Context.movementProfile.WallJumpSideVel, Context.movementProfile.WallJumpUpVel);
-        Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
-        TrySwitchState(Factory.Jump);
     }
 
     public override void UpdateState()
@@ -88,5 +71,18 @@ public class PlayerWallglideState : PlayerMovementState
         {
             TrySwitchState(Factory.Idle);
         }
+    }
+    public void OnSpacebarDown()
+    {
+        Context.wallRunning.JumpFromWall(Context.movementProfile.WallJumpSideVel, Context.movementProfile.WallJumpUpVel);
+        Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
+        TrySwitchState(Factory.Jump);
+    }
+
+    private IEnumerator CoroutExit()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Context.TPComponentController.SetShoulderOffset(1);
+        Context.TPComponentController.SetLerpTimeMultiplier(3f);
     }
 }
