@@ -32,11 +32,11 @@ public class CameraCollisionPanning : MonoBehaviour
         bool leftHit = lefthits.Length > 0;
         bool rightHit = righthits.Length > 0;
 
-        if(leftHit)
+/*        if(leftHit)
             TPFollowController.SetShoulderOffset(1f,-1);
         else if(rightHit)
             TPFollowController.SetShoulderOffset(leftPan,1);
         else
-            TPFollowController.SetShoulderOffset(1f,1);
+            TPFollowController.SetShoulderOffset(1f,1);*/
     }
 }

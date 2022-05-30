@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DefaultCombatProfile
   m_EditorClassIdentifier: 
   chargeTime: 0.75
-  holdTime: 0.55
+  holdTime: 0.65
   cooldown: 1.5
-  castRadius: 1
+  castRadius: 1.25
   castDistance: 10
   hitMask:
     serializedVersion: 2
@@ -24,8 +24,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483648
   hitVelocity: 35
-  hitBoostVelocity: 2
+  hitBoostVelocity: 4
   hitDashPierceDistance: 2
-  dryVelocity: 32
-  dryMinVelocity: 3.5
+  dryVelocity: 30
+  dryExitVelocity: 2
   dryDashDistance: 4.5

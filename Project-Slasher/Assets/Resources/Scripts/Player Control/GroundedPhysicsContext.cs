@@ -53,9 +53,10 @@ public class GroundedPhysicsContext : MonoBehaviour
             groundedCast.bounds.center, 
             groundedCast.radius, 
             -transform.up, 
-            0.03f, 
+            0.1f, 
             groundedMask));
 
+        //  Raw grounded with a single raycast
         if (Physics.Raycast(
             groundedCast.bounds.center,
             -transform.up,
@@ -68,6 +69,7 @@ public class GroundedPhysicsContext : MonoBehaviour
         else
             rawNormal = Vector3.up;
 
+        // Keep surfaces with acceptable normals
         rawNormalDot = Vector3.Dot(rawNormal, Vector3.up);
         foreach (var hit in hits)
         {
@@ -76,14 +78,15 @@ public class GroundedPhysicsContext : MonoBehaviour
         groundContactCount = groundedContacts.Count;
         steepContactCount = steepContacts.Count;
 
+        // Calculate normals from the valid surfaces
         RecalculateNormalsFromContacts();
-        // Update state
+        // Update grounded physics state
         UpdateState();
     }
 
     private void RecalculateNormalsFromContacts()
     {
-        // Calculate normals based off previous frame's contacts (this might be an issue cuz its now one fixedupdate behind but whatever)
+        // Calculate normals based off previous frame's contacts (this might be an issue because one fixedupdate behind)
         prevHitSurfacePos = hitSurfacePos;
         hitSurfacePos = Vector3.zero;
         contactNormal = Vector3.zero;
@@ -151,7 +154,7 @@ public class GroundedPhysicsContext : MonoBehaviour
             contactNormal = hit.normal;
             groundNormalDot = Vector3.Dot(contactNormal, Vector3.up);
             // Readjust velocity if doing so will redirect towards snap target
-            if(Vector3.Dot(contactNormal,vel) > 0f)
+            if (Vector3.Dot(contactNormal, vel) > 0f)
             {
                 vel = Vector3.ProjectOnPlane(vel,contactNormal).normalized * vel.magnitude;
                 rb.velocity = vel;
@@ -191,6 +194,12 @@ public class GroundedPhysicsContext : MonoBehaviour
     {
         return stepsGrounded > steps;
     }
+
+    public bool IsAirborneForSteps(int steps)
+    {
+        return stepsSinceLastGrounded > steps;
+    }
+
 
     public bool IsGroundedRaw()
     {

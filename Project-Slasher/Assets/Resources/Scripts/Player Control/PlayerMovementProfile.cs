@@ -9,17 +9,23 @@ public class PlayerMovementProfile : ScriptableObject
     [Header("Basic Movement")]
     [SerializeField] private float turnSpeed;
     [SerializeField] private float baseMoveSpeed;
+    [SerializeField] private float topMoveSpeed;
     [SerializeField] private float baseAcceleration;
     [SerializeField] private float baseFriction;
 
     [Space(10)]
     [Header("Jump and Airborne")]
-    [SerializeField, HideInInspector] private float jumpVelocity;
     [SerializeField] private float groundedToJumpDelay;
     [SerializeField] private float jumpHeight;
+    [SerializeField, HideInInspector] private float jumpVelocity;
     [SerializeField] private float baseAirAcceleration;
     [SerializeField] private float airTurnSpeed;
     [SerializeField] private float jumpGroundBlockDuration;
+
+    [Space(10)]
+    [Header("Moment Preservation")]
+    [SerializeField] private float runningPreservationRatio;
+    [SerializeField] private float airbornePreservationRatio;
 
     [Space(10)]
     [Header("Landing Roll")]
@@ -57,6 +63,7 @@ public class PlayerMovementProfile : ScriptableObject
     public float TurnSpeed => turnSpeed;
     public float AirTurnSpeed => airTurnSpeed;
     public float BaseMoveSpeed => baseMoveSpeed;
+    public float TopMoveSpeed => topMoveSpeed;
     public float BaseAcceleration => baseAcceleration;
     public float BaseAirAcceleration => baseAirAcceleration;
     public float BaseFriction => baseFriction;
@@ -68,6 +75,9 @@ public class PlayerMovementProfile : ScriptableObject
     public float RollFallSpeedThreshhold => rollFallSpeedThreshhold;
     public float WallJumpSideVel => wallJumpSideVel;
     public float WallJumpUpVel => wallJumpUpVel;
+    public float RunningPreservationRatio => runningPreservationRatio;
+    public float AirbornePreservationRatio => airbornePreservationRatio;
+
 
     public float MinGroundedDotProd => minGroundedDotProd;
     public float MinAirRotationDot => maxAirRotationDot;

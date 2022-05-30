@@ -14,7 +14,6 @@ public class PlayerSlideState : PlayerGroundedState
 
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.SlideParticle, Context.transform, false);
-        Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
 
 
         Context.animationController.SetBool("Sliding", true);
@@ -39,10 +38,9 @@ public class PlayerSlideState : PlayerGroundedState
         Context.animationController.SetBool("Sliding", false);
         Context.colliderSwitcher.SwitchToCollider(0);
 
-        // Stop Particles
-        // They will be deleted from their own scrips after 1 second of stopped.
+        // Detach particle from player.
+        Context.Particle.GetComponent<ParticleSystem>().Stop();
         Context.Particle.transform.SetParent(null, true);
-        Context.Ps.Stop();
     }
 
     public override void UpdateState()
