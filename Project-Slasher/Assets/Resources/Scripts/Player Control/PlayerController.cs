@@ -34,6 +34,15 @@ public class PlayerController : MonoBehaviour
     private PlayerStateMachine movementStateMachine;
     private PlayerStateMachine combatStateMachine;
 
+    // Player Death
+    private Vector3 respawnPoint;
+
+    public Vector3 RespawnPoint
+    {
+        get => respawnPoint;
+        set => respawnPoint = value;
+    }
+
     // Player initialPosition for particle usage
     private float apexHeight;
 
@@ -93,6 +102,7 @@ public class PlayerController : MonoBehaviour
         wallRunning = new Wallrunning(this);
         mainCam = Camera.main;
         forwardVector = Vector3.forward;
+        respawnPoint = transform.position;
     }
 
     private void Update()
@@ -120,5 +130,11 @@ public class PlayerController : MonoBehaviour
     {
         PlayerBaseState state = (PlayerBaseState)movementStateMachine.CurrentState;
         print(state);
+    }
+
+    public void Die()
+    {
+        this.playerRb.velocity = Vector3.zero; 
+        transform.position = respawnPoint;
     }
 }
