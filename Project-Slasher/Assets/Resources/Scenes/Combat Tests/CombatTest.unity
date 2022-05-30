@@ -4184,24 +4184,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &217775286 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2023879516243316260, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
-  m_PrefabInstance: {fileID: 4599813829066343388}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &217775289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 217775286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a242288b1ca9db140a9861b7b75eec78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerEvents: {fileID: 11400000, guid: a91b005c0b76a724eb48b3f4a8d02fcd, type: 2}
 --- !u!1 &252106448
 GameObject:
   m_ObjectHideFlags: 0
@@ -27838,14 +27820,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1645124998, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645124998, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 2023879515020833344, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -27902,18 +27876,6 @@ PrefabInstance:
       propertyPath: TPComponentController
       value: 
       objectReference: {fileID: 1389386789}
-    - target: {fileID: 2261670265497852218, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
-      propertyPath: scarfDefaultGlow.b
-      value: 1.4588236
-      objectReference: {fileID: 0}
-    - target: {fileID: 2261670265497852218, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
-      propertyPath: scarfDefaultGlow.g
-      value: 1.4980392
-      objectReference: {fileID: 0}
-    - target: {fileID: 2261670265497852218, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
-      propertyPath: scarfDefaultGlow.r
-      value: 0.10980392
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
 --- !u!4 &5631728251675153082 stripped
