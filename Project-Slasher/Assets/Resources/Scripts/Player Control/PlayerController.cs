@@ -54,7 +54,8 @@ public class PlayerController : MonoBehaviour
     private GameObject smallLandParticle;
     [SerializeField]
     private GameObject jumpParticle;
-
+    [SerializeField]
+    private GameObject speedParticle;
     // Particle getters.
     public GameObject RunParticle { get => runParticle; }
     public GameObject LargeLandParticle { get => largeLandParticle; }
@@ -65,9 +66,9 @@ public class PlayerController : MonoBehaviour
     // For particles usage in each state.
     private GameObject particle;
     private ParticleSystem ps;
-    
-    // Particle for speed of player.
-    private GameObject speedParticle;
+
+    // ParticleSystem for speed of player.
+    private ParticleSystem speedPs;
 
     // Particle usage getters.
     public GameObject Particle
@@ -93,10 +94,15 @@ public class PlayerController : MonoBehaviour
         wallRunning = new Wallrunning(this);
         mainCam = Camera.main;
         forwardVector = Vector3.forward;
+
+        particle = Instantiate(speedParticle, gameObject.transform, false);
+        speedPs = particle.GetComponent<ParticleSystem>();
     }
 
     private void Update()
     {
+        SetSpeedParticleEmission();
+
         combatStateMachine.UpdateStateMachine();
         movementStateMachine.UpdateStateMachine();
     }
@@ -120,5 +126,13 @@ public class PlayerController : MonoBehaviour
     {
         PlayerBaseState state = (PlayerBaseState)movementStateMachine.CurrentState;
         print(state);
+    }
+
+    // Change the speed particle emission depending on the speed of the player.
+    private void SetSpeedParticleEmission()
+    {
+        var emission = speedPs.emission;
+
+        emission.rateOverTime = Mathf.Abs(playerRb.velocity.x) * 2 + Mathf.Abs(playerRb.velocity.y) * 2 + Mathf.Abs(playerRb.velocity.z) * 2;
     }
 }
