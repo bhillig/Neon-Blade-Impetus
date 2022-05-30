@@ -4,28 +4,15 @@ using UnityEngine;
 
 public class PlayerCombatChargeState : PlayerCombatState
 {
-    public PlayerCombatChargeState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) 
-    {
-        
-    }
+    public PlayerCombatChargeState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) { }
 
     private float timer = 0f;
     private bool fullyCharged;
     private bool overCharged;
 
-    public override void CheckSwitchState()
-    {
-        if(overCharged)
-        {
-            Context.primaryAttackCooldownTimer = Context.combatProfile.Cooldown;
-            Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
-            Context.playerEvents.OnStrikeOvercharged?.Invoke();
-            TrySwitchState(Factory.CombatIdle);
-        }
-    }
-
     public override void EnterState()
     {
+        base.EnterState();
         timer = 0f;
         fullyCharged = false;
         overCharged = false;
@@ -35,17 +22,57 @@ public class PlayerCombatChargeState : PlayerCombatState
         Context.playerEvents.OnStrikeChargeStart?.Invoke();
     }
 
+    public override void ExitState()
+    {
+        base.ExitState();
+        Context.inputContext.PrimaryUpEvent.RemoveListener(ChargeReleased);
+        Context.animationController.SetBool("Charging", false);
+    }
+
     public override bool IsStateSwitchable()
     {
         return Context.primaryAttackCooldownTimer <= 0;
     }
 
-    public override void ExitState()
+    public override void UpdateState()
     {
-        Context.inputContext.PrimaryUpEvent.RemoveListener(ChargeReleased);
-        Context.animationController.SetBool("Charging", false);
+        base.UpdateState();
+        timer += Time.deltaTime;
+        if (!fullyCharged && timer >= Context.combatProfile.ChargeTime)
+        {
+            fullyCharged = true;
+            Context.playerEvents.OnStrikeChargeReady?.Invoke();
+        }
+        if (!overCharged && timer >= Context.combatProfile.ChargeTime + Context.combatProfile.HoldTime)
+        {
+            overCharged = true;
+        }
+        CheckSwitchState();
     }
+
+    public override void FixedUpdateState() 
+    { 
     
+    }
+
+    public override void CheckSwitchState()
+    {
+        if (overCharged)
+        {
+            Context.primaryAttackCooldownTimer = Context.combatProfile.Cooldown;
+            Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
+            Context.playerEvents.OnStrikeOvercharged?.Invoke();
+            TrySwitchState(Factory.CombatIdle);
+        }
+    }
+
+    protected override void PlayerCombatKilled()
+    {
+        Context.primaryAttackCooldownTimer = 0f;
+        base.PlayerCombatKilled();
+        Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
+    }   
+
     protected void ChargeReleased()
     {
         if (fullyCharged)
@@ -60,26 +87,5 @@ public class PlayerCombatChargeState : PlayerCombatState
             Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
             TrySwitchState(Factory.CombatIdle);
         }
-    }
-
-    public override void FixedUpdateState()
-    {
-       
-    }
-
-    public override void UpdateState()
-    {
-        base.UpdateState();   
-        timer += Time.deltaTime;
-        if(!fullyCharged && timer >= Context.combatProfile.ChargeTime)
-        {
-            fullyCharged = true;
-            Context.playerEvents.OnStrikeChargeReady?.Invoke();
-        }
-        if(!overCharged &&  timer >= Context.combatProfile.ChargeTime + Context.combatProfile.HoldTime)
-        {
-            overCharged = true;
-        }        
-        CheckSwitchState();
     }
 }

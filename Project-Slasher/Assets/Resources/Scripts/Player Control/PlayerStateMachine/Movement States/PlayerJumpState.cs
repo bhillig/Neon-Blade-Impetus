@@ -18,29 +18,12 @@ public class PlayerJumpState : PlayerAirborneState
         // Grab some values from movementProfile
         acceleration = Context.movementProfile.BaseAirAcceleration;
         maxSpeedChange = acceleration * Time.fixedDeltaTime;
-
         
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.JumpParticle, Context.transform, false);
 
-
         // If going faster than movement profile's speed when entering state, then that becomes the new max speed
         UpdateTopSpeed();
-    }
-
-    private void UpdateTopSpeed()
-    {
-        float flatVel = Context.playerRb.velocity.XZMag();
-        if (flatVel < maxSpeed)
-        {
-            maxSpeed = Mathf.LerpUnclamped(flatVel,maxSpeed, Context.movementProfile.AirbornePreservationRatio);
-        }
-        else
-        {
-            maxSpeed = flatVel;
-        }
-        // Clamp to minimum speed
-        maxSpeed = Mathf.Clamp(maxSpeed, Context.movementProfile.BaseMoveSpeed,Context.movementProfile.TopMoveSpeed);
     }
 
     public override void ExitState()
@@ -75,5 +58,19 @@ public class PlayerJumpState : PlayerAirborneState
     public override void CheckSwitchState()
     {
         base.CheckSwitchState();
+    }
+    private void UpdateTopSpeed()
+    {
+        float flatVel = Context.playerRb.velocity.XZMag();
+        if (flatVel < maxSpeed)
+        {
+            maxSpeed = Mathf.LerpUnclamped(flatVel, maxSpeed, Context.movementProfile.AirbornePreservationRatio);
+        }
+        else
+        {
+            maxSpeed = flatVel;
+        }
+        // Clamp to minimum speed
+        maxSpeed = Mathf.Clamp(maxSpeed, Context.movementProfile.BaseMoveSpeed, Context.movementProfile.TopMoveSpeed);
     }
 }

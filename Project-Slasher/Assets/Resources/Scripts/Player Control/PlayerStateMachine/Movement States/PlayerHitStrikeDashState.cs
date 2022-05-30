@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class PlayerHitStrikeDashState : PlayerDashState
 {
-    public PlayerHitStrikeDashState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
-    {
-        
-    }
+    public PlayerHitStrikeDashState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) { }
 
     public override void EnterState()
     {
@@ -31,14 +28,13 @@ public class PlayerHitStrikeDashState : PlayerDashState
     {
         base.UpdateState();
     }
+    public override void FixedUpdateState()
+    {
+        base.FixedUpdateState();
+    }
 
     public override void CheckSwitchState()
     {
             
-    }
-
-    public override void FixedUpdateState()
-    {
-        base.FixedUpdateState();
     }
 }

@@ -4,14 +4,10 @@ using UnityEngine;
 
 public abstract class PlayerDashState : PlayerMovementState
 {
-    public PlayerDashState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
-    {
-        
-    }
+    public PlayerDashState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) { }
 
     protected float cachedSpeed;
     private bool subscribedToCollision;
-
     private int buffer = 0;
 
     public override void EnterState()
@@ -24,11 +20,6 @@ public abstract class PlayerDashState : PlayerMovementState
         Context.playerRb.useGravity = false;
         // Subscribe 
         Context.playerEvents.OnStrikeEnd += StrikeDashEnd;
-    }
-
-    protected override void PerformStrikeDash(Collider strikeHasTarget)
-    {
-        //Do nothing LOL
     }
 
     public override void ExitState()
@@ -74,4 +65,13 @@ public abstract class PlayerDashState : PlayerMovementState
         }
     }
 
+    protected override void PerformStrikeDash(Collider strikeHasTarget)
+    {
+        //Do nothing LOL
+    }
+
+    protected override void PlayerKilled()
+    {
+        // Invincible while dashing
+    }
 }

@@ -26,24 +26,6 @@ public class PlayerRunState : PlayerGroundedState
         CalculateTopSpeed();
     }
 
-    /// <summary>
-    /// Always use the fastest top speed possible to preserve entry velocity 
-    /// </summary>
-    private void CalculateTopSpeed()
-    {
-        float flatVel = Vector3.ProjectOnPlane(Context.playerRb.velocity, Context.groundPhysicsContext.ContactNormal).magnitude;
-        if(flatVel < maxSpeed)
-        {
-            maxSpeed = Mathf.LerpUnclamped(flatVel, maxSpeed, Context.movementProfile.RunningPreservationRatio);
-        }
-        else
-        {
-            maxSpeed = flatVel;
-        }
-        // Clamp to minimum speed
-        maxSpeed = Mathf.Clamp(maxSpeed,Context.movementProfile.BaseMoveSpeed,Context.movementProfile.TopMoveSpeed);
-    }
-
     public override void ExitState()
     {
         base.ExitState();
@@ -83,5 +65,23 @@ public class PlayerRunState : PlayerGroundedState
         {
             TrySwitchState(Factory.Stopping);
         }
+    }
+
+    /// <summary>
+    /// Always use the fastest top speed possible to preserve entry velocity 
+    /// </summary>
+    private void CalculateTopSpeed()
+    {
+        float flatVel = Vector3.ProjectOnPlane(Context.playerRb.velocity, Context.groundPhysicsContext.ContactNormal).magnitude;
+        if (flatVel < maxSpeed)
+        {
+            maxSpeed = Mathf.LerpUnclamped(flatVel, maxSpeed, Context.movementProfile.RunningPreservationRatio);
+        }
+        else
+        {
+            maxSpeed = flatVel;
+        }
+        // Clamp to minimum speed
+        maxSpeed = Mathf.Clamp(maxSpeed, Context.movementProfile.BaseMoveSpeed, Context.movementProfile.TopMoveSpeed);
     }
 }

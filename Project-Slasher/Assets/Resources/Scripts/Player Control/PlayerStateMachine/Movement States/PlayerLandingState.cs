@@ -34,11 +34,6 @@ public class PlayerLandingState : PlayerGroundedState
         CheckSwitchState();
     }
 
-    protected override void Jump()
-    {
-        // NO JUMPIN WHILE ROLLIN
-    }
-
     public override void CheckSwitchState()
     {
         timer += Time.deltaTime;
@@ -48,5 +43,9 @@ public class PlayerLandingState : PlayerGroundedState
             TrySwitchState(Factory.GroundedSwitch);
         }
 
+    }
+    protected override void Jump()
+    {
+        // NO JUMPIN WHILE ROLLIN
     }
 }

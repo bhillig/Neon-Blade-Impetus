@@ -47,10 +47,10 @@ public class BulletController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponentInParent<PlayerController>())
+        var player = other.gameObject.GetComponentInParent<PlayerHitboxManager>();
+        if (player != null)
         {
-            Debug.Log("HIT!");
-            //Destroy(other.gameObject);
+            player.HitByProjectile();
         }
         Destroy(this.gameObject);
     }

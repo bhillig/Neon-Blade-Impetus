@@ -11,7 +11,6 @@ public abstract class PlayerGroundedState : PlayerMovementState
     public override void EnterState()
     {
         base.EnterState();
-
         Context.inputContext.JumpDownEvent.AddListener(Jump);
         Context.inputContext.SlideDownEvent.AddListener(Shift);
     }
@@ -21,27 +20,6 @@ public abstract class PlayerGroundedState : PlayerMovementState
         base.ExitState();
         Context.inputContext.JumpDownEvent.RemoveListener(Jump);
         Context.inputContext.SlideDownEvent.RemoveListener(Shift);
-    }
-
-    protected virtual void Jump()
-    {
-        if(groundedJumpDelayTimer <= 0)
-        {
-            groundedJumpDelayTimer = Context.movementProfile.GroundedToJumpDelay;
-            TrySwitchState(Factory.Jump);
-            // Jump physics
-            Vector3 vel = Context.playerRb.velocity;
-            vel.y = Mathf.Max(0f, vel.y);
-            Vector3 jumpVec = Context.groundPhysicsContext.ContactNormal * Context.movementProfile.JumpVelocity;
-            vel += jumpVec;
-            Context.playerRb.velocity = vel;
-            Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
-        }
-    }
-
-    protected virtual void Shift()
-    {
-        TrySwitchState(Factory.Slide);
     }
 
     public override void UpdateState()
@@ -60,5 +38,25 @@ public abstract class PlayerGroundedState : PlayerMovementState
         {
             TrySwitchState(Factory.Jump);
         }
+    }
+    protected virtual void Jump()
+    {
+        if (groundedJumpDelayTimer <= 0)
+        {
+            groundedJumpDelayTimer = Context.movementProfile.GroundedToJumpDelay;
+            TrySwitchState(Factory.Jump);
+            // Jump physics
+            Vector3 vel = Context.playerRb.velocity;
+            vel.y = Mathf.Max(0f, vel.y);
+            Vector3 jumpVec = Context.groundPhysicsContext.ContactNormal * Context.movementProfile.JumpVelocity;
+            vel += jumpVec;
+            Context.playerRb.velocity = vel;
+            Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
+        }
+    }
+
+    protected virtual void Shift()
+    {
+        TrySwitchState(Factory.Slide);
     }
 }

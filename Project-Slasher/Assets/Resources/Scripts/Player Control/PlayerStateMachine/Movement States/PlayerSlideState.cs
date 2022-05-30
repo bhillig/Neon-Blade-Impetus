@@ -15,7 +15,6 @@ public class PlayerSlideState : PlayerGroundedState
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.SlideParticle, Context.transform, false);
 
-
         Context.animationController.SetBool("Sliding", true);
         Context.colliderSwitcher.SwitchToCollider(1);
         SlideEnterPhysics();
@@ -23,13 +22,10 @@ public class PlayerSlideState : PlayerGroundedState
         Context.slideCooldownTimer = Context.movementProfile.SlideCooldown;
         slideLockTimer = Context.movementProfile.SlideLockDuration;
     }
-
-    private void SlideEnterPhysics()
+    public override bool IsStateSwitchable()
     {
-        Vector3 cVel = Context.playerRb.velocity;
-        cVel.x *= Context.movementProfile.SlideSpeedBoostRatio;
-        cVel.z *= Context.movementProfile.SlideSpeedBoostRatio;
-        Context.playerRb.velocity = cVel;
+        return (Context.playerRb.velocity.magnitude >= Context.movementProfile.SlideVelThreshhold) &&
+            (Context.slideCooldownTimer <= 0f);
     }
 
     public override void ExitState()
@@ -52,10 +48,13 @@ public class PlayerSlideState : PlayerGroundedState
         CheckSwitchState();
     }
 
-    public override bool IsStateSwitchable()
+    public override void CheckSwitchState()
     {
-        return (Context.playerRb.velocity.magnitude >= Context.movementProfile.SlideVelThreshhold) &&
-            (Context.slideCooldownTimer <= 0f);
+        base.CheckSwitchState();
+        bool userCancel = !Context.inputContext.slideDown;
+        bool tooSlow = Context.playerRb.velocity.magnitude < Context.movementProfile.SlideVelThreshhold;
+        if ((userCancel || tooSlow) && slideLockTimer <= 0f)
+            TrySwitchState(Factory.GroundedSwitch);
     }
 
     public override void FixedUpdateState()
@@ -71,6 +70,13 @@ public class PlayerSlideState : PlayerGroundedState
         {
             Context.playerRb.velocity = vel.normalized * Context.movementProfile.SlideSpeedCap;
         }
+    }
+    private void SlideEnterPhysics()
+    {
+        Vector3 cVel = Context.playerRb.velocity;
+        cVel.x *= Context.movementProfile.SlideSpeedBoostRatio;
+        cVel.z *= Context.movementProfile.SlideSpeedBoostRatio;
+        Context.playerRb.velocity = cVel;
     }
 
     private void RotateTowardsSlide()
@@ -97,14 +103,5 @@ public class PlayerSlideState : PlayerGroundedState
     {
         if(slideLockTimer <= 0f)
             base.Jump();
-    }
-
-    public override void CheckSwitchState()
-    {
-        base.CheckSwitchState();
-        bool userCancel = !Context.inputContext.slideDown;
-        bool tooSlow = Context.playerRb.velocity.magnitude < Context.movementProfile.SlideVelThreshhold;
-        if ((userCancel || tooSlow) && slideLockTimer <= 0f)
-            TrySwitchState(Factory.GroundedSwitch);
     }
 }

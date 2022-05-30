@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PlayerCombatStrikeState : PlayerCombatState
 {
-    public PlayerCombatStrikeState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) 
-    {
-        
-    }
+    public PlayerCombatStrikeState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) { }
 
     private float timer = 0f;
 
     public override void EnterState()
     {
+        base.EnterState();
         Collider targetFound = SearchForTarget();
         Context.combatTarget = targetFound;
         // Invoke event to tell the movement state machine to switch to dash state
@@ -36,8 +34,13 @@ public class PlayerCombatStrikeState : PlayerCombatState
 
     public override void ExitState()
     {
+        base.ExitState();
         Context.playerEvents.OnStrikeEnd?.Invoke();
         Context.animationController.SetBool("Striking", false);
+    }
+    public override void UpdateState()
+    {
+        base.UpdateState();
     }
 
     public override void FixedUpdateState()
@@ -51,9 +54,8 @@ public class PlayerCombatStrikeState : PlayerCombatState
             TrySwitchState(Factory.CombatIdle);
     }
 
-
-    public override void UpdateState()
+    protected override void PlayerCombatKilled()
     {
-        base.UpdateState();
+        // Do nothing, invincible while in this state
     }
 }
