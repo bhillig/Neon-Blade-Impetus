@@ -1333,13 +1333,14 @@ MonoBehaviour:
   scabbard: {fileID: 996782159}
   scabbardSword: {fileID: 5414679961316037141}
   coat: {fileID: 7144831110458703608}
+  body: {fileID: 7817674436066480381}
   scarfRenderer: {fileID: 1213485232313889549}
   endDelay: 0.1
   scabbardDefaultGlow: {fileID: 2100000, guid: 62027d625eefcc4479049a8cf7ff5f42, type: 2}
   chargeStrikeMat: {fileID: 2100000, guid: c0a6467b6f160b94eb061bef0e0e76ee, type: 2}
   defaultCoatMat: {fileID: 2100000, guid: 992516de291e97b46a5e25cf9d996760, type: 2}
   scabbardCooldownMat: {fileID: 2100000, guid: 019c39507f0990d43bada773e2d5e608, type: 2}
-  scarfDefaultGlow: {r: 1.6373607, g: 0.18002392, b: 0.30190527, a: 1}
+  scarfDefaultGlow: {r: 1.7584686, g: 0.8101845, b: 0.915119, a: 1}
   scarfChargedGlow: {r: 2.6701574, g: 1.8416916, b: 0, a: 1}
   scarfCooldownGlow: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2023879515863202330
@@ -6859,8 +6860,8 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: c0539c32068c6e54885851d611d4cb22, type: 2}
   - {fileID: 2100000, guid: a9dca8a3d1c0d184bb51e8a0d119c81c, type: 2}
   - {fileID: 2100000, guid: 5ca44debf5cde25439266e4a7b472f4f, type: 2}
-  - {fileID: 2100000, guid: 5ca44debf5cde25439266e4a7b472f4f, type: 2}
-  - {fileID: 2100000, guid: aaedb0baf5df8904c81453932c750437, type: 2}
+  - {fileID: 2100000, guid: 992516de291e97b46a5e25cf9d996760, type: 2}
+  - {fileID: 2100000, guid: 992516de291e97b46a5e25cf9d996760, type: 2}
   - {fileID: 2100000, guid: 5ca44debf5cde25439266e4a7b472f4f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

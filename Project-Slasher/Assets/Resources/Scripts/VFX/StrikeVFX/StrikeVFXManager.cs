@@ -107,6 +107,7 @@ public class StrikeVFXManager : MonoBehaviour
     private void ChargeStart()
     {
         chargeParticles.Play();
+        scabbardSword.enabled = false;
     }
 
     private void Overcharged()
@@ -156,7 +157,7 @@ public class StrikeVFXManager : MonoBehaviour
     {
         dashTrailParticles.Stop();
         yield return new WaitForSeconds(endDelay);
-        scabbardSword.enabled = false;
+        scabbardSword.enabled = true;
         sword.enabled = false;
     }
 
