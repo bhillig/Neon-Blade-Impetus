@@ -60,6 +60,13 @@ public class FlatMovingStateComponent
         context.playerPhysicsTransform.rotation = Quaternion.Lerp(context.playerPhysicsTransform.rotation, targetRotation, factor);
     }
 
+    public void LerpRotation(float factor, Vector3 forward, Vector3 right)
+    {
+        Vector3 up = Vector3.Cross(forward, right);
+        Quaternion targetRotation = Quaternion.LookRotation(forward,up);
+        context.playerPhysicsTransform.rotation = Quaternion.Lerp(context.playerPhysicsTransform.rotation, targetRotation, factor);
+    }
+
     public void LerpRotationY(float factor)
     {
         Vector3 normal = context.playerPhysicsTransform.up;

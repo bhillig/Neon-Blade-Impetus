@@ -8,35 +8,38 @@ public class CinemachineTPFollowController : MonoBehaviour
     public CinemachineVirtualCamera cam;
 
     private float cameraSideTarget = 1;
-    public float CameraSideTarget => cameraSideTarget;
+    private float newVal = 1;
+    private float prevTarget;
 
-    [SerializeField] private float cameraSideLerpFactor;
+    public AnimationCurve lerpCurve;
 
-    private SortedDictionary<int, float> targets = new SortedDictionary<int, float>();
+    [SerializeField] private float lerpTime;
+    private float lerpTimer;
 
-    public void SetShoulderOffset(float val, int layer)
+    private float multiplier = 1f;
+
+    public void SetShoulderOffset(float val)
     {
-        if(!targets.ContainsKey(layer))
-            targets.Add(layer, val);
-        else
-            targets[layer] = val;
+        newVal = val;
     }
 
-    public void RemoveKey(int layer)
+    public void SetLerpTimeMultiplier(float val)
     {
-        targets.Remove(layer);
+        multiplier = val;
     }
-
 
     private void FixedUpdate()
     {
-        if (targets.Count > 0)
-            cameraSideTarget = targets.Values.Last();
-        else
-            cameraSideTarget = 1;
-        //Debug.Log(cameraSideTarget);
         var tpFollow = cam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-        float current = tpFollow.CameraSide;
-        tpFollow.CameraSide = Mathf.Lerp(current, cameraSideTarget, cameraSideLerpFactor * Time.fixedDeltaTime);   
+        lerpTimer += Time.fixedDeltaTime;
+        if (newVal != cameraSideTarget)
+        {
+            prevTarget = tpFollow.CameraSide;
+            cameraSideTarget = newVal;
+            lerpTimer = 0f;
+        }
+        //Debug.Log(cameraSideTarget);
+        float t = lerpTimer / (lerpTime * multiplier);
+        tpFollow.CameraSide = Mathf.Lerp(prevTarget, cameraSideTarget, lerpCurve.Evaluate(t));
     }
 }

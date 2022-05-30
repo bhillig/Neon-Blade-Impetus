@@ -15,7 +15,7 @@ public class Wallrunning
     private float wallRunTimer = 2.0f;
 
     // Cooldown
-    private float wallRunCooldown = 0.1f;
+    private float wallRunCooldown;
     private float wallRunCooldownTime;
 
     // Detection variables
@@ -30,12 +30,26 @@ public class Wallrunning
     private float normalizedAngleThreshold = 0.25f;
     private Vector3 lastWallPosition;
     private Vector3 lastWallNormal;
+    private float side;
+    public float Side => side;
+
+    public Vector3 LastWallNormal => lastWallNormal;
+
     private bool jumping;
     private float timeSinceLastJumped;
     float elapsedTimeSinceWallAttach = 0;
     float elapsedTimeSinceWallDetatch = 0;
 
+    private float incomingMagnitude;
+    public float IncomingMagnitude
+    {
+        get { return incomingMagnitude; }
+        set { incomingMagnitude = value; }
+    }
+
     private Vector3 wallForward;
+    public Vector3 WallForward => wallForward;
+
     private Vector3 wallNormal;
     private bool useGravity = true;
     private float counterGravityForce = 11.0f;
@@ -59,8 +73,8 @@ public class Wallrunning
         whatisGround = LayerMask.GetMask("Terrain");
         whatisWall = LayerMask.GetMask("Terrain");
         directions = new Vector3[]{
-            Vector3.right,
-            Vector3.left
+            Vector3.right + Vector3.forward * 0.1f,
+            Vector3.left + Vector3.forward * 0.1f
         };
     }
 
@@ -84,9 +98,10 @@ public class Wallrunning
         return isWallRunning;
     }
 
-    public void SetWallrunCooldown()
+    public void SetWallrunCooldown(float cooldown)
     {
         wallRunCooldownTime = Time.time;
+        wallRunCooldown = cooldown;
     }
 
     public void DetectWalls(bool performRun = true)
@@ -152,8 +167,9 @@ public class Wallrunning
     public bool CanWallRun()
     {
         float verticalAxis = context.inputContext.movementInput.y;
+        bool enoughSpeed = rb.velocity.magnitude > 1f;
         return Time.time - wallRunCooldownTime > wallRunCooldown &&
-                rb.velocity.magnitude > 1f && 
+                enoughSpeed && 
                 verticalAxis > 0.0f && 
                 AboveGround(minWallrunHeightFromGround);
     }
@@ -164,24 +180,33 @@ public class Wallrunning
         float d = Vector3.Dot(hit.normal, Vector3.up);
         if (d >= -normalizedAngleThreshold && d <= normalizedAngleThreshold)
         {
-            // Vector3 alongWall = Vector3.Cross(hit.normal, Vector3.up);
             float vertical = context.inputContext.movementInput.y;
             Vector3 alongWall = orientation.TransformDirection(Vector3.forward);
 
             wallNormal = hit.normal;
             wallForward = Vector3.Cross(hit.normal, Vector3.up);
+            side = 1;
             // Ensures the player wallruns in the direction according to their orientation
             if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
             {
+                side = -1;
                 wallForward = -wallForward;
             }
-            orientation.forward = wallForward;
+            /*orientation.rotation = Quaternion.identity;
+            orientation.forward = wallForward;*/
+
 
             Debug.DrawRay(orientation.position, alongWall.normalized * 10, Color.green);
             Debug.DrawRay(orientation.position, lastWallNormal * 10, Color.magenta);
+            float wallRunForceToAdd = wallRunForce;
+            if(incomingMagnitude > wallRunForce)
+            {
+                wallRunForceToAdd = incomingMagnitude;
+            }
 
-            rb.velocity = wallForward * wallRunForce * vertical;
-            rb.AddForce(-wallNormal * 100.0f, ForceMode.Force);
+            rb.velocity = wallForward * wallRunForceToAdd * vertical;
+            rb.AddForce(-wallNormal * 50.0f, ForceMode.Force);
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             isWallRunning = true;
         }
     }

@@ -19,7 +19,7 @@ public class PlayerCombatProfile : ScriptableObject
     [SerializeField] private float hitDashPierceDistance;
     [Space(15f)]
     [SerializeField] private float dryVelocity;
-    [SerializeField] private float dryMinVelocity;
+    [SerializeField] private float dryExitVelocity;
     [SerializeField] private float dryDashDistance;
 
     public float ChargeTime => chargeTime;
@@ -35,6 +35,6 @@ public class PlayerCombatProfile : ScriptableObject
     public float HitDashPierceDistance => hitDashPierceDistance;
 
     public float DryVelocity => dryVelocity;
-    public float DryMinVelocity => dryMinVelocity;
+    public float DryExitVelocity => dryExitVelocity;
     public float DryDashDistance => dryDashDistance;
 }

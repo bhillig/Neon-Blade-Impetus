@@ -87,7 +87,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601195886}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.05
   m_Height: 2
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 3537850461884283383}
   - component: {fileID: 3537850461884283381}
   - component: {fileID: 3537850461884283382}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,11 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0.3, y: 0.5, z: 0.45}
+  Damping: {x: 0.3, y: 0.5, z: 0.35}
   ShoulderOffset: {x: 1.25, y: 0.6, z: 0}
   VerticalArmLength: 0
   CameraSide: 1
-  CameraDistance: 2.5
+  CameraDistance: 3
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0
@@ -268,35 +268,35 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.024100149
-      outSlope: 0.024100149
+      inSlope: 0.071767725
+      outSlope: 0.071767725
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.25515908
-      value: 0.006149372
-      inSlope: 0.030909719
-      outSlope: 0.030909719
+      time: 0.14379735
+      value: 0.010320009
+      inSlope: 0.069766596
+      outSlope: 0.069766596
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.6784172
+      outWeight: 0.4841865
+    - serializedVersion: 3
+      time: 0.6809053
+      value: 0.18248643
+      inSlope: 0.10995313
+      outSlope: 0.10995313
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.30081177
+      outWeight: 0.5061082
     - serializedVersion: 3
-      time: 0.80058765
-      value: 0.1689165
-      inSlope: 0.47990328
-      outSlope: 0.47990328
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9981998
-      value: 0.2996144
-      inSlope: 0.66138595
-      outSlope: 0.66138595
+      time: 0.98989904
+      value: 0.19643828
+      inSlope: 0.04515254
+      outSlope: 0.04515254
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -319,7 +319,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 3537850462526633340}
-  cameraSideLerpFactor: 6
+  lerpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  lerpTime: 0.5
 --- !u!1 &3537850462526633342
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,8 +354,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3537850462526633341}
   - component: {fileID: 3537850462526633340}
-  - component: {fileID: 162755715}
-  - component: {fileID: 5578880823974087205}
   m_Layer: 0
   m_Name: PlayerShoulderCam
   m_TagString: Untagged
@@ -347,7 +369,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462526633342}
   m_LocalRotation: {x: 0.108679175, y: 0.74058884, z: -0.12356347, w: 0.65149766}
-  m_LocalPosition: {x: 3.642, y: 2.3899999, z: 5.95}
+  m_LocalPosition: {x: 3.642, y: 2.3899999, z: 5.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3537850461884283383}
@@ -389,46 +411,6 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 3537850461884283383}
---- !u!114 &162755715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3537850462526633342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7892bf37f61dac4aaae74fa38bf97f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TPFollowController: {fileID: 1389386789}
-  vCam: {fileID: 3537850462526633340}
-  mainCam: {fileID: 3537850462879656055}
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 64
-  radius: 0.4
-  leftPan: 0.35
---- !u!114 &5578880823974087205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3537850462526633342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7892bf37f61dac4aaae74fa38bf97f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TPFollowController: {fileID: 1389386789}
-  vCam: {fileID: 3537850462526633340}
-  mainCam: {fileID: 3537850462879656055}
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 64
-  radius: 0.4
-  leftPan: 0.35
 --- !u!1 &3537850462879656041
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537850462879656041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.642, y: 2.3899999, z: 5.95}
+  m_LocalPosition: {x: 3.642, y: 2.3899999, z: 5.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1601195887}
@@ -629,7 +611,7 @@ MonoBehaviour:
   toFollow: {fileID: 0}
   offset: {x: 0, y: 1, z: 0}
   inputInfo: {fileID: 11400000, guid: 1a0b6215610630c4ab636c82624b91b7, type: 2}
-  Sensitivity: 24
+  Sensitivity: 20
   Damping: 0.4
   VerticalRangeUp: 85
   VerticalRangeDown: 85
