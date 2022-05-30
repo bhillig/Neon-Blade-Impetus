@@ -138,11 +138,6 @@ public class PlayerController : MonoBehaviour
         print(state);
     }
 
-    public void Die()
-    {
-        this.playerRb.velocity = Vector3.zero; 
-        transform.position = respawnPoint;
-    }
     // Change the speed particle emission depending on the speed of the player.
     private void SetSpeedParticleEmission()
     {

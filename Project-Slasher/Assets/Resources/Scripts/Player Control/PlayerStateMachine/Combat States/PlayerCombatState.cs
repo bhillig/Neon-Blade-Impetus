@@ -14,11 +14,13 @@ public abstract class PlayerCombatState : PlayerBaseState
     public override void EnterState()
     {
         Context.playerEvents.OnCollideWithProjectile += PlayerCombatKilled;
+        Context.playerEvents.OnCollideWithVoid += PlayerCombatKilled;
     }
 
     public override void ExitState()
     {
         Context.playerEvents.OnCollideWithProjectile -= PlayerCombatKilled;
+        Context.playerEvents.OnCollideWithVoid -= PlayerCombatKilled;
     }
 
     public override void UpdateState()
