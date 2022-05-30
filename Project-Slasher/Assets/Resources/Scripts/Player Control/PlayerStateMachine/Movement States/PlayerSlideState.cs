@@ -39,6 +39,7 @@ public class PlayerSlideState : PlayerGroundedState
         Context.colliderSwitcher.SwitchToCollider(0);
 
         // Detach particle from player.
+        Context.Particle.GetComponent<ParticleSystem>().Stop();
         Context.Particle.transform.SetParent(null, true);
     }
 

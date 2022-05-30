@@ -201,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2824861806676663348, guid: 438aa95dd76eeff47984beb3723071a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2824861806676663348, guid: 438aa95dd76eeff47984beb3723071a7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3537850462526633341, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.95
+      value: 5.45
       objectReference: {fileID: 0}
     - target: {fileID: 3537850462879656054, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -345,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3537850462879656054, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.95
+      value: 5.45
       objectReference: {fileID: 0}
     - target: {fileID: 3537850462916779128, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: toFollow
@@ -366,15 +366,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2023879515020833344, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -142.3
+      value: -68.3064
       objectReference: {fileID: 0}
     - target: {fileID: 2023879515020833344, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.315
+      value: 25.787067
       objectReference: {fileID: 0}
     - target: {fileID: 2023879515020833344, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -76.18
+      value: 426.66553
       objectReference: {fileID: 0}
     - target: {fileID: 2023879515020833344, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
       propertyPath: m_LocalRotation.w
@@ -412,6 +412,10 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 1731746901}
+    - target: {fileID: 2023879515020833348, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
+      propertyPath: movementProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 18bdb98fe3691fb4fa194fe3c2e9af6e, type: 2}
     - target: {fileID: 2023879515020833348, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
       propertyPath: TPTargetController
       value: 
