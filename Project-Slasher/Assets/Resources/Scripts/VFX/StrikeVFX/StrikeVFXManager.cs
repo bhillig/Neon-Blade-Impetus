@@ -82,6 +82,8 @@ public class StrikeVFXManager : MonoBehaviour
 
     private void StrikePerformed(Collider target)
     {
+        chargeParticles.Stop();
+        chargeReadyParticles.Stop();
         if (target == null)
         {
             DryDash();
@@ -128,11 +130,14 @@ public class StrikeVFXManager : MonoBehaviour
         coat.SetMaterials(new int[] { 0 }, new Material[] {chargeStrikeMat});
         body.SetMaterials(new int[] { 9, 10 }, new Material[] { chargeStrikeMat });
         chargeReadyParticles.Play();
+        chargeParticles.Stop();
         SetScarfEmission(scarfChargedGlow);
     }
 
     private void DefaultVisuals()
     {
+        chargeParticles.Stop();
+        chargeReadyParticles.Stop();
         scabbard.material = scabbardDefaultGlow;
         coat.SetMaterials(new int[] { 0 }, new Material[] { defaultCoatMat });
         body.SetMaterials(new int[] { 9, 10 }, new Material[] { defaultCoatMat });
