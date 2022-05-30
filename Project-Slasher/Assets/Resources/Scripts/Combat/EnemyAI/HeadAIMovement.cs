@@ -29,6 +29,8 @@ public class HeadAIMovement : MonoBehaviour
 
     [SerializeField] GameObject bullet;
 
+    [SerializeField] private EnemyEntityCore core;
+
     private float alertTimer;
 
     private float reloadTimer;
@@ -36,6 +38,12 @@ public class HeadAIMovement : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        core.OnRespawn += Respawn;
+    }
+
+    private void OnDestroy()
+    {
+        core.OnRespawn -= Respawn;
     }
 
     public bool GetPlayerSpotted()
@@ -45,7 +53,7 @@ public class HeadAIMovement : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(this.transform.position, player.position) <= activationRange)
+        if (!core.IsDead && Vector3.Distance(this.transform.position, player.position) <= activationRange)
         {
             if (!playerSpotted)
             {
@@ -93,6 +101,12 @@ public class HeadAIMovement : MonoBehaviour
             }
         }
         
+    }
+
+    public void Respawn()
+    {
+        reloadTimer = 0f;
+        alertTime = 0f;
     }
 
     void Shoot()

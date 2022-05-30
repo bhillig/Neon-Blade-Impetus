@@ -87,8 +87,8 @@ public class BulletController : MonoBehaviour
 
     private void OnImpact()
     {
-        impactParticles.ForEach(particle => { particle?.Play(); });
-        trailParticles.ForEach(particle => { particle?.Stop(); });
+        impactParticles.ForEach(particle => particle?.Play());
+        trailParticles.ForEach(particle => particle?.Stop());
         rb.constraints = RigidbodyConstraints.FreezeAll;
         bulletRenderer.enabled = false;
         coll.enabled = false;
