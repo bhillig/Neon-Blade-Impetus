@@ -14,19 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 0.2
   baseMoveSpeed: 11
+  topMoveSpeed: 18
   baseAcceleration: 40
   baseFriction: 25
-  jumpVelocity: 7.745967
   groundedToJumpDelay: 0.1
   jumpHeight: 2
+  jumpVelocity: 7.745967
   baseAirAcceleration: 10
   airTurnSpeed: 0.1
   jumpGroundBlockDuration: 0.15
-  rollSpeed: 10
+  runningPreservationRatio: -0.25
+  airbornePreservationRatio: -0.25
+  rollSpeed: 12
   rollFallSpeedThreshhold: 20
-  wallJumpUpHeight: 1.5
-  wallJumpUpVel: 6.708204
-  wallJumpSideVel: 10
+  wallJumpUpHeight: 1.6
+  wallJumpUpVel: 6.928203
+  wallJumpSideVel: 8
   maxGroundedAngle: 50
   maxSnapVelocity: 11
   snapVelocityToAngleRatioCurve:
@@ -73,11 +76,11 @@ MonoBehaviour:
     m_RotationOrder: 4
   maxSnapAngle: 85
   snapProbeDistance: 1
-  maxAirRotationDot: 0.9
+  maxAirRotationDot: 0.95
   slideVelThreshhold: 5
-  slideGravityBoost: 15
-  slideSpeedBoostRatio: 1.45
-  slideBaseFriction: 9
+  slideGravityBoost: 16
+  slideSpeedBoostRatio: 1.4
+  slideBaseFriction: 8
   slideLockDuration: 0.3
   slideCooldown: 0.65
   slideSpeedCap: 25

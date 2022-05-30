@@ -5,7 +5,6 @@ using UnityEngine;
 public class JumpingPad : MonoBehaviour
 {
     [SerializeField] private float bounceForce; 
-    private float timer = 0.0f; 
     // Start is called before the first frame update
     void OnCollisionEnter(Collision other)
     {
