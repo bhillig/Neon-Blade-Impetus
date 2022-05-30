@@ -56,6 +56,7 @@ public class GroundedPhysicsContext : MonoBehaviour
             0.1f, 
             groundedMask));
 
+        //  Raw grounded with a single raycast
         if (Physics.Raycast(
             groundedCast.bounds.center,
             -transform.up,
@@ -68,6 +69,7 @@ public class GroundedPhysicsContext : MonoBehaviour
         else
             rawNormal = Vector3.up;
 
+        // Keep surfaces with acceptable normals
         rawNormalDot = Vector3.Dot(rawNormal, Vector3.up);
         foreach (var hit in hits)
         {
@@ -76,14 +78,15 @@ public class GroundedPhysicsContext : MonoBehaviour
         groundContactCount = groundedContacts.Count;
         steepContactCount = steepContacts.Count;
 
+        // Calculate normals from the valid surfaces
         RecalculateNormalsFromContacts();
-        // Update state
+        // Update grounded physics state
         UpdateState();
     }
 
     private void RecalculateNormalsFromContacts()
     {
-        // Calculate normals based off previous frame's contacts (this might be an issue cuz its now one fixedupdate behind but whatever)
+        // Calculate normals based off previous frame's contacts (this might be an issue because one fixedupdate behind)
         prevHitSurfacePos = hitSurfacePos;
         hitSurfacePos = Vector3.zero;
         contactNormal = Vector3.zero;

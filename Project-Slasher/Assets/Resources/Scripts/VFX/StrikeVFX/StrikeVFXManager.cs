@@ -53,12 +53,15 @@ public class StrikeVFXManager : MonoBehaviour
     private void CooldownFinished()
     {
         cooldownFinishedParticles.Play();
-        scabbard.material = scabbardDefaultGlow;
+        DefaultVisuals();
     }
 
     private void CooldownStarted()
     {
         scabbard.material = scabbardCooldownMat;
+        var mats = coat.materials;
+        mats[0] = scabbardCooldownMat;
+        coat.materials = mats;
     }
 
     private void StrikePerformed(Collider target)
