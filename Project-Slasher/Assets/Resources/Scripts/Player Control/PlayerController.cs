@@ -133,6 +133,6 @@ public class PlayerController : MonoBehaviour
     {
         var emission = speedPs.emission;
 
-        emission.rateOverTime = Mathf.Abs(playerRb.velocity.x) * 2 + Mathf.Abs(playerRb.velocity.y) * 2 + Mathf.Abs(playerRb.velocity.z) * 2;
+        emission.rateOverTime = playerRb.velocity.magnitude * 2;
     }
 }
