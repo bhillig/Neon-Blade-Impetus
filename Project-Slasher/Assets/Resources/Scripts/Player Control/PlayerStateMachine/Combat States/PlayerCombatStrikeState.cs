@@ -26,6 +26,8 @@ public class PlayerCombatStrikeState : PlayerCombatState
             // Calculate distance to target + pierce distance
             float dist = (targetFound.bounds.center - dashCollider.bounds.center).magnitude + Context.combatProfile.HitDashPierceDistance;
             timer = dist / Context.combatProfile.HitVelocity;
+            var core = targetFound.GetComponentInParent<EnemyEntityCore>();
+            core.KillEnemy();
         }
         Context.groundPhysicsContext.GroundedBlockTimer = timer;
         // Animation
