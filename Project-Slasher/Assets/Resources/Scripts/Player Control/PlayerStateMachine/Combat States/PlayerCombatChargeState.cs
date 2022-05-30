@@ -69,8 +69,8 @@ public class PlayerCombatChargeState : PlayerCombatState
     protected override void PlayerCombatKilled()
     {
         Context.primaryAttackCooldownTimer = 0f;
-        base.PlayerCombatKilled();
         Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
+        base.PlayerCombatKilled();
     }   
 
     protected void ChargeReleased()

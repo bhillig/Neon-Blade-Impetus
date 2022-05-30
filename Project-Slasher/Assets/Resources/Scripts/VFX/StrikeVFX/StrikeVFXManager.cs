@@ -82,7 +82,7 @@ public class StrikeVFXManager : MonoBehaviour
 
     private void StrikePerformed(Collider target)
     {
-        if(target == null)
+        if (target == null)
         {
             DryDash();
         }
@@ -94,7 +94,8 @@ public class StrikeVFXManager : MonoBehaviour
 
     private void TargetedDash()
     {
-        sword.GetComponent<MeshRenderer>().enabled = true;
+        scabbardSword.enabled = false;
+        sword.enabled = true;
         dashTrailParticles.Play();
         targettedDashParticles.Play();
     }
@@ -107,7 +108,6 @@ public class StrikeVFXManager : MonoBehaviour
     private void ChargeStart()
     {
         chargeParticles.Play();
-        scabbardSword.enabled = false;
     }
 
     private void Overcharged()
