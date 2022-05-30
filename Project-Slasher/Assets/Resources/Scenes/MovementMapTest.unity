@@ -8267,7 +8267,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh102360
+  m_Name: pb_Mesh349200
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32833,6 +32833,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2023879515020833348, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
+      propertyPath: movementProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 265fd5da65a2d954ab73d0ac446c17d5, type: 2}
     - target: {fileID: 2023879515020833348, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
       propertyPath: TPTargetController
       value: 

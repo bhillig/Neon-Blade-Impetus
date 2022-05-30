@@ -11,11 +11,7 @@ public class JumpingPad : MonoBehaviour
     {
         GameObject target = other.gameObject; 
         Rigidbody rb = target.GetComponent<Rigidbody>(); 
+        rb.velocity = Vector3.zero;
         rb.AddForce(Vector3.up * bounceForce);
-        timer += Time.deltaTime; 
-        if (timer > 0.5f) {
-            rb.AddForce(Vector3.up * bounceForce);
-            timer = 0;
-        }
     }
 }
