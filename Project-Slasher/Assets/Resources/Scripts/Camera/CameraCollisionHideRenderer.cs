@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 public class CameraCollisionHideRenderer : MonoBehaviour
 {
     public LayerMask hideMask;
     public Material passthroughMat;
+    public CinemachineVirtualCamera vcam;
 
     internal class meshPair
     {
@@ -56,6 +57,7 @@ public class CameraCollisionHideRenderer : MonoBehaviour
             block.SetFloat("_Alpha", Mathf.Lerp(0.25f, 0.6f, t));
             ren.SetPropertyBlock(block);
         }
+        transform.LookAt(vcam.m_Follow);
     }
 
     private void OnTriggerExit(Collider other)

@@ -60,6 +60,16 @@ public static class ExtensionMethods
         return new Vector3(vec.x, 0, vec.z);
     }
 
+    public static void SetMaterials(this Renderer renderer, int[] indexes, Material[] mats)
+    {
+        var newMaterials = renderer.materials;
+        for(int i = 0;i < indexes.Length;i++)
+        {
+            newMaterials[indexes[i]] = mats[Mathf.Min(i,mats.Length-1)];
+        }
+        renderer.materials = newMaterials;
+    }
+
     /// <summary>
     /// Rotate a transform towards the velocity of a rb
     /// </summary>

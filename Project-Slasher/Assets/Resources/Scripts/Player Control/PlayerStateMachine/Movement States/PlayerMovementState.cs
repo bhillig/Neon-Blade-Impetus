@@ -29,7 +29,6 @@ public abstract class PlayerMovementState : PlayerBaseState
         }
         else
         {
-            Debug.Log("E");
             TrySwitchState(Factory.DryStrikeDash);
         }
     }

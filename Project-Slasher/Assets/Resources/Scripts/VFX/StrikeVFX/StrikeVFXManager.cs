@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class StrikeVFXManager : MonoBehaviour
 {
+    [Header("Dependencies")]
     public PlayerEventsAsset playerEvents;
-    public GameObject sword;
-    public MeshRenderer scabbard;
-    public GameObject scabbardSword;
+
+    [Header("Particles")]
     public ParticleSystem dryDashParticles;
     public ParticleSystem targettedDashParticles;
     public ParticleSystem dashTrailParticles;
@@ -15,15 +15,31 @@ public class StrikeVFXManager : MonoBehaviour
     public ParticleSystem chargeReadyParticles;
     public ParticleSystem cooldownFinishedParticles;
     public ParticleSystem overchargedParticles;
+
+    [Header("Renderers")]
+    public MeshRenderer sword;
+    public MeshRenderer scabbard;
+    public MeshRenderer scabbardSword;
     public SkinnedMeshRenderer coat;
+    public SkinnedMeshRenderer body;
+    public SkinnedMeshRenderer scarfRenderer;
 
     [Header("Values")]
     public float endDelay;
+
+    [Header("Materials")]
     public Material scabbardDefaultGlow;
     public Material chargeStrikeMat;
     public Material defaultCoatMat;
-
     public Material scabbardCooldownMat;
+
+    [Header("Scarf")]
+    [ColorUsage(true, true)]
+    public Color scarfDefaultGlow;
+    [ColorUsage(true, true)]
+    public Color scarfChargedGlow;
+    [ColorUsage(true, true)]
+    public Color scarfCooldownGlow;
 
     private void Awake()
     {
@@ -59,9 +75,9 @@ public class StrikeVFXManager : MonoBehaviour
     private void CooldownStarted()
     {
         scabbard.material = scabbardCooldownMat;
-        var mats = coat.materials;
-        mats[0] = scabbardCooldownMat;
-        coat.materials = mats;
+        coat.SetMaterials(new int[] { 0 }, new Material[] { scabbardCooldownMat });
+        body.SetMaterials(new int[] { 9, 10 }, new Material[] { scabbardCooldownMat });
+        SetScarfEmission(scarfCooldownGlow);
     }
 
     private void StrikePerformed(Collider target)
@@ -108,18 +124,26 @@ public class StrikeVFXManager : MonoBehaviour
     private void DashReadyVisuals()
     {
         scabbard.material = chargeStrikeMat;
-        var mats = coat.materials;
-        mats[0] = chargeStrikeMat;
-        coat.materials = mats;
+        coat.SetMaterials(new int[] { 0 }, new Material[] {chargeStrikeMat});
+        body.SetMaterials(new int[] { 9, 10 }, new Material[] { chargeStrikeMat });
         chargeReadyParticles.Play();
+        SetScarfEmission(scarfChargedGlow);
     }
 
     private void DefaultVisuals()
     {
         scabbard.material = scabbardDefaultGlow;
-        var mats = coat.materials;
-        mats[0] = defaultCoatMat;
-        coat.materials = mats;
+        coat.SetMaterials(new int[] { 0 }, new Material[] { defaultCoatMat });
+        body.SetMaterials(new int[] { 9, 10 }, new Material[] { defaultCoatMat });
+        SetScarfEmission(scarfDefaultGlow);
+    }
+
+    private void SetScarfEmission(Color c)
+    {
+        MaterialPropertyBlock block = new MaterialPropertyBlock();
+        scarfRenderer.GetPropertyBlock(block);
+        block.SetColor("_Emission", c);
+        scarfRenderer.SetPropertyBlock(block);
     }
 
     private void StrikeEnd()
@@ -132,8 +156,8 @@ public class StrikeVFXManager : MonoBehaviour
     {
         dashTrailParticles.Stop();
         yield return new WaitForSeconds(endDelay);
-        scabbardSword.SetActive(true);
-        sword.GetComponent<MeshRenderer>().enabled = false;
+        scabbardSword.enabled = false;
+        sword.enabled = false;
     }
 
     private void DryDash()
