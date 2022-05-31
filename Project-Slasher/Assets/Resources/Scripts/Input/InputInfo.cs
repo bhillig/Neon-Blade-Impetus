@@ -19,4 +19,6 @@ public class InputInfo : ScriptableObject
     public bool primaryDown;
 
     public UnityEvent RestartDownEvent;
+
+    public UnityEvent MaskRotateDownEvent;
 }
