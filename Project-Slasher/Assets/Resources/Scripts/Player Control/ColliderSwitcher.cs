@@ -20,15 +20,16 @@ public class ColliderSwitcher : MonoBehaviour
         currentIndex = startCollider;
     }
 
-    public void SwitchToCollider(int index, float speed = 100000)
+    public void SwitchToCollider(int index)
+    {
+        currentIndex = index;
+        currentCollider = states[index];
+        SetLerpColliderToCurrent();
+    }
+
+    public void SwitchToCollider(int index, float speed)
     {
         lerpSpeed = speed;
-        if (index >= 0 && index < states.Count)
-        {
-            foreach (var v in states)
-                v.enabled = false;
-            states[index].enabled = true;
-        }
         currentIndex = index;
         currentCollider = states[index];
     }
@@ -49,5 +50,13 @@ public class ColliderSwitcher : MonoBehaviour
         usedCollider.height = Mathf.MoveTowards(usedCollider.height, currentCollider.height, lerpSpeed * Time.deltaTime);
         usedCollider.center = Vector3.MoveTowards(usedCollider.center, currentCollider.center, lerpSpeed * Time.deltaTime);
         groundedCheck.center = usedCollider.center - Vector3.up * (usedCollider.height/2f - usedCollider.radius);
+    }
+
+    private void SetLerpColliderToCurrent()
+    {
+        usedCollider.radius = currentCollider.radius;
+        usedCollider.height = currentCollider.height;
+        usedCollider.center = currentCollider.center;
+        groundedCheck.center = usedCollider.center - Vector3.up * (usedCollider.height / 2f - usedCollider.radius);
     }
 }

@@ -18,6 +18,7 @@ public abstract class PlayerDashState : PlayerMovementState
         buffer = 0;
         Context.playerRb.useGravity = false;
         Context.SpeedPs.Stop();
+        Context.SpeedPs.Clear();
         // Subscribe 
         Context.playerEvents.OnStrikeEnd += StrikeDashEnd;
     }

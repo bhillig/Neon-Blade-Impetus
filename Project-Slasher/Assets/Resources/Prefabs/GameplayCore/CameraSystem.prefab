@@ -228,34 +228,34 @@ MonoBehaviour:
   body: {fileID: 0}
   minVel: 0
   maxVel: 20
-  maxFOV: 95
-  minFOV: 65
+  maxFOV: 90
+  minFOV: 60
   fovCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.24831906
-      outSlope: 0.24831906
+      inSlope: 0.40580547
+      outSlope: 0.40580547
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5501391
-      value: 0.13661003
-      inSlope: 0.37548655
-      outSlope: 0.37548655
+      time: 0.45320666
+      value: 0.18391374
+      inSlope: 0.0542463
+      outSlope: 0.0542463
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.1455294
-      outWeight: 0.31558457
+      outWeight: 0.43758258
     - serializedVersion: 3
       time: 1.0114594
       value: 1.0031166
-      inSlope: 1.8783191
-      outSlope: 1.8783191
+      inSlope: 1.467441
+      outSlope: 1.467441
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -285,19 +285,19 @@ MonoBehaviour:
       inWeight: 0.6784172
       outWeight: 0.4841865
     - serializedVersion: 3
-      time: 0.6809053
-      value: 0.18248643
-      inSlope: 0.10995313
-      outSlope: 0.10995313
+      time: 0.70132154
+      value: 0.14584245
+      inSlope: 0.22746333
+      outSlope: 0.22746333
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.5061082
+      outWeight: 0.7492884
     - serializedVersion: 3
-      time: 0.98989904
-      value: 0.19643828
-      inSlope: 0.04515254
-      outSlope: 0.04515254
+      time: 0.9815114
+      value: 0.20866074
+      inSlope: 0.224199
+      outSlope: 0.224199
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

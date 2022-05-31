@@ -16,6 +16,7 @@ public class StrikeVFXManager : MonoBehaviour
     [Header("Targeted Strike Particles")]
     public ParticleSystem targetedStrikeSonicBoomParticles;
     public ParticleSystem targetedStrikeSonicBoom2Particles;
+    public TrailRenderer targetedStrikeTrail;
 
     [Header("Dry Strike Particles")]
     public ParticleSystem dryStrikeTrailParticles;
@@ -93,19 +94,26 @@ public class StrikeVFXManager : MonoBehaviour
         chargeReadyParticles.Stop();
         if (target == null)
         {
-            DryDash();
+            DryStrike();
         }
         else
         {
-            TargetedDash();
+            TargetedStrike();
         }
     }
 
-    private void TargetedDash()
+    private void TargetedStrike()
     {
         scabbardSword.enabled = false;
         sword.enabled = true;
+        StartCoroutine(CoroutFrameDelay(() => targetedStrikeTrail.emitting = true));
         targetedStrikeSonicBoomParticles.Play();
+    }
+
+    private IEnumerator CoroutFrameDelay(System.Action action)
+    {
+        yield return new WaitForEndOfFrame();
+        action?.Invoke();
     }
 
     private void ChargeReady()
@@ -162,6 +170,8 @@ public class StrikeVFXManager : MonoBehaviour
     {
         DefaultVisuals();
         StartCoroutine(CoroutStrikeEnd());
+        targetedStrikeTrail.emitting = false;
+        targetedStrikeTrail.Clear();
     }
 
     private void ImpactEnd(float _)
@@ -177,7 +187,7 @@ public class StrikeVFXManager : MonoBehaviour
         sword.enabled = false;
     }
 
-    private void DryDash()
+    private void DryStrike()
     {
         dryStrikeSonicBoomParticles.Play();
         dryStrikeTrailParticles.Play();
