@@ -17,6 +17,7 @@ public abstract class PlayerDashState : PlayerMovementState
         subscribedToCollision = false;
         buffer = 0;
         Context.playerRb.useGravity = false;
+        Context.SpeedPs.Stop();
         // Subscribe 
         Context.playerEvents.OnStrikeEnd += StrikeDashEnd;
     }
@@ -28,6 +29,7 @@ public abstract class PlayerDashState : PlayerMovementState
         if(subscribedToCollision)
             Context.colliderEvents.OnCollisionEnterEvent -= OnDashCollision;
         Context.playerRb.useGravity = true;
+        Context.SpeedPs.Play();
         // unsubscribe
         Context.playerEvents.OnStrikeEnd -= StrikeDashEnd;
     }

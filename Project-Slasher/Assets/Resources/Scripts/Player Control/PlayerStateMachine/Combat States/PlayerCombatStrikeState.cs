@@ -7,6 +7,8 @@ public class PlayerCombatStrikeState : PlayerCombatState
     public PlayerCombatStrikeState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) { }
 
     private float timer = 0f;
+    private float impactTimer = 0f;
+    private EnemyEntityCore target;
 
     public override void EnterState()
     {
@@ -19,15 +21,19 @@ public class PlayerCombatStrikeState : PlayerCombatState
         if(targetFound == null)
         {
             timer = Context.combatProfile.DryDashDistance / Context.combatProfile.DryVelocity;
+            // -1 means it will not tick down
+            impactTimer = -1f;
         }
         else
         {
             Context.primaryAttackCooldownTimer = 0f;
             // Calculate distance to target + pierce distance
-            float dist = (targetFound.bounds.center - dashCollider.bounds.center).magnitude + Context.combatProfile.HitDashPierceDistance;
-            timer = dist / Context.combatProfile.HitVelocity;
-            var core = targetFound.GetComponentInParent<EnemyEntityCore>();
-            core.KillEnemy();
+            float dist = (targetFound.bounds.center - dashCollider.bounds.center).magnitude;
+            float pierceDist = dist + Context.combatProfile.HitDashPierceDistance;
+            timer = pierceDist / Context.combatProfile.HitVelocity;
+            impactTimer = Mathf.Max(0f, dist / Context.combatProfile.HitVelocity - 0.1f);
+            // Save target
+            target = targetFound.GetComponentInParent<EnemyEntityCore>();
         }
         Context.groundPhysicsContext.GroundedBlockTimer = timer;
         // Animation
@@ -38,6 +44,7 @@ public class PlayerCombatStrikeState : PlayerCombatState
     {
         base.ExitState();
         Context.playerEvents.OnStrikeEnd?.Invoke();
+        Context.TPComponentController.ResetDamp();
         Context.animationController.SetBool("Striking", false);
     }
     public override void UpdateState()
@@ -48,12 +55,30 @@ public class PlayerCombatStrikeState : PlayerCombatState
     public override void FixedUpdateState()
     {
         timer -= Time.fixedDeltaTime;
+        if (impactTimer >= 0f)
+        {
+            impactTimer -= Time.fixedDeltaTime;
+            if(impactTimer < 0f)
+                ImpactEffect();
+        }
         CheckSwitchState();
     }
     public override void CheckSwitchState()
     {
         if (timer <= 0f)
             TrySwitchState(Factory.CombatIdle);
+    }
+
+    protected virtual void ImpactEffect()
+    {
+        Context.TPComponentController.SetDampZ(0.1f);
+        TimeScaleManager.instance.SetTimeScale(0.05f, 1f, 0.05f, KillEnemy);
+    }
+
+    protected virtual void KillEnemy()
+    {
+        Context.TPComponentController.SetDampZ(2f);
+        target.KillEnemy();
     }
 
     protected override void PlayerCombatKilled()

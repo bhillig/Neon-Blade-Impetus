@@ -23,13 +23,13 @@ MonoBehaviour:
   baseAirAcceleration: 10
   airTurnSpeed: 0.1
   jumpGroundBlockDuration: 0.15
-  runningPreservationRatio: -0.25
-  airbornePreservationRatio: -0.25
+  runningPreservationRatio: -0.1
+  airbornePreservationRatio: -0.1
   rollSpeed: 12
   rollFallSpeedThreshhold: 15
   wallJumpUpHeight: 2
   wallJumpUpVel: 7.745967
-  wallJumpSideVel: 8
+  wallJumpSideVel: 8.5
   maxGroundedAngle: 50
   maxSnapVelocity: 11
   snapVelocityToAngleRatioCurve:

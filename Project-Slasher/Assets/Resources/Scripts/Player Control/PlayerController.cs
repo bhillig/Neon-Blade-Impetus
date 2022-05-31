@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
 
     // ParticleSystem for speed of player.
     private ParticleSystem speedPs;
+    public ParticleSystem SpeedPs => speedPs;
 
     // Particle usage getters.
     public GameObject Particle
@@ -152,7 +153,7 @@ public class PlayerController : MonoBehaviour
     {
         var emission = speedPs.emission;
         var velOverLifetime = speedPs.velocityOverLifetime;
-        emission.rateOverTime = Mathf.Pow(playerRb.velocity.magnitude / 4f, 2f);
+        emission.rateOverTime = Mathf.Pow(playerRb.velocity.magnitude / 5f, 2.5f);
         velOverLifetime.z = Mathf.Sqrt(playerRb.velocity.magnitude) * 2f;
     }
 }

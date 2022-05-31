@@ -607,6 +607,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Airborne
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Striking
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3758416975823955406}
   m_Solo: 0
@@ -618,7 +621,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.25
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 4
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &-1271232355961801757
@@ -1181,6 +1184,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Airborne
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Striking
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7991484907095197333}
   m_Solo: 0
@@ -1192,7 +1198,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.625
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 3
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1102 &7991484907095197333

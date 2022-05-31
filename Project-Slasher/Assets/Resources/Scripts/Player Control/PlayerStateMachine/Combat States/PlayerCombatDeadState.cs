@@ -23,6 +23,7 @@ public class PlayerCombatDeadState : PlayerCombatState
         Context.scarfCloth.randomAcceleration = new Vector3(15, 15, 15);
         scarfColliders = Context.scarfCloth.capsuleColliders;
         Context.scarfCloth.capsuleColliders = null;
+        
     }
 
     public override void ExitState()
