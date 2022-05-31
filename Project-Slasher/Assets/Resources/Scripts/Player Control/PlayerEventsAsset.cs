@@ -25,6 +25,7 @@ public class PlayerEventsAsset : ScriptableObject
     public Action OnStrikeCooldownStarted;
 
     public Action OnCollideWithProjectile;
+    public Action OnCollideWithVoid;
 
     #endregion
 

@@ -28,14 +28,14 @@ public class BulletController : MonoBehaviour
         coll = GetComponent<Collider>();
     }
 
-    private void Start()
-    {
-        ProjectileMove(moveSpeed);
-    }
-
     public void SetTarget(Transform target)
     {
         player = target;
+    }
+
+    public void SetStartDirection(Vector3 dir)
+    {
+        ProjectileMove(moveSpeed,dir);
     }
 
     public void SetTargetHeightOffset(float val)
@@ -55,14 +55,15 @@ public class BulletController : MonoBehaviour
         if (!destroyed)
         {
             float accelStep = trackingAcceleration * Time.deltaTime;
-            ProjectileMove(accelStep);
+            Vector3 toPlayer = player.position + Vector3.up * targetHeightOffset - transform.position;
+            ProjectileMove(accelStep,toPlayer);
         }    
     }
 
-    private void ProjectileMove(float accelStep)
+    private void ProjectileMove(float accelStep, Vector3 targetDir)
     {
         Vector3 currentVel = rb.velocity;
-        Vector3 desiredVel = (player.position + Vector3.up * targetHeightOffset - transform.position).normalized * moveSpeed;
+        Vector3 desiredVel = targetDir.normalized * moveSpeed;
         Vector3 newVel = Vector3.MoveTowards(currentVel, desiredVel, accelStep);
         rb.velocity = newVel;
         this.gameObject.transform.forward = rb.velocity;

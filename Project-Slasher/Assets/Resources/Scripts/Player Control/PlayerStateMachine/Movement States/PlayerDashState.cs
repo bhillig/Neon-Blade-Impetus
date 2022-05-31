@@ -14,7 +14,6 @@ public abstract class PlayerDashState : PlayerMovementState
     {
         base.EnterState();
         cachedSpeed = Context.playerRb.velocity.magnitude;
-        Context.colliderSwitcher.SwitchToCollider(2);
         subscribedToCollision = false;
         buffer = 0;
         Context.playerRb.useGravity = false;
@@ -50,7 +49,7 @@ public abstract class PlayerDashState : PlayerMovementState
 
     protected void OnDashCollision(Collision coll)
     {
-        StrikeDashEnd();
+        //StrikeDashEnd();
     }
 
     protected virtual void StrikeDashEnd()

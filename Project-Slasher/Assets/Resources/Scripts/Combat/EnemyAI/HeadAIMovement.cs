@@ -5,34 +5,17 @@ using UnityEngine.AI;
 
 public class HeadAIMovement : MonoBehaviour
 {
+    [Header("Dependencies")]
+    [SerializeField] private GameObject barrel;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private EnemyEntityCore core;
+    [SerializeField] private HeadAIProfile AiProfile;
+
     private Transform player;
-    [SerializeField] private LayerMask whatIsPlayer;
+    private float alertTimer;
     private Vector3 turnPoint;
     private bool turnPointSet = false;
     private bool playerSpotted = false;
-
-    [SerializeField] private GameObject barrel;
-
-    [SerializeField] private float sightRange;
-
-    [SerializeField] private float activationRange;
-
-    [SerializeField] private float scopeRange;
-
-    [SerializeField] private float reloadDelay;
-
-    [SerializeField] private float alertTime;
-
-    [SerializeField] private float lookSpeed;
-
-    [SerializeField] private float targetHeightOffset;
-
-    [SerializeField] GameObject bullet;
-
-    [SerializeField] private EnemyEntityCore core;
-
-    private float alertTimer;
-
     private float reloadTimer;
     
     void Awake()
@@ -53,22 +36,25 @@ public class HeadAIMovement : MonoBehaviour
 
     void Update()
     {
-        if (!core.IsDead && Vector3.Distance(this.transform.position, player.position) <= activationRange)
+        if (!core.IsDead && Vector3.Distance(this.transform.position, player.position) <= AiProfile.ActivationRange)
         {
             if (!playerSpotted)
             {
-                if (Physics.Raycast(barrel.transform.position, barrel.transform.position, scopeRange, whatIsPlayer))
+                if (Physics.Raycast(barrel.transform.position, 
+                    barrel.transform.position, 
+                    AiProfile.ScopeRange, 
+                    AiProfile.WhatIsPlayer))
                 {
                     Shoot();
                     playerSpotted = true;
-                    alertTimer = alertTime;
+                    alertTimer = AiProfile.AlertTime;
                 }
 
-                if (Vector3.Distance(this.transform.position, player.position) <= sightRange)
+                if (Vector3.Distance(this.transform.position, player.position) <= AiProfile.SightRange)
                 {
                     playerSpotted = true;
-                    alertTimer = alertTime;
-                    reloadTimer = reloadDelay;
+                    alertTimer = AiProfile.AlertTime;
+                    reloadTimer = AiProfile.ReloadDelay;
                 }
 
                 else 
@@ -82,7 +68,7 @@ public class HeadAIMovement : MonoBehaviour
                 TurnLockOn();
                 if (reloadTimer <= 0) 
                 {
-                    reloadTimer = reloadDelay;
+                    reloadTimer = AiProfile.ReloadDelay;
                     Shoot();
                 }
                 else
@@ -106,7 +92,7 @@ public class HeadAIMovement : MonoBehaviour
     public void Respawn()
     {
         reloadTimer = 0f;
-        alertTime = 0f;
+        AiProfile.AlertTime = 0f;
     }
 
     void Shoot()
@@ -114,16 +100,17 @@ public class HeadAIMovement : MonoBehaviour
         var newBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
         var controller = newBullet.GetComponent<BulletController>();
         controller.SetTarget(player);
-        controller.SetTargetHeightOffset(targetHeightOffset);
+        controller.SetTargetHeightOffset(AiProfile.TargetHeightOffset);
+        controller.SetStartDirection(barrel.transform.forward);
     }
 
     void TurnLockOn()
     {
         turnPoint = player.position;
         turnPointSet = true;
-        Vector3 lookPos = turnPoint - transform.position;
+        Vector3 lookPos = transform.position - turnPoint;
         Quaternion rotation = Quaternion.LookRotation(lookPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, lookSpeed);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, AiProfile.RotationSpeed * Time.deltaTime);
     }
 
     void TurnRandom()
@@ -141,7 +128,7 @@ public class HeadAIMovement : MonoBehaviour
         {
             Vector3 lookPos = turnPoint - transform.position;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, lookSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, AiProfile.RotationSpeed);
 
             if (transform.rotation == rotation)
             {
@@ -157,7 +144,7 @@ public class HeadAIMovement : MonoBehaviour
 
     public bool Activate()
     {
-        return Vector3.Distance(this.transform.position, player.position) <= activationRange;
+        return Vector3.Distance(this.transform.position, player.position) <= AiProfile.ActivationRange;
     }
 
 }

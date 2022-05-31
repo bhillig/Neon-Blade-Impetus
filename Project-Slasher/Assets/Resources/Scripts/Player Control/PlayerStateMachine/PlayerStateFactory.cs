@@ -19,7 +19,7 @@ public class PlayerStateFactory
         Landing = new PlayerLandingState(context, this);
         Run = new PlayerRunState(context, this);
         DryStrikeDash = new PlayerDryStrikeDashState(context, this);
-        HitStrikeDash = new PlayerHitStrikeDashState(context, this);
+        TargetStrikeDash = new PlayerTargetStrikeDashState(context, this);
         Dead = new PlayerDeadState(context, this);
 
         // Switch states
@@ -41,7 +41,7 @@ public class PlayerStateFactory
     public PlayerBaseState Jump { get; }
     public PlayerBaseState Slide { get; }
     public PlayerBaseState DryStrikeDash { get; }
-    public PlayerBaseState HitStrikeDash { get; }
+    public PlayerBaseState TargetStrikeDash { get; }
     public PlayerBaseState Dead { get; }
 
     // Switch states
