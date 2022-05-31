@@ -25,7 +25,10 @@ MonoBehaviour:
     m_Bits: 2147483648
   hitVelocity: 35
   hitBoostVelocity: 4
-  hitDashPierceDistance: 3
+  hitDashPierceDistance: 4
+  timeSlowScale: 0.05
+  timeSlowDuration: 0.6
+  timeSlowStartOffset: -0.07
   dryVelocity: 30
   dryExitVelocity: 2
   dryDashDistance: 4.5

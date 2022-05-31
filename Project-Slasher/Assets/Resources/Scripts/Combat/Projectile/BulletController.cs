@@ -13,6 +13,7 @@ public class BulletController : MonoBehaviour
     private Rigidbody rb;
     private bool destroyed = false;
     private float targetHeightOffset;
+    private float timer = 0f;
 
     [Header("Renderers")]
     [SerializeField] private Renderer bulletRenderer;
@@ -43,13 +44,6 @@ public class BulletController : MonoBehaviour
         targetHeightOffset = val;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //this.transform.position = Vector3.Lerp(this.gameObject.transform.position, new Vector3(player.position.x, player.position.y+1, player.position.z), moveSpeed*Time.smoothDeltaTime);
-        Invoke("DestroyBullet", destructTime);
-    }
-
     private void FixedUpdate()
     {
         if (!destroyed)
@@ -69,9 +63,11 @@ public class BulletController : MonoBehaviour
         this.gameObject.transform.forward = rb.velocity;
     }
 
-    void DestroyBullet()
+    private void Update()
     {
-        Destroy(this.gameObject);
+        timer += Time.deltaTime;
+        if (timer > destructTime && !destroyed)
+            OnImpact();
     }
 
     void OnTriggerEnter(Collider collision)
@@ -94,5 +90,6 @@ public class BulletController : MonoBehaviour
         bulletRenderer.enabled = false;
         coll.enabled = false;
         destroyed = true;
+        Destroy(gameObject, 0.5f);
     }
 }

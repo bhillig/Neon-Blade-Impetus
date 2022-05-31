@@ -8,12 +8,13 @@ public class HeadAIMovement : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private GameObject barrel;
     [SerializeField] private GameObject bullet;
-    [SerializeField] private EnemyEntityCore core;
+    [SerializeField] private AbstractEnemyEntity core;
     [SerializeField] private HeadAIProfile AiProfile;
 
     private Transform player;
     private float alertTimer;
     private Vector3 turnPoint;
+    private Vector3 lookPos;
     private bool turnPointSet = false;
     private bool playerSpotted = false;
     private float reloadTimer;
@@ -66,7 +67,8 @@ public class HeadAIMovement : MonoBehaviour
             else
             {
                 TurnLockOn();
-                if (reloadTimer <= 0) 
+                float dot = Vector3.Dot(barrel.transform.forward, -lookPos.normalized);
+                if (reloadTimer <= 0 && dot > 0.9f) 
                 {
                     reloadTimer = AiProfile.ReloadDelay;
                     Shoot();
@@ -108,7 +110,7 @@ public class HeadAIMovement : MonoBehaviour
     {
         turnPoint = player.position;
         turnPointSet = true;
-        Vector3 lookPos = transform.position - Vector3.up * AiProfile.TargetHeightOffset - turnPoint;
+        lookPos = transform.position - Vector3.up * AiProfile.TargetHeightOffset - turnPoint;
         Quaternion rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, AiProfile.RotationSpeed * Time.deltaTime);
     }

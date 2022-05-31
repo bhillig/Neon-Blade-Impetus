@@ -14,15 +14,13 @@ public abstract class PlayerMovementState : PlayerBaseState
     public override void EnterState()
     {
         Context.playerEvents.OnStrikeStart += PerformStrikeDash;
-        Context.playerEvents.OnCollideWithProjectile += PlayerKilled;
-        Context.playerEvents.OnCollideWithVoid += PlayerKilled;
+        Context.playerEvents.OnCombatKilled += PlayerKilled;
     }
 
     public override void ExitState()
     {
         Context.playerEvents.OnStrikeStart -= PerformStrikeDash;
-        Context.playerEvents.OnCollideWithProjectile -= PlayerKilled;
-        Context.playerEvents.OnCollideWithVoid -= PlayerKilled;
+        Context.playerEvents.OnCombatKilled -= PlayerKilled;
     }
 
     public override void UpdateState()

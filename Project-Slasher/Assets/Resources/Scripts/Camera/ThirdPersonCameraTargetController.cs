@@ -45,8 +45,8 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
 
     private void CameraRotation()
     {
-        yRotation += Time.deltaTime * Sensitivity * mouseDelta.x;
-        xRotation -= Time.deltaTime * Sensitivity * mouseDelta.y;
+        yRotation += Time.unscaledDeltaTime * Sensitivity * mouseDelta.x;
+        xRotation -= Time.unscaledDeltaTime * Sensitivity * mouseDelta.y;
         // Clamping vertical looking       
         LerpCameraToValues(1);
     }
@@ -55,7 +55,7 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
     {
         Vector3 originalRotation = TPTarget.rotation.eulerAngles;
         xRotation = Mathf.Clamp(Mathf.DeltaAngle(0, xRotation), -VerticalRangeDown, VerticalRangeUp);
-        float lerpFactor = (Damping > 0) ? 10 / (Damping * dampingMultiplier) * Time.deltaTime : 1;
+        float lerpFactor = (Damping > 0) ? 10 / (Damping * dampingMultiplier) * Time.unscaledDeltaTime : 1;
         TPTarget.rotation = Quaternion.Euler(
             originalRotation.x.AngleLerp(xRotation, lerpFactor),
             originalRotation.y.AngleLerp(yRotation, lerpFactor),

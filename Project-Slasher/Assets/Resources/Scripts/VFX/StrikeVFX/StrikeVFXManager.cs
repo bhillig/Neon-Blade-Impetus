@@ -7,14 +7,20 @@ public class StrikeVFXManager : MonoBehaviour
     [Header("Dependencies")]
     public PlayerEventsAsset playerEvents;
 
-    [Header("Particles")]
-    public ParticleSystem dryDashParticles;
-    public ParticleSystem targettedDashParticles;
-    public ParticleSystem dashTrailParticles;
+    [Header("Chargeup Particles")]
     public ParticleSystem chargeParticles;
     public ParticleSystem chargeReadyParticles;
     public ParticleSystem cooldownFinishedParticles;
     public ParticleSystem overchargedParticles;
+
+    [Header("Targeted Strike Particles")]
+    public ParticleSystem targetedStrikeSonicBoomParticles;
+    public ParticleSystem targetedStrikeSonicBoom2Particles;
+    public TrailRenderer targetedStrikeTrail;
+
+    [Header("Dry Strike Particles")]
+    public ParticleSystem dryStrikeTrailParticles;
+    public ParticleSystem dryStrikeSonicBoomParticles;
 
     [Header("Renderers")]
     public MeshRenderer sword;
@@ -51,6 +57,7 @@ public class StrikeVFXManager : MonoBehaviour
         playerEvents.OnStrikeOvercharged += Overcharged;
         playerEvents.OnStrikeCooldownFinished += CooldownFinished;
         playerEvents.OnStrikeCooldownStarted += CooldownStarted;
+        playerEvents.ImpactEnd += ImpactEnd;
         sword.GetComponent<MeshRenderer>().enabled = false;
     }
 
@@ -64,6 +71,7 @@ public class StrikeVFXManager : MonoBehaviour
         playerEvents.OnStrikeOvercharged -= Overcharged;
         playerEvents.OnStrikeCooldownFinished -= CooldownFinished;
         playerEvents.OnStrikeCooldownStarted -= CooldownStarted;
+        playerEvents.ImpactEnd -= ImpactEnd;
     }
 
     private void CooldownFinished()
@@ -86,20 +94,26 @@ public class StrikeVFXManager : MonoBehaviour
         chargeReadyParticles.Stop();
         if (target == null)
         {
-            DryDash();
+            DryStrike();
         }
         else
         {
-            TargetedDash();
+            TargetedStrike();
         }
     }
 
-    private void TargetedDash()
+    private void TargetedStrike()
     {
         scabbardSword.enabled = false;
         sword.enabled = true;
-        dashTrailParticles.Play();
-        targettedDashParticles.Play();
+        StartCoroutine(CoroutFrameDelay(() => targetedStrikeTrail.emitting = true));
+        targetedStrikeSonicBoomParticles.Play();
+    }
+
+    private IEnumerator CoroutFrameDelay(System.Action action)
+    {
+        yield return new WaitForEndOfFrame();
+        action?.Invoke();
     }
 
     private void ChargeReady()
@@ -156,18 +170,26 @@ public class StrikeVFXManager : MonoBehaviour
     {
         DefaultVisuals();
         StartCoroutine(CoroutStrikeEnd());
+        targetedStrikeTrail.emitting = false;
+        targetedStrikeTrail.Clear();
+    }
+
+    private void ImpactEnd(float _)
+    {
+        targetedStrikeSonicBoomParticles?.Stop();
+        targetedStrikeSonicBoom2Particles?.Play();
     }
 
     private IEnumerator CoroutStrikeEnd()
     {
-        dashTrailParticles.Stop();
         yield return new WaitForSeconds(endDelay);
         scabbardSword.enabled = true;
         sword.enabled = false;
     }
 
-    private void DryDash()
+    private void DryStrike()
     {
-        dryDashParticles.Play();
+        dryStrikeSonicBoomParticles.Play();
+        dryStrikeTrailParticles.Play();
     }
 }
