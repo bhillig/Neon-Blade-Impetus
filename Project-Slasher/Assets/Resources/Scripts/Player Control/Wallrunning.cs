@@ -216,7 +216,7 @@ public class Wallrunning
         // Only enter wall run if camera is pointing towards the wall 
         Vector3 proj = Vector3.ProjectOnPlane(cameraForward, Vector3.up);
         float dot = Vector3.Dot(proj.normalized, lastWallNormal);
-        return CanWallRun() && hits.Length > 0 && AboveGround(minJumpHeight) && dot <= 0.2f;
+        return CanWallRun() && hits.Length > 0 && AboveGround(minJumpHeight) && dot <= 0.2f && dot > -0.9f;
     }
 
     public bool CanAttach()

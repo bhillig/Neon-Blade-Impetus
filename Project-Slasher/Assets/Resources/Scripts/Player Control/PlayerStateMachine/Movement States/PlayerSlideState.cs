@@ -11,12 +11,13 @@ public class PlayerSlideState : PlayerGroundedState
     public override void EnterState()
     {
         base.EnterState();
-
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.SlideParticle, Context.transform, false);
+        // The player phases through the ground if this line isn't here
+        Context.playerPhysicsTransform.position += Vector3.up * 0.1f;
+        Context.colliderSwitcher.SwitchToCollider(1);
 
         Context.animationController.SetBool("Sliding", true);
-        Context.colliderSwitcher.SwitchToCollider(1);
         SlideEnterPhysics();
         // Slide timers
         Context.slideCooldownTimer = Context.movementProfile.SlideCooldown;

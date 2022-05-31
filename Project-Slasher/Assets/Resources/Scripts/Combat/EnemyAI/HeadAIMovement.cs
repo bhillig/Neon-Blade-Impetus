@@ -8,7 +8,7 @@ public class HeadAIMovement : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private GameObject barrel;
     [SerializeField] private GameObject bullet;
-    [SerializeField] private EnemyEntityCore core;
+    [SerializeField] private AbstractEnemyEntity core;
     [SerializeField] private HeadAIProfile AiProfile;
 
     private Transform player;

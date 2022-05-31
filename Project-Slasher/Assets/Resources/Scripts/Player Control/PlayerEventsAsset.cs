@@ -28,6 +28,8 @@ public class PlayerEventsAsset : ScriptableObject
     public Action OnCollideWithVoid;
     public Action OnCombatKilled;
 
+    public Action<float> ImpactEnd;
+
     #endregion
 
     #region Utils

@@ -24,8 +24,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483648
   hitVelocity: 35
-  hitBoostVelocity: 3
+  hitBoostVelocity: 4
   hitDashPierceDistance: 4
+  timeSlowScale: 0.05
+  timeSlowDuration: 0.55
+  timeSlowStartOffset: -0.05
   dryVelocity: 30
   dryExitVelocity: 2
   dryDashDistance: 4.5

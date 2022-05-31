@@ -6,10 +6,10 @@ public abstract class PlayerCombatState : PlayerBaseState
 {
     public PlayerCombatState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) 
     {
-        dashCollider = (SphereCollider)Context.colliderSwitcher.GetCollider(2);
+        dashCollider = (CapsuleCollider)Context.colliderSwitcher.GetCollider(2);
     }
 
-    protected SphereCollider dashCollider;
+    protected CapsuleCollider dashCollider;
 
     public override void EnterState()
     {

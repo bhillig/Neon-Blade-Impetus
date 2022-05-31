@@ -20,15 +20,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DeathParticles1
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 2
+  m_Name: TargetedStrikeSonicBoomParticles
+  m_Shader: {fileID: -6465566751694194690, guid: 52fbabc79dda16447a04c49bfbaef688, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -111,7 +110,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 1
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -120,10 +119,10 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_91205da7ca614d11957f70d05c84cce9: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Emission: {r: 0.6734973, g: 0, b: 0.021156985, a: 1}
-    - _EmissionColor: {r: 1.3490196, g: 0, b: 0.039215688, a: 1}
+    - _Emission: {r: 2.132742, g: 1.9922637, b: 0.15632655, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _TintColor: {r: 0.44705883, g: 0, b: 0, a: 1}
+    - _TintColor: {r: 3.5648696, g: 3.2467558, b: 0, a: 1}
   m_BuildTextureStacks: []

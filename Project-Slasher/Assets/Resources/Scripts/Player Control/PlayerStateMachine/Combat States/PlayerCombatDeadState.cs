@@ -15,7 +15,7 @@ public class PlayerCombatDeadState : PlayerCombatState
         Context.inputContext.RestartDownEvent.AddListener(CombatRestartLevel);
         Context.playerModelTransform.gameObject.SetActive(false);
         Context.DeathParticles.Play();
-        Context.colliderSwitcher.GetCurrentCollider().enabled = false;
+        Context.colliderSwitcher.GetConcreteCollider().enabled = false;
 
         // Scarf stuff
         Context.scarfCloth.externalAcceleration = new Vector3(0, 100, 0);
@@ -33,7 +33,7 @@ public class PlayerCombatDeadState : PlayerCombatState
         Context.playerModelTransform.gameObject.SetActive(true);
         
         // Scarf stuff
-        Context.colliderSwitcher.GetCurrentCollider().enabled = true;
+        Context.colliderSwitcher.GetConcreteCollider().enabled = true;
         Context.scarfCloth.externalAcceleration = new Vector3(0, 0, 0);
         Context.scarfCloth.randomAcceleration = scarfRandAccel;
         Context.scarfCloth.capsuleColliders = scarfColliders;

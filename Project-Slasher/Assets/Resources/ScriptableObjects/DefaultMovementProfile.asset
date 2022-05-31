@@ -20,7 +20,7 @@ MonoBehaviour:
   groundedToJumpDelay: 0.1
   jumpHeight: 2
   jumpVelocity: 7.745967
-  baseAirAcceleration: 10
+  baseAirAcceleration: 12
   airTurnSpeed: 0.1
   jumpGroundBlockDuration: 0.15
   runningPreservationRatio: -0.1
@@ -30,7 +30,7 @@ MonoBehaviour:
   wallJumpUpHeight: 2
   wallJumpUpVel: 7.745967
   wallJumpSideVel: 8.5
-  maxGroundedAngle: 50
+  maxGroundedAngle: 45
   maxSnapVelocity: 11
   snapVelocityToAngleRatioCurve:
     serializedVersion: 2
@@ -84,4 +84,4 @@ MonoBehaviour:
   slideLockDuration: 0.3
   slideCooldown: 0.65
   slideSpeedCap: 25
-  minGroundedDotProd: 0.64278764
+  minGroundedDotProd: 0.70710677

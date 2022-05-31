@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DryDashTriParticle
+  m_Name: DryStrikeSonicBoomParticles
   m_Shader: {fileID: -6465566751694194690, guid: 52fbabc79dda16447a04c49bfbaef688, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -118,11 +118,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_91205da7ca614d11957f70d05c84cce9: {r: 1, g: 0, b: 0, a: 1}
+    - Color_91205da7ca614d11957f70d05c84cce9: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Emission: {r: 0.5290781, g: 1.474188, b: 1.536501, a: 1}
+    - _Emission: {r: 0.10980392, g: 2.5568628, b: 2.9960785, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _TintColor: {r: 0, g: 1, b: 0.83983755, a: 1}
+    - _TintColor: {r: 0, g: 0.71495414, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -2,21 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class EnemyEntityCore : MonoBehaviour
+public class EnemyEntityCore : AbstractEnemyEntity
 {
     [Header("Components")]
     public List<Collider> colliders;
     public List<Renderer> renderers;
     public List<ParticleSystem> deathParticles;
 
-    // Events
-    public Action OnDead;
-    public Action OnRespawn;
-
-    private bool isDead;
-    public bool IsDead => isDead;
-
-    public void KillEnemy()
+    public override void KillEnemy()
     {
         isDead = true;
         colliders.ForEach(collider => collider.enabled = false);
@@ -25,7 +18,7 @@ public class EnemyEntityCore : MonoBehaviour
         OnDead?.Invoke();
     }
 
-    public void Respawn()
+    public override void Respawn()
     {
         isDead = false; 
         colliders.ForEach(collider => collider.enabled = true);

@@ -9,17 +9,16 @@ public abstract class PlayerAirborneState : PlayerMovementState
     public override void EnterState()
     {
         base.EnterState();
-
         // Store initial height of the player.
         Context.ApexHeight = Context.transform.position.y;
-        Context.colliderSwitcher.SwitchToCollider(3);
+        Context.colliderSwitcher.SwitchToCollider(3,4);
         Context.animationController.SetBool("Airborne", true);
     }
 
     public override void ExitState()
     {   
         base.ExitState();
-        Context.colliderSwitcher.SwitchToCollider(0);
+        Context.colliderSwitcher.SwitchToCollider(0,4);
         Context.animationController.SetBool("Airborne", false);
     }
 
