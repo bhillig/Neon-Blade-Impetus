@@ -5313,7 +5313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6244716891126673560}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.016000003, y: -1.42, z: 0.07}
+  m_LocalPosition: {x: 0.016000003, y: 1.42, z: 0.07}
   m_LocalScale: {x: 0.5, y: 0.49999988, z: 0.49999988}
   m_Children: []
   m_Father: {fileID: 791000123954561549}
@@ -5526,19 +5526,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9347bfd8a6e4cd47abe8bb6bc2c4bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 128
   barrel: {fileID: 6244716891126673560}
-  sightRange: 25
-  activationRange: 25
-  scopeRange: 25
-  reloadDelay: 0.25
-  alertTime: 100
-  lookSpeed: 2
-  targetHeightOffset: 1.5
   bullet: {fileID: 6647800826117427705, guid: 3897e676db38f0646a7d0654d651af84, type: 3}
-  core: {fileID: 0}
+  core: {fileID: 2552501014171526000}
+  AiProfile: {fileID: 11400000, guid: 67b99f907797ac14085e411d6da013d4, type: 2}
 --- !u!1 &8699705718651531999
 GameObject:
   m_ObjectHideFlags: 0

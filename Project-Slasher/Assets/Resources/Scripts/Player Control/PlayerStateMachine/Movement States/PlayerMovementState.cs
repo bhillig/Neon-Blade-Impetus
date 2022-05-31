@@ -15,12 +15,14 @@ public abstract class PlayerMovementState : PlayerBaseState
     {
         Context.playerEvents.OnStrikeStart += PerformStrikeDash;
         Context.playerEvents.OnCollideWithProjectile += PlayerKilled;
+        Context.playerEvents.OnCollideWithVoid += PlayerKilled;
     }
 
     public override void ExitState()
     {
         Context.playerEvents.OnStrikeStart -= PerformStrikeDash;
         Context.playerEvents.OnCollideWithProjectile -= PlayerKilled;
+        Context.playerEvents.OnCollideWithVoid -= PlayerKilled;
     }
 
     public override void UpdateState()
@@ -31,7 +33,7 @@ public abstract class PlayerMovementState : PlayerBaseState
     {
         if (strikeHasTarget != null)
         {
-            TrySwitchState(Factory.HitStrikeDash);
+            TrySwitchState(Factory.TargetStrikeDash);
         }
         else
         {

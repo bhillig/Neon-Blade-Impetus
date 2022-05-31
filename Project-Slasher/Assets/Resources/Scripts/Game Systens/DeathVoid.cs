@@ -6,10 +6,10 @@ public class DeathVoid : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController pc = other.transform.parent.GetComponent<PlayerController>();
+        var pc = other.GetComponentInParent<PlayerHitboxManager>();
         if (pc != null)
         {
-            pc.Die();
+            pc.playerEvents.OnCollideWithVoid();
         }
     }
 }

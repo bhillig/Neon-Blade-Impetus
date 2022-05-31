@@ -9,22 +9,27 @@ public class PlayerController : MonoBehaviour
     public Transform playerPhysicsTransform;
     public Transform playerModelTransform;
     public Transform playerCenter;
+
     [Header("Camera")]
     public Camera mainCam;
     public ThirdPersonCameraTargetController TPTargetController;
     public CinemachineTPFollowController TPComponentController;
+
     [Header("Movement Scripts")]
     public GroundedPhysicsContext groundPhysicsContext;
     public AirbornePhysicsContext airbornePhysicsContext;
     public WallFinder wallFinder;
     public Wallrunning wallRunning;
+
     [Header("Physics Dependencies")]
     public ColliderSwitcher colliderSwitcher;
     public ColliderEvents colliderEvents;
     public Rigidbody playerRb;
+
     [Header("Scriptable Objects")]
     public PlayerMovementProfile movementProfile;
     public PlayerCombatProfile combatProfile;
+
     [Header("Misc")]
     public InputInfo inputContext;
     public Animator animationController;
@@ -138,16 +143,12 @@ public class PlayerController : MonoBehaviour
         print(state);
     }
 
-    public void Die()
-    {
-        this.playerRb.velocity = Vector3.zero; 
-        transform.position = respawnPoint;
-    }
     // Change the speed particle emission depending on the speed of the player.
     private void SetSpeedParticleEmission()
     {
         var emission = speedPs.emission;
-
-        emission.rateOverTime = Mathf.Abs(playerRb.velocity.x) * 2 + Mathf.Abs(playerRb.velocity.y) * 2 + Mathf.Abs(playerRb.velocity.z) * 2;
+        var velOverLifetime = speedPs.velocityOverLifetime;
+        emission.rateOverTime = Mathf.Pow(playerRb.velocity.magnitude / 4f, 2f);
+        velOverLifetime.z = Mathf.Sqrt(playerRb.velocity.magnitude) * 2f;
     }
 }
