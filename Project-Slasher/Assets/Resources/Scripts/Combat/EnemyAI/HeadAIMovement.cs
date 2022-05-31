@@ -108,7 +108,7 @@ public class HeadAIMovement : MonoBehaviour
     {
         turnPoint = player.position;
         turnPointSet = true;
-        Vector3 lookPos = transform.position - turnPoint;
+        Vector3 lookPos = transform.position - Vector3.up * AiProfile.TargetHeightOffset - turnPoint;
         Quaternion rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, AiProfile.RotationSpeed * Time.deltaTime);
     }

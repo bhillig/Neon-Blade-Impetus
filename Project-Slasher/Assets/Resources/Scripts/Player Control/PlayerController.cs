@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public ColliderSwitcher colliderSwitcher;
     public ColliderEvents colliderEvents;
     public Rigidbody playerRb;
+    public Cloth scarfCloth;
 
     [Header("Scriptable Objects")]
     public PlayerMovementProfile movementProfile;
@@ -33,6 +34,29 @@ public class PlayerController : MonoBehaviour
     [Header("Misc")]
     public InputInfo inputContext;
     public Animator animationController;
+
+    [Header("Particles")]
+    [SerializeField]
+    private GameObject runParticle;
+    [SerializeField]
+    private GameObject largeLandParticle;
+    [SerializeField]
+    private GameObject slideParticle;
+    [SerializeField]
+    private GameObject smallLandParticle;
+    [SerializeField]
+    private GameObject jumpParticle;
+    [SerializeField]
+    private GameObject speedParticle;
+    [SerializeField]
+    private ParticleSystem deathParticles;
+    // Particle getters.
+    public GameObject RunParticle { get => runParticle; }
+    public GameObject LargeLandParticle { get => largeLandParticle; }
+    public GameObject SlideParticle { get => slideParticle; }
+    public GameObject SmallLandParticle { get => smallLandParticle; }
+    public GameObject JumpParticle { get => jumpParticle; }
+    public ParticleSystem DeathParticles { get => deathParticles; }
 
     public PlayerEventsAsset playerEvents;
     // State machine
@@ -56,26 +80,6 @@ public class PlayerController : MonoBehaviour
         get => apexHeight;
         set => apexHeight = value;
     }
-
-    // Particle prefabs.
-    [SerializeField]
-    private GameObject runParticle;
-    [SerializeField]
-    private GameObject largeLandParticle;
-    [SerializeField]
-    private GameObject slideParticle;
-    [SerializeField]
-    private GameObject smallLandParticle;
-    [SerializeField]
-    private GameObject jumpParticle;
-    [SerializeField]
-    private GameObject speedParticle;
-    // Particle getters.
-    public GameObject RunParticle { get => runParticle; }
-    public GameObject LargeLandParticle { get => largeLandParticle; }
-    public GameObject SlideParticle { get => slideParticle; }
-    public GameObject SmallLandParticle { get => smallLandParticle; }
-    public GameObject JumpParticle { get => jumpParticle; }
 
     // For particles usage in each state.
     private GameObject particle;
