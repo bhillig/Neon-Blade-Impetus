@@ -6,10 +6,12 @@ public class ColliderSwitcher : MonoBehaviour
 {
     public List<Collider> states;
     public int startCollider;
+    private int currentIndex;
 
     private void Awake()
     {
         SwitchToCollider(startCollider);
+        currentIndex = startCollider;
     }
 
     public void SwitchToCollider(int index)
@@ -20,10 +22,16 @@ public class ColliderSwitcher : MonoBehaviour
                 v.enabled = false;
             states[index].enabled = true;
         }
+        currentIndex = index;
     }
 
     public Collider GetCollider(int index)
     {
         return states[index];
+    }
+
+    public Collider GetCurrentCollider()
+    {
+        return states[currentIndex];
     }
 }
