@@ -21,8 +21,12 @@ public class HeadAIMovement : MonoBehaviour
     
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        
         core.OnRespawn += Respawn;
+    }
+
+    void Start() {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void OnDestroy()

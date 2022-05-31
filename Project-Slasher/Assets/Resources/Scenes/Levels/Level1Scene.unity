@@ -17242,68 +17242,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1001 &643720662
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1901966545}
-    m_Modifications:
-    - target: {fileID: 650499973088625852, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_Name
-      value: DummyTurret
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -58.038414
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.7125387
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -36
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
---- !u!4 &643720663 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1405907199046768729, guid: 6107b327286c0e641b575fc9bbbff9d0, type: 3}
-  m_PrefabInstance: {fileID: 643720662}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &648514895
 Mesh:
   m_ObjectHideFlags: 0
@@ -40413,6 +40351,68 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &1717730347
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1901966545}
+    m_Modifications:
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -58.51727
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.7694592
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -35.822643
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875071023897226370, guid: bc41482d29f553b448b123565addf093, type: 3}
+      propertyPath: m_Name
+      value: Turret
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc41482d29f553b448b123565addf093, type: 3}
+--- !u!4 &1717730348 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
+  m_PrefabInstance: {fileID: 1717730347}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1724278690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2327109170383964519, guid: e779cd92f2dcf4f4f9a413577819d09c, type: 3}
@@ -43917,9 +43917,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 643720663}
+  - {fileID: 1717730348}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1903420727
 Mesh:
