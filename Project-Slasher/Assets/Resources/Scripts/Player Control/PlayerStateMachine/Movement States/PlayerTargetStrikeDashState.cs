@@ -68,4 +68,8 @@ public class PlayerTargetStrikeDashState : PlayerDashState
         if (dot < 4f)
             exitVelocity = dir * Context.combatProfile.HitBoostVelocity;
     }
+    protected override void UpdateWindAudio()
+    {
+        PlayerAudioManager.SetGlobalParameter("WindEffect", 0f);
+    }
 }

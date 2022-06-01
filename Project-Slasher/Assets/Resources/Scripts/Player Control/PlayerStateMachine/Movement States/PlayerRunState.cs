@@ -15,6 +15,8 @@ public class PlayerRunState : PlayerGroundedState
     public override void EnterState()
     {
         base.EnterState();
+        // Footsteps
+        Context.playerEvents.FootstepTaken += PlayFootstepAudio;
 
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.RunParticle, Context.transform, false);
@@ -30,7 +32,8 @@ public class PlayerRunState : PlayerGroundedState
     {
         base.ExitState();
         Context.animationController.SetBool("Running", false);
-
+        Context.animationController.speed = 1f;
+        Context.playerEvents.FootstepTaken -= PlayFootstepAudio;
         // Stop Particles
         // They will be deleted from their own scrips after 1 second of stopped.
         Context.Ps.Stop();
@@ -47,6 +50,13 @@ public class PlayerRunState : PlayerGroundedState
     public override void FixedUpdateState()
     {
         base.FixedUpdateState();
+        float horizontalSpeed = Vector3.ProjectOnPlane(Context.playerRb.velocity, Context.groundPhysicsContext.ContactNormal).magnitude;
+        // Overclock acceleration
+        if (horizontalSpeed + maxSpeedChange >= maxSpeed && maxSpeed >= Context.movementProfile.BaseMoveSpeed)
+        {
+            maxSpeed += Time.fixedDeltaTime * Context.movementProfile.OverclockAcceleration;
+            desiredVelocity = flatMove.GetDesiredVelocity(maxSpeed);
+        }
         // Basic run movement
         if (desiredVelocity != Vector3.zero)
             flatMove.SimpleMovement(desiredVelocity,maxSpeedChange);
@@ -55,7 +65,10 @@ public class PlayerRunState : PlayerGroundedState
         if (Context.inputContext.movementInput != Vector2.zero)
             flatMove.UpdateFlatForwardVector(Context.inputContext.lastNZeroMovementInput);
         flatMove.LerpRotation(Context.movementProfile.TurnSpeed);
-        CalculateTopSpeed();
+        UpdateTopSpeed();
+        // Animation speed
+        float speedRatio = Mathf.InverseLerp(0f, Context.movementProfile.TopMoveSpeed, horizontalSpeed);
+        Context.animationController.speed = Context.movementProfile.RunAnimationSpeedCurve.Evaluate(speedRatio);
     }
 
     public override void CheckSwitchState()
@@ -67,19 +80,27 @@ public class PlayerRunState : PlayerGroundedState
         }
     }
 
+    private void PlayFootstepAudio()
+    {
+        Context.audioManager.footStepEmitter.Play();
+    }
+
     /// <summary>
     /// Always use the fastest top speed possible to preserve entry velocity 
     /// </summary>
     private void CalculateTopSpeed()
     {
         float flatVel = Vector3.ProjectOnPlane(Context.playerRb.velocity, Context.groundPhysicsContext.ContactNormal).magnitude;
+        maxSpeed = flatVel;
+        // Clamp to minimum speed
+        maxSpeed = Mathf.Clamp(maxSpeed, Context.movementProfile.BaseMoveSpeed, Context.movementProfile.TopMoveSpeed);
+    }
+    private void UpdateTopSpeed()
+    {
+        float flatVel = Vector3.ProjectOnPlane(Context.playerRb.velocity, Context.groundPhysicsContext.ContactNormal).magnitude;
         if (flatVel < maxSpeed)
         {
             maxSpeed = Mathf.LerpUnclamped(flatVel, maxSpeed, Context.movementProfile.RunningPreservationRatio);
-        }
-        else
-        {
-            maxSpeed = flatVel;
         }
         // Clamp to minimum speed
         maxSpeed = Mathf.Clamp(maxSpeed, Context.movementProfile.BaseMoveSpeed, Context.movementProfile.TopMoveSpeed);

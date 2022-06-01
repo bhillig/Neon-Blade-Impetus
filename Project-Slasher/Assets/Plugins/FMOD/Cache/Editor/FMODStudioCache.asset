@@ -20,6 +20,183 @@ MonoBehaviour:
   - Name: Desktop
     Value: 712
   Exists: 1
+--- !u!114 &-4773472155621450417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Movement/Jump
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Movement/Jump
+  Guid:
+    Data1: 841431178
+    Data2: 1324947466
+    Data3: 612157337
+    Data4: 1084007507
+  Banks:
+  - {fileID: 4270549497490980967}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 1799
+--- !u!114 &-2953819040301756460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Shit/189LSFX/NeonImpetus/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 637896602584326971
+  FileSizes:
+  - Name: Desktop
+    Value: 494
+  Exists: 1
+--- !u!114 &-2795795180460110441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Movement/Wind
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Movement/Wind
+  Guid:
+    Data1: 635385205
+    Data2: 1088272738
+    Data3: -79475544
+    Data4: 1267638850
+  Banks:
+  - {fileID: 4270549497490980967}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 8270321806498937228}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 32370
+--- !u!114 &-2727127375870080181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Movement/DefaultLanding
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Movement/DefaultLanding
+  Guid:
+    Data1: -515519254
+    Data2: 1167518807
+    Data3: 1676537263
+    Data4: 159266527
+  Banks:
+  - {fileID: 4270549497490980967}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 375
+--- !u!114 &-2577334827129893740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WindEffect
+  m_EditorClassIdentifier: 
+  Name: WindEffect
+  StudioPath: parameter:/WindEffect
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4283534082
+    data2: 1058000134
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-2473418210714541472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SlideSpeed
+  m_EditorClassIdentifier: 
+  Name: SlideSpeed
+  StudioPath: parameter:/SlideSpeed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4251288214
+    data2: 3821683672
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-1244416407677732897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Movement/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Movement/Footsteps
+  Guid:
+    Data1: -55378946
+    Data2: 1264301518
+    Data3: -420012622
+    Data4: -906908767
+  Banks:
+  - {fileID: 4270549497490980967}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 138
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,16 +210,77 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -5770420015790297356}
-  - {fileID: 3776392373669755103}
-  EditorEvents: []
-  EditorParameters: []
+  - {fileID: 5278167982566895840}
+  - {fileID: 4270549497490980967}
+  - {fileID: -2953819040301756460}
+  EditorEvents:
+  - {fileID: -1244416407677732897}
+  - {fileID: 3328286389087657943}
+  - {fileID: 7913563847856363432}
+  - {fileID: -4773472155621450417}
+  - {fileID: -2727127375870080181}
+  - {fileID: -2795795180460110441}
+  EditorParameters:
+  - {fileID: -2473418210714541472}
+  - {fileID: -2577334827129893740}
   MasterBanks:
-  - {fileID: 3776392373669755103}
+  - {fileID: 4270549497490980967}
   StringsBanks:
-  - {fileID: -5770420015790297356}
-  cacheTime: 637896229151960795
+  - {fileID: 5278167982566895840}
+  cacheTime: 637896602584326971
   cacheVersion: 131591
+--- !u!114 &1267925426502426054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sliding/SlideSpeed
+  m_EditorClassIdentifier: 
+  Name: SlideSpeed
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4251288214
+    data2: 3821683672
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &3328286389087657943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Movement/Sliding
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Movement/Sliding
+  Guid:
+    Data1: 725563
+    Data2: 1277178312
+    Data3: 1074294418
+    Data4: -1567672050
+  Banks:
+  - {fileID: 4270549497490980967}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1267925426502426054}
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 1906
 --- !u!114 &3776392373669755103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,4 +300,95 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 1036
+  Exists: 1
+--- !u!114 &4270549497490980967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Shit/189LSFX/NeonImpetus/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637896602584292183
+  FileSizes:
+  - Name: Desktop
+    Value: 472032
+  Exists: 1
+--- !u!114 &5278167982566895840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Shit/189LSFX/NeonImpetus/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637896602584316861
+  FileSizes:
+  - Name: Desktop
+    Value: 1130
+  Exists: 1
+--- !u!114 &7913563847856363432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Movement/LandingRoll
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Movement/LandingRoll
+  Guid:
+    Data1: -165519253
+    Data2: 1251309487
+    Data3: -1479909983
+    Data4: 567316447
+  Banks:
+  - {fileID: 4270549497490980967}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 812
+--- !u!114 &8270321806498937228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wind/WindEffect
+  m_EditorClassIdentifier: 
+  Name: WindEffect
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4283534082
+    data2: 1058000134
+  Type: 0
+  IsGlobal: 1
+  Labels: []
   Exists: 1

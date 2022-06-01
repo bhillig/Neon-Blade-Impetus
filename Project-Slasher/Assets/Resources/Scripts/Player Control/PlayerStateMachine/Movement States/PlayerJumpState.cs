@@ -23,12 +23,15 @@ public class PlayerJumpState : PlayerAirborneState
         Context.Particle = GameObject.Instantiate(Context.JumpParticle, Context.transform, false);
 
         // If going faster than movement profile's speed when entering state, then that becomes the new max speed
-        UpdateTopSpeed();
+        CalculateTopSpeed();
+        // Really weird bug with collider switching passing through objects
+        Context.playerRb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        Context.playerRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
 
     public override void UpdateState()
@@ -66,10 +69,13 @@ public class PlayerJumpState : PlayerAirborneState
         {
             maxSpeed = Mathf.LerpUnclamped(flatVel, maxSpeed, Context.movementProfile.AirbornePreservationRatio);
         }
-        else
-        {
-            maxSpeed = flatVel;
-        }
+        // Clamp to minimum speed
+        maxSpeed = Mathf.Clamp(maxSpeed, Context.movementProfile.BaseMoveSpeed, Context.movementProfile.TopMoveSpeed);
+    }
+    private void CalculateTopSpeed()
+    {
+        float flatVel = Context.playerRb.velocity.XZMag();
+        maxSpeed = flatVel;
         // Clamp to minimum speed
         maxSpeed = Mathf.Clamp(maxSpeed, Context.movementProfile.BaseMoveSpeed, Context.movementProfile.TopMoveSpeed);
     }

@@ -16,8 +16,10 @@ public class PlayerSlideState : PlayerGroundedState
         // The player phases through the ground if this line isn't here
         Context.playerPhysicsTransform.position += Vector3.up * 0.1f;
         Context.colliderSwitcher.SwitchToCollider(1);
-
+        // Audio and animation
         Context.animationController.SetBool("Sliding", true);
+        Context.audioManager.slideEmitter.Play();
+        // Calculate boosted speed
         SlideEnterPhysics();
         // Slide timers
         Context.slideCooldownTimer = Context.movementProfile.SlideCooldown;
@@ -34,7 +36,7 @@ public class PlayerSlideState : PlayerGroundedState
         base.ExitState();
         Context.animationController.SetBool("Sliding", false);
         Context.colliderSwitcher.SwitchToCollider(0);
-
+        Context.audioManager.slideEmitter.Stop();
         // Detach particle from player.
         Context.Particle.GetComponent<ParticleSystem>().Stop();
         Context.Particle.transform.SetParent(null, true);
@@ -46,6 +48,11 @@ public class PlayerSlideState : PlayerGroundedState
         // Slide timers update
         Context.slideCooldownTimer = Context.movementProfile.SlideCooldown;
         slideLockTimer -= Time.deltaTime;
+        // Update Audio
+        PlayerAudioManager.SetGlobalParameter("SlideSpeed", Mathf.InverseLerp(
+            Context.movementProfile.SlideVelThreshhold,
+            Context.movementProfile.SlideSpeedCap,
+            Context.playerRb.velocity.magnitude));
         CheckSwitchState();
     }
 

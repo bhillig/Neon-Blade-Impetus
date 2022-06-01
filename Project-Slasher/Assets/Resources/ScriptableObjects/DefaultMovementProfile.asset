@@ -17,19 +17,53 @@ MonoBehaviour:
   topMoveSpeed: 18
   baseAcceleration: 40
   baseFriction: 25
+  runAnimationSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.008354187
+      value: 0.5080261
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.1567882
+      value: 0.785151
+      inSlope: 0.39857918
+      outSlope: 0.39857918
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2259193
+    - serializedVersion: 3
+      time: 1.0097959
+      value: 1.3576794
+      inSlope: 0.49675715
+      outSlope: 0.49675715
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12830591
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  overclockAcceleration: 1
   groundedToJumpDelay: 0.1
   jumpHeight: 2
   jumpVelocity: 7.745967
   baseAirAcceleration: 12
   airTurnSpeed: 0.1
   jumpGroundBlockDuration: 0.15
-  runningPreservationRatio: -0.1
-  airbornePreservationRatio: -0.1
+  runningPreservationRatio: 0.2
+  airbornePreservationRatio: 0.4
   rollSpeed: 12
   rollFallSpeedThreshhold: 15
-  wallJumpUpHeight: 2
-  wallJumpUpVel: 7.745967
-  wallJumpSideVel: 8.25
+  wallJumpUpHeight: 1.8
+  wallJumpUpVel: 7.3484693
+  wallJumpSideVel: 7.75
   maxGroundedAngle: 45
   maxSnapVelocity: 11
   snapVelocityToAngleRatioCurve:
@@ -79,9 +113,9 @@ MonoBehaviour:
   maxAirRotationDot: 0.95
   slideVelThreshhold: 5
   slideGravityBoost: 16
-  slideSpeedBoostRatio: 1.4
+  slideSpeedBoostRatio: 1.3
   slideBaseFriction: 8
-  slideLockDuration: 0.3
+  slideLockDuration: 0.35
   slideCooldown: 0.65
   slideSpeedCap: 25
   minGroundedDotProd: 0.70710677

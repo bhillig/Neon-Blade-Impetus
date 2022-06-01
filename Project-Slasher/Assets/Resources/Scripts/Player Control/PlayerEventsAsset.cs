@@ -6,7 +6,8 @@ using System;
 public class PlayerEventsAsset : ScriptableObject
 {
     #region Movement events
-
+    public Action FootstepTaken;
+    public Action Jumped;
     #endregion
 
     #region Combat events

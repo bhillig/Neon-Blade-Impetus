@@ -61,6 +61,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
                 TrySwitchState(Factory.Landing);
             }
             LandingParticles();
+            Context.audioManager.defaultLandEmitter.Play();
             TrySwitchState(Factory.GroundedSwitch);
         }
     }

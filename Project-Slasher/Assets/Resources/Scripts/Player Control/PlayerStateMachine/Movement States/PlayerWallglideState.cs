@@ -13,7 +13,9 @@ public class PlayerWallglideState : PlayerMovementState
         Context.animationController.SetBool("Airborne", true);
         Context.animationController.SetBool("Wallrunning", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
-
+        // Audio
+        Context.playerEvents.FootstepTaken += PlayFootstepSound;
+        Context.audioManager.defaultLandEmitter.Play();
         // particles
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.RunParticle, Context.transform, false);
@@ -26,9 +28,11 @@ public class PlayerWallglideState : PlayerMovementState
         Context.playerRb.useGravity = true;
         Context.animationController.SetBool("Airborne", false);
         Context.animationController.SetBool("Wallrunning", false);
+        Context.animationController.speed = 1f;
         Context.wallRunning.isWallRunning = false;
         Context.StartCoroutine(CoroutExit());
         Context.inputContext.JumpDownEvent.RemoveListener(OnSpacebarDown);
+        Context.playerEvents.FootstepTaken -= PlayFootstepSound;
         Context.Ps.Stop();
     }
 
@@ -51,6 +55,10 @@ public class PlayerWallglideState : PlayerMovementState
             Context.movementProfile.TurnSpeed*1.25f,
             Context.wallRunning.WallForward,
             Context.wallRunning.LastWallNormal * Context.wallRunning.Side);
+        // Animation speed
+        float horizontalSpeed = Vector3.ProjectOnPlane(Context.playerRb.velocity, Context.groundPhysicsContext.ContactNormal).magnitude;
+        float speedRatio = Mathf.InverseLerp(0f, Context.movementProfile.TopMoveSpeed, horizontalSpeed);
+        Context.animationController.speed = Context.movementProfile.RunAnimationSpeedCurve.Evaluate(speedRatio);
     }
 
     public override void CheckSwitchState()
@@ -76,6 +84,7 @@ public class PlayerWallglideState : PlayerMovementState
     {
         Context.wallRunning.JumpFromWall(Context.movementProfile.WallJumpSideVel, Context.movementProfile.WallJumpUpVel);
         Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
+        Context.audioManager.jumpEmitter.Play();
         TrySwitchState(Factory.Jump);
     }
 
@@ -84,5 +93,10 @@ public class PlayerWallglideState : PlayerMovementState
         yield return new WaitForSeconds(0.2f);
         Context.TPComponentController.SetShoulderOffset(1);
         Context.TPComponentController.SetLerpTimeMultiplier(3f);
+    }
+
+    private void PlayFootstepSound()
+    {
+        Context.audioManager.footStepEmitter.Play();
     }
 }

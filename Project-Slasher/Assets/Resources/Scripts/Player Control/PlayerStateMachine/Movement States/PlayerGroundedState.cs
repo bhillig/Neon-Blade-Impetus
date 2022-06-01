@@ -52,6 +52,7 @@ public abstract class PlayerGroundedState : PlayerMovementState
             vel += jumpVec;
             Context.playerRb.velocity = vel;
             Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
+            Context.audioManager.jumpEmitter.Play();
         }
     }
 

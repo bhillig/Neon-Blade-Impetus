@@ -13,6 +13,7 @@ public class PlayerLandingState : PlayerGroundedState
     {
         base.EnterState();
         Context.animationController.SetBool("Landing", true);
+        Context.audioManager.rollEmitter.Play(); 
         Context.colliderSwitcher.SwitchToCollider(1);
         // Adjust roll velocity
         Vector3 roll = Context.playerRb.velocity;

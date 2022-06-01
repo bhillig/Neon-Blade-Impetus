@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     [Header("Misc")]
     public InputInfo inputContext;
     public Animator animationController;
+    public PlayerAudioManager audioManager;
 
     [Header("Particles")]
     [SerializeField]

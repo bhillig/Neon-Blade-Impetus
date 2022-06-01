@@ -26,7 +26,18 @@ public abstract class PlayerMovementState : PlayerBaseState
     public override void UpdateState()
     {
         Context.slideCooldownTimer -= Time.deltaTime;
+        UpdateWindAudio();
     }
+
+    protected virtual void UpdateWindAudio()
+    {
+        float speed = Context.playerRb.velocity.magnitude;
+        float windEffect = Mathf.InverseLerp(0f, Context.movementProfile.TopMoveSpeed, speed);
+        float currentWindEffect = PlayerAudioManager.GetGobalParameter("WindEffect");
+        currentWindEffect = Mathf.MoveTowards(currentWindEffect, windEffect, 1.4f * Time.deltaTime);
+        PlayerAudioManager.SetGlobalParameter("WindEffect", currentWindEffect);
+    }
+
     protected virtual void PerformStrikeDash(Collider strikeHasTarget)
     {
         if (strikeHasTarget != null)
