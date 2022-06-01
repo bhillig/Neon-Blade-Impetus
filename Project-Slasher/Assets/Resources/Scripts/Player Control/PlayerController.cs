@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
     private GameObject speedParticle;
     [SerializeField]
     private ParticleSystem deathParticles;
+    [SerializeField]
+    private ParticleSystem respawnParticles;
     // Particle getters.
     public GameObject RunParticle { get => runParticle; }
     public GameObject LargeLandParticle { get => largeLandParticle; }
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
     public GameObject SmallLandParticle { get => smallLandParticle; }
     public GameObject JumpParticle { get => jumpParticle; }
     public ParticleSystem DeathParticles { get => deathParticles; }
+    public ParticleSystem RespawnParticles { get => respawnParticles; }
 
     public PlayerEventsAsset playerEvents;
     // State machine

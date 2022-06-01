@@ -11,6 +11,8 @@ public class PlayerAudioManager : MonoBehaviour
     public StudioEventEmitter rollEmitter;
     public StudioEventEmitter defaultLandEmitter;
     public StudioEventEmitter windSpeedEmitter;
+    public StudioEventEmitter deathEmitter;
+    public StudioEventEmitter respawnEmitter;
 
 
     public static void SetGlobalParameter(string name, float val)

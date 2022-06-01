@@ -23,7 +23,9 @@ public class PlayerCombatDeadState : PlayerCombatState
         Context.scarfCloth.randomAcceleration = new Vector3(15, 15, 15);
         scarfColliders = Context.scarfCloth.capsuleColliders;
         Context.scarfCloth.capsuleColliders = null;
-        
+
+        // Audio
+        Context.audioManager.deathEmitter.Play();
     }
 
     public override void ExitState()
@@ -60,6 +62,15 @@ public class PlayerCombatDeadState : PlayerCombatState
     }
     protected virtual void CombatRestartLevel()
     {
+        Context.audioManager.respawnEmitter.Play();
+        Context.RespawnParticles.Play();
+        Context.inputContext.RestartDownEvent.RemoveListener(CombatRestartLevel);
+        Context.StartCoroutine(CoroutRestart());
+    }
+
+    protected virtual IEnumerator CoroutRestart()
+    {
+        yield return new WaitForSeconds(0.55f);
         Context.playerEvents.OnRestartLevel?.Invoke();
         TrySwitchState(Factory.CombatIdle);
     }

@@ -7,12 +7,13 @@ public class MaskTextureSwapper : MonoBehaviour
     public List<Texture2D> textures;
     public Renderer maskRenderer;
     public InputInfo input;
+    public FMODUnity.StudioEventEmitter sfx;
 
-    private int currentIndex = -1;
+    private int currentIndex = 0;
 
     private void Awake()
     {
-        Rotate();
+        SetMaskTex(0);
         input.MaskRotateDownEvent.AddListener(Rotate);
     }
 
@@ -24,9 +25,15 @@ public class MaskTextureSwapper : MonoBehaviour
     private void Rotate()
     {
         currentIndex = (currentIndex + 1) % textures.Count;
+        SetMaskTex(currentIndex);
+        sfx?.Play();
+    }
+
+    private void SetMaskTex(int index)
+    {
         var propBlock = new MaterialPropertyBlock();
         maskRenderer.GetPropertyBlock(propBlock);
-        propBlock.SetTexture("_EmissionMap", textures[currentIndex]);
+        propBlock.SetTexture("_EmissionMap", textures[index]);
         maskRenderer.SetPropertyBlock(propBlock);
     }
 
