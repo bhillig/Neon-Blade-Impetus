@@ -10,6 +10,7 @@ public class PlayerWallglideState : PlayerMovementState
     {
         base.EnterState();
         Context.playerRb.useGravity = false;
+        Context.playerRb.constraints |= RigidbodyConstraints.FreezePositionY;
         Context.animationController.SetBool("Airborne", true);
         Context.animationController.SetBool("Wallrunning", true);
         Context.inputContext.JumpDownEvent.AddListener(OnSpacebarDown);
@@ -26,6 +27,7 @@ public class PlayerWallglideState : PlayerMovementState
     {
         base.ExitState();
         Context.playerRb.useGravity = true;
+        Context.playerRb.constraints = RigidbodyConstraints.FreezeRotation;
         Context.animationController.SetBool("Airborne", false);
         Context.animationController.SetBool("Wallrunning", false);
         Context.animationController.speed = 1f;
