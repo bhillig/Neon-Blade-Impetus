@@ -6,11 +6,22 @@ public abstract class PlayerCombatState : PlayerBaseState
 {
     public PlayerCombatState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) 
     {
-        dashCollider = (SphereCollider)Context.colliderSwitcher.GetCollider(2);
+        dashCollider = (CapsuleCollider)Context.colliderSwitcher.GetCollider(2);
     }
 
+    protected CapsuleCollider dashCollider;
 
-    protected SphereCollider dashCollider;
+    public override void EnterState()
+    {
+        Context.playerEvents.OnCollideWithProjectile += PlayerCombatKilled;
+        Context.playerEvents.OnCollideWithVoid += PlayerCombatKilled;
+    }
+
+    public override void ExitState()
+    {
+        Context.playerEvents.OnCollideWithProjectile -= PlayerCombatKilled;
+        Context.playerEvents.OnCollideWithVoid -= PlayerCombatKilled;
+    }
 
     public override void UpdateState()
     {       
@@ -55,5 +66,10 @@ public abstract class PlayerCombatState : PlayerBaseState
             }
         }
         return null;
+    }
+    protected virtual void PlayerCombatKilled()
+    {
+        Context.playerEvents.OnCombatKilled?.Invoke();
+        TrySwitchState(Factory.CombatDead);
     }
 }

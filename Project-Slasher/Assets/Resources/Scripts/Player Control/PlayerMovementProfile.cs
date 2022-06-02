@@ -12,6 +12,11 @@ public class PlayerMovementProfile : ScriptableObject
     [SerializeField] private float topMoveSpeed;
     [SerializeField] private float baseAcceleration;
     [SerializeField] private float baseFriction;
+    [SerializeField] private AnimationCurve runAnimationSpeedCurve;
+
+    [Space(10)]
+    [Header("Momentum gain")]
+    [SerializeField] private float overclockAcceleration;
 
     [Space(10)]
     [Header("Jump and Airborne")]
@@ -65,6 +70,8 @@ public class PlayerMovementProfile : ScriptableObject
     public float BaseMoveSpeed => baseMoveSpeed;
     public float TopMoveSpeed => topMoveSpeed;
     public float BaseAcceleration => baseAcceleration;
+    public AnimationCurve RunAnimationSpeedCurve => runAnimationSpeedCurve;
+    public float OverclockAcceleration => overclockAcceleration;
     public float BaseAirAcceleration => baseAirAcceleration;
     public float BaseFriction => baseFriction;
     public float GroundedToJumpDelay => groundedToJumpDelay;

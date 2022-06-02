@@ -4,31 +4,23 @@ using UnityEngine;
 
 public abstract class PlayerDashState : PlayerMovementState
 {
-    public PlayerDashState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory)
-    {
-        
-    }
+    public PlayerDashState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) { }
 
     protected float cachedSpeed;
     private bool subscribedToCollision;
-
     private int buffer = 0;
 
     public override void EnterState()
     {
         base.EnterState();
         cachedSpeed = Context.playerRb.velocity.magnitude;
-        Context.colliderSwitcher.SwitchToCollider(2);
         subscribedToCollision = false;
         buffer = 0;
         Context.playerRb.useGravity = false;
+        Context.SpeedPs.Stop();
+        Context.SpeedPs.Clear();
         // Subscribe 
         Context.playerEvents.OnStrikeEnd += StrikeDashEnd;
-    }
-
-    protected override void PerformStrikeDash(Collider strikeHasTarget)
-    {
-        //Do nothing LOL
     }
 
     public override void ExitState()
@@ -38,6 +30,7 @@ public abstract class PlayerDashState : PlayerMovementState
         if(subscribedToCollision)
             Context.colliderEvents.OnCollisionEnterEvent -= OnDashCollision;
         Context.playerRb.useGravity = true;
+        Context.SpeedPs.Play();
         // unsubscribe
         Context.playerEvents.OnStrikeEnd -= StrikeDashEnd;
     }
@@ -59,7 +52,7 @@ public abstract class PlayerDashState : PlayerMovementState
 
     protected void OnDashCollision(Collision coll)
     {
-        StrikeDashEnd();
+        //StrikeDashEnd();
     }
 
     protected virtual void StrikeDashEnd()
@@ -74,4 +67,13 @@ public abstract class PlayerDashState : PlayerMovementState
         }
     }
 
+    protected override void PerformStrikeDash(Collider strikeHasTarget)
+    {
+        //Do nothing LOL
+    }
+
+    protected override void PlayerKilled()
+    {
+        // Invincible while dashing
+    }
 }

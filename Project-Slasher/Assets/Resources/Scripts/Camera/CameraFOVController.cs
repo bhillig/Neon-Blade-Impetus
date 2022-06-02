@@ -28,7 +28,7 @@ public class CameraFOVController : MonoBehaviour
         float currentFOV = cam.m_Lens.FieldOfView;
         float t = Mathf.InverseLerp(minVel,maxVel,body.velocity.XZMag());
         float targetFOV = Mathf.Lerp(minFOV, maxFOV, fovCurve.Evaluate(t));
-        cam.m_Lens.FieldOfView = Mathf.MoveTowards(currentFOV, targetFOV, lerpSpeed);
+        cam.m_Lens.FieldOfView = Mathf.MoveTowards(currentFOV, targetFOV, lerpSpeed * Time.deltaTime);
         float lenseDistort = Mathf.Lerp(0, -1, lensDistortCurve.Evaluate(t));
         postProcessVolume.sharedProfile.TryGet(out LensDistortion lenseDistortProfile);
         lenseDistortProfile.intensity.value = lenseDistort;

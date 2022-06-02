@@ -71,6 +71,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""fed63b16-a7f0-42b8-a946-5f0eb39196ca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MaskRotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""51c0785b-94ca-46d4-be8f-72f464afa00d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -227,6 +245,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""PrimaryAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bab10ab8-f3d1-4d9a-b252-4e01f8b939a1"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1e0c91b-64a2-4893-b9d3-1db66c50f11c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06244260-01e4-4669-9a76-8013e21d309b"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MaskRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -240,6 +291,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_Jump = m_PlayerMovement.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMovement_Slide = m_PlayerMovement.FindAction("Slide", throwIfNotFound: true);
         m_PlayerMovement_PrimaryAttack = m_PlayerMovement.FindAction("PrimaryAttack", throwIfNotFound: true);
+        m_PlayerMovement_Restart = m_PlayerMovement.FindAction("Restart", throwIfNotFound: true);
+        m_PlayerMovement_MaskRotate = m_PlayerMovement.FindAction("MaskRotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -304,6 +357,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Jump;
     private readonly InputAction m_PlayerMovement_Slide;
     private readonly InputAction m_PlayerMovement_PrimaryAttack;
+    private readonly InputAction m_PlayerMovement_Restart;
+    private readonly InputAction m_PlayerMovement_MaskRotate;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -313,6 +368,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerMovement_Jump;
         public InputAction @Slide => m_Wrapper.m_PlayerMovement_Slide;
         public InputAction @PrimaryAttack => m_Wrapper.m_PlayerMovement_PrimaryAttack;
+        public InputAction @Restart => m_Wrapper.m_PlayerMovement_Restart;
+        public InputAction @MaskRotate => m_Wrapper.m_PlayerMovement_MaskRotate;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -337,6 +394,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @PrimaryAttack.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPrimaryAttack;
                 @PrimaryAttack.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPrimaryAttack;
                 @PrimaryAttack.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPrimaryAttack;
+                @Restart.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnRestart;
+                @Restart.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnRestart;
+                @Restart.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnRestart;
+                @MaskRotate.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMaskRotate;
+                @MaskRotate.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMaskRotate;
+                @MaskRotate.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMaskRotate;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -356,6 +419,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @PrimaryAttack.started += instance.OnPrimaryAttack;
                 @PrimaryAttack.performed += instance.OnPrimaryAttack;
                 @PrimaryAttack.canceled += instance.OnPrimaryAttack;
+                @Restart.started += instance.OnRestart;
+                @Restart.performed += instance.OnRestart;
+                @Restart.canceled += instance.OnRestart;
+                @MaskRotate.started += instance.OnMaskRotate;
+                @MaskRotate.performed += instance.OnMaskRotate;
+                @MaskRotate.canceled += instance.OnMaskRotate;
             }
         }
     }
@@ -367,5 +436,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
         void OnPrimaryAttack(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
+        void OnMaskRotate(InputAction.CallbackContext context);
     }
 }

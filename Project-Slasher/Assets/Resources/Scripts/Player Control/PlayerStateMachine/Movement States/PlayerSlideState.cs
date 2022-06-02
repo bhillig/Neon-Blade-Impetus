@@ -11,25 +11,24 @@ public class PlayerSlideState : PlayerGroundedState
     public override void EnterState()
     {
         base.EnterState();
-
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.SlideParticle, Context.transform, false);
-
-
-        Context.animationController.SetBool("Sliding", true);
+        // The player phases through the ground if this line isn't here
+        Context.playerPhysicsTransform.position += Vector3.up * 0.1f;
         Context.colliderSwitcher.SwitchToCollider(1);
+        // Audio and animation
+        Context.animationController.SetBool("Sliding", true);
+        Context.audioManager.slideEmitter.Play();
+        // Calculate boosted speed
         SlideEnterPhysics();
         // Slide timers
         Context.slideCooldownTimer = Context.movementProfile.SlideCooldown;
         slideLockTimer = Context.movementProfile.SlideLockDuration;
     }
-
-    private void SlideEnterPhysics()
+    public override bool IsStateSwitchable()
     {
-        Vector3 cVel = Context.playerRb.velocity;
-        cVel.x *= Context.movementProfile.SlideSpeedBoostRatio;
-        cVel.z *= Context.movementProfile.SlideSpeedBoostRatio;
-        Context.playerRb.velocity = cVel;
+        return (Context.playerRb.velocity.magnitude >= Context.movementProfile.SlideVelThreshhold) &&
+            (Context.slideCooldownTimer <= 0f);
     }
 
     public override void ExitState()
@@ -37,7 +36,7 @@ public class PlayerSlideState : PlayerGroundedState
         base.ExitState();
         Context.animationController.SetBool("Sliding", false);
         Context.colliderSwitcher.SwitchToCollider(0);
-
+        Context.audioManager.slideEmitter.Stop();
         // Detach particle from player.
         Context.Particle.GetComponent<ParticleSystem>().Stop();
         Context.Particle.transform.SetParent(null, true);
@@ -49,21 +48,30 @@ public class PlayerSlideState : PlayerGroundedState
         // Slide timers update
         Context.slideCooldownTimer = Context.movementProfile.SlideCooldown;
         slideLockTimer -= Time.deltaTime;
+        // Update Audio
+        PlayerAudioManager.SetGlobalParameter("SlideSpeed", Mathf.InverseLerp(
+            Context.movementProfile.SlideVelThreshhold,
+            Context.movementProfile.SlideSpeedCap,
+            Context.playerRb.velocity.magnitude));
         CheckSwitchState();
     }
 
-    public override bool IsStateSwitchable()
+    public override void CheckSwitchState()
     {
-        return (Context.playerRb.velocity.magnitude >= Context.movementProfile.SlideVelThreshhold) &&
-            (Context.slideCooldownTimer <= 0f);
+        base.CheckSwitchState();
+        bool userCancel = !Context.inputContext.slideDown;
+        bool tooSlow = Context.playerRb.velocity.magnitude < Context.movementProfile.SlideVelThreshhold;
+        if ((userCancel || tooSlow) && slideLockTimer <= 0f)
+            TrySwitchState(Factory.GroundedSwitch);
     }
 
     public override void FixedUpdateState()
     {
         base.FixedUpdateState();
         RotateTowardsSlide();
-        // Gravity is amplified when sliding
-        Context.playerRb.AddForce(Vector3.down * Context.movementProfile.SlideGravityBoost);
+        // Gravity is amplified when sliding down
+        if(Context.playerRb.velocity.y < 0f)
+            Context.playerRb.AddForce(Vector3.down * Context.movementProfile.SlideGravityBoost);
         ApplySlideFriction();
         // Cap speed
         Vector2 vel = Context.playerRb.velocity;
@@ -71,6 +79,13 @@ public class PlayerSlideState : PlayerGroundedState
         {
             Context.playerRb.velocity = vel.normalized * Context.movementProfile.SlideSpeedCap;
         }
+    }
+    private void SlideEnterPhysics()
+    {
+        Vector3 cVel = Context.playerRb.velocity;
+        cVel.x *= Context.movementProfile.SlideSpeedBoostRatio;
+        cVel.z *= Context.movementProfile.SlideSpeedBoostRatio;
+        Context.playerRb.velocity = cVel;
     }
 
     private void RotateTowardsSlide()
@@ -97,14 +112,5 @@ public class PlayerSlideState : PlayerGroundedState
     {
         if(slideLockTimer <= 0f)
             base.Jump();
-    }
-
-    public override void CheckSwitchState()
-    {
-        base.CheckSwitchState();
-        bool userCancel = !Context.inputContext.slideDown;
-        bool tooSlow = Context.playerRb.velocity.magnitude < Context.movementProfile.SlideVelThreshhold;
-        if ((userCancel || tooSlow) && slideLockTimer <= 0f)
-            TrySwitchState(Factory.GroundedSwitch);
     }
 }
