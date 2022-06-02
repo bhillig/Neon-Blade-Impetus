@@ -4,7 +4,7 @@ using UnityEngine;
 using FMODUnity;
 public class PlayerAudioManager : MonoBehaviour
 {
-    [Header("FMOD Studio Events")]
+    [Header("Movement")]
     public StudioEventEmitter footStepEmitter;
     public StudioEventEmitter jumpEmitter;
     public StudioEventEmitter slideEmitter;
@@ -13,6 +13,14 @@ public class PlayerAudioManager : MonoBehaviour
     public StudioEventEmitter windSpeedEmitter;
     public StudioEventEmitter deathEmitter;
     public StudioEventEmitter respawnEmitter;
+
+    [Header("Chargeup Strike")]
+    public StudioEventEmitter chargeupWhineEmitter;
+    public StudioEventEmitter chargeupReadyEmitter;
+    public StudioEventEmitter chargeupOvercharge;
+    public StudioEventEmitter targettrikeStart;
+    public StudioEventEmitter targetStrikeImpact;
+    public StudioEventEmitter dryStrikeDashImpact;
 
 
     public static void SetGlobalParameter(string name, float val)

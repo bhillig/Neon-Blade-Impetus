@@ -22,12 +22,15 @@ public class PlayerCombatStrikeState : PlayerCombatState
         // Calculate dash duration from distance and velocity
         if (target == null)
         {
+            Context.audioManager.dryStrikeDashImpact.Play();
             timer = Context.combatProfile.DryDashDistance / Context.combatProfile.DryVelocity;
             // -1 means it will not tick down
             impactTimer = -1f;
         }
         else
         {
+            // Audio
+            Context.audioManager.targettrikeStart.Play();  
             Context.TPComponentController.SetDistance(4f);
             Context.primaryAttackCooldownTimer = 0f;
             // Calculate distance to target + pierce distance
@@ -75,6 +78,7 @@ public class PlayerCombatStrikeState : PlayerCombatState
     protected virtual void ImpactEffect()
     {
         KillEnemy();
+        Context.audioManager.targetStrikeImpact.Play();
         TimeScaleManager.instance.SetTimeScale(
             Context.combatProfile.TimeSlowScale, 
             Context.combatProfile.TimeSlowDuration, 

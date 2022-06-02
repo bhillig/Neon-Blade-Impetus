@@ -20,6 +20,7 @@ public class PlayerCombatChargeState : PlayerCombatState
         Context.inputContext.PrimaryUpEvent.AddListener(ChargeReleased);
         Context.animationController.SetBool("Charging", true);
         Context.playerEvents.OnStrikeChargeStart?.Invoke();
+        Context.audioManager.chargeupWhineEmitter.Play();
     }
 
     public override void ExitState()
@@ -27,6 +28,8 @@ public class PlayerCombatChargeState : PlayerCombatState
         base.ExitState();
         Context.inputContext.PrimaryUpEvent.RemoveListener(ChargeReleased);
         Context.animationController.SetBool("Charging", false);
+        Context.audioManager.chargeupWhineEmitter.Stop();
+        Context.audioManager.chargeupReadyEmitter.Stop();
     }
 
     public override bool IsStateSwitchable()
@@ -38,9 +41,12 @@ public class PlayerCombatChargeState : PlayerCombatState
     {
         base.UpdateState();
         timer += Time.deltaTime;
+        PlayerAudioManager.SetGlobalParameter("ChargeupTimeRatio", timer / Context.combatProfile.ChargeTime);
         if (!fullyCharged && timer >= Context.combatProfile.ChargeTime)
         {
             fullyCharged = true;
+            Context.audioManager.chargeupWhineEmitter.Stop();
+            Context.audioManager.chargeupReadyEmitter.Play();
             Context.playerEvents.OnStrikeChargeReady?.Invoke();
         }
         if (!overCharged && timer >= Context.combatProfile.ChargeTime + Context.combatProfile.HoldTime)
@@ -62,6 +68,7 @@ public class PlayerCombatChargeState : PlayerCombatState
             Context.primaryAttackCooldownTimer = Context.combatProfile.Cooldown;
             Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
             Context.playerEvents.OnStrikeOvercharged?.Invoke();
+            Context.audioManager.chargeupOvercharge.Play();
             TrySwitchState(Factory.CombatIdle);
         }
     }
@@ -85,6 +92,7 @@ public class PlayerCombatChargeState : PlayerCombatState
         {
             Context.primaryAttackCooldownTimer = 0f;
             Context.playerEvents.OnStrikeChargeEnd?.Invoke(false);
+            Context.audioManager.chargeupWhineEmitter.Stop();
             TrySwitchState(Factory.CombatIdle);
         }
     }

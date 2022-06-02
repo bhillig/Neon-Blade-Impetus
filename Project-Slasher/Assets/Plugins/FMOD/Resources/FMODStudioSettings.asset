@@ -348,10 +348,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
+  HasSourceProject: 0
+  HasPlatforms: 0
   sourceProjectPath: ../../FMOD Shit/189LSFX/NeonImpetus/NeonImpetus.fspro
-  sourceBankPath: ../../FMOD Shit/189LSFX/NeonImpetus/Build
+  sourceBankPath: Assets/FMOD Banks/Desktop
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 0
@@ -374,9 +374,9 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Master
+  - Desktop/Master
   Banks:
-  - Music
+  - Desktop/Music
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

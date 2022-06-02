@@ -24,6 +24,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-8406883752767872352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Attack/TargetStrikeImpact
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Attack/TargetStrikeImpact
+  Guid:
+    Data1: 1940143295
+    Data2: 1260003873
+    Data3: -555352390
+    Data4: 1666304505
+  Banks:
+  - {fileID: 3979590394132627444}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 1101
 --- !u!114 &-6691637019996818805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,7 +70,7 @@ MonoBehaviour:
     Data3: -1479909983
     Data4: 567316447
   Banks:
-  - {fileID: 4270549497490980967}
+  - {fileID: 3979590394132627444}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -70,14 +97,59 @@ MonoBehaviour:
     Data3: 612157337
     Data4: 1084007507
   Banks:
-  - {fileID: 4270549497490980967}
+  - {fileID: 3979590394132627444}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 50
-  Length: 531
+  Length: 398
+--- !u!114 &-6305714620994959983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Desktop/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD Banks/Desktop/Music.bank
+  Name: Desktop/Music
+  StudioPath: bank:/Music
+  lastModified: 637897121106990369
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-6077693183200887162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Attack/DryStrikeStart
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Attack/DryStrikeStart
+  Guid:
+    Data1: -121587313
+    Data2: 1292651523
+    Data3: -961667669
+    Data4: 204852907
+  Banks:
+  - {fileID: 3979590394132627444}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 414
 --- !u!114 &-6058288333112755397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +169,7 @@ MonoBehaviour:
     Data3: 1074294418
     Data4: -1567672050
   Banks:
-  - {fileID: 4270549497490980967}
+  - {fileID: 3979590394132627444}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -126,6 +198,30 @@ MonoBehaviour:
   - Name: Desktop
     Value: 712
   Exists: 1
+--- !u!114 &-5764905858407171169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ChargeupTimeRatio
+  m_EditorClassIdentifier: 
+  Name: ChargeupTimeRatio
+  StudioPath: parameter:/ChargeupTimeRatio
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 385269533
+    data2: 2553468236
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-5386224079355332554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +241,7 @@ MonoBehaviour:
     Data3: -79475544
     Data4: 1267638850
   Banks:
-  - {fileID: 4270549497490980967}
+  - {fileID: 3979590394132627444}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -173,7 +269,7 @@ MonoBehaviour:
     Data3: -1705584231
     Data4: -1865907991
   Banks:
-  - {fileID: 4270549497490980967}
+  - {fileID: 3979590394132627444}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -205,7 +301,7 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &-2953819040301756460
+--- !u!114 &-2844214248464135998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,17 +310,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Music.bank
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Attack/ChargeReady
   m_EditorClassIdentifier: 
-  Path: ../../FMOD Shit/189LSFX/NeonImpetus/Build/Desktop/Music.bank
-  Name: Music
-  StudioPath: bank:/Music
-  lastModified: 637896647993626573
-  FileSizes:
-  - Name: Desktop
-    Value: 494
-  Exists: 1
+  Path: event:/SFX/Attack/ChargeReady
+  Guid:
+    Data1: -977455141
+    Data2: 1198089685
+    Data3: 350451872
+    Data4: 773867516
+  Banks:
+  - {fileID: 3979590394132627444}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 4000
 --- !u!114 &-2577334827129893740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,6 +376,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-2315415164773596531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Attack/TargetedDashStart
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Attack/TargetedDashStart
+  Guid:
+    Data1: 549234929
+    Data2: 1247920838
+    Data3: 373715337
+    Data4: 841803677
+  Banks:
+  - {fileID: 3979590394132627444}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 992
 --- !u!114 &-434981286330639114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +422,7 @@ MonoBehaviour:
     Data3: 1676537263
     Data4: 159266527
   Banks:
-  - {fileID: 4270549497490980967}
+  - {fileID: 3979590394132627444}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -313,9 +443,9 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 5278167982566895840}
-  - {fileID: 4270549497490980967}
-  - {fileID: -2953819040301756460}
+  - {fileID: 8677366606508001380}
+  - {fileID: 3979590394132627444}
+  - {fileID: -6305714620994959983}
   EditorEvents:
   - {fileID: -6058288333112755397}
   - {fileID: -6691637019996818805}
@@ -326,15 +456,46 @@ MonoBehaviour:
   - {fileID: 2534946094716208847}
   - {fileID: 8545101147444026780}
   - {fileID: -3634045312467570445}
+  - {fileID: 7861906310492792092}
+  - {fileID: -2844214248464135998}
+  - {fileID: -2315415164773596531}
+  - {fileID: -8406883752767872352}
+  - {fileID: 5309260301214972729}
+  - {fileID: -6077693183200887162}
   EditorParameters:
   - {fileID: -2473418210714541472}
   - {fileID: -2577334827129893740}
+  - {fileID: -5764905858407171169}
   MasterBanks:
-  - {fileID: 4270549497490980967}
+  - {fileID: 3979590394132627444}
   StringsBanks:
-  - {fileID: 5278167982566895840}
-  cacheTime: 637896647993626573
+  - {fileID: 8677366606508001380}
+  cacheTime: 637897121106990369
   cacheVersion: 131591
+--- !u!114 &56648917512551362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Chargeup/ChargeupTimeRatio
+  m_EditorClassIdentifier: 
+  Name: ChargeupTimeRatio
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 385269533
+    data2: 2553468236
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &538664669475337925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,14 +515,14 @@ MonoBehaviour:
     Data3: 2062388130
     Data4: 431183324
   Banks:
-  - {fileID: 4270549497490980967}
+  - {fileID: 3979590394132627444}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 50
-  Length: 2625
+  Length: 2750
 --- !u!114 &2534946094716208847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +542,7 @@ MonoBehaviour:
     Data3: -420012622
     Data4: -906908767
   Banks:
-  - {fileID: 4270549497490980967}
+  - {fileID: 3979590394132627444}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -409,7 +570,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1036
   Exists: 1
---- !u!114 &4270549497490980967
+--- !u!114 &3979590394132627444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -419,17 +580,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
+  m_Name: bank:/Desktop/Master.bank
   m_EditorClassIdentifier: 
-  Path: ../../FMOD Shit/189LSFX/NeonImpetus/Build/Desktop/Master.bank
-  Name: Master
+  Path: Assets/FMOD Banks/Desktop/Master.bank
+  Name: Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 637896647993583313
-  FileSizes:
-  - Name: Desktop
-    Value: 522880
+  lastModified: 637897121106950731
+  FileSizes: []
   Exists: 1
---- !u!114 &5278167982566895840
+--- !u!114 &5309260301214972729
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -438,17 +597,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Attack/Overcharge
   m_EditorClassIdentifier: 
-  Path: ../../FMOD Shit/189LSFX/NeonImpetus/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637896647993610976
-  FileSizes:
-  - Name: Desktop
-    Value: 1254
-  Exists: 1
+  Path: event:/SFX/Attack/Overcharge
+  Guid:
+    Data1: -1839299504
+    Data2: 1080111016
+    Data3: 120904584
+    Data4: -1714161798
+  Banks:
+  - {fileID: 3979590394132627444}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 593
+--- !u!114 &7861906310492792092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Attack/Chargeup
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Attack/Chargeup
+  Guid:
+    Data1: -597292427
+    Data2: 1280231878
+    Data3: -1220396913
+    Data4: 1519251640
+  Banks:
+  - {fileID: 3979590394132627444}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 56648917512551362}
+  MinDistance: 0
+  MaxDistance: 50
+  Length: 1940
 --- !u!114 &8545101147444026780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,11 +662,31 @@ MonoBehaviour:
     Data3: 1984019360
     Data4: 526166361
   Banks:
-  - {fileID: 4270549497490980967}
+  - {fileID: 3979590394132627444}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 50
-  Length: 2500
+  Length: 875
+--- !u!114 &8677366606508001380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Desktop/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD Banks/Desktop/Master.strings.bank
+  Name: Desktop/Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637897121106970407
+  FileSizes:
+  - Name: 
+    Value: 1608
+  Exists: 1
