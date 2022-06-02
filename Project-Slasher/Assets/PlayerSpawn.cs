@@ -12,7 +12,14 @@ public class PlayerSpawn : MonoBehaviour
     private void MovePlayerToSpawn()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = transform.position;
+        if (player != null)
+        {
+            player.transform.position = transform.position;
+        }
+        else
+        {
+            Debug.Log("PlayerSpawn can't find Player!");
+        }
     }
 
 }
