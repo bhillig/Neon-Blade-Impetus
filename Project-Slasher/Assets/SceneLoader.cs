@@ -12,9 +12,6 @@ public class SceneLoader : MonoBehaviour
     private string currentLevelScene;
 
     [SerializeField]
-    private string nextLevelScene;
-
-    [SerializeField]
     private bool isLevel;
 
     void Awake()
@@ -32,7 +29,7 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(coreScene, LoadSceneMode.Additive);
     }
 
-    private void LoadNextLevel()
+    public void LoadNextLevel(string nextLevelScene)
     {
         SceneManager.LoadScene(nextLevelScene, LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(currentLevelScene);
