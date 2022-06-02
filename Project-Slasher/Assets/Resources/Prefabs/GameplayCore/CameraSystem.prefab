@@ -425,6 +425,7 @@ GameObject:
   - component: {fileID: 3537850462879656053}
   - component: {fileID: 3537850462879656052}
   - component: {fileID: -8742409863758664915}
+  - component: {fileID: 270568751}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -570,6 +571,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 3537850462879656041}
+--- !u!114 &270568751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537850462879656041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9468c5f457ace64f8d4df6d642b107f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadEvent: 1
+  UnloadEvent: 2
+  Banks:
+  - Master
+  - Music
+  CollisionTag: 
+  PreloadSamples: 0
 --- !u!1 &3537850462916779130
 GameObject:
   m_ObjectHideFlags: 0
