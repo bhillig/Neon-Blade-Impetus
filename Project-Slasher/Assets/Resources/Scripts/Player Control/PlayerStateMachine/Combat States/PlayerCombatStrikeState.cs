@@ -44,7 +44,7 @@ public class PlayerCombatStrikeState : PlayerCombatState
         Context.animationController.SetBool("Striking", true);
     }
 
-    public override void ExitState()
+    public override void ExitState() 
     {
         base.ExitState();
         Context.playerEvents.OnStrikeEnd?.Invoke();
