@@ -26,12 +26,15 @@ public class SceneLoader : MonoBehaviour
 
     private void LoadCoreFunctionality()
     {
-        SceneManager.LoadScene(coreScene, LoadSceneMode.Additive);
+        if(CoreUtilities.Instance == null)
+        {
+            SceneManager.LoadScene(coreScene, LoadSceneMode.Additive);
+        }
     }
 
     public void LoadNextLevel(string nextLevelScene)
     {
-        SceneManager.LoadScene(nextLevelScene, LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(currentLevelScene);
+        SceneManager.LoadScene(nextLevelScene, LoadSceneMode.Additive);
     }
 }

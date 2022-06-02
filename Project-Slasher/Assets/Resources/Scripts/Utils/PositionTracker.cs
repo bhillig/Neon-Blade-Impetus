@@ -18,6 +18,7 @@ public class PositionTracker : MonoBehaviour
 
     private void Update()
     {
-        transform.position = target.position - offset;
+        if(target != null)
+            transform.position = target.position - offset;
     }
 }
