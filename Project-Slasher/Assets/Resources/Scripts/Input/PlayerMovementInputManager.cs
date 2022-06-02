@@ -68,4 +68,20 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
             movementInputInfo.PrimaryDownEvent.Invoke();
         }
     }
+
+    public void OnRestart(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            movementInputInfo.RestartDownEvent.Invoke();
+        }
+    }
+
+    public void OnMaskRotate(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            movementInputInfo.MaskRotateDownEvent.Invoke();
+        }
+    }
 }

@@ -4,26 +4,48 @@ using UnityEngine;
 
 public class StrikeVFXManager : MonoBehaviour
 {
+    [Header("Dependencies")]
     public PlayerEventsAsset playerEvents;
-    public GameObject sword;
-    public MeshRenderer scabbard;
-    public GameObject scabbardSword;
-    public ParticleSystem dryDashParticles;
-    public ParticleSystem targettedDashParticles;
-    public ParticleSystem dashTrailParticles;
+
+    [Header("Chargeup Particles")]
     public ParticleSystem chargeParticles;
     public ParticleSystem chargeReadyParticles;
     public ParticleSystem cooldownFinishedParticles;
     public ParticleSystem overchargedParticles;
+
+    [Header("Targeted Strike Particles")]
+    public ParticleSystem targetedStrikeSonicBoomParticles;
+    public ParticleSystem targetedStrikeSonicBoom2Particles;
+    public TrailRenderer targetedStrikeTrail;
+
+    [Header("Dry Strike Particles")]
+    public ParticleSystem dryStrikeTrailParticles;
+    public ParticleSystem dryStrikeSonicBoomParticles;
+
+    [Header("Renderers")]
+    public MeshRenderer sword;
+    public MeshRenderer scabbard;
+    public MeshRenderer scabbardSword;
     public SkinnedMeshRenderer coat;
+    public SkinnedMeshRenderer body;
+    public SkinnedMeshRenderer scarfRenderer;
 
     [Header("Values")]
     public float endDelay;
+
+    [Header("Materials")]
     public Material scabbardDefaultGlow;
     public Material chargeStrikeMat;
     public Material defaultCoatMat;
-
     public Material scabbardCooldownMat;
+
+    [Header("Scarf")]
+    [ColorUsage(true, true)]
+    public Color scarfDefaultGlow;
+    [ColorUsage(true, true)]
+    public Color scarfChargedGlow;
+    [ColorUsage(true, true)]
+    public Color scarfCooldownGlow;
 
     private void Awake()
     {
@@ -35,6 +57,7 @@ public class StrikeVFXManager : MonoBehaviour
         playerEvents.OnStrikeOvercharged += Overcharged;
         playerEvents.OnStrikeCooldownFinished += CooldownFinished;
         playerEvents.OnStrikeCooldownStarted += CooldownStarted;
+        playerEvents.ImpactEnd += ImpactEnd;
         sword.GetComponent<MeshRenderer>().enabled = false;
     }
 
@@ -48,6 +71,7 @@ public class StrikeVFXManager : MonoBehaviour
         playerEvents.OnStrikeOvercharged -= Overcharged;
         playerEvents.OnStrikeCooldownFinished -= CooldownFinished;
         playerEvents.OnStrikeCooldownStarted -= CooldownStarted;
+        playerEvents.ImpactEnd -= ImpactEnd;
     }
 
     private void CooldownFinished()
@@ -59,28 +83,37 @@ public class StrikeVFXManager : MonoBehaviour
     private void CooldownStarted()
     {
         scabbard.material = scabbardCooldownMat;
-        var mats = coat.materials;
-        mats[0] = scabbardCooldownMat;
-        coat.materials = mats;
+        coat.SetMaterials(new int[] { 0 }, new Material[] { scabbardCooldownMat });
+        body.SetMaterials(new int[] { 9, 10 }, new Material[] { scabbardCooldownMat });
+        SetScarfEmission(scarfCooldownGlow);
     }
 
     private void StrikePerformed(Collider target)
     {
-        if(target == null)
+        chargeParticles.Stop();
+        chargeReadyParticles.Stop();
+        if (target == null)
         {
-            DryDash();
+            DryStrike();
         }
         else
         {
-            TargetedDash();
+            TargetedStrike();
         }
     }
 
-    private void TargetedDash()
+    private void TargetedStrike()
     {
-        sword.GetComponent<MeshRenderer>().enabled = true;
-        dashTrailParticles.Play();
-        targettedDashParticles.Play();
+        scabbardSword.enabled = false;
+        sword.enabled = true;
+        StartCoroutine(CoroutFrameDelay(() => targetedStrikeTrail.emitting = true));
+        targetedStrikeSonicBoomParticles.Play();
+    }
+
+    private IEnumerator CoroutFrameDelay(System.Action action)
+    {
+        yield return new WaitForEndOfFrame();
+        action?.Invoke();
     }
 
     private void ChargeReady()
@@ -108,36 +141,55 @@ public class StrikeVFXManager : MonoBehaviour
     private void DashReadyVisuals()
     {
         scabbard.material = chargeStrikeMat;
-        var mats = coat.materials;
-        mats[0] = chargeStrikeMat;
-        coat.materials = mats;
+        coat.SetMaterials(new int[] { 0 }, new Material[] {chargeStrikeMat});
+        body.SetMaterials(new int[] { 9, 10 }, new Material[] { chargeStrikeMat });
         chargeReadyParticles.Play();
+        chargeParticles.Stop();
+        SetScarfEmission(scarfChargedGlow);
     }
 
     private void DefaultVisuals()
     {
+        chargeParticles.Stop();
+        chargeReadyParticles.Stop();
         scabbard.material = scabbardDefaultGlow;
-        var mats = coat.materials;
-        mats[0] = defaultCoatMat;
-        coat.materials = mats;
+        coat.SetMaterials(new int[] { 0 }, new Material[] { defaultCoatMat });
+        body.SetMaterials(new int[] { 9, 10 }, new Material[] { defaultCoatMat });
+        SetScarfEmission(scarfDefaultGlow);
+    }
+
+    private void SetScarfEmission(Color c)
+    {
+        MaterialPropertyBlock block = new MaterialPropertyBlock();
+        scarfRenderer.GetPropertyBlock(block);
+        block.SetColor("_Emission", c);
+        scarfRenderer.SetPropertyBlock(block);
     }
 
     private void StrikeEnd()
     {
         DefaultVisuals();
         StartCoroutine(CoroutStrikeEnd());
+        targetedStrikeTrail.emitting = false;
+        targetedStrikeTrail.Clear();
+    }
+
+    private void ImpactEnd(float _)
+    {
+        targetedStrikeSonicBoomParticles?.Stop();
+        targetedStrikeSonicBoom2Particles?.Play();
     }
 
     private IEnumerator CoroutStrikeEnd()
     {
-        dashTrailParticles.Stop();
         yield return new WaitForSeconds(endDelay);
-        scabbardSword.SetActive(true);
-        sword.GetComponent<MeshRenderer>().enabled = false;
+        scabbardSword.enabled = true;
+        sword.enabled = false;
     }
 
-    private void DryDash()
+    private void DryStrike()
     {
-        dryDashParticles.Play();
+        dryStrikeSonicBoomParticles.Play();
+        dryStrikeTrailParticles.Play();
     }
 }

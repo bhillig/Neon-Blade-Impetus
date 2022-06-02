@@ -9,25 +9,58 @@ public class PlayerController : MonoBehaviour
     public Transform playerPhysicsTransform;
     public Transform playerModelTransform;
     public Transform playerCenter;
+
     [Header("Camera")]
     public Camera mainCam;
     public ThirdPersonCameraTargetController TPTargetController;
     public CinemachineTPFollowController TPComponentController;
+
     [Header("Movement Scripts")]
     public GroundedPhysicsContext groundPhysicsContext;
     public AirbornePhysicsContext airbornePhysicsContext;
     public WallFinder wallFinder;
     public Wallrunning wallRunning;
+
     [Header("Physics Dependencies")]
     public ColliderSwitcher colliderSwitcher;
     public ColliderEvents colliderEvents;
     public Rigidbody playerRb;
+    public Cloth scarfCloth;
+
     [Header("Scriptable Objects")]
     public PlayerMovementProfile movementProfile;
     public PlayerCombatProfile combatProfile;
+
     [Header("Misc")]
     public InputInfo inputContext;
     public Animator animationController;
+    public PlayerAudioManager audioManager;
+
+    [Header("Particles")]
+    [SerializeField]
+    private GameObject runParticle;
+    [SerializeField]
+    private GameObject largeLandParticle;
+    [SerializeField]
+    private GameObject slideParticle;
+    [SerializeField]
+    private GameObject smallLandParticle;
+    [SerializeField]
+    private GameObject jumpParticle;
+    [SerializeField]
+    private GameObject speedParticle;
+    [SerializeField]
+    private ParticleSystem deathParticles;
+    [SerializeField]
+    private ParticleSystem respawnParticles;
+    // Particle getters.
+    public GameObject RunParticle { get => runParticle; }
+    public GameObject LargeLandParticle { get => largeLandParticle; }
+    public GameObject SlideParticle { get => slideParticle; }
+    public GameObject SmallLandParticle { get => smallLandParticle; }
+    public GameObject JumpParticle { get => jumpParticle; }
+    public ParticleSystem DeathParticles { get => deathParticles; }
+    public ParticleSystem RespawnParticles { get => respawnParticles; }
 
     public PlayerEventsAsset playerEvents;
     // State machine
@@ -52,32 +85,13 @@ public class PlayerController : MonoBehaviour
         set => apexHeight = value;
     }
 
-    // Particle prefabs.
-    [SerializeField]
-    private GameObject runParticle;
-    [SerializeField]
-    private GameObject largeLandParticle;
-    [SerializeField]
-    private GameObject slideParticle;
-    [SerializeField]
-    private GameObject smallLandParticle;
-    [SerializeField]
-    private GameObject jumpParticle;
-    [SerializeField]
-    private GameObject speedParticle;
-    // Particle getters.
-    public GameObject RunParticle { get => runParticle; }
-    public GameObject LargeLandParticle { get => largeLandParticle; }
-    public GameObject SlideParticle { get => slideParticle; }
-    public GameObject SmallLandParticle { get => smallLandParticle; }
-    public GameObject JumpParticle { get => jumpParticle; }
-
     // For particles usage in each state.
     private GameObject particle;
     private ParticleSystem ps;
 
     // ParticleSystem for speed of player.
     private ParticleSystem speedPs;
+    public ParticleSystem SpeedPs => speedPs;
 
     // Particle usage getters.
     public GameObject Particle
@@ -138,16 +152,12 @@ public class PlayerController : MonoBehaviour
         print(state);
     }
 
-    public void Die()
-    {
-        this.playerRb.velocity = Vector3.zero; 
-        transform.position = respawnPoint;
-    }
     // Change the speed particle emission depending on the speed of the player.
     private void SetSpeedParticleEmission()
     {
         var emission = speedPs.emission;
-
-        emission.rateOverTime = playerRb.velocity.magnitude * 2;
+        var velOverLifetime = speedPs.velocityOverLifetime;
+        emission.rateOverTime = Mathf.Pow(playerRb.velocity.magnitude / 5f, 2.5f);
+        velOverLifetime.z = Mathf.Sqrt(playerRb.velocity.magnitude) * 2f;
     }
 }

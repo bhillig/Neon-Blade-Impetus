@@ -14,7 +14,7 @@ public class PlayerDryStrikeDashState : PlayerDashState
     public override void EnterState()
     {
         base.EnterState();
-        Debug.Log("Dry strike dash");
+        Context.colliderSwitcher.SwitchToCollider(2);
         Vector3 forward = Camera.main.transform.forward;
         entryVel = Context.playerRb.velocity.magnitude * 
             Mathf.Max(0,Vector3.Dot(forward, Context.playerRb.velocity.normalized));

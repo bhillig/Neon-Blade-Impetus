@@ -56,10 +56,10 @@ MonoBehaviour:
       m_FlipV: 0
       m_SwapUV: 0
       m_Fill: 2
-      m_Scale: {x: 1, y: 1}
+      m_Scale: {x: 0.0625, y: 0.0625}
       m_Offset: {x: 0, y: 0}
       m_Rotation: 0
-      m_Anchor: 4
+      m_Anchor: 8
     m_Material: {fileID: 0}
     m_SubmeshIndex: 0
     m_ManualUV: 0
@@ -187,9 +187,9 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 0}
   m_Textures0:
   - {x: 1, y: 0}
-  - {x: 0, y: 0}
-  - {x: 1, y: 1}
-  - {x: 0, y: 0}
+  - {x: 0.9375, y: 0}
+  - {x: 1, y: 0.0625}
+  - {x: 0.9375, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}

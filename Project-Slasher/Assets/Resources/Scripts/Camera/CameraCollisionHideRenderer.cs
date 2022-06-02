@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 public class CameraCollisionHideRenderer : MonoBehaviour
 {
     public LayerMask hideMask;
     public Material passthroughMat;
+    public CinemachineVirtualCamera vcam;
 
     internal class meshPair
     {
@@ -30,12 +31,6 @@ public class CameraCollisionHideRenderer : MonoBehaviour
             {
                 cache.Add(meshRen, new meshPair(1, meshRen.material));
                 meshRen.material = passthroughMat;
-                // Match colors
-                /*                Color c = meshRen.material.GetColor("_Color");
-                                MaterialPropertyBlock block = new MaterialPropertyBlock();
-                                meshRen.GetPropertyBlock(block);
-                                block.SetColor("_Color", c);
-                                meshRen.SetPropertyBlock(block);*/
                 // Disable shadows to avoid weird dotted shadows
                 meshRen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             }
@@ -56,6 +51,7 @@ public class CameraCollisionHideRenderer : MonoBehaviour
             block.SetFloat("_Alpha", Mathf.Lerp(0.25f, 0.6f, t));
             ren.SetPropertyBlock(block);
         }
+        transform.LookAt(vcam.m_Follow.transform.position + Vector3.up * 1.6f);
     }
 
     private void OnTriggerExit(Collider other)

@@ -4,23 +4,42 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    public PlayerEventsAsset playerEvents;
+
     private bool alreadyTriggered = false;
     private PlayerController pc;
 
+    private void Awake()
+    {
+        playerEvents.OnRestartLevel += TeleportToCheckpoint;
+    }
+
+    private void OnDestroy()
+    {
+        playerEvents.OnRestartLevel -= TeleportToCheckpoint;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        pc = other.transform.parent.GetComponent<PlayerController>();
-        if(pc != null && !alreadyTriggered)
+        var hit = other.GetComponentInParent<PlayerController>();
+        if(hit != null && !alreadyTriggered)
         {
+            pc = hit;
             TriggerCheckpoint();
         }
     }
 
     private void TriggerCheckpoint()
     {
-        Debug.Log("Checkpoint Triggered: " + gameObject.name);
-
         alreadyTriggered = true;
         pc.RespawnPoint = transform.position;
+    }
+
+    private void TeleportToCheckpoint()
+    {
+        if (pc != null)
+        {
+            pc.playerPhysicsTransform.position = transform.position;
+        }
     }
 }

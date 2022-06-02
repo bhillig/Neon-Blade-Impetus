@@ -7,17 +7,21 @@ public class PlayerLandingState : PlayerGroundedState
     public PlayerLandingState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) {}
 
     private float timer = 0.0f;
-    private float stateDuration = 0.6f;
+    private float stateDuration = 0.52f;
 
     public override void EnterState()
     {
         base.EnterState();
         Context.animationController.SetBool("Landing", true);
+        Context.audioManager.rollEmitter.Play(); 
+        Context.colliderSwitcher.SwitchToCollider(1);
         // Adjust roll velocity
         Vector3 roll = Context.playerRb.velocity;
         Vector3 planeVel = Vector3.ProjectOnPlane(roll, Context.groundPhysicsContext.RawGroundNormal);
         float speed = planeVel.magnitude;
-        Context.playerRb.velocity = Context.forwardVector.normalized *
+        Context.playerRb.velocity = 
+            Vector3.up * roll.y + 
+            Context.forwardVector.normalized *
             Mathf.Max(speed, Context.movementProfile.RollSpeed);
     }
 
@@ -25,6 +29,7 @@ public class PlayerLandingState : PlayerGroundedState
     {
         base.ExitState();
         timer = 0.0f;
+        Context.colliderSwitcher.SwitchToCollider(0);
         Context.animationController.SetBool("Landing", false);
     }
 
@@ -32,11 +37,6 @@ public class PlayerLandingState : PlayerGroundedState
     {
         base.UpdateState();
         CheckSwitchState();
-    }
-
-    protected override void Jump()
-    {
-        // NO JUMPIN WHILE ROLLIN
     }
 
     public override void CheckSwitchState()
@@ -48,5 +48,14 @@ public class PlayerLandingState : PlayerGroundedState
             TrySwitchState(Factory.GroundedSwitch);
         }
 
+    }
+    protected override void Jump()
+    {
+        // NO JUMPIN WHILE ROLLIN
+    }
+
+    protected override void Shift()
+    {
+        // NO SLIDIN EITHER
     }
 }
