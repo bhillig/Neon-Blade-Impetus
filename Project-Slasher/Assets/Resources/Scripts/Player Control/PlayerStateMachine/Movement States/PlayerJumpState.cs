@@ -12,6 +12,8 @@ public class PlayerJumpState : PlayerAirborneState
 
     protected Vector3 desiredVelocity;
 
+    private float hackZcache;
+
     public override void EnterState()
     {
         base.EnterState();
@@ -22,30 +24,30 @@ public class PlayerJumpState : PlayerAirborneState
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.JumpParticle, Context.transform, false);
 
+        maxSpeed = Context.movementProfile.BaseMoveSpeed;
         // If going faster than movement profile's speed when entering state, then that becomes the new max speed
-        CalculateTopSpeed();
-        // Really weird bug with collider switching passing through objects
-        Context.playerRb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+        //CalculateTopSpeed();
+        hackZcache = Context.playerRb.velocity.z;
     }
 
     public override void ExitState()
     {
         base.ExitState();
-        Context.playerRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        desiredVelocity = flatMove.GetDesiredVelocity(maxSpeed);
+        Context.playerRb.velocity = Context.playerRb.velocity.SetZ(hackZcache);
         CheckSwitchState();
     }
 
     public override void FixedUpdateState()
     {
+        desiredVelocity = flatMove.GetDesiredVelocity(maxSpeed);
         if (desiredVelocity.magnitude > 0f)
-        {           
-            flatMove.SimpleMovement(desiredVelocity,maxSpeedChange);
+        {
+            flatMove.SimpleMovement(desiredVelocity, maxSpeedChange);
         }
         // Rotation
         // Only rotates X/Z to a threshhold
@@ -55,7 +57,8 @@ public class PlayerJumpState : PlayerAirborneState
             flatMove.LerpRotation(Context.movementProfile.AirTurnSpeed);
         else
             flatMove.LerpRotationY(Context.movementProfile.AirTurnSpeed);
-        UpdateTopSpeed();
+        //UpdateTopSpeed();
+        hackZcache = Context.playerRb.velocity.z;
     }
 
     public override void CheckSwitchState()
