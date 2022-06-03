@@ -39,7 +39,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (pc != null)
         {
-            pc.playerPhysicsTransform.position = transform.position;
+            pc.playerPhysicsTransform.position = pc.RespawnPoint;
         }
     }
 }
