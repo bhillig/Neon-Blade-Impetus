@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultMovementProfile
   m_EditorClassIdentifier: 
   turnSpeed: 0.2
-  baseMoveSpeed: 11
+  baseMoveSpeed: 10.5
   topMoveSpeed: 18
   baseAcceleration: 40
   baseFriction: 25
@@ -57,13 +57,13 @@ MonoBehaviour:
   baseAirAcceleration: 10
   airTurnSpeed: 0.1
   jumpGroundBlockDuration: 0.15
-  runningPreservationRatio: 0.2
-  airbornePreservationRatio: 0.4
+  runningPreservationRatio: 0.25
+  airbornePreservationRatio: 0.1
   rollSpeed: 12
   rollFallSpeedThreshhold: 15
-  wallJumpUpHeight: 1.8
-  wallJumpUpVel: 7.3484693
-  wallJumpSideVel: 7.75
+  wallJumpUpHeight: 1.85
+  wallJumpUpVel: 7.4498324
+  wallJumpSideVel: 7
   maxGroundedAngle: 45
   maxSnapVelocity: 11
   snapVelocityToAngleRatioCurve:
@@ -115,7 +115,7 @@ MonoBehaviour:
   slideGravityBoost: 16
   slideSpeedBoostRatio: 1.3
   slideBaseFriction: 8
-  slideLockDuration: 0.35
+  slideLockDuration: 0.33
   slideCooldown: 0.65
   slideSpeedCap: 25
   minGroundedDotProd: 0.70710677

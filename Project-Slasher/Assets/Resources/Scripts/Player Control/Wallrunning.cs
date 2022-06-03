@@ -10,7 +10,7 @@ public class Wallrunning
     // Wallruning config variables
     private LayerMask whatisWall;
     private LayerMask whatisGround;
-    private float wallRunForce = 11.5f;
+    private float wallRunForce = 11f;
     private float maxWallRunTime = 25.00f;
     private float wallRunTimer = 2.0f;
 

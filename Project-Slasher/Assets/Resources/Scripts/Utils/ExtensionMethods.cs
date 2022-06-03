@@ -26,9 +26,10 @@ public static class ExtensionMethods
         return vec;
     }
 
-    public static Vector3 SetZ(this Vector3 vec, float val)
+    public static Vector3 SetXZ(this Vector3 vec, Vector2 val)
     {
-        vec.z = val;
+        vec.z = val.y;
+        vec.x = val.x;
         return vec;
     }
 
@@ -64,6 +65,10 @@ public static class ExtensionMethods
     public static Vector3 XZVec(this Vector3 vec)
     {
         return new Vector3(vec.x, 0, vec.z);
+    }
+    public static Vector2 XZVec2(this Vector3 vec)
+    {
+        return new Vector2(vec.x, vec.z);
     }
 
     public static void SetMaterials(this Renderer renderer, int[] indexes, Material[] mats)

@@ -12,7 +12,7 @@ public class PlayerJumpState : PlayerAirborneState
 
     protected Vector3 desiredVelocity;
 
-    private float hackZcache;
+    private Vector3 hackVelCache;
 
     public override void EnterState()
     {
@@ -27,7 +27,8 @@ public class PlayerJumpState : PlayerAirborneState
         maxSpeed = Context.movementProfile.BaseMoveSpeed;
         // If going faster than movement profile's speed when entering state, then that becomes the new max speed
         CalculateTopSpeed();
-        hackZcache = Context.playerRb.velocity.z;
+        // Hack fix for random walljump speed loss
+        hackVelCache = Context.playerRb.velocity.XZVec2();
     }
 
     public override void ExitState()
@@ -38,7 +39,7 @@ public class PlayerJumpState : PlayerAirborneState
     public override void UpdateState()
     {
         base.UpdateState();
-        Context.playerRb.velocity = Context.playerRb.velocity.SetZ(hackZcache);
+        Context.playerRb.velocity = Context.playerRb.velocity.SetXZ(hackVelCache);
         CheckSwitchState();
     }
 
@@ -58,7 +59,7 @@ public class PlayerJumpState : PlayerAirborneState
         else
             flatMove.LerpRotationY(Context.movementProfile.AirTurnSpeed);
         UpdateTopSpeed();
-        hackZcache = Context.playerRb.velocity.z;
+        hackVelCache = Context.playerRb.velocity.XZVec2();
     }
 
     public override void CheckSwitchState()
