@@ -21,13 +21,13 @@ public class Wallrunning
     // Detection variables
     private float wallCheckDistance = 1.2f;
     private float minJumpHeight = 1.5f;
-    private float minWallrunHeightFromGround = 1f;
+    private float minWallrunHeightFromGround = 1.5f;
     private float raycastWaistHeightOffset = 0.75f;
 
     // temp variables for testing
     private Vector3[] directions;
     private RaycastHit[] hits;
-    private float normalizedAngleThreshold = 0.25f;
+    private float normalizedAngleThreshold = 0.3f;
     private Vector3 lastWallPosition;
     private Vector3 lastWallNormal;
     private float side;
@@ -49,6 +49,7 @@ public class Wallrunning
 
     private Vector3 wallForward;
     public Vector3 WallForward => wallForward;
+    private Vector3 wallDown;
 
     private Vector3 wallNormal;
     private bool useGravity = true;
@@ -83,6 +84,11 @@ public class Wallrunning
         orientation = context.playerPhysicsTransform;
         return !Physics.Raycast(orientation.position, Vector3.down, dist, whatisGround);
     }
+    public bool AboveGround(float dist, Vector3 dir)
+    {
+        orientation = context.playerPhysicsTransform;
+        return !Physics.Raycast(orientation.position, dir, dist, whatisGround);
+    }
 
     public void JumpFromWall(float sideVel, float upVel)
     {
@@ -108,44 +114,46 @@ public class Wallrunning
     {
         isWallRunning = false;
         bool wallDetected = false;
-        if (CanAttach())
-        {
-            hits = new RaycastHit[directions.Length];
-            var waistHits = new RaycastHit[directions.Length];
+        hits = new RaycastHit[directions.Length];
+        var waistHits = new RaycastHit[directions.Length];
 
-            for (int i = 0; i < directions.Length; i++)
+        for (int i = 0; i < directions.Length; i++)
+        {
+            Vector3 dir = orientation.TransformDirection(directions[i]);
+            dir = Vector3.ProjectOnPlane(dir, Vector3.up).normalized;
+            Physics.Raycast(orientation.position, dir, out hits[i], wallCheckDistance,whatisGround);
+            Physics.Raycast(orientation.position + Vector3.up * raycastWaistHeightOffset, 
+                dir, out waistHits[i], wallCheckDistance, whatisGround);
+            if (hits[i].collider != null)
             {
-                Vector3 dir = orientation.TransformDirection(directions[i]);
-                dir = Vector3.ProjectOnPlane(dir, Vector3.up).normalized;
-                Physics.Raycast(orientation.position, dir, out hits[i], wallCheckDistance,whatisGround);
-                Physics.Raycast(orientation.position + Vector3.up * raycastWaistHeightOffset, 
-                    dir, out waistHits[i], wallCheckDistance, whatisGround);
-                if (hits[i].collider != null)
-                {
-                    Debug.DrawRay(orientation.position, dir * hits[i].distance, Color.green);
-                }
-                else
-                {
-                    Debug.DrawRay(orientation.position, dir * wallCheckDistance, Color.red);
-                }
+                Debug.DrawRay(orientation.position, dir * hits[i].distance, Color.green);
             }
-            if (CanWallRun())
+            else
             {
-                hits = hits.ToList().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
-                waistHits = waistHits.ToList().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
-                if (hits.Length > 0 && waistHits.Length > 0)
-                {
-                    wallDetected = true;
-                    if (performRun)
-                        OnWall(hits[0]);
-                    lastWallPosition = hits[0].point;
-                    lastWallNormal = hits[0].normal;
-                }
+                Debug.DrawRay(orientation.position, dir * wallCheckDistance, Color.red);
+            }
+        }
+        if (CanWallRun())
+        {
+            hits = hits.ToList().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
+            waistHits = waistHits.ToList().Where(h => h.collider != null).OrderBy(h => h.distance).ToArray();
+            if (hits.Length > 0 && waistHits.Length > 0)
+            {
+                wallDetected = true;
+                if (performRun)
+                    OnWall(hits[0]);
+                lastWallPosition = hits[0].point;
+                lastWallNormal = hits[0].normal;
+                Vector3 wallNormal = hits[0].normal;
+                Vector3 wallForward = Vector3.Cross(hits[0].normal, Vector3.up);
+                wallDown = Vector3.Cross(wallNormal, wallForward);
             }
         }
 
         if(!wallDetected)
+        {
             hits = new RaycastHit[0];
+        }
 
         if (isWallRunning)
         {
@@ -169,9 +177,9 @@ public class Wallrunning
         float verticalAxis = context.inputContext.movementInput.y;
         bool enoughSpeed = rb.velocity.magnitude > 1f;
         return Time.time - wallRunCooldownTime > wallRunCooldown &&
-                enoughSpeed && 
+                enoughSpeed &&
                 verticalAxis > 0.0f && 
-                AboveGround(minWallrunHeightFromGround);
+                AboveGround(minWallrunHeightFromGround, wallDown);
     }
 
     void OnWall(RaycastHit hit)
@@ -216,7 +224,7 @@ public class Wallrunning
         // Only enter wall run if camera is pointing towards the wall 
         Vector3 proj = Vector3.ProjectOnPlane(cameraForward, Vector3.up);
         float dot = Vector3.Dot(proj.normalized, lastWallNormal);
-        return CanWallRun() && hits.Length > 0 && AboveGround(minJumpHeight) && dot <= 0.2f && dot > -0.9f;
+        return CanWallRun() && hits.Length > 0 && dot <= 0.2f && dot > -0.8f;
     }
 
     public bool CanAttach()
