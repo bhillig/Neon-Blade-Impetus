@@ -84,6 +84,7 @@ public class PlayerWallglideState : PlayerMovementState
     }
     public void OnSpacebarDown()
     {
+        Context.playerRb.constraints = RigidbodyConstraints.FreezeRotation;
         Context.wallRunning.JumpFromWall(Context.movementProfile.WallJumpSideVel, Context.movementProfile.WallJumpUpVel);
         Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
         Context.audioManager.jumpEmitter.Play();

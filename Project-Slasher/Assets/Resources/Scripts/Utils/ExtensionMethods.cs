@@ -26,6 +26,12 @@ public static class ExtensionMethods
         return vec;
     }
 
+    public static Vector3 SetZ(this Vector3 vec, float val)
+    {
+        vec.z = val;
+        return vec;
+    }
+
     public static void DrawNormal(this RaycastHit hit)
     {
         Debug.DrawRay(hit.point, hit.normal * 100, Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f), 10f);

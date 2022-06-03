@@ -89,7 +89,7 @@ public class Wallrunning
         jumping = true;
         timeSinceLastJumped = 0.0f;
 
-        rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
+        rb.velocity = Vector3.ProjectOnPlane(rb.velocity, lastWallNormal);
         rb.velocity += GetWallJumpVelocity(sideVel, upVel);
     }
 
