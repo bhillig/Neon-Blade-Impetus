@@ -35,7 +35,7 @@ public abstract class PlayerCombatState : PlayerBaseState
         CursorScript.instance.SetCursorState(Context.combatTarget == null ? CursorStates.Default : CursorStates.Enemy);
     }
 
-    protected virtual Collider SearchForTarget()
+    protected virtual AbstractEnemyEntity SearchForTarget()
     {
         Vector3 dir = Camera.main.transform.forward;
         // First do a raw camera raycast to find the player's intended target
@@ -48,8 +48,11 @@ public abstract class PlayerCombatState : PlayerBaseState
                 Context.combatProfile.TargetMask
             ))
         {
+            var foundEnemyTarget = rawTarget.collider.GetComponentInParent<AbstractEnemyEntity>();
+            if (foundEnemyTarget == null)
+                return null;
             // Then do an actual raycast to see if there is a clear shot
-            Vector3 validCastDir = (rawTarget.transform.position - dashCollider.bounds.center).normalized;
+            Vector3 validCastDir = (foundEnemyTarget.Center.position - dashCollider.bounds.center).normalized;
             if (Physics.SphereCast(
                 dashCollider.bounds.center,
                 dashCollider.radius,
@@ -61,7 +64,7 @@ public abstract class PlayerCombatState : PlayerBaseState
             {
                 if (validTarget.collider.gameObject.IsInLayerMask(Context.combatProfile.TargetMask))
                 {
-                    return validTarget.collider;
+                    return foundEnemyTarget;
                 }
             }
         }

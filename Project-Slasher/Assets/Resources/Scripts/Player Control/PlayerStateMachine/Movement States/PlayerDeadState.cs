@@ -44,7 +44,7 @@ public class PlayerDeadState : PlayerMovementState
     {
         // Do nothing
     }
-    protected override void PerformStrikeDash(Collider strikeHasTarget)
+    protected override void PerformStrikeDash(AbstractEnemyEntity strikeHasTarget)
     {
         // Do nothing
     }

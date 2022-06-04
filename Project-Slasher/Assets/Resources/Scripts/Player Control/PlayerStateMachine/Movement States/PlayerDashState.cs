@@ -67,7 +67,7 @@ public abstract class PlayerDashState : PlayerMovementState
         }
     }
 
-    protected override void PerformStrikeDash(Collider strikeHasTarget)
+    protected override void PerformStrikeDash(AbstractEnemyEntity strikeHasTarget)
     {
         //Do nothing LOL
     }
