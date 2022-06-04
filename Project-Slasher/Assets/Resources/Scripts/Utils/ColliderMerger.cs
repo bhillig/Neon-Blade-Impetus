@@ -11,9 +11,12 @@ public class ColliderMerger : MonoBehaviour
         CombineInstance[] combine = new CombineInstance[meshFilters.Length];
 
         for(int i = 0;i < meshFilters.Length;i++)
-        { 
+        {
+            if (meshFilters[i].gameObject == gameObject) continue;
             combine[i].mesh = meshFilters[i].sharedMesh;
             combine[i].transform = transform.worldToLocalMatrix * meshFilters[i].transform.localToWorldMatrix;
+            var meshcoll = meshFilters[i].gameObject.GetComponent<MeshCollider>();
+            if (meshcoll != null) meshcoll.convex = true;
             meshFilters[i].gameObject.GetComponent<Collider>().isTrigger = true;
         }
 

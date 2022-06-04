@@ -29,7 +29,10 @@ public abstract class PlayerCombatState : PlayerBaseState
         {
             Context.primaryAttackCooldownTimer -= Time.deltaTime;
             if(Context.primaryAttackCooldownTimer < 0f)
+            {
+                Context.audioManager.cooldownUp.Play();
                 Context.playerEvents.OnStrikeCooldownFinished?.Invoke();
+            }
         }
         Context.combatTarget = SearchForTarget();
         CursorScript.instance.SetCursorState(Context.combatTarget == null ? CursorStates.Default : CursorStates.Enemy);
