@@ -38,7 +38,7 @@ public abstract class PlayerMovementState : PlayerBaseState
         PlayerAudioManager.SetGlobalParameter("WindEffect", currentWindEffect);
     }
 
-    protected virtual void PerformStrikeDash(Collider strikeHasTarget)
+    protected virtual void PerformStrikeDash(AbstractEnemyEntity strikeHasTarget)
     {
         if (strikeHasTarget != null)
         {

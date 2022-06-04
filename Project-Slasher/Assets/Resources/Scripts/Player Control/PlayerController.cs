@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Vector3 forwardVector;
     [HideInInspector] public float slideCooldownTimer;
     [HideInInspector] public float primaryAttackCooldownTimer;
-    [HideInInspector] public Collider combatTarget;
+    [HideInInspector] public AbstractEnemyEntity combatTarget;
 
     private void Awake()
     {

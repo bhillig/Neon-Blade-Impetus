@@ -71,7 +71,7 @@ public class HeadAIMovement : MonoBehaviour
             else
             {
                 TurnLockOn();
-                float dot = Vector3.Dot(barrel.transform.forward, -lookPos.normalized);
+                float dot = Vector3.Dot(barrel.transform.forward, lookPos.normalized);
                 if (reloadTimer <= 0 && dot > 0.9f) 
                 {
                     reloadTimer = AiProfile.ReloadDelay;
@@ -114,7 +114,7 @@ public class HeadAIMovement : MonoBehaviour
     {
         turnPoint = player.position;
         turnPointSet = true;
-        lookPos = transform.position - player.up * AiProfile.TargetHeightOffset - turnPoint;
+        lookPos = turnPoint - transform.position + player.up * AiProfile.TargetHeightOffset;
         Quaternion rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, AiProfile.RotationSpeed * Time.deltaTime);
     }
