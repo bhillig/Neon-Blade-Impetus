@@ -29297,6 +29297,7 @@ GameObject:
   - component: {fileID: 7120569191205607268}
   - component: {fileID: 7760797760339469290}
   - component: {fileID: 1061455881396990383}
+  - component: {fileID: 3377985801044937036}
   m_Layer: 28
   m_Name: DefaultBullet
   m_TagString: Untagged
@@ -29332,8 +29333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91a85a8718f194bb79cca616a5617d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructTime: 4
-  trackingAcceleration: 0
+  destructTime: 3
+  trackingAcceleration: 0.05
   moveSpeed: 45
   bulletRenderer: {fileID: 4053410200360787243}
   impactParticles:
@@ -29343,6 +29344,7 @@ MonoBehaviour:
   - {fileID: 3589063436664698689}
   - {fileID: 8801434775548363216}
   - {fileID: 2137547018}
+  emitter: {fileID: 3377985801044937036}
 --- !u!135 &7760797760339469290
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -29372,3 +29374,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &3377985801044937036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6647800826117427705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1776355705
+      Data2: 1076432478
+      Data3: -1105412431
+      Data4: -1055433222
+    Path: event:/SFX/Bullet
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 4.6

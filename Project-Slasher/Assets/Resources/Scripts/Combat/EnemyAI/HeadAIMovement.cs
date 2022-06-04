@@ -10,6 +10,7 @@ public class HeadAIMovement : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private AbstractEnemyEntity core;
     [SerializeField] private HeadAIProfile AiProfile;
+    [SerializeField] private FMODUnity.StudioEventEmitter shootVFX;
 
     private Transform player;
     private float alertTimer;
@@ -18,11 +19,12 @@ public class HeadAIMovement : MonoBehaviour
     private bool turnPointSet = false;
     private bool playerSpotted = false;
     private float reloadTimer;
+    private Quaternion startRotation;
     
     void Awake()
-    {
-        
+    {     
         core.OnRespawn += Respawn;
+        startRotation = transform.rotation;
     }
 
     void Start() {
@@ -64,7 +66,7 @@ public class HeadAIMovement : MonoBehaviour
 
                 else 
                 {
-                    TurnRandom();
+                    //TurnRandom();
                 }
             }
 
@@ -99,10 +101,12 @@ public class HeadAIMovement : MonoBehaviour
     {
         reloadTimer = 0f;
         AiProfile.AlertTime = 0f;
+        transform.rotation = startRotation;
     }
 
     void Shoot()
     {
+        shootVFX?.Play();
         var newBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
         var controller = newBullet.GetComponent<BulletController>();
         controller.SetTarget(player);

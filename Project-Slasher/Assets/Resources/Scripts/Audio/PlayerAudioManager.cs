@@ -21,6 +21,7 @@ public class PlayerAudioManager : MonoBehaviour
     public StudioEventEmitter targettrikeStart;
     public StudioEventEmitter targetStrikeImpact;
     public StudioEventEmitter dryStrikeDashImpact;
+    public StudioEventEmitter cooldownUp;
 
 
     public static void SetGlobalParameter(string name, float val)

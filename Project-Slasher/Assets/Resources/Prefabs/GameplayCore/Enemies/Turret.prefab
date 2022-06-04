@@ -105,6 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1790903467219780355}
   - component: {fileID: 1790903467219780354}
+  - component: {fileID: 8471521660135530105}
   m_Layer: 31
   m_Name: BarrelContainer
   m_TagString: Untagged
@@ -144,6 +145,37 @@ MonoBehaviour:
   bullet: {fileID: 6647800826117427705, guid: 3897e676db38f0646a7d0654d651af84, type: 3}
   core: {fileID: 2552501014171526000}
   AiProfile: {fileID: 11400000, guid: 67b99f907797ac14085e411d6da013d4, type: 2}
+  shootVFX: {fileID: 8471521660135530105}
+--- !u!114 &8471521660135530105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790903467219780364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1100059744
+      Data2: 1167386850
+      Data3: -677888867
+      Data4: 1498595095
+    Path: event:/SFX/Shoot
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 50
 --- !u!1 &2552501014138944379
 GameObject:
   m_ObjectHideFlags: 0

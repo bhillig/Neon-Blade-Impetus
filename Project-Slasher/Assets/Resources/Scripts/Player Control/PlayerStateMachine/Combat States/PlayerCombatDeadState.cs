@@ -39,6 +39,7 @@ public class PlayerCombatDeadState : PlayerCombatState
         Context.scarfCloth.externalAcceleration = new Vector3(0, 0, 0);
         Context.scarfCloth.randomAcceleration = scarfRandAccel;
         Context.scarfCloth.capsuleColliders = scarfColliders;
+        Context.primaryAttackCooldownTimer = 0.01f;
     }
 
     public override void FixedUpdateState() 
@@ -48,7 +49,7 @@ public class PlayerCombatDeadState : PlayerCombatState
 
     public override void UpdateState()
     {
-        base.UpdateState();
+        //base.UpdateState();
     }
 
     public override void CheckSwitchState() 

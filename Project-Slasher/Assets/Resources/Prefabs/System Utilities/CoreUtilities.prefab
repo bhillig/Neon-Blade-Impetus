@@ -1,5 +1,66 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1736303733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1736303734}
+  - component: {fileID: 1736303735}
+  m_Layer: 7
+  m_Name: CooldownUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1736303734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736303733}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4910550241401462462}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1736303735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736303733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1310359848
+      Data2: 1326631394
+      Data3: 1878995611
+      Data4: -310383793
+    Path: event:/SFX/Attack/CooldownRefreshed
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 50
 --- !u!1 &2410771666451988520
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,10 +182,62 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3482012781550273058}
     m_Modifications:
+    - target: {fileID: -8742409863758664915, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: attenuationObject
+      value: 
+      objectReference: {fileID: 4910550240923733754}
     - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: body
       value: 
       objectReference: {fileID: 6355569592923302122}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: maxFOV
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: minFOV
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: fovCurve.m_Curve.Array.data[1].time
+      value: 0.3689171
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: fovCurve.m_Curve.Array.data[1].value
+      value: 0.325851
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: fovCurve.m_Curve.Array.data[0].inSlope
+      value: 0.88326347
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: fovCurve.m_Curve.Array.data[2].inSlope
+      value: 1.0540407
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: fovCurve.m_Curve.Array.data[0].outSlope
+      value: 0.88326347
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: fovCurve.m_Curve.Array.data[2].outSlope
+      value: 1.0540407
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: lensDistortCurve.m_Curve.Array.data[1].time
+      value: 0.16424413
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: lensDistortCurve.m_Curve.Array.data[1].value
+      value: 0.02164203
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: lensDistortCurve.m_Curve.Array.data[0].inSlope
+      value: 0.13176744
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
+      propertyPath: lensDistortCurve.m_Curve.Array.data[0].outSlope
+      value: 0.13176744
+      objectReference: {fileID: 0}
     - target: {fileID: 3537850462230069222, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -237,6 +350,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3482012781550273058}
     m_Modifications:
+    - target: {fileID: 249740766, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
+      propertyPath: cooldownUp
+      value: 
+      objectReference: {fileID: 1736303735}
     - target: {fileID: 2023879515020833344, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -309,6 +426,16 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 2023879515020833351, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
   m_PrefabInstance: {fileID: 4910550240529357485}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4910550240923733754 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2072106071, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
+  m_PrefabInstance: {fileID: 4910550240529357485}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4910550241401462462 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1409762323, guid: 59a0010d305b3304b8e99ac44d41e154, type: 3}
+  m_PrefabInstance: {fileID: 4910550240529357485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5352872666872627064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -362,7 +489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: loadOnStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: mainMenuScene
