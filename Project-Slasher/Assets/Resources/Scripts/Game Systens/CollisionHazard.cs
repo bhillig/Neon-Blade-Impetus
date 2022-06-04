@@ -12,4 +12,12 @@ public class CollisionHazard : MonoBehaviour
             pc.playerEvents.OnCollideWithVoid();
         }
     }
+    private void OnCollisionEnter(Collision other)
+    {
+        var pc = other.collider.GetComponentInParent<PlayerHitboxManager>();
+        if (pc != null)
+        {
+            pc.playerEvents.OnCollideWithVoid();
+        }
+    }
 }
