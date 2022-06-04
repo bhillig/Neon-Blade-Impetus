@@ -64654,6 +64654,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 9058209308587008292, guid: 454da547dc2a1394c8b9543fa871ab75, type: 3}
+      propertyPath: forceFields.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058209308587008292, guid: 454da547dc2a1394c8b9543fa871ab75, type: 3}
+      propertyPath: forceFields.Array.data[0]
+      value: 
+      objectReference: {fileID: 1073648395}
+    - target: {fileID: 9058209308587008292, guid: 454da547dc2a1394c8b9543fa871ab75, type: 3}
       propertyPath: enemySections.Array.data[0].enemies.Array.data[0]
       value: 
       objectReference: {fileID: 324988517}

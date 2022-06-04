@@ -11,13 +11,15 @@ public class RespawnHandler : MonoBehaviour
     private int numberOfSections;
 
     [SerializeField]
+    private List<ForceField> forceFields;
+
+    [SerializeField]
     private List<EnemySection> enemySections;
     
     [System.Serializable]
     public struct EnemySection
     {
-        public List<AbstractEnemyEntity> enemies;
-        
+        public List<AbstractEnemyEntity> enemies;    
     }
 
     private int currentCheckpointID;
@@ -27,6 +29,7 @@ public class RespawnHandler : MonoBehaviour
     {
         Debug.Log("test");
         playerEvents.OnRestartLevel += RespawnEnemies;
+        playerEvents.OnRestartLevel += RespawnForceField;
     }
 
     public void RespawnEnemies()
@@ -35,6 +38,14 @@ public class RespawnHandler : MonoBehaviour
        foreach (var enemy in enemySections[currentCheckpointID].enemies)
         {
             enemy.Respawn();
+        }
+    }
+
+    public void RespawnForceField()
+    {
+        if(forceFields[currentCheckpointID] != null && forceFields[currentCheckpointID].IsOpen)
+        {
+            forceFields[currentCheckpointID].Respawn();
         }
     }
 

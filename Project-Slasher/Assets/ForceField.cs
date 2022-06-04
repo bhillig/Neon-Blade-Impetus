@@ -8,6 +8,7 @@ public class ForceField : MonoBehaviour
     private List<AbstractEnemyEntity> enemiesNeededToKill;
 
     private bool isOpen = false;
+    public bool IsOpen { get { return isOpen; } set { isOpen = value; } } 
 
 
     public void CheckOpenCondition()
@@ -26,5 +27,11 @@ public class ForceField : MonoBehaviour
     {
         isOpen = true;
         this.gameObject.SetActive(false);
+    }
+
+    public void Respawn()
+    {
+        isOpen = false;
+        this.gameObject.SetActive(true);
     }
 }
