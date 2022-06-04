@@ -6,6 +6,7 @@ using System;
 public abstract class AbstractEnemyEntity : MonoBehaviour
 {
     [SerializeField] private Transform center;
+
     public Transform Center
     {
         get { return center == null ? transform : center; }
