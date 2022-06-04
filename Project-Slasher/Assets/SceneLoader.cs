@@ -12,29 +12,32 @@ public class SceneLoader : MonoBehaviour
     private string currentLevelScene;
 
     [SerializeField]
-    private bool isLevel;
+    private string mainMenuScene;
 
-    void Awake()
+    [SerializeField]
+    private string debug_SceneYouWantToPlay;
+
+    private void Start()
     {
-        // If this SceneLoader object is in a level scene, load the core utilities
-        if(isLevel)
-        {
-            LoadCoreFunctionality();
-        }
-        // SceneManager.LoadScene("ParticleEffectScene", LoadSceneMode.Additive);
+        StartSession(debug_SceneYouWantToPlay);
     }
 
-    private void LoadCoreFunctionality()
+    public void StartSession(string level)
     {
-        if(CoreUtilities.Instance == null)
-        {
-            SceneManager.LoadScene(coreScene, LoadSceneMode.Additive);
-        }
+        SceneManager.LoadScene(level, LoadSceneMode.Additive);
+        currentLevelScene = level;
     }
 
+    public void EndSession()
+    {
+        SceneManager.UnloadSceneAsync(currentLevelScene);
+        SceneManager.LoadScene(mainMenuScene, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(coreScene);
+    }
     public void LoadNextLevel(string nextLevelScene)
     {
         SceneManager.UnloadSceneAsync(currentLevelScene);
         SceneManager.LoadScene(nextLevelScene, LoadSceneMode.Additive);
+        currentLevelScene = nextLevelScene;
     }
 }
