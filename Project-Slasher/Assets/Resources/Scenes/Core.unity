@@ -196,8 +196,8 @@ PrefabInstance:
       value: CoreUtilities
       objectReference: {fileID: 0}
     - target: {fileID: 2876296411872741403, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: loadOnStart
-      value: 0
+      propertyPath: debug_SceneYouWantToPlay
+      value: Level2Scene
       objectReference: {fileID: 0}
     - target: {fileID: 3482012781550273058, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
       propertyPath: m_RootOrder
