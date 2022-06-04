@@ -4,11 +4,29 @@ using UnityEngine;
 using System;
 public class EnemyEntityCore : AbstractEnemyEntity
 {
+    [SerializeField]
+    private ForceField forceField;
+
     [Header("Components")]
     public List<Collider> colliders;
     public List<Renderer> renderers;
     public List<ParticleSystem> deathParticles;
 
+    private void Awake()
+    {
+        if(forceField != null)
+        {
+            OnDead += forceField.CheckOpenCondition;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if(forceField != null)
+        {
+            OnDead -= forceField.CheckOpenCondition;
+        }
+    }
     public override void KillEnemy()
     {
         isDead = true;
