@@ -6871,6 +6871,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
   m_PrefabInstance: {fileID: 228959242}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &228959244 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2552501014171526000, guid: bc41482d29f553b448b123565addf093, type: 3}
+  m_PrefabInstance: {fileID: 228959242}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb40a5ad47a7d94dbc883f057f94dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &234935190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8929,6 +8940,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
   m_PrefabInstance: {fileID: 324988515}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &324988517 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2552501014171526000, guid: bc41482d29f553b448b123565addf093, type: 3}
+  m_PrefabInstance: {fileID: 324988515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb40a5ad47a7d94dbc883f057f94dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &334144131
 Mesh:
   m_ObjectHideFlags: 0
@@ -11108,6 +11130,10 @@ PrefabInstance:
     - target: {fileID: 5044058593069374113, guid: d878e76e340f0524b85d9cf84eadac71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5044058593069374114, guid: d878e76e340f0524b85d9cf84eadac71, type: 3}
+      propertyPath: checkPointID
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5044058593069374127, guid: d878e76e340f0524b85d9cf84eadac71, type: 3}
       propertyPath: m_Name
@@ -29097,6 +29123,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61f45c18b0b220946810173eeaeb7c95, type: 3}
+--- !u!1 &949506549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 949506551}
+  - component: {fileID: 949506550}
+  m_Layer: 0
+  m_Name: RespawnHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &949506550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949506549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1da38b119503cb48a65125b80f0fc38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerEvents: {fileID: 11400000, guid: a91b005c0b76a724eb48b3f4a8d02fcd, type: 2}
+  numberOfSections: 4
+  enemySections:
+  - enemies:
+    - {fileID: 324988517}
+    - {fileID: 228959244}
+  - enemies: []
+  - enemies:
+    - {fileID: 1237239953}
+  - enemies:
+    - {fileID: 1085069558}
+--- !u!4 &949506551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949506549}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &950378275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35082,6 +35162,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
   m_PrefabInstance: {fileID: 1085069556}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1085069558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2552501014171526000, guid: bc41482d29f553b448b123565addf093, type: 3}
+  m_PrefabInstance: {fileID: 1085069556}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb40a5ad47a7d94dbc883f057f94dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1088815101
 Mesh:
   m_ObjectHideFlags: 0
@@ -36806,6 +36897,10 @@ PrefabInstance:
     - target: {fileID: 5044058593069374113, guid: d878e76e340f0524b85d9cf84eadac71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5044058593069374114, guid: d878e76e340f0524b85d9cf84eadac71, type: 3}
+      propertyPath: checkPointID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5044058593069374127, guid: d878e76e340f0524b85d9cf84eadac71, type: 3}
       propertyPath: m_Name
@@ -40662,6 +40757,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7038938697357602919, guid: bc41482d29f553b448b123565addf093, type: 3}
   m_PrefabInstance: {fileID: 1237239951}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1237239953 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2552501014171526000, guid: bc41482d29f553b448b123565addf093, type: 3}
+  m_PrefabInstance: {fileID: 1237239951}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb40a5ad47a7d94dbc883f057f94dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1259644171
 Mesh:
   m_ObjectHideFlags: 0
@@ -55423,6 +55529,10 @@ PrefabInstance:
     - target: {fileID: 5044058593069374113, guid: d878e76e340f0524b85d9cf84eadac71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5044058593069374114, guid: d878e76e340f0524b85d9cf84eadac71, type: 3}
+      propertyPath: checkPointID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5044058593069374127, guid: d878e76e340f0524b85d9cf84eadac71, type: 3}
       propertyPath: m_Name
