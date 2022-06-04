@@ -78,7 +78,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_7bb9556d475947f7b311c8530b5fc057: 0.5
-    - _Alpha: 0.5
+    - _Alpha: 0.75
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -92,7 +92,7 @@ Material:
     - _DstBlend: 10
     - _EnvironmentReflections: 1
     - _Frequency: 2.5
-    - _FresnelPower: 10
+    - _FresnelPower: 25
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -114,7 +114,7 @@ Material:
     - _BaseColor: {r: 1, g: 0.3915094, b: 0.3915094, a: 0.8784314}
     - _Border: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.764151, g: 0, b: 0, a: 1}
-    - _Emission: {r: 4.271752, g: 0, b: 0, a: 1}
+    - _Emission: {r: 5.703125, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 1.4980392, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

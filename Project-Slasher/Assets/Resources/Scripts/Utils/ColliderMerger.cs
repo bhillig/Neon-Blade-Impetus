@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshCollider))]
 public class ColliderMerger : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class ColliderMerger : MonoBehaviour
         { 
             combine[i].mesh = meshFilters[i].sharedMesh;
             combine[i].transform = transform.worldToLocalMatrix * meshFilters[i].transform.localToWorldMatrix;
-            meshFilters[i].gameObject.GetComponent<Collider>().enabled = false;
+            meshFilters[i].gameObject.GetComponent<Collider>().isTrigger = true;
         }
 
         var filter = GetComponent<MeshFilter>();

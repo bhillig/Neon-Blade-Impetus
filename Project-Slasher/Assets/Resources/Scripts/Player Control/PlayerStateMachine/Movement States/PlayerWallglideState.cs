@@ -94,6 +94,8 @@ public class PlayerWallglideState : PlayerMovementState
         Context.wallRunning.JumpFromWall(Context.movementProfile.WallJumpSideVel, Context.movementProfile.WallJumpUpVel);
         Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
         Context.audioManager.jumpEmitter.Play();
+        // Start particles.
+        Context.Particle = GameObject.Instantiate(Context.WallJumpParticle, Context.transform, false);
         TrySwitchState(Factory.Jump);
     }
 
