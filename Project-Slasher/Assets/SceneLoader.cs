@@ -17,9 +17,15 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     private string debug_SceneYouWantToPlay;
 
+    [SerializeField]
+    private bool loadOnStart;
+
     private void Start()
     {
-        StartSession(debug_SceneYouWantToPlay);
+        if (loadOnStart)
+            StartSession(debug_SceneYouWantToPlay);
+        else
+            currentLevelScene = debug_SceneYouWantToPlay;
     }
 
     public void StartSession(string level)
