@@ -8,12 +8,13 @@ public class ForceField : MonoBehaviour
     private List<AbstractEnemyEntity> enemiesNeededToKill;
 
     private bool isOpen = false;
+    public bool IsOpen { get { return isOpen; } }   
 
     private void Awake()
     {
         foreach (var enemy in enemiesNeededToKill)
         {
-            enemy.OnRespawn += CheckOpenCondition;
+            //enemy.OnRespawn += CheckOpenCondition;
             enemy.OnDead += CheckOpenCondition;
         }
     }
@@ -22,7 +23,7 @@ public class ForceField : MonoBehaviour
     {
         foreach (var enemy in enemiesNeededToKill)
         {
-            enemy.OnRespawn -= CheckOpenCondition;
+            //enemy.OnRespawn -= CheckOpenCondition;
             enemy.OnDead -= CheckOpenCondition;
         }
     }
@@ -34,7 +35,6 @@ public class ForceField : MonoBehaviour
         {
             if(!enemy.IsDead)
             {
-                CloseForceField();
                 return;
             }
         }
@@ -67,7 +67,7 @@ public class ForceField : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void CloseForceField()
+    public void RespawnForceField()
     {
         isOpen = false;
         this.gameObject.SetActive(true);

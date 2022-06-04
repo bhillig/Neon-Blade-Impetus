@@ -45,7 +45,7 @@ public class RespawnHandler : MonoBehaviour
     {
         if(forceFields[currentCheckpointID] != null && forceFields[currentCheckpointID].IsOpen)
         {
-            forceFields[currentCheckpointID].Respawn();
+            forceFields[currentCheckpointID].RespawnForceField();
         }
     }
 
