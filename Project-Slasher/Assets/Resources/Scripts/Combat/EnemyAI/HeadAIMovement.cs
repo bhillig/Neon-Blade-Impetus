@@ -85,7 +85,7 @@ public class HeadAIMovement : MonoBehaviour
                 }
                 if (alertTimer <= 0)
                 {
-                    Reset();
+                    //Reset();
                 }
                 else
                 {

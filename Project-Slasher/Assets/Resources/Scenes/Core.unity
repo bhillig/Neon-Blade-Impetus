@@ -191,6 +191,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
+      propertyPath: maxVel
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 2410771666451988520, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
       propertyPath: m_Name
       value: CoreUtilities

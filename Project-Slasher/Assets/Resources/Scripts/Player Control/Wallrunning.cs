@@ -20,7 +20,8 @@ public class Wallrunning
 
     // Detection variables
     private float wallCheckDistance = 1.2f;
-    private float minJumpHeight = 1.5f;
+    private float wallCheckDistanceWaist = 1.6f;
+    private float minJumpHeight = 1.25f;
     private float minWallrunHeightFromGround = 1.5f;
     private float raycastWaistHeightOffset = 0.75f;
 
@@ -123,7 +124,7 @@ public class Wallrunning
             dir = Vector3.ProjectOnPlane(dir, Vector3.up).normalized;
             Physics.Raycast(orientation.position, dir, out hits[i], wallCheckDistance,whatisGround);
             Physics.Raycast(orientation.position + Vector3.up * raycastWaistHeightOffset, 
-                dir, out waistHits[i], wallCheckDistance, whatisGround);
+                dir, out waistHits[i], wallCheckDistanceWaist, whatisGround);
             if (hits[i].collider != null)
             {
                 Debug.DrawRay(orientation.position, dir * hits[i].distance, Color.green);
