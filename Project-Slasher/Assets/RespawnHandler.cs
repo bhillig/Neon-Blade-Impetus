@@ -32,6 +32,12 @@ public class RespawnHandler : MonoBehaviour
         playerEvents.OnRestartLevel += RespawnForceField;
     }
 
+    private void OnDestroy()
+    {
+        playerEvents.OnRestartLevel -= RespawnEnemies;
+        playerEvents.OnRestartLevel -= RespawnForceField;
+    }
+
     public void RespawnEnemies()
     {
        if (enemySections[currentCheckpointID].enemies == null) return;
