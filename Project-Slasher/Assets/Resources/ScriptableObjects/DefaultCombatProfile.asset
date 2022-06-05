@@ -16,7 +16,7 @@ MonoBehaviour:
   holdTime: 0.65
   cooldown: 1.5
   castRadius: 1.25
-  castDistance: 8.5
+  castDistance: 10
   hitMask:
     serializedVersion: 2
     m_Bits: 2147483712
@@ -25,7 +25,7 @@ MonoBehaviour:
     m_Bits: 2147483648
   hitVelocity: 35
   hitBoostVelocity: 4.5
-  hitDashPierceDistance: 4
+  hitDashPierceDistance: 6
   timeSlowScale: 0.05
   timeSlowDuration: 0.65
   timeSlowStartOffset: -0.02
