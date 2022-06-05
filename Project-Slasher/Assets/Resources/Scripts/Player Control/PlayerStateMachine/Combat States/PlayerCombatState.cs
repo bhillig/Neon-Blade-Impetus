@@ -47,7 +47,7 @@ public abstract class PlayerCombatState : PlayerBaseState
                 Context.combatProfile.CastRadius,
                 dir,
                 out RaycastHit rawTarget,
-                100,
+                1000,
                 Context.combatProfile.TargetMask
             ))
         {
@@ -61,13 +61,13 @@ public abstract class PlayerCombatState : PlayerBaseState
                 dashCollider.radius,
                 validCastDir,
                 out RaycastHit validTarget,
-                Context.combatProfile.CastDistance,
+                Context.combatProfile.CastDistance - dashCollider.radius,
                 Context.combatProfile.HitMask
             ))
             {
                 if (validTarget.collider.gameObject.IsInLayerMask(Context.combatProfile.TargetMask))
                 {
-                    return foundEnemyTarget;
+                    return validTarget.collider.GetComponentInParent<AbstractEnemyEntity>();
                 }
             }
         }
