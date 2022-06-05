@@ -37,7 +37,11 @@ public class Checkpoint : MonoBehaviour
     {
         alreadyTriggered = true;
         pc.RespawnPoint = transform.position;
-        FindObjectOfType<RespawnHandler>().SetRespawnID(CheckPointID);
+        RespawnHandler rh = FindObjectOfType<RespawnHandler>();
+        if(rh != null)
+        {
+            rh.SetRespawnID(checkPointID);
+        }
     }
 
     private void TeleportToCheckpoint()
