@@ -69,7 +69,7 @@ public class PlayerWallglideState : PlayerMovementState
 
     public override void CheckSwitchState()
     {
-        if (!Context.wallRunning.IsWallRunning())
+        if (!Context.wallRunning.IsWallRunning() && jumpLockout <= 0f)
         {
             // Running into an osbtacle while running will block you from wall running again for a longer duration
             if(Context.playerRb.velocity.magnitude < 5f)
@@ -81,7 +81,7 @@ public class PlayerWallglideState : PlayerMovementState
         }
 
         //Grounded check
-        if (Context.groundPhysicsContext.IsGroundedForSteps(2))
+        if (Context.groundPhysicsContext.IsGroundedForSteps(5))
         {
             TrySwitchState(Factory.Idle);
         }
