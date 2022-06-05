@@ -83,7 +83,12 @@ public class Wallrunning
     public bool AboveGround(float dist)
     {
         orientation = context.playerPhysicsTransform;
-        return !Physics.Raycast(orientation.position, Vector3.down, dist, whatisGround);
+        if(!Physics.Raycast(orientation.position, Vector3.down, out RaycastHit hit, dist, whatisGround))
+        {
+            return true;
+        }
+        bool isGround = Vector3.Dot(Vector3.up, hit.normal) >= context.movementProfile.MinGroundedDotProd;
+        return !isGround;
     }
     public bool AboveGround(float dist, Vector3 dir)
     {

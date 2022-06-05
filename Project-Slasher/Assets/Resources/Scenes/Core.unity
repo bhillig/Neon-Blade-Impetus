@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+  m_AmbientSkyColor: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -130,9 +130,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 415555807, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
+      propertyPath: m_Intensity
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2410771666451988520, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
       propertyPath: m_Name
       value: CoreUtilities
+      objectReference: {fileID: 0}
+    - target: {fileID: 2876296411872741403, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
+      propertyPath: loadOnStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2876296411872741403, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
+      propertyPath: debug_SceneYouWantToPlay
+      value: Level2Scene
       objectReference: {fileID: 0}
     - target: {fileID: 3482012781550273058, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
       propertyPath: m_RootOrder
