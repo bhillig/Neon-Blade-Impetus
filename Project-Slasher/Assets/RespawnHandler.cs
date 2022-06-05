@@ -34,7 +34,6 @@ public class RespawnHandler : MonoBehaviour
 
     public void RespawnEnemies()
     {
-        Debug.Log("Called");
        foreach (var enemy in enemySections[currentCheckpointID].enemies)
         {
             enemy.Respawn();
