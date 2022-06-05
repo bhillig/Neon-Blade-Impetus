@@ -83,7 +83,14 @@ public class HeadAIMovement : MonoBehaviour
                 }
                 else
                 {
-                    reloadTimer -= Time.deltaTime;
+                    if(Vector3.Distance(this.transform.position, player.position) <= AiProfile.ShowdownRange) 
+                    {
+                        reloadTimer -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        reloadTimer -= Time.deltaTime/10;
+                    }
                 }
                 if (alertTimer <= 0)
                 {
