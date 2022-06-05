@@ -15,7 +15,7 @@ MonoBehaviour:
   chargeTime: 0.75
   holdTime: 0.65
   cooldown: 1.5
-  castRadius: 1.25
+  castRadius: 7
   castDistance: 10
   hitMask:
     serializedVersion: 2
@@ -25,7 +25,7 @@ MonoBehaviour:
     m_Bits: 2147483648
   hitVelocity: 35
   hitBoostVelocity: 4.5
-  hitDashPierceDistance: 6
+  hitDashPierceDistance: 4
   timeSlowScale: 0.05
   timeSlowDuration: 0.65
   timeSlowStartOffset: -0.02
