@@ -89,7 +89,7 @@ public class HeadAIMovement : MonoBehaviour
                     }
                     else
                     {
-                        reloadTimer -= Time.deltaTime/2;
+                        reloadTimer -= Time.deltaTime/1.4f;
                     }
                 }
                 if (alertTimer <= 0)

@@ -24,19 +24,31 @@ public class CameraCollisionHideRenderer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        var group = other.GetComponent<ColliderMerger>();
+        if(group != null && group.gameObject.IsInLayerMask(hideMask))
+        {
+            foreach (var ren in group.AttachedRenderers)
+                AddMeshRen(ren);
+            return;
+        }
         var meshRen = other.GetComponent<Renderer>();
         if (meshRen != null && meshRen.gameObject.IsInLayerMask(hideMask))
         {
-            if (!cache.ContainsKey(meshRen))
-            {
-                cache.Add(meshRen, new meshPair(1, meshRen.material));
-                meshRen.material = passthroughMat;
-                // Disable shadows to avoid weird dotted shadows
-                meshRen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            }
-            else
-                cache[meshRen].count++;
+            AddMeshRen(meshRen);
         }
+    }
+
+    private void AddMeshRen(Renderer meshRen)
+    {
+        if (!cache.ContainsKey(meshRen))
+        {
+            cache.Add(meshRen, new meshPair(1, meshRen.material));
+            meshRen.material = passthroughMat;
+            // Disable shadows to avoid weird dotted shadows
+            meshRen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        }
+        else
+            cache[meshRen].count++;
     }
 
     private void Update()
@@ -56,18 +68,30 @@ public class CameraCollisionHideRenderer : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        var group = other.GetComponent<ColliderMerger>();
+        if (group != null && group.gameObject.IsInLayerMask(hideMask))
+        {
+            foreach (var ren in group.AttachedRenderers)
+                ClearMeshRen(ren);
+            return;
+        }
         var meshRen = other.GetComponent<Renderer>();
         if (meshRen != null && meshRen.gameObject.IsInLayerMask(hideMask))
         {
-            if(cache.ContainsKey(meshRen))
+            ClearMeshRen(meshRen);
+        }
+    }
+
+    private void ClearMeshRen(Renderer meshRen)
+    {
+        if (cache.ContainsKey(meshRen))
+        {
+            cache[meshRen].count--;
+            if (cache[meshRen].count == 0)
             {
-                cache[meshRen].count--;
-                if(cache[meshRen].count == 0)
-                {
-                    meshRen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-                    meshRen.material = cache[meshRen].mat;
-                    cache.Remove(meshRen);
-                }
+                meshRen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+                meshRen.material = cache[meshRen].mat;
+                cache.Remove(meshRen);
             }
         }
     }

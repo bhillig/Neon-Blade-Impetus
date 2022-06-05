@@ -13,8 +13,10 @@ public class Checkpoint : MonoBehaviour
     private int checkPointID;
     public int CheckPointID {  get { return checkPointID; } }
 
+    [Header("VFX/SFX")]
     public ParticleSystem checkpointIndicator;
     public ParticleSystem checkpointTriggered;
+    public FMODUnity.StudioEventEmitter triggeredSound;
 
     private void Awake()
     {
@@ -43,6 +45,7 @@ public class Checkpoint : MonoBehaviour
         RespawnHandler rh = FindObjectOfType<RespawnHandler>();
         checkpointTriggered?.Play();
         checkpointIndicator?.Stop();
+        triggeredSound?.Play();
         if(rh != null)
         {
             rh.SetRespawnID(checkPointID);
