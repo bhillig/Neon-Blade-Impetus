@@ -124,10 +124,10 @@ MonoBehaviour:
       m_FlipV: 0
       m_SwapUV: 0
       m_Fill: 2
-      m_Scale: {x: 1, y: 1}
+      m_Scale: {x: 0.0625, y: 0.0625}
       m_Offset: {x: 0, y: 0}
       m_Rotation: 0
-      m_Anchor: 0
+      m_Anchor: 8
     m_Material: {fileID: 0}
     m_SubmeshIndex: 0
     m_ManualUV: 0
@@ -202,9 +202,9 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 1, y: 1}
   - {x: 0, y: 1}
-  - {x: 0, y: 1}
-  - {x: 1, y: 1}
-  - {x: 0, y: 0}
+  - {x: 0.9375, y: 0.0625}
+  - {x: 1, y: 0.0625}
+  - {x: 0.9375, y: 0}
   - {x: 1, y: 0}
   - {x: 1, y: 0}
   - {x: 0, y: 0}
@@ -247,25 +247,9 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 0}
   m_IsSelectable: 1
-  m_SelectedFaces: 0100000003000000
-  m_SelectedEdges:
-  - a: 4
-    b: 5
-  - a: 6
-    b: 4
-  - a: 5
-    b: 7
-  - a: 7
-    b: 6
-  - a: 12
-    b: 13
-  - a: 14
-    b: 12
-  - a: 13
-    b: 15
-  - a: 15
-    b: 14
-  m_SelectedVertices: 040000000500000006000000070000000c0000000d0000000e0000000f000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!23 &399773910927322072
 MeshRenderer:
   m_ObjectHideFlags: 0
