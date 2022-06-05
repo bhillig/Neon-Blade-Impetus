@@ -13,6 +13,9 @@ public class Checkpoint : MonoBehaviour
     private int checkPointID;
     public int CheckPointID {  get { return checkPointID; } }
 
+    public ParticleSystem checkpointIndicator;
+    public ParticleSystem checkpointTriggered;
+
     private void Awake()
     {
         playerEvents.OnRestartLevel += TeleportToCheckpoint;
@@ -38,6 +41,8 @@ public class Checkpoint : MonoBehaviour
         alreadyTriggered = true;
         pc.RespawnPoint = transform.position;
         RespawnHandler rh = FindObjectOfType<RespawnHandler>();
+        checkpointTriggered?.Play();
+        checkpointIndicator?.Stop();
         if(rh != null)
         {
             rh.SetRespawnID(checkPointID);
