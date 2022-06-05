@@ -56,6 +56,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (pc != null)
         {
+            pc.TPTargetController.AlignCameraRotation(transform);
             pc.playerPhysicsTransform.position = pc.RespawnPoint;
         }
     }

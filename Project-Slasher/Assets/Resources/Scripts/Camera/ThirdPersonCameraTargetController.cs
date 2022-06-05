@@ -62,6 +62,13 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
             0);
     }
 
+    public void AlignCameraRotation(Transform transform)
+    {
+        Vector3 angle = transform.eulerAngles;
+        xRotation = angle.x;
+        yRotation = angle.y;
+    }
+
     private void LockMouse(bool val)
     {
         Cursor.lockState = val ? CursorLockMode.Locked : CursorLockMode.None;
