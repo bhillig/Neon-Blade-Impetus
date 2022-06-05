@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0034203893, g: 0.003788238, b: 0.006677159, a: 1}
+  m_IndirectSpecularColor: {r: 0.0034203748, g: 0.0037882226, b: 0.0066771386, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1228,7 +1228,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 829527052}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1199142178}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: StartSession
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Level1Scene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &829527052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,6 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ab19d1b04e4a24f8ba30bf7a11846d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coreScene: 
 --- !u!1 &1181021572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,6 +1486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ab19d1b04e4a24f8ba30bf7a11846d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coreScene: Core
 --- !u!4 &1199142179
 Transform:
   m_ObjectHideFlags: 0
