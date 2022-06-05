@@ -351,11 +351,11 @@ PrefabInstance:
       objectReference: {fileID: 6355569592923302122}
     - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: maxFOV
-      value: 100
+      value: 95
       objectReference: {fileID: 0}
     - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: maxVel
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3537850462230069220, guid: ac8c07076dfb5634fa632229dcc674ee, type: 3}
       propertyPath: minFOV
@@ -656,7 +656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: loadOnStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: mainMenuScene
@@ -664,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: debug_SceneYouWantToPlay
-      value: Level1Scene
+      value: Level2Scene
       objectReference: {fileID: 0}
     - target: {fileID: 7983315835041530840, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: m_Name

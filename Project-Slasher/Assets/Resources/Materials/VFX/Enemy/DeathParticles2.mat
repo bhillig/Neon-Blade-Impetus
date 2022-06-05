@@ -101,7 +101,7 @@ Material:
     - _DstBlend: 0
     - _EmissionEnabled: 1
     - _EnvironmentReflections: 1
-    - _FresnelPower: 5
+    - _FresnelPower: 10
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -118,7 +118,7 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
-    - Color_91205da7ca614d11957f70d05c84cce9: {r: 0, g: 0, b: 0, a: 1}
+    - Color_91205da7ca614d11957f70d05c84cce9: {r: 4, g: 4, b: 4, a: 1}
     - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}

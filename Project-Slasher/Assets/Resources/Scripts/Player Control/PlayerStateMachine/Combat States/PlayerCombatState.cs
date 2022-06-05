@@ -40,21 +40,40 @@ public abstract class PlayerCombatState : PlayerBaseState
 
     protected virtual AbstractEnemyEntity SearchForTarget()
     {
+        // First do a raw camera raycast and overlap to find the player's intended target
         Vector3 dir = Camera.main.transform.forward;
-        // First do a raw camera raycast to find the player's intended target
-        if(Physics.SphereCast(
+        Collider targetSearchResult = null;
+        bool castFind = Physics.SphereCast(
                 Camera.main.transform.position,
                 Context.combatProfile.CastRadius,
                 dir,
                 out RaycastHit rawTarget,
                 1000,
                 Context.combatProfile.TargetMask
-            ))
+            );
+        // Overlap in case the camera is inside the enemy
+        if(!castFind)
         {
-            var foundEnemyTarget = rawTarget.collider.GetComponentInParent<AbstractEnemyEntity>();
+            var overlap = Physics.OverlapSphere(
+                Camera.main.transform.position,
+                Context.combatProfile.CastRadius,
+                Context.combatProfile.TargetMask);
+            if(overlap.Length > 0)
+            {
+                targetSearchResult = overlap[0];
+            }
+        }
+        else
+        {
+            targetSearchResult = rawTarget.collider;
+        }
+
+        // Then do a terrain hitting raycast to see if there is a clear shot
+        if (targetSearchResult != null)
+        {
+            var foundEnemyTarget = targetSearchResult.GetComponentInParent<AbstractEnemyEntity>();
             if (foundEnemyTarget == null)
                 return null;
-            // Then do an actual raycast to see if there is a clear shot
             Vector3 validCastDir = (foundEnemyTarget.Center.position - dashCollider.bounds.center).normalized;
             if (Physics.SphereCast(
                 dashCollider.bounds.center,
