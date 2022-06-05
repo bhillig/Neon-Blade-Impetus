@@ -15,6 +15,8 @@ public class HeadAIProfile : ScriptableObject
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float targetHeightOffset;
 
+    [SerializeField] private float showdownRange;
+
     public LayerMask WhatIsPlayer { get => whatIsPlayer; set => whatIsPlayer = value; }
     public float SightRange { get => sightRange; set => sightRange = value; }
     public float ActivationRange { get => activationRange; set => activationRange = value; }
@@ -23,4 +25,6 @@ public class HeadAIProfile : ScriptableObject
     public float AlertTime { get => alertTime; set => alertTime = value; }
     public float RotationSpeed { get => rotationSpeed; set => rotationSpeed = value; }
     public float TargetHeightOffset { get => targetHeightOffset; set => targetHeightOffset = value; }
+
+    public float ShowdownRange { get => showdownRange; set => showdownRange = value; }
 }
