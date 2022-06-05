@@ -10,6 +10,7 @@ public class HeadAIMovement : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private AbstractEnemyEntity core;
     [SerializeField] private HeadAIProfile AiProfile;
+    [SerializeField] private FMODUnity.StudioEventEmitter shootVFX;
 
     private Transform player;
     private float alertTimer;
@@ -18,11 +19,12 @@ public class HeadAIMovement : MonoBehaviour
     private bool turnPointSet = false;
     private bool playerSpotted = false;
     private float reloadTimer;
+    private Quaternion startRotation;
     
     void Awake()
-    {
-        
+    {     
         core.OnRespawn += Respawn;
+        startRotation = transform.rotation;
     }
 
     void Start() {
@@ -64,14 +66,14 @@ public class HeadAIMovement : MonoBehaviour
 
                 else 
                 {
-                    TurnRandom();
+                    //TurnRandom();
                 }
             }
 
             else
             {
                 TurnLockOn();
-                float dot = Vector3.Dot(barrel.transform.forward, -lookPos.normalized);
+                float dot = Vector3.Dot(barrel.transform.forward, lookPos.normalized);
                 if (reloadTimer <= 0 && dot > 0.9f) 
                 {
                     reloadTimer = AiProfile.ReloadDelay;
@@ -83,7 +85,7 @@ public class HeadAIMovement : MonoBehaviour
                 }
                 if (alertTimer <= 0)
                 {
-                    Reset();
+                    //Reset();
                 }
                 else
                 {
@@ -99,10 +101,12 @@ public class HeadAIMovement : MonoBehaviour
     {
         reloadTimer = 0f;
         AiProfile.AlertTime = 0f;
+        transform.rotation = startRotation;
     }
 
     void Shoot()
     {
+        shootVFX?.Play();
         var newBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
         var controller = newBullet.GetComponent<BulletController>();
         controller.SetTarget(player);
@@ -114,7 +118,7 @@ public class HeadAIMovement : MonoBehaviour
     {
         turnPoint = player.position;
         turnPointSet = true;
-        lookPos = transform.position - player.up * AiProfile.TargetHeightOffset - turnPoint;
+        lookPos = turnPoint - transform.position + player.up * AiProfile.TargetHeightOffset;
         Quaternion rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, AiProfile.RotationSpeed * Time.deltaTime);
     }

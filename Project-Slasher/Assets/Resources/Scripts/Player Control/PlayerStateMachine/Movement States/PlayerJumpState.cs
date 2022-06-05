@@ -12,6 +12,8 @@ public class PlayerJumpState : PlayerAirborneState
 
     protected Vector3 desiredVelocity;
 
+    private Vector3 hackVelCache;
+
     public override void EnterState()
     {
         base.EnterState();
@@ -19,33 +21,31 @@ public class PlayerJumpState : PlayerAirborneState
         acceleration = Context.movementProfile.BaseAirAcceleration;
         maxSpeedChange = acceleration * Time.fixedDeltaTime;
         
-        // Start particles.
-        Context.Particle = GameObject.Instantiate(Context.JumpParticle, Context.transform, false);
-
+        maxSpeed = Context.movementProfile.BaseMoveSpeed;
         // If going faster than movement profile's speed when entering state, then that becomes the new max speed
         CalculateTopSpeed();
-        // Really weird bug with collider switching passing through objects
-        Context.playerRb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+        // Hack fix for random walljump speed loss
+        hackVelCache = Context.playerRb.velocity.XZVec2();
     }
 
     public override void ExitState()
     {
         base.ExitState();
-        Context.playerRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        desiredVelocity = flatMove.GetDesiredVelocity(maxSpeed);
+        Context.playerRb.velocity = Context.playerRb.velocity.SetXZ(hackVelCache);
         CheckSwitchState();
     }
 
     public override void FixedUpdateState()
     {
+        desiredVelocity = flatMove.GetDesiredVelocity(maxSpeed);
         if (desiredVelocity.magnitude > 0f)
-        {           
-            flatMove.SimpleMovement(desiredVelocity,maxSpeedChange);
+        {
+            flatMove.SimpleMovement(desiredVelocity, maxSpeedChange);
         }
         // Rotation
         // Only rotates X/Z to a threshhold
@@ -56,6 +56,7 @@ public class PlayerJumpState : PlayerAirborneState
         else
             flatMove.LerpRotationY(Context.movementProfile.AirTurnSpeed);
         UpdateTopSpeed();
+        hackVelCache = Context.playerRb.velocity.XZVec2();
     }
 
     public override void CheckSwitchState()

@@ -12,7 +12,7 @@ public class PlayerEventsAsset : ScriptableObject
 
     #region Combat events
 
-    public Action<Collider> OnStrikeStart;
+    public Action<AbstractEnemyEntity> OnStrikeStart;
     public Action OnStrikeEnd;
 
     public Action OnStrikeChargeReady;

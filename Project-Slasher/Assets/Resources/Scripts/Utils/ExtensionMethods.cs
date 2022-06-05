@@ -26,6 +26,13 @@ public static class ExtensionMethods
         return vec;
     }
 
+    public static Vector3 SetXZ(this Vector3 vec, Vector2 val)
+    {
+        vec.z = val.y;
+        vec.x = val.x;
+        return vec;
+    }
+
     public static void DrawNormal(this RaycastHit hit)
     {
         Debug.DrawRay(hit.point, hit.normal * 100, Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f), 10f);
@@ -58,6 +65,10 @@ public static class ExtensionMethods
     public static Vector3 XZVec(this Vector3 vec)
     {
         return new Vector3(vec.x, 0, vec.z);
+    }
+    public static Vector2 XZVec2(this Vector3 vec)
+    {
+        return new Vector2(vec.x, vec.z);
     }
 
     public static void SetMaterials(this Renderer renderer, int[] indexes, Material[] mats)

@@ -9,6 +9,10 @@ public class Checkpoint : MonoBehaviour
     private bool alreadyTriggered = false;
     private PlayerController pc;
 
+    [SerializeField]
+    private int checkPointID;
+    public int CheckPointID {  get { return checkPointID; } }
+
     private void Awake()
     {
         playerEvents.OnRestartLevel += TeleportToCheckpoint;
@@ -33,13 +37,14 @@ public class Checkpoint : MonoBehaviour
     {
         alreadyTriggered = true;
         pc.RespawnPoint = transform.position;
+        FindObjectOfType<RespawnHandler>().SetRespawnID(CheckPointID);
     }
 
     private void TeleportToCheckpoint()
     {
         if (pc != null)
         {
-            pc.playerPhysicsTransform.position = transform.position;
+            pc.playerPhysicsTransform.position = pc.RespawnPoint;
         }
     }
 }

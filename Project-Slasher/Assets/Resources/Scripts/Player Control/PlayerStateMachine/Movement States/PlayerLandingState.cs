@@ -36,6 +36,7 @@ public class PlayerLandingState : PlayerGroundedState
     public override void UpdateState()
     {
         base.UpdateState();
+        flatMove.LerpRotationY(Context.movementProfile.TurnSpeed);
         CheckSwitchState();
     }
 

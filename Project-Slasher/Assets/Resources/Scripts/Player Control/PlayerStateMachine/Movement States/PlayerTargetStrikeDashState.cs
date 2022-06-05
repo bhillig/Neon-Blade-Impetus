@@ -18,7 +18,7 @@ public class PlayerTargetStrikeDashState : PlayerDashState
         impactEnded = false;
         exitTimer = 0f;
         Context.colliderSwitcher.SwitchToCollider(4);
-        Vector3 dashDirection = (Context.combatTarget.transform.position - Context.playerCenter.position).normalized;
+        Vector3 dashDirection = (Context.combatTarget.Center.position - Context.playerCenter.position).normalized;
         // Weight the saved velocity less if it's in the wrong direction
         cachedSpeed *= Mathf.Sqrt((Vector3.Dot(Context.playerRb.velocity.normalized, dashDirection) + 1f) / 2f);
         Context.playerPhysicsTransform.forward = dashDirection;
