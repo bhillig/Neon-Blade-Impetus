@@ -6,7 +6,8 @@ using System.Linq;
 public enum CursorStates
 { 
     Default,
-    Enemy
+    Enemy,
+    Hidden
 }
 
 

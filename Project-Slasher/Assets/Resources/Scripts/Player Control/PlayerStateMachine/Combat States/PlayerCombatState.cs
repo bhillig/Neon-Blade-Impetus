@@ -34,7 +34,12 @@ public abstract class PlayerCombatState : PlayerBaseState
                 Context.playerEvents.OnStrikeCooldownFinished?.Invoke();
             }
         }
-        Context.combatTarget = SearchForTarget();
+        Context.combatTarget = SearchForTarget();    
+        SetCursorCombatState();
+    }
+
+    protected virtual void SetCursorCombatState()
+    {
         CursorScript.instance.SetCursorState(Context.combatTarget == null ? CursorStates.Default : CursorStates.Enemy);
     }
 
