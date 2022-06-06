@@ -15,6 +15,8 @@ public class PlayerSpawn : MonoBehaviour
         if (player != null)
         {
             player.transform.position = transform.position;
+            player.GetComponentInParent<PlayerController>().TPTargetController.AlignCameraRotation(transform);
+            player.GetComponentInParent<Rigidbody>().velocity = Vector3.zero;
         }
         else
         {

@@ -4,9 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// This is used for "flat" movement like running/other movement on flat ground or normal falling mid-air
-/// Uses the camera's Y axis rotation to rotate the input and whatnot
-/// DO NOT use this for wall gliding, it ain't flat
-/// If you do I will remove your kneecaps
+/// Uses the camera's Y axis rotation to rotate the input
 /// </summary>
 public class FlatMovingStateComponent
 {
@@ -50,10 +48,10 @@ public class FlatMovingStateComponent
     
     public void LerpRotation(float factor)
     {
+        // Prefer RawGroundNormal to avoid jittering
         Vector3 normal = context.groundPhysicsContext.RawGroundNormal;
-        // Why work in quaternions when you can do everything with vectors
-        // This probably has terrible performance
-
+        if (Vector3.Dot(normal, Vector3.up) <= context.movementProfile.MinGroundedDotProd)
+            normal = context.groundPhysicsContext.ContactNormal;
         Vector3 rightTangent = Vector3.Cross(normal, -context.forwardVector);
         Vector3 biNormal = Vector3.Cross(normal, rightTangent);
         Quaternion targetRotation = Quaternion.LookRotation(biNormal, normal);

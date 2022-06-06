@@ -40,9 +40,8 @@ public class RespawnHandler : MonoBehaviour
 
     public void RespawnEnemies()
     {
-       if (enemySections[currentCheckpointID].enemies == null) return;
-
-       foreach (var enemy in enemySections[currentCheckpointID].enemies)
+        if (currentCheckpointID >= enemySections.Count || enemySections[currentCheckpointID].enemies == null) return;
+        foreach (var enemy in enemySections[currentCheckpointID].enemies)
         {
             enemy.Respawn();
         }
@@ -50,6 +49,7 @@ public class RespawnHandler : MonoBehaviour
 
     public void RespawnForceField()
     {
+        if (currentCheckpointID >= forceFields.Count) return;
         if(forceFields[currentCheckpointID] != null && forceFields[currentCheckpointID].IsOpen)
         {
             forceFields[currentCheckpointID].RespawnForceField();

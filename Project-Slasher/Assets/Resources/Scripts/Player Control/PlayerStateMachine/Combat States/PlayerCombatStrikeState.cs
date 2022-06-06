@@ -102,4 +102,9 @@ public class PlayerCombatStrikeState : PlayerCombatState
     {
         // Do nothing, invincible while in this state
     }
+
+    protected override void SetCursorCombatState()
+    {
+        CursorScript.instance.SetCursorState(CursorStates.Hidden);
+    }
 }

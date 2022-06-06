@@ -23,9 +23,9 @@ public class SceneLoader : MonoBehaviour
     private void Start()
     {
         if (loadOnStart)
+        {
             StartSession(debug_SceneYouWantToPlay);
-        else
-            currentLevelScene = debug_SceneYouWantToPlay;
+        }
     }
 
     public void StartSession(string level)

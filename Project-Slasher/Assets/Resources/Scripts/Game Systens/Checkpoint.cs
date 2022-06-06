@@ -13,6 +13,11 @@ public class Checkpoint : MonoBehaviour
     private int checkPointID;
     public int CheckPointID {  get { return checkPointID; } }
 
+    [Header("VFX/SFX")]
+    public ParticleSystem checkpointIndicator;
+    public ParticleSystem checkpointTriggered;
+    public FMODUnity.StudioEventEmitter triggeredSound;
+
     private void Awake()
     {
         playerEvents.OnRestartLevel += TeleportToCheckpoint;
@@ -37,13 +42,21 @@ public class Checkpoint : MonoBehaviour
     {
         alreadyTriggered = true;
         pc.RespawnPoint = transform.position;
-        FindObjectOfType<RespawnHandler>().SetRespawnID(CheckPointID);
+        RespawnHandler rh = FindObjectOfType<RespawnHandler>();
+        checkpointTriggered?.Play();
+        checkpointIndicator?.Stop();
+        triggeredSound?.Play();
+        if(rh != null)
+        {
+            rh.SetRespawnID(checkPointID);
+        }
     }
 
     private void TeleportToCheckpoint()
     {
         if (pc != null)
         {
+            pc.TPTargetController.AlignCameraRotation(transform);
             pc.playerPhysicsTransform.position = pc.RespawnPoint;
         }
     }

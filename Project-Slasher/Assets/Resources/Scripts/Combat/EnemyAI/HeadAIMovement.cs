@@ -12,6 +12,8 @@ public class HeadAIMovement : MonoBehaviour
     [SerializeField] private HeadAIProfile AiProfile;
     [SerializeField] private FMODUnity.StudioEventEmitter shootVFX;
 
+    [SerializeField] private float sightModifier = 1;
+
     private Transform player;
     private float alertTimer;
     private Vector3 turnPoint;
@@ -57,7 +59,7 @@ public class HeadAIMovement : MonoBehaviour
                     alertTimer = AiProfile.AlertTime;
                 }
 
-                if (Vector3.Distance(this.transform.position, player.position) <= AiProfile.SightRange)
+                if (Vector3.Distance(this.transform.position, player.position) <= AiProfile.SightRange*sightModifier)
                 {
                     playerSpotted = true;
                     alertTimer = AiProfile.AlertTime;
@@ -81,7 +83,14 @@ public class HeadAIMovement : MonoBehaviour
                 }
                 else
                 {
-                    reloadTimer -= Time.deltaTime;
+                    if(Vector3.Distance(this.transform.position, player.position) >= AiProfile.ShowdownRange) 
+                    {
+                        reloadTimer -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        reloadTimer -= Time.deltaTime/1.4f;
+                    }
                 }
                 if (alertTimer <= 0)
                 {

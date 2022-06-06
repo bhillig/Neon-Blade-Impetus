@@ -104,4 +104,12 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
             movementInputInfo.MaskRotateDownEvent.Invoke();
         }
     }
+
+    public void OnEscape(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            movementInputInfo.FreeMouseDownEvent?.Invoke();
+        }
+    }
 }

@@ -51,7 +51,7 @@ public class PlayerSlideState : PlayerGroundedState
         // Update Audio
         PlayerAudioManager.SetGlobalParameter("SlideSpeed", Mathf.InverseLerp(
             Context.movementProfile.SlideVelThreshhold,
-            Context.movementProfile.SlideSpeedCap,
+            Context.movementProfile.TopMoveSpeed,
             Context.playerRb.velocity.magnitude));
         CheckSwitchState();
     }

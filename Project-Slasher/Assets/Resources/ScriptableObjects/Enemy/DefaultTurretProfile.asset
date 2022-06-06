@@ -15,10 +15,11 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  sightRange: 35
-  activationRange: 35
-  scopeRange: 35
+  sightRange: 25
+  activationRange: 25
+  scopeRange: 25
   reloadDelay: 0.3
-  alertTime: 100
-  rotationSpeed: 100
+  alertTime: 0
+  rotationSpeed: 90
   targetHeightOffset: 1.5
+  showdownRange: 10
