@@ -177,6 +177,8 @@ For the gameplaytesting, I did it groups of around 2-3 people. But overall, I wa
 
 [Group2Responses](https://docs.google.com/document/d/1Tni4BqhFXaVqJ3iiDGAkGbh8zy5ejpmI/edit?usp=sharing&ouid=115636314873656894616&rtpof=true&sd=true)
 
+[Group3Responses](https://docs.google.com/document/d/1WhQPGlIXGqTiZ-rtad732x7IHx5MDlVG/edit?usp=sharing&ouid=115636314873656894616&rtpof=true&sd=true)
+
 ## Narrative Design
 
 Overall there was not much narrative design elements in this game. Mainly for a 3D platformer game, there isn't much narrative design elements to implement. 
@@ -201,6 +203,3 @@ The screenshots that we chose help demonstrate the gameplay with some images sho
 For game feel, I mainly tested level testing during my level desing process. I would gameplay test for game feel while testing the levels. I mainly wanted to implement the levels as a way to allow the player to create different paths of traversal through the level. Therefore, I optimized for a feel of face pace movement that required high skill. - **Peng**
 
 Played through the game myself to find bugs and balance issues. - **Tyler** 
-
-
-
