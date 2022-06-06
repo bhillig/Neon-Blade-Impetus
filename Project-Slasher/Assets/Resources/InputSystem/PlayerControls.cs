@@ -89,6 +89,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""f132e5ef-b041-40f8-9f32-5d6c2ca94f20"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -278,6 +287,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""MaskRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1617a58-b27d-4faa-99fe-46c1f671d1fe"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -293,6 +313,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_PrimaryAttack = m_PlayerMovement.FindAction("PrimaryAttack", throwIfNotFound: true);
         m_PlayerMovement_Restart = m_PlayerMovement.FindAction("Restart", throwIfNotFound: true);
         m_PlayerMovement_MaskRotate = m_PlayerMovement.FindAction("MaskRotate", throwIfNotFound: true);
+        m_PlayerMovement_Escape = m_PlayerMovement.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +380,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_PrimaryAttack;
     private readonly InputAction m_PlayerMovement_Restart;
     private readonly InputAction m_PlayerMovement_MaskRotate;
+    private readonly InputAction m_PlayerMovement_Escape;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -370,6 +392,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @PrimaryAttack => m_Wrapper.m_PlayerMovement_PrimaryAttack;
         public InputAction @Restart => m_Wrapper.m_PlayerMovement_Restart;
         public InputAction @MaskRotate => m_Wrapper.m_PlayerMovement_MaskRotate;
+        public InputAction @Escape => m_Wrapper.m_PlayerMovement_Escape;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -400,6 +423,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MaskRotate.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMaskRotate;
                 @MaskRotate.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMaskRotate;
                 @MaskRotate.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMaskRotate;
+                @Escape.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -425,6 +451,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MaskRotate.started += instance.OnMaskRotate;
                 @MaskRotate.performed += instance.OnMaskRotate;
                 @MaskRotate.canceled += instance.OnMaskRotate;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
         }
     }
@@ -438,5 +467,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnPrimaryAttack(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
         void OnMaskRotate(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }
