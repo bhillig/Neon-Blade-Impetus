@@ -123,7 +123,9 @@ You should replay any **bold text** with your relevant information. Liberally us
 
 **Describe how you showcased your work. How did you choose what to show in the trailer? Why did you choose your screenshots?**
 
+We showcased our work by demonstrating the focus of our game: speed and mobility. The trailer video does just that by demonstrating the player's quick movement around the map and the execution of the satisfying clean cut when the player dashes into an enemy. 
 
+The screenshots that we chose help demonstrate the gameplay with some images showcasing the player's design as well.
 
 ## Game Feel
 
