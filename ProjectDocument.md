@@ -7,7 +7,7 @@ We do not know how they got here or how they were created.
 Yet, we understand one thing, their entity is trapped in this digital landscape and they must resist this elusive environment to survive.  
 This realm, while mimicking reality, is a hostile environment, surrounded by various obstacles that the player must unravel. 
 It is in a sense, a digital prison from which must you escape. 
-As the player, you must attempt to break out of this landscape paralleling the reality of a modern, yet futuristic city. 
+As the player, you must attempt to break out of this landscape paralleling the reality of a modern, yet futuristic city.
 As you traverse through the area, you must creatively move to get through obstacles blocking your path kill the enemies along your path to get to the end.
 
 Overall, the idea of the game is a 3D platformer game involving many different mechanics for the player to traverse through the landscape. The objective of the game is to traverse through the level and reach the end. 
@@ -24,13 +24,19 @@ Our core gameplay mechanic is staged around movement. We intended to include var
 - For our core movement, we designed it with similar inputs seen in most 3D games of moving the character, left, right, backward, and forward. 
 - **WASD** controls the movement in this game. 
 - By **moving the mouse**, we can interact with the camera (which looks specifically at the player). Moving the mouse left or right respectively will interact with the camera rotation around the player. 
+
+### Sliding: 
 - By moving and pressing **SHIFT**, the player can slide in this game. By sliding the player can lower their height and be under and obstacles along the path. 
+
+![Sliding](./DocumentImages/Sliding.gif)
 
 ### WallRunning: 
 - We designed our level with the intention of wall running being our main movement for traversal. 
 - By holding the forward or **W** key and having a wall next to you will cause the player to wall ride on the wall. 
 - Pressing the **jump key** or **spacebar** and while wall riding will cause the player to detach from the wall and trigger a wall jump. 
 - A wall jump is exactly as intended, it is a jump from a wall. 
+
+![WallRiding](./DocumentImages/WallRiding.gif)
 
 ### Dashing: 
 - Dashing is a charging mechanic. It is done with two steps. 
@@ -40,8 +46,9 @@ Our core gameplay mechanic is staged around movement. We intended to include var
 - If the player is not target locked towards an enemy, the player with dash a short distance. 
 - If the player is target locked towards an enemy, the player will dash at a longer distance through the enemy itself. 
 
-### Level Design: 
-- The stage itself is linear in the design and there will be a linear progression throughout the story. The player will know where to go at different times and will progress by moving through the level itself. 
+![DashingAgainstEnemy](./DocumentImages/DashingAgainstEnemy.gif)
+
+### The Level: 
 
 #### Platforms: 
 - Mainly the platforms serve as a way for the player to stand on. They act as terrain for the player to traverse through. 
