@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: 2c5177b11d81d824dbb064f9ac8527da
   parentIdentifier: default
-  active: 1
+  active: 0
   Properties:
     LiveUpdate:
       Value: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  OutputTypeName: AUTODETECT
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   BankLoadType: 0
   AutomaticSampleLoading: 0
   EncryptionKey: 
-  ImportType: 0
+  ImportType: 1
   TargetAssetPath: FMODAssets
   TargetBankFolder: Desktop
   EventLinkage: 1
@@ -773,8 +773,8 @@ MonoBehaviour:
       Value: 
       HasValue: 0
     SpeakerMode:
-      Value: 3
-      HasValue: 1
+      Value: 0
+      HasValue: 0
     VirtualChannelCount:
       Value: 0
       HasValue: 0

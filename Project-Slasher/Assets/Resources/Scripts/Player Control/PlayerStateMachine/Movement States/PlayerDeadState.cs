@@ -11,6 +11,7 @@ public class PlayerDeadState : PlayerMovementState
         base.EnterState();
         Context.playerRb.constraints = RigidbodyConstraints.FreezeAll;
         Context.playerEvents.OnRestartLevel += MovementRestartLevel;
+        Context.respawnCanvas.EnableRespawnCanvas();
         CheckSwitchState();
     }
 
@@ -19,6 +20,7 @@ public class PlayerDeadState : PlayerMovementState
         base.ExitState();
         Context.playerRb.constraints = RigidbodyConstraints.FreezeRotation;
         Context.playerEvents.OnRestartLevel -= MovementRestartLevel;
+        Context.respawnCanvas.DisableRespawnCanvas();
     }
 
     public override void UpdateState()
@@ -48,4 +50,6 @@ public class PlayerDeadState : PlayerMovementState
     {
         // Do nothing
     }
+
+    
 }

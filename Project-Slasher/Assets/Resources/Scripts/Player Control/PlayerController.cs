@@ -79,6 +79,9 @@ public class PlayerController : MonoBehaviour
         set => respawnPoint = value;
     }
 
+    // Respawn Canvas
+    public RespawnCanvas respawnCanvas;
+
     // Player initialPosition for particle usage
     private float apexHeight;
 
