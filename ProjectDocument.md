@@ -145,6 +145,11 @@ Using PlayerLandingState.cs I implemented rolling, a consequence to falling with
 
 ## Modeling/Particles 
 
+- Modeling the player was done in blender and we kept it simple with the player having a very simplified body, that was covered in clothing. Player is textured using Unity. This was done by Arthur - **Simon**
+
+- For the particle effects we aimed to keep it simple so we used simple shapes for each of the player particles. The particles are meant to compliment the visuals of the player with cube shaped particles for the players movement through the world. Triangle plane particles are used mainly for combated related particles such as the turrets bullet emitting triangle particles in a 360 circle around it. The player's weapon emits particles when charging up and helps visualize when the weapon is ready to be used while charging. Tyler created the triangle particles while I created the cube ones - **Simon**
+
+
 ## Game Logic
 
 - *AI/Enemies* Created the AI system where the turrets activate when the player is within range, will rotate towards the player and fire at the player once the player is within the turrets sight. There were other AI systems like walking about randomly but since Nav Meshes had to be baked into the level and only I knew how to bake them, it was cut to give the level designers more freedom. Also worked at balancing the turrets to make them a bit easier to defeat. [FULL 3D Enemy Video ](https://www.youtube.com/watch?v=UjkSFoLxesw&ab_channel=Dave%2FGameDevelopment) used this to help make the turrets AI, though it was basics and I had to heavily adapt it for our purposes. The only one thing still in its original form mostly is the call to look at the player. - **Tyler**
