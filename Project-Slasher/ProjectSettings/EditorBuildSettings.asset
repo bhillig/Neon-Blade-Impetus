@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Resources/Scenes/TimeTrialLevelSelect.unity
     guid: 9c8d7982643c11b4ea48a83eee9fcd8b
   - enabled: 1
+    path: Assets/Resources/Scenes/Levels/Tutorial.unity
+    guid: 764789745fc0e514f835a8ed90d051cb
+  - enabled: 1
     path: Assets/Resources/Scenes/Levels/Level1Scene.unity
     guid: 03e855d7a05a4a040abb91a64c08a627
   - enabled: 1
@@ -38,13 +41,16 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Resources/Scenes/Levels/Level4Scene.unity
+    guid: 82a4c679eb6647548b555bed94cd6cbd
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Resources/Scenes/Levels/Level4Scene.unity
-    guid: eb67357652736d949ab0222ca316d020
-  - enabled: 1
     path: Assets/Resources/Scenes/Levels/Level5Scene.unity
-    guid: ed529724d4d49384384873ad3329e4bd
+    guid: eb67357652736d949ab0222ca316d020
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
