@@ -57,8 +57,9 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
     {
         if(mouseLocked)
         {
-            yRotation += Time.unscaledDeltaTime * Sensitivity * mouseDelta.x;
-            xRotation -= Time.unscaledDeltaTime * Sensitivity * mouseDelta.y;
+            float time = Mathf.Min(Time.unscaledDeltaTime, 0.2f);
+            yRotation += time * Sensitivity * mouseDelta.x;
+            xRotation -= time * Sensitivity * mouseDelta.y;
         }
         // Clamping vertical looking       
         LerpCameraToValues(1);
