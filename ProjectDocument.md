@@ -54,18 +54,35 @@ Our core gameplay mechanic is staged around movement. We intended to include var
 - Mainly the platforms serve as a way for the player to stand on. They act as terrain for the player to traverse through. 
 - Platforms can either be buildings, flat platforms, or ramps. 
 
+![Platform](./DocumentImages/Platform.JPG)
+
+![Ramps](./DocumentImages/Ramps.JPG)
+
 #### Hazards: 
-- Indicated by their red gwall glow, hazards are screens that kill the player if they come into contact with it. It is best to avoid these. 
- 
+- Indicated by their red wall glow, hazards are screens that kill the player if they come into contact with it. It is best to avoid these. 
+- These act as obstacles that you have to avoid.
+
+![Hazards](./DocumentImages/KillField.JPG)
+
 #### Walls: 
 - Walls acts as terrain for the player to wall ride. These are placed throughout the map for the player to traverse through. 
 - Walls can be just horizontal walls or cylinder walls. Both can wall ride. 
+
+![Wall](./DocumentImages/Wall.JPG)
+
+#### Force Field 
+- Force fields are placed at sections to prevent the player from going into the next section of the map. In order to break through them.
+- In order to break through them, the player must kill the turrets at their respective sections of the map. 
+
+![Hazards](./DocumentImages/ForceField.JPG)
 
 ### Enemies (Turrets): 
 - Turrets are placed throught the map. They act as enemies and will shoot projectiles towards the player. If the projectile hit the player, they will die. 
 - When the player comes into range of the turret, it will start shooting at the player. 
 - When the player becomes close to the turret, the turret will slow down it's fire rate to balance changes. 
 - If the player dashes through the turret, the turret will be killed. 
+
+![Turrets](./DocumentImages/Turret.gif)
 
 # Main Roles #
 
@@ -86,7 +103,22 @@ For the colors I mainly used a simple gradient accent and also made a simple pro
 
 ## Movement/Physics
 
-**Describe the basics of movement and physics in your game. Is it the standard physics model? What did you change or modify? Did you make your movement scripts that do not use the physics system?**
+Using Wallrunning.cs, PlayerWallGlideState.cs, and PlayerAirborneState.cs, I implemented wallrunning, one of the game's biggest technical challenges. 
+
+The implementation uses raycasts to detect the nearest wall that's not only marked as "Terrain"
+but also verifies various other checks like it's angle of rotation. Once connected, the wallrunning state will move you alongside the wall adding to your velocity.
+
+- Implementation mildly was based on a Unity Prototype Series but was largely changed to fit our needs and to incorporate within our Hierarchical State Machine: [State Machine](https://www.youtube.com/watch?v=qOVtucXxb1E&t=278s&ab_channel=Unity)
+- **Brandon** 
+
+![PhysicsCode1](./DocumentImages/PhysicsCode1.JPG)
+
+Also worked on Wall Jumping which sends the player in the Vector3.up() + wall Normal direction with an Impulse Force. Code within Wallrunning.cs as well.
+
+Using PlayerLandingState.cs I implemented rolling, a consequence to falling with a velocity past a certain threshold. The state gets rid of your control for a brief moment of time and plays a rolling animation. - **Brandon** 
+
+
+## Input / System 
 
 ## Level Design / Visuals 
 
@@ -115,12 +147,23 @@ For the colors I mainly used a simple gradient accent and also made a simple pro
 
 ## Game Logic
 
-- *AI/Enemies* Created the AI system where the turrets activate when the player is within range, will rotate towards the player and fire at the player once the player is within the turrets sight. There were other AI systems like walking about randomly but since Nav Meshes had to be baked into the level and only I knew how to bake them, it was cut to give the level designers more freedom. Also worked at balancing the turrets to make them a bit easier to defeat. - **Tyler**
+- *AI/Enemies* Created the AI system where the turrets activate when the player is within range, will rotate towards the player and fire at the player once the player is within the turrets sight. There were other AI systems like walking about randomly but since Nav Meshes had to be baked into the level and only I knew how to bake them, it was cut to give the level designers more freedom. Also worked at balancing the turrets to make them a bit easier to defeat. [FULL 3D Enemy Video ](https://www.youtube.com/watch?v=UjkSFoLxesw&ab_channel=Dave%2FGameDevelopment) used this to help make the turrets AI, though it was basics and I had to heavily adapt it for our purposes. The only one thing still in its original form mostly is the call to look at the player. - **Tyler**
+
+- Created the checkpoint system via Checkpoint.cs where each checkpoint has an ID that corresponds with what should and shouldn’t be respawned at death. This allowed enemies to be respawned when you have yet to reach the next checkpoint. Integrated with the event system to decouple code. - **Brandon**
+
+![GameLogic1](./DocumentImages/GameLogic1.JPG)
+
+- Created the ForceField.cs and RespawnHandler.cs logic which holds data on the specific enemies that need to be killed in order for the force field to open. This was important as the main character was required to eliminate these machines in their path to escaping this decaying digital world. RespawnHandler holds an array which holds an array of enemies. When respawning, RespawnHandler indexes to the specific group of enemies needed depending on the checkpoint ID the player is at. - **Brandon**
+
+![GameLogic2](./DocumentImages/GameLogic2.JPG)
+
+- Created the PlayerSpawn.cs, PlayerExit.cs, and SceneLoader.cs logic which loaded/unloaded levels additively as the player progressed through the game. This enabled our core functionality to remain present in its own scene at all times. The player triggers these scripts through a trigger collider which in return loads the next scene specified, resets the player’s velocity, and moves them to the next spawn. - **Brandon**
+
+![GameLogic3](./DocumentImages/GameLogic2.JPG)
 
 # Sub-Roles
 
 ## Audio
-
 
 ## Gameplay Testing
 
@@ -134,7 +177,8 @@ For the gameplaytesting, I did it groups of around 2-3 people. But overall, I wa
 
 ## Narrative Design
 
-For the narrative design elements, I mainly wanted
+Overall there was not much narrative design elements in this game. Mainly for a 3D platformer game, there isn't much narrative design elements to implement. 
+For the narrative design elements, I mainly made the background to fit the theme of what we were going for. I designed this process in which the character is in an alternate realm in whiich it is a 3D futuristic city full of neon lights. Mainly the background asthetic was that I wanted the player to feel like they were trapped in an alternate dimension and they had to escape the land. Therefore, by traversing through the end, it would get harder and harder. The player should feel fustration while playing but eventually want to get to the end and complete the game. The levels are short but also difficult. Once the player completes the game, they would feel like the escaped the world but they get a NUll reference exception error to troll them. Therefore, they haven't actually escaped. - **Peng** 
 
 ## Press Kit and Trailer
 
@@ -152,4 +196,7 @@ The screenshots that we chose help demonstrate the gameplay with some images sho
 
 ## Game Feel
 
-**Document what you added to and how you tweaked your game to improve its game feel.**
+For game feel, I mainly tested level testing during my level desing process. I would gameplay test for game feel while testing the levels. I mainly wanted to implement the levels as a way to allow the player to create different paths of traversal through the level. Therefore, I optimized for a feel of face pace movement that required high skill. - **Peng**
+
+Played through the game myself to find bugs and balance issues. - **Tyler** 
+
