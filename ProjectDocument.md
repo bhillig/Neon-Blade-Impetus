@@ -55,7 +55,7 @@ Our core gameplay mechanic is staged around movement. We intended to include var
 - Platforms can either be buildings, flat platforms, or ramps. 
 
 #### Hazards: 
-- Indicated by their red wall glow, hazards are screens that kill the player if they come into contact with it. It is best to avoid these. 
+- Indicated by their red gwall glow, hazards are screens that kill the player if they come into contact with it. It is best to avoid these. 
  
 #### Walls: 
 - Walls acts as terrain for the player to wall ride. These are placed throughout the map for the player to traverse through. 
@@ -69,70 +69,86 @@ Our core gameplay mechanic is staged around movement. We intended to include var
 
 # Main Roles #
 
-Your goal is to relate the work of your role and sub-role in terms of the content of the course. Please look at the role sections below for specific instructions for each role.
+### Summary of what people have done: 
 
-Below is a template for you to highlight items of your work. These provide the evidence needed for your work to be evaluated. Try to have at least 4 such descriptions. They will be assessed on the quality of the underlying system and how they are linked to course content. 
+- Arthur - Movement and Input, Modeling, Animations, Audio 
+- Brandon - Movement and Input, UI, Game Logic 
+- Peng - Level Design, Gameplay Trailer, Gameplay Testing 
+- Simon - Particle System, Press Kit 
+- Tyler - Enemy AI / Turrets, Game Feel
 
-*Short Description* - Long description of your work item that includes how it is relevant to topics discussed in class. [link to evidence in your repository](https://github.com/dr-jam/ECS189L/edit/project-description/ProjectDocumentTemplate.md)
-
-Here is an example:  
-*Procedural Terrain* - The background of the game consists of procedurally-generated terrain that is produced with Perlin noise. This terrain can be modified by the game at run-time via a call to its script methods. The intent is to allow the player to modify the terrain. This system is based on the component design pattern and the procedural content generation portions of the course. [The PCG terrain generation script](https://github.com/dr-jam/CameraControlExercise/blob/513b927e87fc686fe627bf7d4ff6ff841cf34e9f/Obscura/Assets/Scripts/TerrainGenerator.cs#L6).
-
-You should replay any **bold text** with your relevant information. Liberally use the template when necessary and appropriate.
+These are generally what people have done the most. As there weren't any designated roles mainly, it is just what people worked on the most. 
 
 ## User Interface
 
-**Describe your user interface and how it relates to gameplay. This can be done via the template.**
+*Design of Main Menu* - The main menu design was pretty simple. It features a with a title and some general simple buttons. I was able to download some fonts for the UI and it turned out pretty good. 
+For the colors I mainly used a simple gradient accent and also made a simple procedural background generation. Brandon handled the main user interface system - **Peng** 
 
 ## Movement/Physics
 
 **Describe the basics of movement and physics in your game. Is it the standard physics model? What did you change or modify? Did you make your movement scripts that do not use the physics system?**
 
-## Animation and Visuals
+## Level Design / Visuals 
 
-**List your assets including their sources and licenses.**
+### Level Design 
+- *Creating Levels*: Creating the levels, I started with a simple scene that was particular large. Our initial process was that we were going to create one huge level to play on with full of details. However that eventually got scrapped for something else. Therefore we instead transition to a approach that included levels for everything. THe player would transition from one level to another So far we have created 5 levels from 1 to 5 in sequence. - **Peng**
 
-**Describe how your work intersects with game feel, graphic design, and world-building. Include your visual style guide if one exists.**
+- *Buildings*: The main asthetic of the game comes from the buildings that you see along the outside. They were made with probuilder, simple shapes, and simple emission maps that I made using a image editing software called GIMP. Although I created various prefabs, not all of them were used. In fact most of them were scrapped for better things. I had to adjust the UVs on the probuilder for most of the prefabs so they would fall in line with the asthetic. Mainly the top building's UV needed to be adjusted to fit in line. - **Peng**
 
-## Input
+- *Platforms*: Most of the platforms were created the same way using an emmission map and probuilder. They were simple to implement. Platforms included the simple wall in which you can traverse through, a cylinder which you can traverse around, and buildings which act similarly to platforms but fit with the asthetic. - **Peng**
 
-**Describe the default input configuration.**
+- *JumpPads*: I created a simple jump along with its script. If the player makes contact with the jump pad their velocity would be immediately set to zero and then launched with a set velocity force right after. That way, I could control the velocity at which the player is launched. - **Peng**
 
-**Add an entry for each platform or input style your project supports.**
+- *SkyBox*: I created materials for these using unity's 3D skybox. I had initially set up a shader graph for these but it didn't work. Therefore Arthur suggested a simple solution of using a texture map which I implemented. I downloaded a skybox starry night texture online and added it to images then made a material for it. The source can be found here: [3D Skybox](https://tools.wwwtyro.net/space-3d/index.html#animationSpeed=1&fov=80&nebulae=true&pointStars=true&resolution=1024&seed=5j8g40cfqgg0&stars=true&sun=true) - **Peng**
+
+- *Level1Implementation*:  Level 1 implementation was considered to be a simple level in which it mainly teaches the player wallriding as a main skill. It was suppose to be a simple scene, but since the jump from level 1 to level 2 was too far in terms of skill, Arthur added some more hazards and an enemy along the way. - **Peng**
+
+- *Level2Implementation*:  Level 2 was mainly implemented with the design that the player would learn to do complex wall riding movements as well as being able to kill the enemies as well. Mainly Arthur added the hazards but I did most of the intial platform placements. However through various iterations it did get changed. - **Peng** 
+
+- *Level3Implementation*: Level 3 is height traversal map. I placed the platforms with the intention that the player will traverse through them and gain height over time. The platforms reach a peak and then fall back down. I added hazards along the way to guide the player in a specific direction - **Peng** 
+
+- *Level4Implementation*: Level 4 is mainly teaching about the player to traverse through the cylinders. It was mainly implemented with the intention as a warm-up map to level 5. Additionally, there were many hazards along the way forcing the player to slide in order to get through the map. - **Peng** 
+
+- *Level5Implementation*: Level 5 is implemented with the intention of using jumpads and sliding as a main mechanic. It was definitely one of the more time consuming maps to implement but overall it was well worth it for the last level. It was implemented for the player to utilize the complex movements. For example, one mechanic is that you gain speed while you slide. Therefore, I intentionally created large ramps for the player to slide along. I had initially set up the platforms and jump pads but afterwards Brandon added the hazards for the map. - **Peng** 
+
+## Modeling/Particles 
 
 ## Game Logic
 
-**Document what game states and game data you managed and what design patterns you used to complete your task.**
+- *AI/Enemies* Created the AI system where the turrets activate when the player is within range, will rotate towards the player and fire at the player once the player is within the turrets sight. There were other AI systems like walking about randomly but since Nav Meshes had to be baked into the level and only I knew how to bake them, it was cut to give the level designers more freedom. Also worked at balancing the turrets to make them a bit easier to defeat. - **Tyler**
 
 # Sub-Roles
 
 ## Audio
 
-**List your assets including their sources and licenses.**
-
-**Describe the implementation of your audio system.**
-
-**Document the sound style.** 
 
 ## Gameplay Testing
 
-**Add a link to the full results of your gameplay tests.**
+Went through the gameplay testing sheet to remove irrelevant or impossible questions for remote testing. Helped keep the team on schedule to facilitate gameplay testing in a timely manner. - **Tyler** 
 
-**Summarize the key findings from your gameplay tests.**
+For the gameplaytesting, I did it groups of around 2-3 people. But overall, I was able to get through to 10 people overall. I was able to fill out questionaire sheets by group. Therefore the response are in terms of the group and not overall individuals. They mainly categorize as group responses rather than individual responses. Generally, people either responded individually or people that responded as a group. I put all the responses in bullet format. There were certain questions that the group felt was reduntant so I decided to remove those questions in the questionire. Therefore, the questionaire only contains questions that they have answered not ones that they felt were confusing at times. - **Peng** 
+
+[Group1Responses](https://docs.google.com/document/d/1XpPOGWuCIeT6rdigkR_PWpnXJ5en4mKr/edit?usp=sharing&ouid=115636314873656894616&rtpof=true&sd=true)
+
+[Group2Responses](https://docs.google.com/document/d/1Tni4BqhFXaVqJ3iiDGAkGbh8zy5ejpmI/edit?usp=sharing&ouid=115636314873656894616&rtpof=true&sd=true)
 
 ## Narrative Design
 
-**Document how the narrative is present in the game via assets, gameplay systems, and gameplay.** 
+For the narrative design elements, I mainly wanted
 
 ## Press Kit and Trailer
 
-**Include links to your presskit materials and trailer.**
+### Gameplay Trailer
 
-**Describe how you showcased your work. How did you choose what to show in the trailer? Why did you choose your screenshots?**
+For the gameplay trailer, I had initially designed it as a montage of gameplay using my favorite song. I believed that a montage of gameplay served better as a way to introduce a game. I believed this served better purpose rather than I would play the game on the editor, record on OBS and then edit the scenes together. I would just simply try to sync the cutscenes with the song itself. It was very simply implemented - **Peng** 
 
-We showcased our work by demonstrating the focus of our game: speed and mobility. The trailer video does just that by demonstrating the player's quick movement around the map and the execution of the satisfying clean cut when the player dashes into an enemy. 
+[Link to Trailer](https://www.youtube.com/watch?v=P1dlvfSensU&ab_channel=SaltMeister)
 
-The screenshots that we chose help demonstrate the gameplay with some images showcasing the player's design as well.
+### Press Kit 
+
+We showcased our work by demonstrating the focus of our game: speed and mobility. The trailer video does just that by demonstrating the player's quick movement around the map and the execution of the satisfying clean cut when the player dashes into an enemy. - **Simon** 
+
+The screenshots that we chose help demonstrate the gameplay with some images showcasing the player's design as well. - **Simon**
 
 ## Game Feel
 
