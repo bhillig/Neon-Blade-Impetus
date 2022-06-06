@@ -26,18 +26,14 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
 
     public Quaternion rotation { get { return Quaternion.Euler(xRotation, yRotation, 0); } }
 
-    private bool mouseLocked = false;
-
     private void Awake()
     {
-        inputInfo.FreeMouseDownEvent.AddListener(FreeMouse);
         inputInfo.PrimaryDownEvent.AddListener(LockMouse);
         LockMouse(true);
     }
 
     private void OnDestroy()
     {
-        inputInfo.FreeMouseDownEvent.RemoveListener(FreeMouse);
         inputInfo.PrimaryDownEvent.AddListener(LockMouse);
     }
 
@@ -55,7 +51,7 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
 
     private void CameraRotation()
     {
-        if(mouseLocked)
+        if(Cursor.lockState == CursorLockMode.Locked)
         {
             float time = Mathf.Min(Time.unscaledDeltaTime, 0.2f);
             yRotation += time * Sensitivity * mouseDelta.x;
@@ -83,10 +79,6 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
         yRotation = angle.y;
     }
 
-    private void FreeMouse()
-    {
-        LockMouse(false);
-    }
     private void LockMouse()
     {
         LockMouse(true);
@@ -94,7 +86,6 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
 
     private void LockMouse(bool val)
     {
-        mouseLocked = val;
         Cursor.lockState = val ? CursorLockMode.Locked : CursorLockMode.None;
     }
 

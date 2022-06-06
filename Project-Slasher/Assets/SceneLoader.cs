@@ -37,7 +37,7 @@ public class SceneLoader : MonoBehaviour
     public void EndSession()
     {
         SceneManager.UnloadSceneAsync(currentLevelScene);
-        SceneManager.LoadScene(mainMenuScene, LoadSceneMode.Additive);
+        SceneManager.LoadScene(mainMenuScene, LoadSceneMode.Single);
         SceneManager.UnloadSceneAsync(coreScene);
     }
     public void LoadNextLevel(string nextLevelScene)

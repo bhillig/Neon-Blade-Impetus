@@ -17,7 +17,6 @@ public class PlayerCombatChargeState : PlayerCombatState
         fullyCharged = false;
         overCharged = false;
         Context.primaryAttackCooldownTimer = Context.combatProfile.Cooldown;
-        Context.inputContext.PrimaryUpEvent.AddListener(ChargeReleased);
         Context.animationController.SetBool("Charging", true);
         Context.playerEvents.OnStrikeChargeStart?.Invoke();
         Context.audioManager.chargeupWhineEmitter.Play();
@@ -26,7 +25,6 @@ public class PlayerCombatChargeState : PlayerCombatState
     public override void ExitState()
     {
         base.ExitState();
-        Context.inputContext.PrimaryUpEvent.RemoveListener(ChargeReleased);
         Context.animationController.SetBool("Charging", false);
         Context.audioManager.chargeupWhineEmitter.Stop();
         Context.audioManager.chargeupReadyEmitter.Stop();
@@ -53,6 +51,8 @@ public class PlayerCombatChargeState : PlayerCombatState
         {
             overCharged = true;
         }
+        if (!Context.inputContext.primaryDown)
+            ChargeReleased();
         CheckSwitchState();
     }
 
