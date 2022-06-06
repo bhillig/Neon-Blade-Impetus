@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 27177749}
   - component: {fileID: 27177753}
   - component: {fileID: 27177752}
-  - component: {fileID: 27177751}
   - component: {fileID: 27177750}
   m_Layer: 8
   m_Name: Triggered
@@ -4873,19 +4872,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!65 &27177751
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27177748}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &27177750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4909,7 +4895,6 @@ GameObject:
   - component: {fileID: 6319589661002982246}
   - component: {fileID: 5014380294870219017}
   - component: {fileID: 6775142161175814163}
-  - component: {fileID: 1836029133367861568}
   - component: {fileID: 4776710272735799428}
   m_Layer: 8
   m_Name: Indicator
@@ -9713,19 +9698,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!65 &1836029133367861568
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2177396141873447887}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4776710272735799428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9784,8 +9756,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 8.147617, y: 0.83809865, z: 10.324533}
+  m_Center: {x: -1.316164, y: 0.08095068, z: 2.6613398}
 --- !u!114 &5044058593069374114
 MonoBehaviour:
   m_ObjectHideFlags: 0

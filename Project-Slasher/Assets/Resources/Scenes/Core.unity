@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &2045905011 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3469570155765354196, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-  m_PrefabInstance: {fileID: 984758337284478483}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &984758337284478483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,101 +130,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[1].time
-      value: 0.16285321
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[2].time
-      value: 0.3689171
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[3].time
-      value: 1.0114594
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[1].value
-      value: 0.12465179
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[2].value
-      value: 0.325851
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[3].value
-      value: 1.0031166
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[0].inSlope
-      value: 0.7654242
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[1].inSlope
-      value: 2.2952237
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[2].inSlope
-      value: 0.6028791
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[3].inSlope
-      value: 1.0540407
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[0].outSlope
-      value: 0.7654242
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[1].inWeight
-      value: 0.32715625
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[1].outSlope
-      value: 2.2952237
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[2].inWeight
-      value: 0.1455294
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[2].outSlope
-      value: 0.6028791
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[3].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[3].outSlope
-      value: 1.0540407
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[1].outWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[2].outWeight
-      value: 0.3375443
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[2].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 984758338415892976, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: fovCurve.m_Curve.Array.data[3].tangentMode
-      value: 34
-      objectReference: {fileID: 0}
     - target: {fileID: 2410771666451988520, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
       propertyPath: m_Name
       value: CoreUtilities
-      objectReference: {fileID: 0}
-    - target: {fileID: 2876296411872741403, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: currentLevelScene
-      value: Level1Scene
       objectReference: {fileID: 0}
     - target: {fileID: 3482012781550273058, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
       propertyPath: m_RootOrder
@@ -281,53 +178,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[0].cursorImages.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[1].cursorImages.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[0].cursorImages.Array.data[1].c.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[0].cursorImages.Array.data[1].c.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[0].cursorImages.Array.data[1].c.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[0].cursorImages.Array.data[1].c.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[1].cursorImages.Array.data[2].c.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[1].cursorImages.Array.data[2].c.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[1].cursorImages.Array.data[2].c.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[1].cursorImages.Array.data[2].c.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[0].cursorImages.Array.data[1].image
-      value: 
-      objectReference: {fileID: 2045905011}
-    - target: {fileID: 6056550258274568671, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
-      propertyPath: stateData.Array.data[1].cursorImages.Array.data[2].image
-      value: 
-      objectReference: {fileID: 2045905011}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 365324bed62e9af40826a1649835e2e6, type: 3}
