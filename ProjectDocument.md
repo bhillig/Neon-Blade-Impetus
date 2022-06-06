@@ -177,6 +177,7 @@ For the gameplaytesting, I did it groups of around 2-3 people. But overall, I wa
 
 [Group2Responses](https://docs.google.com/document/d/1Tni4BqhFXaVqJ3iiDGAkGbh8zy5ejpmI/edit?usp=sharing&ouid=115636314873656894616&rtpof=true&sd=true)
 
+[Group3Responses](https://docs.google.com/document/d/1WhQPGlIXGqTiZ-rtad732x7IHx5MDlVG/edit?usp=sharing&ouid=115636314873656894616&rtpof=true&sd=true)
 ## Narrative Design
 
 Overall there was not much narrative design elements in this game. Mainly for a 3D platformer game, there isn't much narrative design elements to implement. 
