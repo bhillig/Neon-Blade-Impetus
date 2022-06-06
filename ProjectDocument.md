@@ -133,6 +133,8 @@ Using PlayerLandingState.cs I implemented rolling, a consequence to falling with
 
 - *SkyBox*: I created materials for these using unity's 3D skybox. I had initially set up a shader graph for these but it didn't work. Therefore Arthur suggested a simple solution of using a texture map which I implemented. I downloaded a skybox starry night texture online and added it to images then made a material for it. The source can be found here: [3D Skybox](https://tools.wwwtyro.net/space-3d/index.html#animationSpeed=1&fov=80&nebulae=true&pointStars=true&resolution=1024&seed=5j8g40cfqgg0&stars=true&sun=true) - **Peng**
 
+- *TutorialImplemented the first half of the tutorial level in which the player slowly gets accustomed to their new abilities. Level Design was created taking Yi’s discussion on right hand turns in Game Design to heart. Added text on to the environment so that the player could choose whether or not they wanted to read it instead of skipping several lines of dialogue. - **Brandon** 
+
 - *Level1Implementation*:  Level 1 implementation was considered to be a simple level in which it mainly teaches the player wallriding as a main skill. It was suppose to be a simple scene, but since the jump from level 1 to level 2 was too far in terms of skill, Arthur added some more hazards and an enemy along the way. - **Peng**
 
 - *Level2Implementation*:  Level 2 was mainly implemented with the design that the player would learn to do complex wall riding movements as well as being able to kill the enemies as well. Mainly Arthur added the hazards but I did most of the intial platform placements. However through various iterations it did get changed. - **Peng** 
@@ -144,11 +146,6 @@ Using PlayerLandingState.cs I implemented rolling, a consequence to falling with
 - *Level5Implementation*: Level 5 is implemented with the intention of using jumpads and sliding as a main mechanic. It was definitely one of the more time consuming maps to implement but overall it was well worth it for the last level. It was implemented for the player to utilize the complex movements. For example, one mechanic is that you gain speed while you slide. Therefore, I intentionally created large ramps for the player to slide along. I had initially set up the platforms and jump pads but afterwards Brandon added the hazards for the map. - **Peng** 
 
 ## Modeling/Particles 
-
-- Modeling the player was done in blender and we kept it simple with the player having a very simplified body, that was covered in clothing. Player is textured using Unity. This was done by Arthur - **Simon**
-
-- For the particle effects we aimed to keep it simple so we used simple shapes for each of the player particles. The particles are meant to compliment the visuals of the player with cube shaped particles for the players movement through the world. Triangle plane particles are used mainly for combated related particles such as the turrets bullet emitting triangle particles in a 360 circle around it. The player's weapon emits particles when charging up and helps visualize when the weapon is ready to be used while charging. Tyler created the triangle particles while I created the cube ones - **Simon**
-
 
 ## Game Logic
 
@@ -204,4 +201,6 @@ The screenshots that we chose help demonstrate the gameplay with some images sho
 For game feel, I mainly tested level testing during my level desing process. I would gameplay test for game feel while testing the levels. I mainly wanted to implement the levels as a way to allow the player to create different paths of traversal through the level. Therefore, I optimized for a feel of face pace movement that required high skill. - **Peng**
 
 Played through the game myself to find bugs and balance issues. - **Tyler** 
+
+
 
