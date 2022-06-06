@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerMovementActions
 {
+    public static PlayerMovementInputManager instance;
     public InputInfo movementInputInfo;
     private PlayerControls playerControls;
 
@@ -13,6 +14,7 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
 
     public void Awake()
     {
+        instance = this;
         playerControls = new PlayerControls();
         playerControls.Enable();
         playerControls.PlayerMovement.SetCallbacks(this);
@@ -23,6 +25,14 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
     {
         playerControls.Disable();
         playerControls.Dispose();
+    }
+
+    public void SetEnabled(bool val)
+    {
+        if (val)
+            playerControls.PlayerMovement.Enable();
+        else
+            playerControls.PlayerMovement.Disable();
     }
 
     void Update()
@@ -109,7 +119,7 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
     {
         if (context.started)
         {
-            movementInputInfo.FreeMouseDownEvent?.Invoke();
+            movementInputInfo.OptionsMenuDownEvent?.Invoke();
         }
     }
 }

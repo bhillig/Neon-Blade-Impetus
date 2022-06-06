@@ -129,6 +129,12 @@ public class PlayerController : MonoBehaviour
         speedPs = particle.GetComponent<ParticleSystem>();
     }
 
+    private void OnDestroy()
+    {
+        combatStateMachine.CurrentState.ExitState();
+        movementStateMachine.CurrentState.ExitState();
+    }
+
     private void Update()
     {
         SetSpeedParticleEmission();

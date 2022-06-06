@@ -8,7 +8,7 @@ public class CoreUtilities : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        /*if(Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
@@ -16,6 +16,6 @@ public class CoreUtilities : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
-        }
+        }*/
     }
 }
