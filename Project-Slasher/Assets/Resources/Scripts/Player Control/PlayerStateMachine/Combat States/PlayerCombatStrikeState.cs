@@ -13,12 +13,12 @@ public class PlayerCombatStrikeState : PlayerCombatState
     public override void EnterState()
     {
         base.EnterState();
-        Collider targetFound = SearchForTarget();
+        AbstractEnemyEntity targetFound = SearchForTarget();
         Context.combatTarget = targetFound;
         // Invoke event to tell the movement state machine to switch to dash state
         Context.playerEvents.OnStrikeStart?.Invoke(targetFound);
         // Save target
-        target = targetFound == null ? null : targetFound.GetComponentInParent<AbstractEnemyEntity>();
+        target = targetFound;
         // Calculate dash duration from distance and velocity
         if (target == null)
         {
@@ -34,7 +34,7 @@ public class PlayerCombatStrikeState : PlayerCombatState
             Context.TPComponentController.SetDistance(4f);
             Context.primaryAttackCooldownTimer = 0f;
             // Calculate distance to target + pierce distance
-            float dist = (targetFound.bounds.center - dashCollider.bounds.center).magnitude;
+            float dist = (targetFound.Center.position - dashCollider.bounds.center).magnitude;
             float pierceDist = dist + Context.combatProfile.HitDashPierceDistance;
             timer = pierceDist / Context.combatProfile.HitVelocity;
             impactTimer = Mathf.Max(0f, dist / Context.combatProfile.HitVelocity + Context.combatProfile.TimeSlowStartOffset);
@@ -44,7 +44,7 @@ public class PlayerCombatStrikeState : PlayerCombatState
         Context.animationController.SetBool("Striking", true);
     }
 
-    public override void ExitState()
+    public override void ExitState() 
     {
         base.ExitState();
         Context.playerEvents.OnStrikeEnd?.Invoke();
@@ -101,5 +101,10 @@ public class PlayerCombatStrikeState : PlayerCombatState
     protected override void PlayerCombatKilled()
     {
         // Do nothing, invincible while in this state
+    }
+
+    protected override void SetCursorCombatState()
+    {
+        CursorScript.instance.SetCursorState(CursorStates.Hidden);
     }
 }

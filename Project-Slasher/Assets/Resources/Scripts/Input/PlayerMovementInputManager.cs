@@ -7,6 +7,10 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
 {
     public InputInfo movementInputInfo;
     private PlayerControls playerControls;
+
+    private float jumpDownTimer = 0f;
+    private float primaryDownTimer = 0f;
+
     public void Awake()
     {
         playerControls = new PlayerControls();
@@ -19,6 +23,16 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
     {
         playerControls.Disable();
         playerControls.Dispose();
+    }
+
+    void Update()
+    {
+        jumpDownTimer -= Time.deltaTime;
+        primaryDownTimer -= Time.deltaTime;
+        if (jumpDownTimer > 0f)
+            movementInputInfo.JumpDownEvent?.Invoke();
+        if (primaryDownTimer > 0f)
+            movementInputInfo.PrimaryDownEvent?.Invoke();
     }
 
     public void OnMovement(InputAction.CallbackContext context)
@@ -36,9 +50,14 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.canceled)
+        {
             movementInputInfo.JumpUpEvent.Invoke();
+        }
         else if(context.started)
+        {
             movementInputInfo.JumpDownEvent.Invoke();
+            jumpDownTimer = 0.15f;
+        }
     }
 
     public void OnSlide(InputAction.CallbackContext context)
@@ -64,6 +83,7 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
         }
         else if (context.started)
         {
+            primaryDownTimer = 0.15f;
             movementInputInfo.primaryDown = true;
             movementInputInfo.PrimaryDownEvent.Invoke();
         }
@@ -82,6 +102,14 @@ public class PlayerMovementInputManager : MonoBehaviour, PlayerControls.IPlayerM
         if (context.started)
         {
             movementInputInfo.MaskRotateDownEvent.Invoke();
+        }
+    }
+
+    public void OnEscape(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            movementInputInfo.FreeMouseDownEvent?.Invoke();
         }
     }
 }

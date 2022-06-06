@@ -53,6 +53,9 @@ public abstract class PlayerGroundedState : PlayerMovementState
             Context.playerRb.velocity = vel;
             Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
             Context.audioManager.jumpEmitter.Play();
+            // Start particles.
+            Context.Particle = GameObject.Instantiate(Context.JumpParticle, Context.transform, false);
+
         }
     }
 

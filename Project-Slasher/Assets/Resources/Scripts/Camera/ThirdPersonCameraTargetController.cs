@@ -26,9 +26,19 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
 
     public Quaternion rotation { get { return Quaternion.Euler(xRotation, yRotation, 0); } }
 
+    private bool mouseLocked = false;
+
     private void Awake()
     {
+        inputInfo.FreeMouseDownEvent.AddListener(FreeMouse);
+        inputInfo.PrimaryDownEvent.AddListener(LockMouse);
         LockMouse(true);
+    }
+
+    private void OnDestroy()
+    {
+        inputInfo.FreeMouseDownEvent.RemoveListener(FreeMouse);
+        inputInfo.PrimaryDownEvent.AddListener(LockMouse);
     }
 
     // Update is called once per frame
@@ -45,8 +55,12 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
 
     private void CameraRotation()
     {
-        yRotation += Time.unscaledDeltaTime * Sensitivity * mouseDelta.x;
-        xRotation -= Time.unscaledDeltaTime * Sensitivity * mouseDelta.y;
+        if(mouseLocked)
+        {
+            float time = Mathf.Min(Time.unscaledDeltaTime, 0.2f);
+            yRotation += time * Sensitivity * mouseDelta.x;
+            xRotation -= time * Sensitivity * mouseDelta.y;
+        }
         // Clamping vertical looking       
         LerpCameraToValues(1);
     }
@@ -62,8 +76,25 @@ public class ThirdPersonCameraTargetController : MonoBehaviour
             0);
     }
 
+    public void AlignCameraRotation(Transform transform)
+    {
+        Vector3 angle = transform.eulerAngles;
+        xRotation = angle.x;
+        yRotation = angle.y;
+    }
+
+    private void FreeMouse()
+    {
+        LockMouse(false);
+    }
+    private void LockMouse()
+    {
+        LockMouse(true);
+    }
+
     private void LockMouse(bool val)
     {
+        mouseLocked = val;
         Cursor.lockState = val ? CursorLockMode.Locked : CursorLockMode.None;
     }
 

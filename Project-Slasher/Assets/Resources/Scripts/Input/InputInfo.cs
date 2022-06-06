@@ -21,4 +21,5 @@ public class InputInfo : ScriptableObject
     public UnityEvent RestartDownEvent;
 
     public UnityEvent MaskRotateDownEvent;
+    public UnityEvent FreeMouseDownEvent;
 }

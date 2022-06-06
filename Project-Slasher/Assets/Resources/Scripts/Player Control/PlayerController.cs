@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject jumpParticle;
     [SerializeField]
+    private GameObject wallJumpParticle;
+    [SerializeField]
     private GameObject speedParticle;
     [SerializeField]
     private ParticleSystem deathParticles;
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
     public GameObject SlideParticle { get => slideParticle; }
     public GameObject SmallLandParticle { get => smallLandParticle; }
     public GameObject JumpParticle { get => jumpParticle; }
+    public GameObject WallJumpParticle { get => wallJumpParticle; }
     public ParticleSystem DeathParticles { get => deathParticles; }
     public ParticleSystem RespawnParticles { get => respawnParticles; }
 
@@ -75,6 +78,9 @@ public class PlayerController : MonoBehaviour
         get => respawnPoint;
         set => respawnPoint = value;
     }
+
+    // Respawn Canvas
+    public RespawnCanvas respawnCanvas;
 
     // Player initialPosition for particle usage
     private float apexHeight;
@@ -108,7 +114,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Vector3 forwardVector;
     [HideInInspector] public float slideCooldownTimer;
     [HideInInspector] public float primaryAttackCooldownTimer;
-    [HideInInspector] public Collider combatTarget;
+    [HideInInspector] public AbstractEnemyEntity combatTarget;
 
     private void Awake()
     {

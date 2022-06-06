@@ -22,7 +22,8 @@ public class BulletController : MonoBehaviour
     [SerializeField] private List<ParticleSystem> impactParticles;
     [SerializeField] private List<ParticleSystem> trailParticles;
 
-
+    [Header("SFX")]
+    [SerializeField] private FMODUnity.StudioEventEmitter emitter;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -84,6 +85,7 @@ public class BulletController : MonoBehaviour
 
     private void OnImpact()
     {
+        emitter.Stop();
         impactParticles.ForEach(particle => particle?.Play());
         trailParticles.ForEach(particle => particle?.Stop());
         rb.constraints = RigidbodyConstraints.FreezeAll;

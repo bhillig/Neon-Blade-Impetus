@@ -20,6 +20,8 @@ public class GroundedPhysicsContext : MonoBehaviour
 
     private float groundNormalDot = 0f;
     public float GroundNormalDot => groundNormalDot;
+    private Vector3 closestPoint;
+    public Vector3 ClosestPoint => closestPoint;
 
     private Vector3 contactNormal;
     public Vector3 ContactNormal => contactNormal;
@@ -78,7 +80,17 @@ public class GroundedPhysicsContext : MonoBehaviour
         }
         groundContactCount = groundedContacts.Count;
         steepContactCount = steepContacts.Count;
-
+        // Closest point
+        float high = 100;
+        foreach(var point in groundedContacts)
+        {
+            float dist = (groundedCast.bounds.center - point.point).magnitude;
+            if(dist < high)
+            {
+                high = dist;
+                closestPoint = point.point;
+            }
+        }
         // Calculate normals from the valid surfaces
         RecalculateNormalsFromContacts();
         // Update grounded physics state

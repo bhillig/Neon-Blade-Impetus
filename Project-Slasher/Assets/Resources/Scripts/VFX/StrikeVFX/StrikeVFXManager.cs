@@ -88,7 +88,7 @@ public class StrikeVFXManager : MonoBehaviour
         SetScarfEmission(scarfCooldownGlow);
     }
 
-    private void StrikePerformed(Collider target)
+    private void StrikePerformed(AbstractEnemyEntity target)
     {
         chargeParticles.Stop();
         chargeReadyParticles.Stop();

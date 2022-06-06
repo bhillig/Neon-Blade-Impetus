@@ -6,6 +6,7 @@ public class PlayerWallglideState : PlayerMovementState
 {
     public PlayerWallglideState(PlayerStateMachine context, PlayerStateFactory factory) : base(context,factory) { }
 
+    private float jumpLockout = 0f;
     public override void EnterState()
     {
         base.EnterState();
@@ -21,6 +22,8 @@ public class PlayerWallglideState : PlayerMovementState
         // Start particles.
         Context.Particle = GameObject.Instantiate(Context.RunParticle, Context.transform, false);
         Context.Ps = Context.Particle.GetComponent<ParticleSystem>();
+        // Jump lockout
+        jumpLockout = 0.1f;
     }
 
     public override void ExitState()
@@ -40,6 +43,7 @@ public class PlayerWallglideState : PlayerMovementState
 
     public override void UpdateState()
     {
+        jumpLockout -= Time.deltaTime;
         Context.wallRunning.DetectWalls();
         float tilt = Context.wallRunning.PlayerRightDotWallNormal > 0 ? 1 : 0;
         if(tilt == 0)
@@ -65,7 +69,7 @@ public class PlayerWallglideState : PlayerMovementState
 
     public override void CheckSwitchState()
     {
-        if (!Context.wallRunning.IsWallRunning())
+        if (!Context.wallRunning.IsWallRunning() && jumpLockout <= 0f)
         {
             // Running into an osbtacle while running will block you from wall running again for a longer duration
             if(Context.playerRb.velocity.magnitude < 5f)
@@ -77,16 +81,21 @@ public class PlayerWallglideState : PlayerMovementState
         }
 
         //Grounded check
-        if (Context.groundPhysicsContext.IsGroundedForSteps(2))
+        if (Context.groundPhysicsContext.IsGroundedForSteps(5))
         {
             TrySwitchState(Factory.Idle);
         }
     }
     public void OnSpacebarDown()
     {
+        if (jumpLockout > 0f)
+            return;
+        Context.playerRb.constraints = RigidbodyConstraints.FreezeRotation;
         Context.wallRunning.JumpFromWall(Context.movementProfile.WallJumpSideVel, Context.movementProfile.WallJumpUpVel);
         Context.groundPhysicsContext.GroundedBlockTimer = Context.movementProfile.JumpGroundBlockDuration;
         Context.audioManager.jumpEmitter.Play();
+        // Start particles.
+        Context.Particle = GameObject.Instantiate(Context.WallJumpParticle, Context.transform, false);
         TrySwitchState(Factory.Jump);
     }
 
