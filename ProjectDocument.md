@@ -103,6 +103,7 @@ For the colors I mainly used a simple gradient accent and also made a simple pro
 
 ## Movement/Physics
 
+### Main Physics 
 Using Wallrunning.cs, PlayerWallGlideState.cs, and PlayerAirborneState.cs, I implemented wallrunning, one of the game's biggest technical challenges. 
 
 The implementation uses raycasts to detect the nearest wall that's not only marked as "Terrain"
@@ -118,7 +119,13 @@ Also worked on Wall Jumping which sends the player in the Vector3.up() + wall No
 Using PlayerLandingState.cs I implemented rolling, a consequence to falling with a velocity past a certain threshold. The state gets rid of your control for a brief moment of time and plays a rolling animation. - **Brandon** 
 
 
-## Input / System 
+### State Machine 
+
+I worked on the state machine that controlled the movement and combat. I implemented a hierarchical state machine using inheritance, setting up the physics for grounded movement and airborne control -**Arthur** 
+
+The heirarchy state machine focuses on the transitioning the player from one state to another. The player goes from an initial state of idle to another state based upon player input. -**Arthur** 
+
+The physics system performs several checks in order to transition the player from one state to another. -**Arthur** 
 
 ## Level Design / Visuals 
 
@@ -147,6 +154,17 @@ Using PlayerLandingState.cs I implemented rolling, a consequence to falling with
 
 ## Modeling/Particles 
 
+I also worked on the shaders for various effects like the kill barrier, the forcefield wall, the turret core, and the players scarf. - **Arthur** 
+
+In order to do this, we used blender to model the every single model and used unity's shader graphics to do various effects. We then combined these elements together in prefabs to put onto the screen. - **Arthur** 
+
+For modeling, I modeled the player based upon this inspiration: - **Arthur**
+
+![CharacterInspiration](./DocumentImages/CharacterInspiration.JPG)
+
+This is the initial modeling stage to which it would go through multiple iterations to get to a final stage. - **Arthur** 
+
+![InitialModel](./DocumentImages/InitialModelStage.JPG)
 ## Game Logic
 
 - *AI/Enemies* Created the AI system where the turrets activate when the player is within range, will rotate towards the player and fire at the player once the player is within the turrets sight. There were other AI systems like walking about randomly but since Nav Meshes had to be baked into the level and only I knew how to bake them, it was cut to give the level designers more freedom. Also worked at balancing the turrets to make them a bit easier to defeat. [FULL 3D Enemy Video ](https://www.youtube.com/watch?v=UjkSFoLxesw&ab_channel=Dave%2FGameDevelopment) used this to help make the turrets AI, though it was basics and I had to heavily adapt it for our purposes. The only one thing still in its original form mostly is the call to look at the player. - **Tyler**
@@ -166,6 +184,8 @@ Using PlayerLandingState.cs I implemented rolling, a consequence to falling with
 # Sub-Roles
 
 ## Audio
+
+I used FMOD to program in dynamic audio, allowing for effects like wind at high speeds, slide sounds scaling with speed, randomized pitch for most movement effects, and distance attenuation. - **Arthur** 
 
 ## Gameplay Testing
 
