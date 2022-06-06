@@ -27,7 +27,6 @@ public class RespawnHandler : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("test");
         playerEvents.OnRestartLevel += RespawnEnemies;
         playerEvents.OnRestartLevel += RespawnForceField;
     }
