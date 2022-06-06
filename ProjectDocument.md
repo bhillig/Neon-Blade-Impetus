@@ -165,6 +165,10 @@ For modeling, I modeled the player based upon this inspiration: - **Arthur**
 This is the initial modeling stage to which it would go through multiple iterations to get to a final stage. - **Arthur** 
 
 ![InitialModel](./DocumentImages/InitialModelStage.JPG)
+
+For Particles, we used simple shapes to match the simplicity that we were going for with the player. The particles are meant to compliment the players movement and to provide feedback to the players actions. - **Simon**
+
+Particles in relation to combat have a triangle plane shape and are used when destroying turrets to gauging when the player is ready to dash - **Tyler**
 ## Game Logic
 
 - *AI/Enemies* Created the AI system where the turrets activate when the player is within range, will rotate towards the player and fire at the player once the player is within the turrets sight. There were other AI systems like walking about randomly but since Nav Meshes had to be baked into the level and only I knew how to bake them, it was cut to give the level designers more freedom. Also worked at balancing the turrets to make them a bit easier to defeat. [FULL 3D Enemy Video ](https://www.youtube.com/watch?v=UjkSFoLxesw&ab_channel=Dave%2FGameDevelopment) used this to help make the turrets AI, though it was basics and I had to heavily adapt it for our purposes. The only one thing still in its original form mostly is the call to look at the player. - **Tyler**
