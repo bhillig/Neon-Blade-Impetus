@@ -33,6 +33,7 @@ public class PlayerTargetStrikeDashState : PlayerDashState
         if (!impactEnded)
             CalculateExitVelocity(0f);
         Context.playerRb.velocity = exitVelocity;
+        Context.playerEvents.ImpactEnd -= CalculateExitVelocity;
     }
 
     public override void UpdateState()
