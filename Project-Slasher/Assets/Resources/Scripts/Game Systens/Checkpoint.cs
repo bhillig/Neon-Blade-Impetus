@@ -8,6 +8,7 @@ public class Checkpoint : MonoBehaviour
 
     private bool alreadyTriggered = false;
     private PlayerController pc;
+    private RespawnHandler rh;
 
     [SerializeField]
     private int checkPointID;
@@ -42,7 +43,7 @@ public class Checkpoint : MonoBehaviour
     {
         alreadyTriggered = true;
         pc.RespawnPoint = transform.position;
-        RespawnHandler rh = FindObjectOfType<RespawnHandler>();
+        rh = FindObjectOfType<RespawnHandler>();
         checkpointTriggered?.Play();
         checkpointIndicator?.Stop();
         triggeredSound?.Play();
@@ -54,7 +55,7 @@ public class Checkpoint : MonoBehaviour
 
     private void TeleportToCheckpoint()
     {
-        if (pc != null)
+        if (pc != null && checkPointID == rh.CurrentCheckpointID)
         {
             pc.TPTargetController.AlignCameraRotation(transform);
             pc.playerPhysicsTransform.position = pc.RespawnPoint;

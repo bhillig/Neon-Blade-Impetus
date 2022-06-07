@@ -24,6 +24,7 @@ public class RespawnHandler : MonoBehaviour
 
     private int currentCheckpointID;
 
+    public int CurrentCheckpointID { get => currentCheckpointID; }
 
     private void Awake()
     {
