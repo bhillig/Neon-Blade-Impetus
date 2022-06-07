@@ -13,14 +13,14 @@ public abstract class PlayerCombatState : PlayerBaseState
 
     public override void EnterState()
     {
-        Context.playerEvents.OnCollideWithProjectile += PlayerCombatKilled;
-        Context.playerEvents.OnCollideWithVoid += PlayerCombatKilled;
+        Context.playerEvents.OnCollideWithProjectile += OnCollideWithProjectile;
+        Context.playerEvents.OnCollideWithHazard += OnCollideWithHazard;
     }
 
     public override void ExitState()
     {
-        Context.playerEvents.OnCollideWithProjectile -= PlayerCombatKilled;
-        Context.playerEvents.OnCollideWithVoid -= PlayerCombatKilled;
+        Context.playerEvents.OnCollideWithProjectile -= OnCollideWithProjectile;
+        Context.playerEvents.OnCollideWithHazard -= OnCollideWithHazard;
     }
 
     public override void UpdateState()
@@ -97,8 +97,19 @@ public abstract class PlayerCombatState : PlayerBaseState
         }
         return null;
     }
+
+    protected virtual void OnCollideWithHazard()
+    {
+        PlayerCombatKilled();
+    }
+    protected virtual void OnCollideWithProjectile()
+    {
+        PlayerCombatKilled();
+    }
+
     protected virtual void PlayerCombatKilled()
     {
+        Debug.Log("E");
         Context.playerEvents.OnCombatKilled?.Invoke();
         TrySwitchState(Factory.CombatDead);
     }

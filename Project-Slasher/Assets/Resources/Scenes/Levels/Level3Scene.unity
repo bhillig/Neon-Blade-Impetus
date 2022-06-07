@@ -3935,6 +3935,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1382598129}
     m_Modifications:
+    - target: {fileID: 107811007, guid: fd7a2f6cd8e93f241b7697fde6aae8f3, type: 3}
+      propertyPath: enemiesNeededToKill.Array.data[0]
+      value: 
+      objectReference: {fileID: 1901072902}
+    - target: {fileID: 107811007, guid: fd7a2f6cd8e93f241b7697fde6aae8f3, type: 3}
+      propertyPath: enemiesNeededToKill.Array.data[1]
+      value: 
+      objectReference: {fileID: 1791365716}
     - target: {fileID: 6867856319025345632, guid: fd7a2f6cd8e93f241b7697fde6aae8f3, type: 3}
       propertyPath: m_Name
       value: ForceField
@@ -3942,14 +3950,6 @@ PrefabInstance:
     - target: {fileID: 6867856319025345639, guid: fd7a2f6cd8e93f241b7697fde6aae8f3, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6867856319025345639, guid: fd7a2f6cd8e93f241b7697fde6aae8f3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6867856319025345639, guid: fd7a2f6cd8e93f241b7697fde6aae8f3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6867856319025345639, guid: fd7a2f6cd8e93f241b7697fde6aae8f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3998,26 +3998,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6867856319025345639, guid: fd7a2f6cd8e93f241b7697fde6aae8f3, type: 3}
   m_PrefabInstance: {fileID: 107811004}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &107811006 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6867856319025345632, guid: fd7a2f6cd8e93f241b7697fde6aae8f3, type: 3}
+--- !u!114 &107811007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 107811007, guid: fd7a2f6cd8e93f241b7697fde6aae8f3, type: 3}
   m_PrefabInstance: {fileID: 107811004}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &107811007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107811006}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f1d8820f52d28748b96f00279a8aef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesNeededToKill:
-  - {fileID: 1901072902}
-  - {fileID: 1791365716}
 --- !u!43 &110106767
 Mesh:
   m_ObjectHideFlags: 0

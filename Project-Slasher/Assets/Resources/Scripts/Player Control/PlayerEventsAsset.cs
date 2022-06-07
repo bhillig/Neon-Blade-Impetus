@@ -26,7 +26,7 @@ public class PlayerEventsAsset : ScriptableObject
     public Action OnStrikeCooldownStarted;
 
     public Action OnCollideWithProjectile;
-    public Action OnCollideWithVoid;
+    public Action OnCollideWithHazard;
     public Action OnCombatKilled;
 
     public Action<float> ImpactEnd;

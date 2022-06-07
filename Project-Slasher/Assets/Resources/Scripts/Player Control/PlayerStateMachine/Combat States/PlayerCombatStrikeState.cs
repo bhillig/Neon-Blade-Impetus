@@ -104,9 +104,16 @@ public class PlayerCombatStrikeState : PlayerCombatState
         Context.colliderSwitcher.GetConcreteCollider().enabled = true;
     }
 
-    protected override void PlayerCombatKilled()
+    protected override void OnCollideWithProjectile()
     {
-        // Do nothing, invincible while in this state
+        // Immune to projectiles while dashing
+    }
+
+    protected override void OnCollideWithHazard()
+    {
+        // Immune while in a targeted dash
+        if(target == null)
+            base.OnCollideWithHazard();
     }
 
     protected override void SetCursorCombatState()

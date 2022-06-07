@@ -9,7 +9,7 @@ public class CollisionHazard : MonoBehaviour
         var pc = other.GetComponentInParent<PlayerHitboxManager>();
         if (pc != null)
         {
-            pc.playerEvents.OnCollideWithVoid();
+            pc.playerEvents.OnCollideWithHazard();
         }
     }
     private void OnCollisionEnter(Collision other)
@@ -17,7 +17,7 @@ public class CollisionHazard : MonoBehaviour
         var pc = other.collider.GetComponentInParent<PlayerHitboxManager>();
         if (pc != null)
         {
-            pc.playerEvents.OnCollideWithVoid();
+            pc.playerEvents.OnCollideWithHazard();
         }
     }
 }

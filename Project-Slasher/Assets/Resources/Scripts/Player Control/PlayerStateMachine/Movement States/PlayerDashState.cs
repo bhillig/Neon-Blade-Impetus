@@ -71,9 +71,4 @@ public abstract class PlayerDashState : PlayerMovementState
     {
         //Do nothing LOL
     }
-
-    protected override void PlayerKilled()
-    {
-        // Invincible while dashing
-    }
 }
