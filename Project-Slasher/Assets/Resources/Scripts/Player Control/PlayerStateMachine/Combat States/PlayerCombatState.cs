@@ -109,7 +109,6 @@ public abstract class PlayerCombatState : PlayerBaseState
 
     protected virtual void PlayerCombatKilled()
     {
-        Debug.Log("E");
         Context.playerEvents.OnCombatKilled?.Invoke();
         TrySwitchState(Factory.CombatDead);
     }
