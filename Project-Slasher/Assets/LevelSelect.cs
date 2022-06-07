@@ -25,20 +25,16 @@ public class LevelSelect : MonoBehaviour
             Debug.LogError("Error, no level data found!");
             return;
         }
-
+        
         for (int i = 1; i < lockIcons.Count; i++)
         {
-            if (!CanLoadLevel(i))
+            if(i <= levelData.HighestLevelCompleted + 1)
             {
-                lockIcons[i].SetActive(true);
+                lockIcons[i].SetActive(false);
             }
             else
             {
-                lockIcons[i].SetActive(false);
-                if (lockIcons[i+1] != null)
-                {
-                    lockIcons[i+1].SetActive(false);
-                }
+                lockIcons[i].SetActive(true);
             }
         }
     }
@@ -56,6 +52,6 @@ public class LevelSelect : MonoBehaviour
     private bool CanLoadLevel(int levelNumber)
     {
         if (levelNumber < 0 || levelNumber >= lockIcons.Count) return false;
-        return levelData.GetLevelComplete(levelNumber - 1);
+        return levelNumber <= levelData.HighestLevelCompleted + 1;
     }
 }

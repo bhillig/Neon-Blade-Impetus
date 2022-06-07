@@ -17,6 +17,14 @@ public class LevelData : MonoBehaviour
     [SerializeField]
     private List<Level> levels;
 
+    private int highestLevelCompleted;
+    public int HighestLevelCompleted {  get { return highestLevelCompleted; } }
+
+    private void Awake()
+    {
+        highestLevelCompleted = PlayerPrefs.GetInt("HighestLevelCompleted");
+    }
+
     public void SetLevelComplete(int index)
     {
         if (index < 0 || index > numberOfLevels) return;
@@ -24,6 +32,11 @@ public class LevelData : MonoBehaviour
         Level v = levels[index];
         v.completed = true;
         levels[index] = v;
+        if(index > PlayerPrefs.GetInt("HighestLevelCompleted"))
+        {
+            PlayerPrefs.SetInt("HighestLevelCompleted", index);
+            highestLevelCompleted = index;
+        }
     }
 
     public bool GetLevelComplete(int index)
