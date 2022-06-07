@@ -76,7 +76,8 @@ public class Wallrunning
         whatisWall = LayerMask.GetMask("Terrain");
         directions = new Vector3[]{
             Vector3.right + Vector3.forward * 0.1f,
-            Vector3.left + Vector3.forward * 0.1f
+            Vector3.left + Vector3.forward * 0.1f,
+            Vector3.forward
         };
     }
 

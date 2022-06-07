@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef578cc589496b84e9ec2af5c8188dc7, type: 3}
   m_Name: DefaultCombatProfile
   m_EditorClassIdentifier: 
-  chargeTime: 0.75
-  holdTime: 0.65
-  cooldown: 1.5
+  chargeTime: 0.01
+  holdTime: 0.8
+  cooldown: 1.75
   castRadius: 7
   castDistance: 9.15
   hitMask:
