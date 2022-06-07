@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerExit : MonoBehaviour
 {
     [SerializeField]
+    private int levelNumber;
+
+    [SerializeField]
     private string nextLevelScene;
 
     private bool triggered;
@@ -15,6 +18,7 @@ public class PlayerExit : MonoBehaviour
         if(pc != null && !triggered)
         {
             triggered = true;
+            FindObjectOfType<LevelData>().SetLevelComplete(levelNumber);
             FindObjectOfType<SceneLoader>().LoadNextLevel(nextLevelScene);
         }
     }

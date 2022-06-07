@@ -34,6 +34,8 @@ public class PauseMenuScript : MonoBehaviour
         float damping = PlayerPrefs.GetFloat("MouseDamping", 0.2f);
         dampingSlider.value = damping;
         dampingSlider.onValueChanged.AddListener(ChangeDamping);
+
+        sceneLoader = FindObjectOfType<SceneLoader>();
     }
 
     private void OnDestroy()
