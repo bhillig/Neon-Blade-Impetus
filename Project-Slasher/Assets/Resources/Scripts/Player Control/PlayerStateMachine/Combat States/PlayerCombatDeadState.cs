@@ -36,9 +36,12 @@ public class PlayerCombatDeadState : PlayerCombatState
         
         // Scarf stuff
         Context.colliderSwitcher.GetConcreteCollider().enabled = true;
-        Context.scarfCloth.externalAcceleration = new Vector3(0, 0, 0);
-        Context.scarfCloth.randomAcceleration = scarfRandAccel;
-        Context.scarfCloth.capsuleColliders = scarfColliders;
+        if (Context.scarfCloth != null)
+        {
+            Context.scarfCloth.externalAcceleration = new Vector3(0, 0, 0);
+            Context.scarfCloth.randomAcceleration = scarfRandAccel;
+            Context.scarfCloth.capsuleColliders = scarfColliders;
+        }
         Context.primaryAttackCooldownTimer = 0.01f;
     }
 

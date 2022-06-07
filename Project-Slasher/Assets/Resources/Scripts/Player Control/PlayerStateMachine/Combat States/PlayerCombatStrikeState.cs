@@ -78,13 +78,19 @@ public class PlayerCombatStrikeState : PlayerCombatState
     protected virtual void ImpactEffect()
     {
         KillEnemy();
+        Context.StartCoroutine(CoroutImpactEnd());
         Context.audioManager.targetStrikeImpact.Play();
         TimeScaleManager.instance.SetTimeScale(
             Context.combatProfile.TimeSlowScale, 
             Context.combatProfile.TimeSlowDuration, 
-            0.05f,
-            ImpactEnd
+            0.05f
             );
+    }
+
+    private IEnumerator CoroutImpactEnd()
+    {
+        yield return new WaitForSecondsRealtime(Context.combatProfile.TimeSlowDuration);
+        ImpactEnd();
     }
 
     protected virtual void ImpactEnd()
