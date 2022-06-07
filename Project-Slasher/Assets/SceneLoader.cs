@@ -26,24 +26,46 @@ public class SceneLoader : MonoBehaviour
         {
             StartSession(debug_SceneYouWantToPlay);
         }
+        else
+        {
+            LoadMainMenu();
+        }
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(mainMenuScene, LoadSceneMode.Additive);
+        currentLevelScene = mainMenuScene;
     }
 
     public void StartSession(string level)
     {
+        if(currentLevelScene != null)
+        {
+            SceneManager.UnloadSceneAsync(currentLevelScene);
+        }
         SceneManager.LoadScene(level, LoadSceneMode.Additive);
+        SceneManager.LoadScene(coreScene, LoadSceneMode.Additive);
         currentLevelScene = level;
     }
 
     public void EndSession()
     {
         SceneManager.UnloadSceneAsync(currentLevelScene);
-        SceneManager.LoadScene(mainMenuScene, LoadSceneMode.Single);
+        SceneManager.LoadScene(mainMenuScene, LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(coreScene);
+        currentLevelScene = mainMenuScene;
     }
+
     public void LoadNextLevel(string nextLevelScene)
     {
         SceneManager.UnloadSceneAsync(currentLevelScene);
         SceneManager.LoadScene(nextLevelScene, LoadSceneMode.Additive);
         currentLevelScene = nextLevelScene;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

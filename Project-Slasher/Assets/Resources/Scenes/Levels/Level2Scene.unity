@@ -47993,6 +47993,10 @@ PrefabInstance:
       value: 1.5638275
       objectReference: {fileID: 0}
     - target: {fileID: 8427474746368276633, guid: 2048cd31e8a047c46becdb85b3e0f388, type: 3}
+      propertyPath: levelNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427474746368276633, guid: 2048cd31e8a047c46becdb85b3e0f388, type: 3}
       propertyPath: nextLevelScene
       value: Level3Scene
       objectReference: {fileID: 0}

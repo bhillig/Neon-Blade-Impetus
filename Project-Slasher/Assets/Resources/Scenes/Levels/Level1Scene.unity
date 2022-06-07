@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.033727672, g: 0.11373308, b: 0.04733515, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19867,6 +19867,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8427474746368276633, guid: 2048cd31e8a047c46becdb85b3e0f388, type: 3}
+      propertyPath: levelNumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8427474746368276633, guid: 2048cd31e8a047c46becdb85b3e0f388, type: 3}
       propertyPath: nextLevelScene
       value: Level2Scene
@@ -53177,8 +53181,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1440332277}
-  - {fileID: 93311980}
   - {fileID: 1183645953}
+  - {fileID: 93311980}
   m_Father: {fileID: 1312007004}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

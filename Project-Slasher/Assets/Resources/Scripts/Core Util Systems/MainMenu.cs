@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField]
-    private string coreScene;
+    private SceneLoader sceneLoader;
+
+    private void Awake()
+    {
+        sceneLoader = FindObjectOfType<SceneLoader>();
+    }
 
     public void StartSession(string sceneName)
     {
-        SceneManager.LoadScene(coreScene, LoadSceneMode.Single);
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        sceneLoader.StartSession(sceneName);
     }
+
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        sceneLoader.LoadNextLevel(sceneName);
     }
 
     public void QuitGame()
