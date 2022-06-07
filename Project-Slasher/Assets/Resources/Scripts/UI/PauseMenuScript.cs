@@ -12,48 +12,58 @@ public class PauseMenuScript : MonoBehaviour
 
     [Header("UI Dependencies")]
     public Button mainMenuButton;
-    public Slider sensitivitySlider;
-    public Slider dampingSlider;
-    
-
-    private float sensitivityMin = 0f;
-    private float sensitivityMax = 50f;
+    public PlayerPrefsSlider sensitivitySlider;
+    public PlayerPrefsSlider dampingSlider;
+    public PlayerPrefsSlider sfxSlider;
+    public PlayerPrefsSlider musicSlider;
 
     private void Awake()
     {
-        gameObject.SetActive(false);
         mainMenuButton.onClick.AddListener(ReturnToMenu);
         info.OptionsMenuDownEvent.AddListener(ToggleMenu);
 
-        sensitivitySlider.maxValue = sensitivityMax;
-        sensitivitySlider.minValue = sensitivityMin;
-        float val = PlayerPrefs.GetFloat("MouseSensitivity", 20f);
-        sensitivitySlider.value = val;
-        sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
-
-        float damping = PlayerPrefs.GetFloat("MouseDamping", 0.2f);
-        dampingSlider.value = damping;
-        dampingSlider.onValueChanged.AddListener(ChangeDamping);
+        sensitivitySlider.OnSliderValueChanged.AddListener(ChangeSensitivity);
+        dampingSlider.OnSliderValueChanged.AddListener(ChangeDamping);
+        sfxSlider.OnSliderValueChanged.AddListener(ChangeSFXVolume);
+        musicSlider.OnSliderValueChanged.AddListener(ChangeMusicVolume);
 
         sceneLoader = FindObjectOfType<SceneLoader>();
+    }
+
+    private void Start()
+    {
+        sensitivitySlider.ForceUpdateInvoke();
+        dampingSlider.ForceUpdateInvoke();
+        sfxSlider.ForceUpdateInvoke();
+        musicSlider.ForceUpdateInvoke();
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
         mainMenuButton.onClick.RemoveListener(ReturnToMenu);
         info.OptionsMenuDownEvent.RemoveListener(ToggleMenu);
-        sensitivitySlider.onValueChanged.RemoveListener(ChangeSensitivity);
+        sensitivitySlider.OnSliderValueChanged.RemoveListener(ChangeSensitivity);
+        dampingSlider.OnSliderValueChanged.RemoveListener(ChangeDamping);
+        sfxSlider.OnSliderValueChanged.RemoveListener(ChangeSFXVolume);
+        musicSlider.OnSliderValueChanged.RemoveListener(ChangeMusicVolume);
     }
 
     private void ChangeSensitivity(float val)
     {
-        PlayerPrefs.SetFloat("MouseSensitivity", val);
         cameraTargetController.Sensitivity = val;
     }
     private void ChangeDamping(float val)
     {
-        PlayerPrefs.SetFloat("MouseDamping", val);
         cameraTargetController.Damping = val;
+    }
+    private void ChangeSFXVolume(float val)
+    {
+        FMODMixerManager.instance.SetSFXVolume(val);
+    }
+    private void ChangeMusicVolume(float val)
+    {
+        FMODMixerManager.instance.SetMusicVolume(val);
     }
 
     private void ReturnToMenu()

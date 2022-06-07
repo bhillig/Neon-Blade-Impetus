@@ -273,7 +273,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637901453517867432
+  lastModified: 637901755742707143
   FileSizes: []
   Exists: 1
 --- !u!114 &-5386224079355332554
@@ -330,7 +330,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 30
-  Length: 1500
+  Length: 4500
 --- !u!114 &-3634045312467570445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +510,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 50
-  Length: 500
+  Length: 380
 --- !u!114 &-434981286330639114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,6 +574,7 @@ MonoBehaviour:
   - {fileID: -9099743983708702531}
   - {fileID: -5806128464770949892}
   - {fileID: -5173098981487878954}
+  - {fileID: 7354713483813390109}
   EditorParameters:
   - {fileID: -2473418210714541472}
   - {fileID: -2577334827129893740}
@@ -582,7 +583,7 @@ MonoBehaviour:
   - {fileID: -5763314639534442189}
   StringsBanks:
   - {fileID: 7679026033720049578}
-  cacheTime: 637901453517921705
+  cacheTime: 637901755742973492
   cacheVersion: 131591
 --- !u!114 &56648917512551362
 MonoBehaviour:
@@ -677,7 +678,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637901453517921705
+  lastModified: 637901755742973492
   FileSizes: []
   Exists: 1
 --- !u!114 &3776392373669755103
@@ -727,6 +728,33 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 50
   Length: 1000
+--- !u!114 &7354713483813390109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Soundtrack
+  m_EditorClassIdentifier: 
+  Path: event:/Soundtrack
+  Guid:
+    Data1: 1892551413
+    Data2: 1107740593
+    Data3: 2043572864
+    Data4: -1226319756
+  Banks:
+  - {fileID: 3125320875042171866}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 200000
 --- !u!114 &7679026033720049578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,10 +770,10 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637901453517907724
+  lastModified: 637901755742737433
   FileSizes:
   - Name: 
-    Value: 1782
+    Value: 1964
   Exists: 1
 --- !u!114 &7861906310492792092
 MonoBehaviour:

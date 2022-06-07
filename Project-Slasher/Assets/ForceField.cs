@@ -44,6 +44,7 @@ public class ForceField : MonoBehaviour
     private void OpenForceField()
     {
         isOpen = true;
+        GetComponent<Collider>().enabled = false;
         StartCoroutine(CoroutOpenAnimation());
     }
 
@@ -71,5 +72,6 @@ public class ForceField : MonoBehaviour
     {
         isOpen = false;
         this.gameObject.SetActive(true);
+        GetComponent<Collider>().enabled = true;
     }
 }

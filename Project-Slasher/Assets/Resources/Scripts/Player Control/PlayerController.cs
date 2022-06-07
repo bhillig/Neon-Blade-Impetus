@@ -70,6 +70,16 @@ public class PlayerController : MonoBehaviour
     private PlayerStateMachine movementStateMachine;
     private PlayerStateMachine combatStateMachine;
 
+    public Vector3 groundedBottomPosition
+    {
+        get
+        {
+            return
+                colliderSwitcher.groundedCheck.bounds.center -
+                playerPhysicsTransform.up * colliderSwitcher.groundedCheck.radius;
+        }
+    }
+
     // Player Death
     private Vector3 respawnPoint;
 

@@ -32,18 +32,8 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
     public override void CheckSwitchState()
     {
-        // wallrun check
-        Context.wallRunning.DetectWalls(false);
-        if (Context.wallRunning.ShouldWallRun(Context.mainCam.transform.forward) && Context.groundPhysicsContext.GroundedBlockTimer <= 0f)
-        {
-            Context.wallRunning.IncomingMagnitude = 
-                Vector3.ProjectOnPlane(Context.playerRb.velocity.XZVec(), Context.wallRunning.LastWallNormal).magnitude;
-            Context.wallRunning.DetectWalls(true);
-            LandingParticles();
-            TrySwitchState(Factory.Wallglide);
-        }
-
-        if(!Context.wallRunning.AboveGround(1.0f))
+        // Roll check
+        if (!Context.wallRunning.AboveGround(1.0f))
         {
             if (Context.playerRb.velocity.y <= -Context.movementProfile.RollFallSpeedThreshhold)
             {
@@ -51,7 +41,6 @@ public abstract class PlayerAirborneState : PlayerMovementState
                 TrySwitchState(Factory.Landing);
             }
         }
-
         //Grounded check
         if (Context.groundPhysicsContext.IsGrounded())
         {
@@ -63,6 +52,17 @@ public abstract class PlayerAirborneState : PlayerMovementState
             LandingParticles();
             Context.audioManager.defaultLandEmitter.Play();
             TrySwitchState(Factory.GroundedSwitch);
+            return;
+        }
+        // wallrun check
+        Context.wallRunning.DetectWalls(false);
+        if (Context.wallRunning.ShouldWallRun(Context.mainCam.transform.forward) && Context.groundPhysicsContext.GroundedBlockTimer <= 0f)
+        {
+            Context.wallRunning.IncomingMagnitude = 
+                Vector3.ProjectOnPlane(Context.playerRb.velocity.XZVec(), Context.wallRunning.LastWallNormal).magnitude;
+            Context.wallRunning.DetectWalls(true);
+            LandingParticles();
+            TrySwitchState(Factory.Wallglide);
         }
     }
     private void LandingParticles()
