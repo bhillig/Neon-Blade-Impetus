@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.003420368, g: 0.0037882146, b: 0.006677133, a: 1}
+  m_IndirectSpecularColor: {r: 0.0034203748, g: 0.0037882226, b: 0.0066771386, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2167,7 +2167,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: TimeTrialLevelSelect
+          m_StringArgument: TimeTrialMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1491648095

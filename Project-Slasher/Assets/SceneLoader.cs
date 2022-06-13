@@ -20,6 +20,13 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     private bool loadOnStart;
 
+    public enum SceneMode { Level, TimeTrialLevel, Menu, Utility };
+
+    [SerializeField]
+    private SceneMode sceneMode;
+
+    public SceneMode Scene_Mode { get { return sceneMode; } set { sceneMode = value; } }
+
     private void Start()
     {
         if (loadOnStart)
@@ -36,6 +43,7 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(mainMenuScene, LoadSceneMode.Additive);
         currentLevelScene = mainMenuScene;
+        sceneMode = SceneMode.Menu;
     }
 
     public void StartSession(string level)
@@ -47,6 +55,7 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(level, LoadSceneMode.Additive);
         SceneManager.LoadScene(coreScene, LoadSceneMode.Additive);
         currentLevelScene = level;
+        this.sceneMode = SceneMode.Level;
     }
 
     public void EndSession()
@@ -55,6 +64,7 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(mainMenuScene, LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(coreScene);
         currentLevelScene = mainMenuScene;
+        sceneMode = SceneMode.Menu;
     }
 
     public void LoadNextLevel(string nextLevelScene)
