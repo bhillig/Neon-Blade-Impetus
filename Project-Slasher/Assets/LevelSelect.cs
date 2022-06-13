@@ -46,6 +46,18 @@ public class LevelSelect : MonoBehaviour
         {
             string levelToLoad = levelData.GetSceneString(levelNumber);
             sceneLoader.StartSession(levelToLoad);
+            sceneLoader.Scene_Mode = SceneLoader.SceneMode.Level;
+        }
+    }
+
+    public void LoadTimeTrialLevel(int levelNumber)
+    {
+        // If you completed the previous level...
+        if (CanLoadLevel(levelNumber))
+        {
+            string levelToLoad = levelData.GetSceneString(levelNumber);
+            sceneLoader.StartSession(levelToLoad);
+            sceneLoader.Scene_Mode = SceneLoader.SceneMode.TimeTrialLevel;
         }
     }
 
