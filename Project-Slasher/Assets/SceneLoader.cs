@@ -48,7 +48,7 @@ public class SceneLoader : MonoBehaviour
 
     public void StartSession(string level)
     {
-        if(currentLevelScene != null)
+        if(currentLevelScene != null && !loadOnStart)
         {
             SceneManager.UnloadSceneAsync(currentLevelScene);
         }

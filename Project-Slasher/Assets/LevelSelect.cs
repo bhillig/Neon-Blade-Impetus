@@ -13,6 +13,7 @@ public class LevelSelect : MonoBehaviour
     private void Awake()
     {
         levelData = FindObjectOfType<LevelData>();
+        Debug.Log(levelData.HighestLevelCompleted);
         sceneLoader = FindObjectOfType<SceneLoader>();
 
         if (sceneLoader == null)
@@ -44,6 +45,7 @@ public class LevelSelect : MonoBehaviour
         // If you completed the previous level...
         if (CanLoadLevel(levelNumber))
         {
+            Debug.Log("true");
             string levelToLoad = levelData.GetSceneString(levelNumber);
             sceneLoader.StartSession(levelToLoad);
             sceneLoader.Scene_Mode = SceneLoader.SceneMode.Level;

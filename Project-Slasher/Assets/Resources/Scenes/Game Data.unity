@@ -175,16 +175,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: mainMenuScene
       value: UpdatedMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: currentLevelScene
-      value: Level1Scene
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: debug_SceneYouWantToPlay
-      value: Level1Scene
+      value: Level6Scene
       objectReference: {fileID: 0}
     - target: {fileID: 7983315835041530840, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: m_Name
@@ -264,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7153dd48d80fe45a72545acbc4b797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfLevels: 5
+  numberOfLevels: 6
   levels:
   - name: Tutorial
     completed: 1
@@ -277,6 +281,8 @@ MonoBehaviour:
   - name: Level4Scene
     completed: 0
   - name: Level5Scene
+    completed: 0
+  - name: Level6Scene
     completed: 0
 --- !u!4 &1887156959
 Transform:
