@@ -23,6 +23,14 @@ public class TimeTrialUI : MonoBehaviour
     [SerializeField]
     private TimeTrial timeTrial;
 
+    [SerializeField]
+    private TimeTrialData timeTrialData;
+
+    private void Awake()
+    {
+        timeTrialData = FindObjectOfType<TimeTrialData>();
+    }
+
     private void Update()
     {
         timerText.text = timeTrial.CurrentTimer.ToString("F2");
@@ -30,8 +38,9 @@ public class TimeTrialUI : MonoBehaviour
         bestTimeResultText.text = timeTrial.CurrentTimer.ToString("F2");
     }
 
-    public void ShowResults()
+    public void ShowResults(int levelNumber)
     {
+        bestTimeResultText.text = timeTrialData.GetBestTime(levelNumber).ToString("F2");
         resultsCanvas.SetActive(true);
         Cursor.visible = true;
     }

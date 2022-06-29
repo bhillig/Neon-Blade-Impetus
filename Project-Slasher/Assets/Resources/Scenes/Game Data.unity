@@ -176,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: loadOnStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7900317654323361635, guid: 3c771f83f396e1e488b24423d44d26f3, type: 3}
       propertyPath: mainMenuScene
@@ -225,6 +225,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6839c24c44d86a64e91bebfece729b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bestTimes:
+  - levelPrefCode: 
+    bestTime: 0
+  - levelPrefCode: Level1BestTime
+    bestTime: 0
+  - levelPrefCode: Level2BestTime
+    bestTime: 0
+  - levelPrefCode: Level3BestTime
+    bestTime: 0
+  - levelPrefCode: Level4BestTime
+    bestTime: 0
+  - levelPrefCode: Level5BestTime
+    bestTime: 0
+  - levelPrefCode: Level6BestTime
+    bestTime: 0
 --- !u!4 &829077658
 Transform:
   m_ObjectHideFlags: 0

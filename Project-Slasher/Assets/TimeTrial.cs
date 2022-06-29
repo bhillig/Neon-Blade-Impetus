@@ -15,9 +15,19 @@ public class TimeTrial : MonoBehaviour
     private float currentTimer = 0.0f;
     public float CurrentTimer { get { return currentTimer; } set { currentTimer = value; } }
 
+    [SerializeField]
+    private int levelNumber;
+
+    // cache references
+    TimeTrialData timeTrialData;
+    LevelData levelData;
+
     private void Awake()
     {
         _PlayerEventsAsset.OnRestartLevel += StopTimeTrial;
+
+        levelData = FindObjectOfType<LevelData>();
+        timeTrialData = FindObjectOfType<TimeTrialData>();
     }
 
     private void OnDestroy()
@@ -49,7 +59,8 @@ public class TimeTrial : MonoBehaviour
     public void FinishTimeTrial()
     {
         StopTimeTrial();
-        timeTrialUI.ShowResults();
+        UpdateBestTime();
+        timeTrialUI.ShowResults(levelNumber);
     }
 
     public void AddSeconds(float seconds)
@@ -63,6 +74,17 @@ public class TimeTrial : MonoBehaviour
         if(currentTimer < 0.0f)
         {
             currentTimer = 0.0f;
+        }
+    }
+
+    private void UpdateBestTime()
+    {
+        if(timeTrialData != null)
+        {
+            if(currentTimer < timeTrialData.GetBestTime(levelNumber))
+            {
+                timeTrialData.SetBestTime(levelNumber, currentTimer);
+            }
         }
     }
 }
